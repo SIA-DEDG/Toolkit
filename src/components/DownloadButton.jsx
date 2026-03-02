@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function DownloadButton({ label = 'Baixar Documento' }) {
   return (
-    <button className="mt-2 w-full flex items-center justify-center gap-1.5 bg-[#BEE3F8] hover:bg-[#2B6CB0] text-[#2A4365] hover:text-white text-[11px] font-semibold font-sans rounded-full py-1.5 px-4 shadow-sm transition-colors duration-150 cursor-pointer">
+    <button className="mt-2 flex items-center justify-center gap-1.5 bg-[#BEE3F8] hover:bg-[#2B6CB0] text-[#2A4365] hover:text-white text-[11px] font-semibold font-sans rounded-full shadow-sm transition-colors duration-150 cursor-pointer" style={{ width: 140, height: 28 }}>
       <svg
         className="w-3.5 h-3.5 flex-shrink-0"
         viewBox="0 0 24 24"

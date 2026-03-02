@@ -25,6 +25,30 @@ function CardBody({ children }) {
   return <p className="text-[10.5px] leading-snug text-[#2A4365]/90">{children}</p>
 }
 
+function AccordionItem({ number, title, description }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div>
+      <button
+        className="flex items-center gap-1 w-full text-left cursor-pointer bg-transparent border-0 p-0"
+        onClick={() => setOpen(o => !o)}
+      >
+        <span className="text-[10.5px] font-bold text-[#2A4365]">{number}–</span>
+        <span className="text-[10.5px] text-[#2A4365] flex-1">{title}</span>
+        <svg
+          className={`w-3 h-3 text-[#2A4365] flex-shrink-0 transition-transform duration-200 ${open ? 'rotate-90' : ''}`}
+          fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"
+        >
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
+      {open && description && (
+        <p className="text-[9.5px] text-[#2A4365]/75 leading-snug pl-3 mt-0.5">{description}</p>
+      )}
+    </div>
+  )
+}
+
 function StageCol({ index, children, extra }) {
   const topPx = NODE_TOP[index]
 
@@ -43,9 +67,20 @@ export default function ProcessFlowPage() {
   const aboveRef6 = useRef(null)
 
   useEffect(() => {
-    const heights = [aboveRef2, aboveRef4, aboveRef6].map(r => r.current?.offsetHeight ?? 0)
-    const overflow = Math.max(0, Math.max(...heights) - 171) + 8
-    setExtraTop(overflow)
+    const refs = [aboveRef2, aboveRef4, aboveRef6]
+
+    const recalculate = () => {
+      const heights = refs.map(r => r.current?.offsetHeight ?? 0)
+      const overflow = Math.max(0, Math.max(...heights) - 171) + 8
+      setExtraTop(overflow)
+    }
+
+    recalculate()
+
+    const observer = new ResizeObserver(recalculate)
+    refs.forEach(r => { if (r.current) observer.observe(r.current) })
+
+    return () => observer.disconnect()
   }, [])
 
   return (
@@ -67,7 +102,7 @@ export default function ProcessFlowPage() {
             </svg>
             <span className="text-[#2A4365] text-[11px] font-semibold">Fluxo de Processo</span>
           </div>
-          <h1 className="text-[#2A4365] text-[24px] font-bold leading-tight">(Nome da Trajetória)</h1>
+          <h1 className="text-[#2A4365] text-[24px] font-bold leading-tight">(ACORDO DE PD&I)</h1>
         </div>
         <div className="grid grid-cols-9 pt-2 pb-4 px-0">
           {STAGES.map((s, i) => (
@@ -161,18 +196,18 @@ export default function ProcessFlowPage() {
                 Possui Recurso?
               </div>
 
-              <svg width="308" height="24" viewBox="0 0 308 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-1 flex-shrink-0">
-                <line x1="154" y1="0" x2="154" y2="12" stroke="#2A4365" strokeWidth="2" />
-                <line x1="74" y1="12" x2="234" y2="12" stroke="#2A4365" strokeWidth="2" />
-                <line x1="74" y1="12" x2="74" y2="24" stroke="#2A4365" strokeWidth="2" />
-                <line x1="234" y1="12" x2="234" y2="24" stroke="#2A4365" strokeWidth="2" />
+              <svg width="332" height="24" viewBox="0 0 332 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-1 flex-shrink-0">
+                <line x1="166" y1="0" x2="166" y2="12" stroke="#2A4365" strokeWidth="2" />
+                <line x1="80" y1="12" x2="252" y2="12" stroke="#2A4365" strokeWidth="2" />
+                <line x1="80" y1="12" x2="80" y2="24" stroke="#2A4365" strokeWidth="2" />
+                <line x1="252" y1="12" x2="252" y2="24" stroke="#2A4365" strokeWidth="2" />
               </svg>
 
               <div className="flex gap-3">
                 <div className="flex flex-col items-center">
                   <NodeDiamond />
                   <span className="text-[11px] font-bold text-[#2A4365] mb-1">Sim</span>
-                  <div className="process-card p-2.5 text-[#2A4365] text-center rounded-xl transition-all duration-200 hover:bg-white hover:shadow-lg cursor-pointer" style={{ width: 148 }}>
+                  <div className="process-card p-2.5 text-[#2A4365] text-right rounded-xl transition-all duration-200 hover:bg-white hover:shadow-lg cursor-pointer" style={{ width: 160 }}>
                     <p className="font-bold text-[11px] text-[#2A4365] mb-1">Convênio</p>
                     <p className="text-[10px] text-[#2A4365]/90 leading-snug">
                       Acordo de Parceria para Pesquisa, Desenvolvimento e Inovação (PD&I) é um instrumento jurídico que formaliza a colaboração técnica entre instituições públicas e parceiros, visando criar tecnologias, produtos ou processos inovadores. Regido pela Lei de Inovação (Lei 10.973/2004)
@@ -184,7 +219,7 @@ export default function ProcessFlowPage() {
                 <div className="flex flex-col items-center">
                   <NodeDiamond />
                   <span className="text-[11px] font-bold text-[#2A4365] mb-1">Não</span>
-                  <div className="process-card p-2.5 text-[#2A4365] text-center rounded-xl transition-all duration-200 hover:bg-white hover:shadow-lg cursor-pointer" style={{ width: 148 }}>
+                  <div className="process-card p-2.5 text-[#2A4365] text-left rounded-xl transition-all duration-200 hover:bg-white hover:shadow-lg cursor-pointer" style={{ width: 160 }}>
                     <div className="inline-flex items-center gap-1 bg-[#2A4365]/10 border border-[#2A4365]/30 rounded-full px-2 py-0.5 mb-1">
                       <div className="w-2 h-2 rounded-full border border-[#2A4365]" />
                       <span className="text-[9.5px] font-bold text-[#2A4365]">Continue no Fluxo</span>
@@ -204,26 +239,21 @@ export default function ProcessFlowPage() {
             <div ref={aboveRef6} className="absolute flex flex-col items-center" style={{ bottom: 'calc(100% - 171px)', left: '50%', transform: 'translateX(-50%)' }}>
               <ProcessCard position="above" width={190}>
                 <div className="space-y-1 mb-1">
-                  <div>
-                    <div className="flex items-center gap-1">
-                      <span className="text-[10.5px] font-bold text-[#2A4365]">1–</span>
-                      <span className="text-[10.5px] text-[#2A4365]">Autorização do Secretário da SEAD</span>
-                      <span className="text-[#2A4365] font-bold text-[11px]">∨</span>
-                    </div>
-                    <p className="text-[9.5px] text-[#2A4365]/75 leading-snug pl-3">
-                      Autorização do secretário da SEAD (secretário responsável pelas compras públicas) sobre o acordo de PD&amp;I *verificar mudança para SIA
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <span className="text-[10.5px] font-bold text-[#2A4365]">2–</span>
-                    <span className="text-[10.5px] text-[#2A4365]">Autorização da SEFAZ</span>
-                    <span className="text-[#2A4365] font-bold text-[11px]">›</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <span className="text-[10.5px] font-bold text-[#2A4365]">3–</span>
-                    <span className="text-[10.5px] text-[#2A4365]">Autorização da PGE</span>
-                    <span className="text-[#2A4365] font-bold text-[11px]">›</span>
-                  </div>
+                  <AccordionItem
+                    number="1"
+                    title="Autorização do Secretário da SEAD"
+                    description="Autorização do secretário da SEAD (secretário responsável pelas compras públicas) sobre o acordo de PD&I *verificar mudança para SIA"
+                  />
+                  <AccordionItem
+                    number="2"
+                    title="Autorização da SEFAZ"
+                    description="Secretaria de Estado da Fazenda devido a repasses de recursos"
+                  />
+                  <AccordionItem
+                    number="3"
+                    title="Autorização da PGE"
+                    description="Procuradoria Geral do Estado para verificação"
+                  />
                 </div>
                 <DownloadButton />
               </ProcessCard>
