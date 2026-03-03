@@ -1,6 +1,33 @@
-import React from 'react'
-import ProcessFlowPage from './page/ProcessFlowPage'
+import React, { useEffect, useState } from 'react'
+import HomePage from './page/HomePage'
+import AcordoPDIPage from './page/AcordoPDIPage'
+import ConvenioPDIPage from './page/ConvenioPDIPage'
+import EncomendaTecnologicaPage from './page/EncomendaTecnologicaPage'
+import ContratacaoDiretaPage from './page/ContratacaoDiretaPage'
+import ContratoTransferenciaTecnologiaPage from './page/ContratoTransferenciaTecnologiaPage'
+
+const ROUTES = {
+  '/': HomePage,
+  '/acordo-pdi': AcordoPDIPage,
+  '/convenio-pdi': ConvenioPDIPage,
+  '/encomenda-tecnologica': EncomendaTecnologicaPage,
+  '/contratacao-direta': ContratacaoDiretaPage,
+  '/contrato-transferencia-tecnologia': ContratoTransferenciaTecnologiaPage,
+}
+
+function getPath() {
+  return window.location.pathname || '/'
+}
 
 export default function App() {
-  return <ProcessFlowPage />
+  const [path, setPath] = useState(getPath)
+
+  useEffect(() => {
+    const onPopState = () => setPath(getPath())
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
+
+  const Page = ROUTES[path] ?? HomePage
+  return <Page />
 }

@@ -5,15 +5,15 @@ import { NodeCircle, NodeDiamond, NodeTriangle } from '../components/ProcessNode
 import SnakePath from '../components/SnakePath'
 
 const STAGES = [
-  { label: 'Início',                             img: '/assets/cuate.png' },
-  { label: 'Formalização\nda Demanda',           img: '/assets/documentos.png' },
-  { label: 'Manifestação\nTécnica ou NIT',       img: '/assets/lawyer.png' },
-  { label: 'Plano de\nTrabalho',                 img: '/assets/schedule.png' },
-  { label: 'Acordo de\nParceria',                img: '/assets/ageement.png' },
-  { label: 'Autorização da\nContratação (CGFR)', img: '/assets/consent.png' },
-  { label: 'Autorizações',                       img: '/assets/sent-massage.png' },
-  { label: 'Indicação do\nGestor no Acordo',     img: '/assets/business-deal.png' },
-  { label: 'Publicação\nno DOE',                 img: '/assets/publish-article.png' },
+  { label: 'Início',                             img: '/assets/acordo-pdi/cuate.png' },
+  { label: 'Formalização\nda Demanda',           img: '/assets/acordo-pdi/documentos.png' },
+  { label: 'Manifestação\nTécnica ou NIT',       img: '/assets/acordo-pdi/lawyer.png' },
+  { label: 'Plano de\nTrabalho',                 img: '/assets/acordo-pdi/schedule.png' },
+  { label: 'Acordo de\nParceria',                img: '/assets/acordo-pdi/ageement.png' },
+  { label: 'Autorização da\nContratação (CGFR)', img: '/assets/acordo-pdi/consent.png' },
+  { label: 'Autorizações',                       img: '/assets/acordo-pdi/sent-massage.png' },
+  { label: 'Indicação do\nGestor no Acordo',     img: '/assets/acordo-pdi/business-deal.png' },
+  { label: 'Publicação\nno DOE',                 img: '/assets/acordo-pdi/publish-article.png' },
 ]
 
 const NODE_TOP = [206, 255, 164, 255, 164, 255, 164, 255, 204]
@@ -60,7 +60,7 @@ function StageCol({ index, children, extra }) {
   )
 }
 
-export default function ProcessFlowPage() {
+export default function AcordoPDIPage() {
   const [extraTop, setExtraTop] = useState(0)
   const aboveRef2 = useRef(null)
   const aboveRef4 = useRef(null)
@@ -86,7 +86,13 @@ export default function ProcessFlowPage() {
   return (
     <div className="min-h-screen select-none" style={{ minWidth: 1260 }}>
       <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10">
-        <button className="flex items-center gap-2 text-white text-sm font-medium hover:opacity-90 transition-opacity font-sans">
+        <button
+          className="flex items-center gap-2 text-white text-sm font-medium hover:opacity-90 transition-opacity font-sans"
+          onClick={() => {
+            window.history.pushState({}, '', '/')
+            window.dispatchEvent(new PopStateEvent('popstate'))
+          }}
+        >
           <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
             <polyline points="15 18 9 12 15 6" />
           </svg>
@@ -102,7 +108,7 @@ export default function ProcessFlowPage() {
             </svg>
             <span className="text-[#2A4365] text-[11px] font-semibold">Fluxo de Processo</span>
           </div>
-          <h1 className="text-[#2A4365] text-[24px] font-bold leading-tight">(ACORDO DE PD&I)</h1>
+          <h1 className="text-[#2A4365] text-[24px] font-bold leading-tight">ACORDO DE PD&I</h1>
         </div>
         <div className="grid grid-cols-9 pt-2 pb-4 px-0">
           {STAGES.map((s, i) => (

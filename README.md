@@ -38,7 +38,7 @@ processo-flow/
 │       └── publish-article.png
 ├── src/
 │   ├── components/
-│   │   ├── ProcessFlowPage.jsx  ← Página principal
+│   │   ├── AcordoPDIPage.jsx  ← Página principal
 │   │   ├── ProcessCard.jsx      ← Cards flutuantes
 │   │   ├── ProcessNode.jsx      ← Nós do fluxo (círculo, diamante, triângulo)
 │   │   ├── SnakePath.jsx        ← SVG do caminho serpentine
