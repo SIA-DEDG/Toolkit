@@ -16,7 +16,8 @@ const STAGES = [
   { label: 'Publicação\nno DOE',                 img: '/assets/acordo-pdi/publish-article.png' },
 ]
 
-const NODE_TOP = [206, 255, 164, 255, 164, 255, 164, 255, 204]
+const NODE_TOP = [206, 243, 176, 243, 176, 243, 176, 243, 204]
+const COL_WIDTH = 185
 
 function CardTitle({ children }) {
   return <p className="font-bold text-[12px] text-[#2A4365] mb-1 leading-tight">{children}</p>
@@ -71,7 +72,7 @@ export default function AcordoPDIPage() {
 
     const recalculate = () => {
       const heights = refs.map(r => r.current?.offsetHeight ?? 0)
-      const overflow = Math.max(0, Math.max(...heights) - 171) + 8
+      const overflow = Math.max(0, Math.max(...heights) - 183) + 8
       setExtraTop(overflow)
     }
 
@@ -84,7 +85,7 @@ export default function AcordoPDIPage() {
   }, [])
 
   return (
-    <div className="min-h-screen select-none" style={{ minWidth: 1260 }}>
+    <div className="min-h-screen select-none" style={{ minWidth: 9 * COL_WIDTH }}>
       <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10">
         <button
           className="flex items-center gap-2 text-white text-sm font-medium hover:opacity-90 transition-opacity font-sans"
@@ -142,7 +143,7 @@ export default function AcordoPDIPage() {
         <div className="relative grid grid-cols-9" style={{ minHeight: 520, paddingTop: extraTop }}>
 
           <div className="absolute inset-0 pointer-events-none" style={{ gridColumn: '1 / -1' }}>
-            <SnakePath extraTop={extraTop} />
+            <SnakePath extraTop={extraTop} colWidth={COL_WIDTH} />
           </div>
 
           <StageCol index={0}>
@@ -165,7 +166,7 @@ export default function AcordoPDIPage() {
           </StageCol>
 
           <StageCol index={2}>
-            <div ref={aboveRef2} className="absolute flex flex-col items-center" style={{ bottom: 'calc(100% - 171px)', left: '50%', transform: 'translateX(-50%)' }}>
+            <div ref={aboveRef2} className="absolute flex flex-col items-center" style={{ bottom: 'calc(100% - 183px)', left: '50%', transform: 'translateX(-50%)' }}>
               <ProcessCard position="above" width={172}>
                 <CardBody>
                   Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados
@@ -185,7 +186,7 @@ export default function AcordoPDIPage() {
           </StageCol>
 
           <StageCol index={4}>
-            <div ref={aboveRef4} className="absolute flex flex-col items-center" style={{ bottom: 'calc(100% - 171px)', left: '50%', transform: 'translateX(-50%)' }}>
+            <div ref={aboveRef4} className="absolute flex flex-col items-center" style={{ bottom: 'calc(100% - 183px)', left: '50%', transform: 'translateX(-50%)' }}>
               <ProcessCard position="above" width={178}>
                 <CardBody>
                   Documento do Acordo de parceria firmado
@@ -242,7 +243,7 @@ export default function AcordoPDIPage() {
           </StageCol>
 
           <StageCol index={6}>
-            <div ref={aboveRef6} className="absolute flex flex-col items-center" style={{ bottom: 'calc(100% - 171px)', left: '50%', transform: 'translateX(-50%)' }}>
+            <div ref={aboveRef6} className="absolute flex flex-col items-center" style={{ bottom: 'calc(100% - 183px)', left: '50%', transform: 'translateX(-50%)' }}>
               <ProcessCard position="above" width={190}>
                 <div className="space-y-1 mb-1">
                   <AccordionItem

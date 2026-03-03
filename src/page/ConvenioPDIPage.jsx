@@ -21,11 +21,11 @@ const STAGES = [
 ]
 
 // paddingTop de cada coluna para alinhar o nó com a cobra
-// padrão: MID=206, BAIXO=255, CIMA=164
-const NODE_TOP = [206, 255, 164, 255, 164, 255, 164, 255, 164, 255, 164, 255, 204]
+// padrão: MID=206, BAIXO=243, CIMA=176, FIM=204
+const NODE_TOP = [206, 243, 176, 243, 176, 243, 176, 243, 176, 243, 176, 243, 204]
 
 const COLS      = 13
-const COL_WIDTH = 140
+const COL_WIDTH = 185
 
 function CardBody({ children }) {
   return <p className="text-[10.5px] leading-snug text-[#2A4365]/90">{children}</p>
@@ -69,7 +69,7 @@ const GRID = {
 }
 
 const ABOVE_ANCHOR = {
-  bottom: 'calc(100% - 171px)',
+  bottom: 'calc(100% - 183px)',
   left: '50%',
   transform: 'translateX(-50%)',
 }
@@ -86,7 +86,7 @@ export default function ConvenioPDIPage() {
   useEffect(() => {
     const recalculate = () => {
       const heights = refs.map(r => r.current?.offsetHeight ?? 0)
-      const overflow = Math.max(0, Math.max(...heights) - 171) + 8
+      const overflow = Math.max(0, Math.max(...heights) - 183) + 8
       setExtraTop(overflow)
     }
     recalculate()

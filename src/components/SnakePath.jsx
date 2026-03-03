@@ -1,7 +1,7 @@
 import React from 'react'
 
 const MID_Y     = 85
-const AMPLITUDE = 42
+const AMPLITUDE = 30
 
 function buildPath(cols, colWidth) {
   const half = colWidth / 2
