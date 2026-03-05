@@ -98,7 +98,7 @@ export default function ContratacaoDiretaPage() {
   }, [])
 
   return (
-    <div className="min-h-screen select-none" style={{ minWidth: COLS * COL_WIDTH }}>
+    <div className="min-h-screen select-none flex flex-col" style={{ minWidth: COLS * COL_WIDTH }}>
 
       {/* ── Navbar ── */}
       <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10">
@@ -154,7 +154,7 @@ export default function ContratacaoDiretaPage() {
       </header>
 
       {/* ── Área da cobra + cards ── */}
-      <div className="flow-gradient pt-5">
+      <div className="flow-gradient pt-5 flex-1">
         <div className="relative" style={{ ...GRID, minHeight: 520, paddingTop: extraTop }}>
 
           {/* cobra */}
@@ -174,7 +174,7 @@ export default function ContratacaoDiretaPage() {
           <StageCol index={1}>
             <ProcessCard position="below">
               <CardBody>Formalização da Demanda via SEI gabinete do órgão e instituição da parceria;</CardBody>
-              <DownloadButton />
+              <DownloadButton fileKey="contratacao-direta/1. Documento_Formalizacao_Demanda_PDI.docx" />
             </ProcessCard>
           </StageCol>
 
@@ -183,7 +183,7 @@ export default function ContratacaoDiretaPage() {
             <div ref={ref2} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
                 <CardBody>Declaração de inexistência de Ata de Registro de Preços gerenciados pela SEAD/PI que contemple o objeto pretendido.</CardBody>
-                <DownloadButton />
+                <DownloadButton fileKey="contratacao-direta/2. Declaracao_Inexistencia_ARP_SEAD_PI.docx" />
               </ProcessCard>
             </div>
           </StageCol>
@@ -192,7 +192,7 @@ export default function ContratacaoDiretaPage() {
           <StageCol index={3}>
             <ProcessCard position="below">
               <CardBody>Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados</CardBody>
-              <DownloadButton />
+              <DownloadButton fileKey="contratacao-direta/3. Estudo Preliminar_Encomenda_Tecnologica.docx" />
             </ProcessCard>
           </StageCol>
 
@@ -201,7 +201,7 @@ export default function ContratacaoDiretaPage() {
             <div ref={ref4} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
                 <CardBody>Planejamento que identifica, analisa e propõe o tratamento de eventos que possam comprometer a licitação ou a execução contratual.</CardBody>
-                <DownloadButton />
+                <DownloadButton fileKey="contratacao-direta/4. Mapa_de_Riscos_Contratacao.docx" />
               </ProcessCard>
             </div>
           </StageCol>
@@ -230,7 +230,7 @@ export default function ContratacaoDiretaPage() {
           <StageCol index={7}>
             <ProcessCard position="below">
               <CardBody>O Termo de Referência (TR) ou projeto básico contendo a justificativa, a necessidade da administração, o objeto, prazos, custos estimados, entre outros</CardBody>
-              <DownloadButton />
+              <DownloadButton fileKey="contratacao-direta/6. Termo_de_Referencia.docx" />
             </ProcessCard>
           </StageCol>
 
@@ -253,7 +253,7 @@ export default function ContratacaoDiretaPage() {
           <StageCol index={9}>
             <ProcessCard position="below">
               <CardBody>Minuta de Contrato ou instrumento equivalente</CardBody>
-              <DownloadButton />
+              <DownloadButton fileKey="contratacao-direta/7. Proposta_Comercial_ETEC_Modelo.docx" />
             </ProcessCard>
           </StageCol>
 

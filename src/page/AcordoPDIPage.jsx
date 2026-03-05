@@ -85,7 +85,7 @@ export default function AcordoPDIPage() {
   }, [])
 
   return (
-    <div className="min-h-screen select-none" style={{ minWidth: 9 * COL_WIDTH }}>
+    <div className="min-h-screen select-none flex flex-col" style={{ minWidth: 9 * COL_WIDTH }}>
       <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10">
         <button
           className="flex items-center gap-2 text-white text-sm font-medium hover:opacity-90 transition-opacity font-sans"
@@ -138,7 +138,7 @@ export default function AcordoPDIPage() {
         </div>
       </header>
 
-      <div className="flow-gradient pt-5">
+      <div className="flow-gradient pt-5 flex-1">
 
         <div className="relative grid grid-cols-9" style={{ minHeight: 520, paddingTop: extraTop }}>
 
@@ -161,7 +161,7 @@ export default function AcordoPDIPage() {
               <CardBody>
                 Formalização da Demanda via SEI  gabinete do órgão e instituição da parceria;
               </CardBody>
-              <DownloadButton />
+              <DownloadButton fileKey="acordo-pd&i/Documento_Formalizacao_Demanda_PDI.docx" />
             </ProcessCard>
           </StageCol>
 
@@ -171,7 +171,7 @@ export default function AcordoPDIPage() {
                 <CardBody>
                   Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados
                 </CardBody>
-                <DownloadButton />
+                <DownloadButton fileKey={"acordo-pd&i/Manifestacao_Tecnica_PDI.docx"}/>
               </ProcessCard>
             </div>
           </StageCol>
@@ -181,7 +181,7 @@ export default function AcordoPDIPage() {
               <CardBody>
                 Plano de trabalho do acordo entre as instituições contendo a descrição das atividades, objetivos e metas do acordo
               </CardBody>
-              <DownloadButton />
+              <DownloadButton fileKey="acordo-pd&i/Modelo_Plano_de_Trabalho_PDI.docx" />
             </ProcessCard>
           </StageCol>
 
@@ -191,14 +191,14 @@ export default function AcordoPDIPage() {
                 <CardBody>
                   Documento do Acordo de parceria firmado
                 </CardBody>
-                <DownloadButton />
+                <DownloadButton fileKey="acordo-pd&i/Minuta_Acordo_Parceria_PDI.docx" />
               </ProcessCard>
             </div>
           </StageCol>
 
           <StageCol index={5}>
             <div className="flex flex-col items-center">
-              <div className="w-0.5 bg-[#2A4365] h-10 flex-shrink-0" />
+              <div className="w-[3px] bg-[#2B6CB0] h-10 flex-shrink-0" />
               <div className="border-2 border-dashed border-[#2A4365] rounded-lg bg-white/80 px-3 py-1.5 text-[12px] font-bold text-[#2A4365] whitespace-nowrap shadow">
                 Possui Recurso?
               </div>
@@ -219,7 +219,7 @@ export default function AcordoPDIPage() {
                     <p className="text-[10px] text-[#2A4365]/90 leading-snug">
                       Acordo de Parceria para Pesquisa, Desenvolvimento e Inovação (PD&I) é um instrumento jurídico que formaliza a colaboração técnica entre instituições públicas e parceiros, visando criar tecnologias, produtos ou processos inovadores. Regido pela Lei de Inovação (Lei 10.973/2004)
                     </p>
-                    <DownloadButton />
+                    <DownloadButton fileKey="acordo-pd&i/Planilha_Custos_Operacionais_PDI.xlsx" />
                   </div>
                 </div>
 
@@ -262,7 +262,7 @@ export default function AcordoPDIPage() {
                     description="Procuradoria Geral do Estado para verificação"
                   />
                 </div>
-                <DownloadButton />
+                <DownloadButton fileKey="acordo-pd&i/Lista de Verificação - Acordo PD&I.docx" />
               </ProcessCard>
             </div>
           </StageCol>

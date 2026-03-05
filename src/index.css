@@ -16,12 +16,18 @@
   box-sizing: border-box;
 }
 
+html {
+  overscroll-behavior: none;
+  background-color: #90CDF4;
+}
+
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--color-nav);
+  background-color: #90CDF4;
   min-width: 1280px;
   overflow-x: auto;
+  overscroll-behavior: none;
   color: var(--color-text);
 }
 
@@ -38,5 +44,5 @@ body {
 }
 
 ::-webkit-scrollbar { height: 6px; width: 6px; }
-::-webkit-scrollbar-track { background: var(--color-nav); }
+::-webkit-scrollbar-track { background: var(--color-footer); }
 ::-webkit-scrollbar-thumb { background: var(--color-header); border-radius: 3px; }

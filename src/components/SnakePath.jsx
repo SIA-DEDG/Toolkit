@@ -30,8 +30,12 @@ export default function SnakePath({ extraTop = 0, cols = 9, colWidth = 140 }) {
       style={{ top: 128 + extraTop, height: 170, zIndex: 0 }}
       aria-hidden="true"
     >
-      <path d={PATH} fill="none" stroke="rgba(0,0,0,0.12)" strokeWidth="6"   strokeLinecap="round" />
-      <path d={PATH} fill="none" stroke="#2C5282"           strokeWidth="3.5" strokeLinecap="round" />
+      <defs>
+        <filter id="snake-shadow" x="-5%" y="-20%" width="110%" height="160%">
+          <feDropShadow dx="0" dy="4" stdDeviation="2" floodColor="#000000" floodOpacity="0.25" />
+        </filter>
+      </defs>
+      <path d={PATH} fill="none" stroke="#2B6CB0" strokeWidth="4" strokeLinecap="round" filter="url(#snake-shadow)" />
     </svg>
   )
 }
