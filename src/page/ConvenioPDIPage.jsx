@@ -96,7 +96,7 @@ export default function ConvenioPDIPage() {
   }, [])
 
   return (
-    <div className="min-h-screen select-none" style={{ minWidth: COLS * COL_WIDTH }}>
+    <div className="min-h-screen select-none flex flex-col" style={{ minWidth: COLS * COL_WIDTH }}>
 
       {/* ── Navbar ── */}
       <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10">
@@ -152,7 +152,7 @@ export default function ConvenioPDIPage() {
       </header>
 
       {/* ── Área da cobra + cards ── */}
-      <div className="flow-gradient pt-5">
+      <div className="flow-gradient pt-5 flex-1">
         <div className="relative" style={{ ...GRID, minHeight: 520, paddingTop: extraTop }}>
 
           {/* cobra */}

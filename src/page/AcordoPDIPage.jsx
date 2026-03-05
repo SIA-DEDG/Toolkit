@@ -85,7 +85,7 @@ export default function AcordoPDIPage() {
   }, [])
 
   return (
-    <div className="min-h-screen select-none" style={{ minWidth: 9 * COL_WIDTH }}>
+    <div className="min-h-screen select-none flex flex-col" style={{ minWidth: 9 * COL_WIDTH }}>
       <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10">
         <button
           className="flex items-center gap-2 text-white text-sm font-medium hover:opacity-90 transition-opacity font-sans"
@@ -138,7 +138,7 @@ export default function AcordoPDIPage() {
         </div>
       </header>
 
-      <div className="flow-gradient pt-5">
+      <div className="flow-gradient pt-5 flex-1">
 
         <div className="relative grid grid-cols-9" style={{ minHeight: 520, paddingTop: extraTop }}>
 
