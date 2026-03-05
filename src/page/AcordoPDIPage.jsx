@@ -198,7 +198,7 @@ export default function AcordoPDIPage() {
 
           <StageCol index={5}>
             <div className="flex flex-col items-center">
-              <div className="w-0.5 bg-[#2A4365] h-10 flex-shrink-0" />
+              <div className="w-[3px] bg-[#2B6CB0] h-10 flex-shrink-0" />
               <div className="border-2 border-dashed border-[#2A4365] rounded-lg bg-white/80 px-3 py-1.5 text-[12px] font-bold text-[#2A4365] whitespace-nowrap shadow">
                 Possui Recurso?
               </div>
