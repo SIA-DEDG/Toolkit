@@ -6,7 +6,8 @@ const BUCKET = import.meta.env.VITE_MINIO_BUCKET || 'toolkit-docs'
  * @param {string} fileKey - Caminho do arquivo no bucket (ex: "processos/contrato.pdf")
  */
 export function getFileUrl(fileKey) {
-  return `${ENDPOINT}/${BUCKET}/${fileKey}`
+  const encodedKey = fileKey.split('/').map(encodeURIComponent).join('/')
+  return `${ENDPOINT}/${BUCKET}/${encodedKey}`
 }
 
 /**

@@ -161,7 +161,7 @@ export default function AcordoPDIPage() {
               <CardBody>
                 Formalização da Demanda via SEI  gabinete do órgão e instituição da parceria;
               </CardBody>
-              <DownloadButton />
+              <DownloadButton fileKey="acordo-pd&i/Documento_Formalizacao_Demanda_PDI.docx" />
             </ProcessCard>
           </StageCol>
 
@@ -171,7 +171,7 @@ export default function AcordoPDIPage() {
                 <CardBody>
                   Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados
                 </CardBody>
-                <DownloadButton />
+                <DownloadButton fileKey={"acordo-pd&i/Manifestacao_Tecnica_PDI.docx"}/>
               </ProcessCard>
             </div>
           </StageCol>
@@ -181,7 +181,7 @@ export default function AcordoPDIPage() {
               <CardBody>
                 Plano de trabalho do acordo entre as instituições contendo a descrição das atividades, objetivos e metas do acordo
               </CardBody>
-              <DownloadButton />
+              <DownloadButton fileKey="acordo-pd&i/Modelo_Plano_de_Trabalho_PDI.docx" />
             </ProcessCard>
           </StageCol>
 
@@ -191,7 +191,7 @@ export default function AcordoPDIPage() {
                 <CardBody>
                   Documento do Acordo de parceria firmado
                 </CardBody>
-                <DownloadButton />
+                <DownloadButton fileKey="acordo-pd&i/Minuta_Acordo_Parceria_PDI.docx" />
               </ProcessCard>
             </div>
           </StageCol>
@@ -219,7 +219,7 @@ export default function AcordoPDIPage() {
                     <p className="text-[10px] text-[#2A4365]/90 leading-snug">
                       Acordo de Parceria para Pesquisa, Desenvolvimento e Inovação (PD&I) é um instrumento jurídico que formaliza a colaboração técnica entre instituições públicas e parceiros, visando criar tecnologias, produtos ou processos inovadores. Regido pela Lei de Inovação (Lei 10.973/2004)
                     </p>
-                    <DownloadButton />
+                    <DownloadButton fileKey="acordo-pd&i/Planilha_Custos_Operacionais_PDI.xlsx" />
                   </div>
                 </div>
 
@@ -262,7 +262,7 @@ export default function AcordoPDIPage() {
                     description="Procuradoria Geral do Estado para verificação"
                   />
                 </div>
-                <DownloadButton />
+                <DownloadButton fileKey="acordo-pd&i/Lista de Verificação - Acordo PD&I.docx" />
               </ProcessCard>
             </div>
           </StageCol>

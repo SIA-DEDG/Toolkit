@@ -174,7 +174,7 @@ export default function EncomendaTecnologicaPage() {
           <StageCol index={1}>
             <ProcessCard position="below">
               <CardBody>Formalização da Demanda via SEI gabinete do órgão e instituição da parceria;</CardBody>
-              <DownloadButton />
+              <DownloadButton fileKey="encomenda-tecnologica/1. Documento_Formalizacao_Demanda_PDI.docx" />
             </ProcessCard>
           </StageCol>
 
@@ -183,7 +183,7 @@ export default function EncomendaTecnologicaPage() {
             <div ref={ref2} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
                 <CardBody>Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados</CardBody>
-                <DownloadButton />
+                <DownloadButton fileKey="encomenda-tecnologica/2. Estudo Preliminar_Encomenda_Tecnologica.docx" />
               </ProcessCard>
             </div>
           </StageCol>
@@ -192,7 +192,7 @@ export default function EncomendaTecnologicaPage() {
           <StageCol index={3}>
             <ProcessCard position="below">
               <CardBody>Planejamento que identifica, analisa e propõe o tratamento de eventos que possam comprometer a licitação ou a execução contratual.</CardBody>
-              <DownloadButton />
+              <DownloadButton fileKey="encomenda-tecnologica/3. Mapa_de_Riscos_Contratacao.docx" />
             </ProcessCard>
           </StageCol>
 
@@ -210,7 +210,7 @@ export default function EncomendaTecnologicaPage() {
           <StageCol index={5}>
             <ProcessCard position="below">
               <CardBody> Minuta do Termo de Referência (art. 72, I, da Lei n. 14.133/2021; art. 17, V, do Decreto Estadual n. 21.872/2023);</CardBody>
-              <DownloadButton />
+              <DownloadButton fileKey="encomenda-tecnologica/4. Termo_de_Referencia_PDI.docx" />
             </ProcessCard>
           </StageCol>
 
@@ -232,7 +232,7 @@ export default function EncomendaTecnologicaPage() {
           <StageCol index={7}>
             <ProcessCard position="below">
               <CardBody>Minuta da Proposta comercial do fornecedor; acompanhada de justificativa para a precificação da ETEC;</CardBody>
-              <DownloadButton />
+              <DownloadButton fileKey="encomenda-tecnologica/Modelo_Plano_de_Trabalho_PDI.docx" />
             </ProcessCard>
           </StageCol>
 
@@ -250,7 +250,7 @@ export default function EncomendaTecnologicaPage() {
           <StageCol index={9}>
             <ProcessCard position="below">
               <CardBody>Minuta do contrato para celebração Encomenda Tecnológica</CardBody>
-              <DownloadButton />
+              <DownloadButton fileKey="encomenda-tecnologica/5. Minuta_Contrato_Transferencia_Tecnologia.docx" />
             </ProcessCard>
           </StageCol>
 

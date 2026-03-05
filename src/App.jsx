@@ -8,8 +8,8 @@ import ContratoTransferenciaTecnologiaPage from './page/ContratoTransferenciaTec
 
 const ROUTES = {
   '/': HomePage,
-  '/acordo-pdi': AcordoPDIPage,
-  '/convenio-pdi': ConvenioPDIPage,
+  '/acordo-pd&i': AcordoPDIPage,
+  '/convenio-pd&i': ConvenioPDIPage,
   '/encomenda-tecnologica': EncomendaTecnologicaPage,
   '/contratacao-direta': ContratacaoDiretaPage,
   '/contrato-transferencia-tecnologia': ContratoTransferenciaTecnologiaPage,

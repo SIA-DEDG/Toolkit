@@ -2,13 +2,13 @@ import React from 'react'
 
 const PAGES = [
   {
-    href: '/acordo-pdi',
-    title: 'Acordo PDI',
+    href: '/acordo-pd&i',
+    title: 'Acordo PD&I',
     description: 'Fluxo do processo de Acordo de Parceria para PDI',
   },
   {
-    href: '/convenio-pdi',
-    title: 'Convênio PDI',
+    href: '/convenio-pd&i',
+    title: 'Convênio PD&I',
     description: 'Fluxo do processo de Convênio para PDI',
   },
   {

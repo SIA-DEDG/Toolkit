@@ -31,7 +31,7 @@ export default function SnakePath({ extraTop = 0, cols = 9, colWidth = 140 }) {
       aria-hidden="true"
     >
       <path d={PATH} fill="none" stroke="rgba(0,0,0,0.12)" strokeWidth="6"   strokeLinecap="round" />
-      <path d={PATH} fill="none" stroke="#2C5282"           strokeWidth="3.5" strokeLinecap="round" />
+      <path d={PATH} fill="none" stroke="#2A4365"           strokeWidth="3.5" strokeLinecap="round" />
     </svg>
   )
 }

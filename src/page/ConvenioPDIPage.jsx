@@ -172,7 +172,7 @@ export default function ConvenioPDIPage() {
           <StageCol index={1}>
             <ProcessCard position="below">
               <CardBody>Formalização da Demanda via SEI  gabinete do órgão e instituição da parceria;</CardBody>
-              <DownloadButton />
+              <DownloadButton fileKey="convenio-pd&i/Documento_Formalizacao_Demanda_PDI.docx" />
             </ProcessCard>
           </StageCol>
 
@@ -181,7 +181,7 @@ export default function ConvenioPDIPage() {
             <div ref={ref2} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
                 <CardBody>Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados</CardBody>
-                <DownloadButton />
+                <DownloadButton fileKey="convenio-pd&i/Manifestacao_Tecnica_PDI.docx" />
               </ProcessCard>
             </div>
           </StageCol>
@@ -199,7 +199,7 @@ export default function ConvenioPDIPage() {
             <div ref={ref4} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
                 <CardBody>⁠Plano de trabalho do convênio entre as instituições contendo a descrição das atividades, objetivos e metas do convênio</CardBody>
-                <DownloadButton />
+                <DownloadButton fileKey="convenio-pd&i/Modelo_Plano_de_Trabalho_PDI.docx" />
               </ProcessCard>
             </div>
           </StageCol>
@@ -208,7 +208,7 @@ export default function ConvenioPDIPage() {
           <StageCol index={5}>
             <ProcessCard position="below">
               <CardBody>Minuta do Convênio para Pesquisa, Desenvolvimento e Inovação</CardBody>
-              <DownloadButton />
+              <DownloadButton fileKey="convenio-pd&i/Minuta_Convênio_Parceria_PDI.docx" />
             </ProcessCard>
           </StageCol>
 
@@ -217,7 +217,7 @@ export default function ConvenioPDIPage() {
             <div ref={ref6} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
                 <CardBody>Planilha demonstrativa dos custos operacionais incorridos na execução das atividades</CardBody>
-                <DownloadButton />
+                <DownloadButton fileKey="convenio-pd&i/Planilha_Custos_Operacionais_PDI.xlsx" />
               </ProcessCard>
             </div>
           </StageCol>

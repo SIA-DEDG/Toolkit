@@ -10,7 +10,7 @@ export default function ProcessCard({ position = 'above', width = 168, showNode 
         <>
           <div
             className="process-card p-2.5 text-[#2A4365] text-left rounded-xl transition-all duration-200 hover:bg-white hover:shadow-lg cursor-pointer"
-            style={{ width: 'fit-content', maxWidth: 200 }}
+            style={{ width: 'fit-content', minWidth: 155, maxWidth: 230 }}
           >
             {children}
           </div>
@@ -25,7 +25,7 @@ export default function ProcessCard({ position = 'above', width = 168, showNode 
           {showNode && <NodeDiamond />}
           <div
             className="process-card p-2.5 text-[#2A4365] text-left rounded-xl transition-all duration-200 hover:bg-white hover:shadow-lg cursor-pointer"
-            style={{ width: 'fit-content', maxWidth: 200 }}
+            style={{ width: 'fit-content', minWidth: 155, maxWidth: 230 }}
           >
             {children}
           </div>
