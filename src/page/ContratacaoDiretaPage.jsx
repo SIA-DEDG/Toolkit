@@ -292,9 +292,6 @@ export default function ContratacaoDiretaPage() {
           {/* Col 13 – Comunicação TCE (triângulo + abaixo) */}
           <StageCol index={13}>
             <NodeTriangle />
-            <ProcessCard position="below" showNode={false}>
-              <CardBody>Comunicação de assinatura do contrato ou documento substitutivo ao TCE até 10 dias após o ato</CardBody>
-            </ProcessCard>
           </StageCol>
 
         </div>
