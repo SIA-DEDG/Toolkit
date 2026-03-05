@@ -15,17 +15,17 @@ export default function ProcessCard({ position = 'above', width = 168, showNode 
             {children}
           </div>
           {showNode && <NodeDiamond />}
-          <div className="w-[3px] bg-[#2B6CB0] h-10 flex-shrink-0" />
+          {showNode && <div className="w-[3px] bg-[#2B6CB0] h-10 flex-shrink-0" />}
         </>
       )}
 
       {!isAbove && (
         <>
-          <div className="w-[3px] bg-[#2B6CB0] h-10 flex-shrink-0" />
+          {showNode && <div className="w-[3px] bg-[#2B6CB0] h-10 flex-shrink-0" />}
           {showNode && <NodeDiamond />}
           <div
             className="process-card p-2.5 text-[#2A4365] text-left rounded-xl transition-all duration-200 hover:bg-white hover:shadow-lg cursor-pointer"
-            style={{ width: 'fit-content', minWidth: 155, maxWidth: 230 }}
+            style={{ width: 'fit-content', minWidth: 155, maxWidth: 230, marginTop: !showNode ? 32 : undefined }}
           >
             {children}
           </div>
