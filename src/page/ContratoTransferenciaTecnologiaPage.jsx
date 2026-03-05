@@ -216,25 +216,24 @@ export default function ContratoTransferenciaTecnologiaPage() {
             </ProcessCard>
           </StageCol>
 
-          {/* Col 6 – Exame e parecer Técnico do NIT (acima) */}
+          {/* Col 6 – Exame e parecer Técnico do NIT (acima) + nota dashed (abaixo) */}
           <StageCol index={6}>
             <div ref={ref6} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
                 <CardBody>Exame e parecer técnico do Núcleo de Inovação Tecnológica – NIT</CardBody>
               </ProcessCard>
             </div>
-          </StageCol>
-
-          {/* Col 7 – Habilitação da ICT ou Empresa (abaixo, nota dashed) */}
-          <StageCol index={7}>
-            <div className="flex flex-col items-center mt-2" style={{ width: 160 }}>
+            <div className="flex flex-col items-center mt-16" style={{ width: 160 }}>
               <div className="border-2 border-dashed border-[#2A4365]/60 rounded-lg bg-white/70 px-2.5 py-2">
                 <p className="text-[9.5px] text-[#2A4365]/80 leading-snug">
                   Caso a contratação preveja cláusula de exclusividade, informar se houve a manifestação de outros potenciais parceiros tecnológicos em site eletrônico oficial da ICT e se foram atendidos os §§ 1º, 4º, art. 75 do Decreto n. 10.534 / Decreto 23.676/PI
                 </p>
               </div>
-              <DownloadButton />
             </div>
+          </StageCol>
+
+          {/* Col 7 – Habilitação da ICT ou Empresa */}
+          <StageCol index={7}>
           </StageCol>
 
           {/* Col 8 – Plano de Trabalho (acima) */}
