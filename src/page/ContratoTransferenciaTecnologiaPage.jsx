@@ -21,12 +21,41 @@ const STAGES = [
   { label: 'Comunicação\nTCE',                             img: '/assets/contrato-transferencia-tecnologia/contact-us.png' },
 ]
 
+// Conteúdo de cada etapa para o layout mobile
+const CARDS = [
+  { text: 'Necessidade do órgão desenvolver uma pesquisa', download: false },
+  { text: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria;', download: true },
+  { text: 'Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n. 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados', download: true },
+  { text: 'Planejamento que identifica, analisa e propõe o tratamento de eventos que possam comprometer a licitação ou a execução contratual.', download: true },
+  { text: 'O Termo de Referência (TR) ou projeto básico contendo a justificativa, a necessidade da administração, o objeto, prazos, custos estimados, entre outros', download: true },
+  { text: 'Aprovação do ETP e do mapa de riscos, se houver, e do termo de referência pela autoridade competente do órgão interessado', download: true },
+  { text: 'Exame e parecer técnico do Núcleo de Inovação Tecnológica – NIT', download: false, note: 'Caso a contratação preveja cláusula de exclusividade, informar se houve a manifestação de outros potenciais parceiros tecnológicos em site eletrônico oficial da ICT e se foram atendidos os §§ 1º, 4º, art. 75 do Decreto n. 10.534 / Decreto 23.676/PI' },
+  { text: null, download: false },
+  { text: 'Plano de trabalho do convênio entre as instituições contendo a descrição das atividades, objetivos e metas do convênio', download: true },
+  { text: null, download: true },
+  { accordion: true, download: true },
+  { text: null, download: false },
+  { text: 'Publicação no Diário Oficial do Estado do Piauí', download: false },
+  { text: 'Comunicação de assinatura do contrato ou documento substitutivo ao TCE até 10 dias após o ato', download: false },
+]
+
 // paddingTop de cada coluna para alinhar o nó com a cobra
 // padrão: MID=206, BAIXO=243, CIMA=176, FIM=204
 const NODE_TOP = [206, 243, 176, 243, 176, 243, 176, 243, 176, 243, 176, 243, 176, 204]
 
 const COLS      = 14
 const COL_WIDTH = 185
+
+function useIsMobile() {
+  const mq = window.matchMedia('(max-width: 767px)')
+  const [isMobile, setIsMobile] = useState(() => mq.matches)
+  useEffect(() => {
+    const handler = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+  return isMobile
+}
 
 function CardBody({ children }) {
   return <p className="text-[10.5px] leading-snug text-[#2A4365]/90">{children}</p>
@@ -75,7 +104,197 @@ const ABOVE_ANCHOR = {
   transform: 'translateX(-50%)',
 }
 
-export default function ContratoTransferenciaTecnologiaPage() {
+// ─── Navbar compartilhada ─────────────────────────────────────────────────────
+function Navbar() {
+  return (
+    <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10 flex-shrink-0">
+      <button
+        className="flex items-center gap-2 text-white text-sm font-medium hover:opacity-90 transition-opacity font-sans"
+        onClick={() => {
+          window.history.pushState({}, '', '/')
+          window.dispatchEvent(new PopStateEvent('popstate'))
+        }}
+      >
+        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+        Voltar ao Painel
+      </button>
+    </nav>
+  )
+}
+
+// ─── Footer compartilhado ─────────────────────────────────────────────────────
+function Footer() {
+  return (
+    <footer className="bg-[#90CDF4] px-8 py-3 flex items-center gap-8 border-t border-white/10 flex-shrink-0">
+      <div className="flex items-center gap-2 text-[#2A4365] text-[13px] font-medium">
+        <NodeCircle /><span>Início</span>
+      </div>
+      <div className="flex items-center gap-2 text-[#2A4365] text-[13px] font-medium">
+        <NodeDiamond /><span>Etapas</span>
+      </div>
+      <div className="flex items-center gap-2 text-[#2A4365] text-[13px] font-medium">
+        <NodeTriangle /><span>Fim</span>
+      </div>
+    </footer>
+  )
+}
+
+// ─── Layout Mobile ────────────────────────────────────────────────────────────
+function MobileLayout() {
+  return (
+    <div className="min-h-screen flex flex-col select-none">
+      <Navbar />
+
+      {/* Header */}
+      <header className="bg-[#2C5282] px-5 pt-4 pb-5">
+        <div className="inline-flex items-center gap-2 bg-[#BEE3F8] rounded-lg px-3 py-1.5 mb-3">
+          <svg className="w-3.5 h-3.5 text-[#2A4365]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </svg>
+          <span className="text-[#2A4365] text-[11px] font-semibold">Fluxo de Processo</span>
+        </div>
+        <h1 className="text-white text-xl font-bold leading-tight">
+          CONTRATO DE TRANSFERÊNCIA DE TECNOLOGIA NÃO PATENTEADA, NÃO PATENTEÁVEL OU DE KNOW-HOW
+        </h1>
+      </header>
+
+      {/* Ilustração */}
+      <div className="bg-gradient-to-b from-[#90CDF4] to-[#63B3ED] py-4 flex justify-center">
+        <img src={STAGES[0].img} alt="" className="h-28 object-contain" draggable={false} />
+      </div>
+
+      {/* Timeline */}
+      <div className="flow-gradient flex-1 py-6 px-4">
+        <div className="relative">
+          {/* Linha vertical central */}
+          <div
+            className="absolute bottom-0 w-[3px] bg-[#2B6CB0]"
+            style={{ left: 'calc(50% - 1.5px)', top: '11px' }}
+          />
+
+          {STAGES.map((stage, i) => {
+            const card = CARDS[i]
+            const isLeft = i % 2 === 0
+            const isFirst = i === 0
+            const hasContent = card.text || card.download || card.accordion
+
+            return (
+              <div key={i} className="relative mb-6">
+                {/* Linha horizontal conectando label ao nó */}
+                <div
+                  className="absolute top-[11px] h-[2px] bg-[#2B6CB0]"
+                  style={
+                    isLeft
+                      ? { right: '50%', left: '42%' }
+                      : { left: '50%', right: '42%' }
+                  }
+                />
+
+                {/* Label + Nó */}
+                <div className="flex items-start">
+                  {/* Lado esquerdo */}
+                  <div className="flex-1 flex justify-end pr-3 min-w-0">
+                    {isLeft && (
+                      <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-sm text-right">
+                        {stage.label.split('\n').map((line, j) => (
+                          <div key={j} className="text-[#2A4365] font-bold text-[12px] leading-tight">{line}</div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Nó */}
+                  <div className="flex-shrink-0 w-6 flex justify-center z-10 pt-[3px]">
+                    {isFirst ? <NodeCircle /> : <NodeDiamond />}
+                  </div>
+
+                  {/* Lado direito */}
+                  <div className="flex-1 flex justify-start pl-3 min-w-0">
+                    {!isLeft && (
+                      <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-sm">
+                        {stage.label.split('\n').map((line, j) => (
+                          <div key={j} className="text-[#2A4365] font-bold text-[12px] leading-tight">{line}</div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Conteúdo do card (alinhado ao mesmo lado do label) */}
+                {hasContent && (
+                  <div className="flex mt-2">
+                    <div className="flex-1 pr-3 min-w-0">
+                      {isLeft && (
+                        <div>
+                          {card.text && (
+                            <p className="text-[11px] leading-snug text-[#2A4365]/90 mb-1.5 text-right">{card.text}</p>
+                          )}
+                          {card.accordion && (
+                            <div className="process-card bg-white/70 rounded-xl p-2.5 space-y-1 mb-1.5">
+                              <AccordionItem number="1" title="Autorização da CGE" description="" />
+                              <AccordionItem number="2" title="Autorização da PGE" description="" />
+                              <AccordionItem number="3" title="Autorização do Secretário da SEAD" description="" />
+                              <AccordionItem number="4" title="Autorização da SEFAZ" description="" />
+                            </div>
+                          )}
+                          {card.download && <div className="flex justify-end"><DownloadButton /></div>}
+                          {card.note && (
+                            <div className="border-2 border-dashed border-[#2A4365]/60 rounded-lg bg-white/70 px-2.5 py-2 mt-2">
+                              <p className="text-[9.5px] text-[#2A4365]/80 leading-snug">{card.note}</p>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Espaço do nó */}
+                    <div className="flex-shrink-0 w-6" />
+
+                    <div className="flex-1 pl-3 min-w-0">
+                      {!isLeft && (
+                        <div>
+                          {card.text && (
+                            <p className="text-[11px] leading-snug text-[#2A4365]/90 mb-1.5">{card.text}</p>
+                          )}
+                          {card.accordion && (
+                            <div className="process-card bg-white/70 rounded-xl p-2.5 space-y-1 mb-1.5">
+                              <AccordionItem number="1" title="Autorização da CGE" description="" />
+                              <AccordionItem number="2" title="Autorização da PGE" description="" />
+                              <AccordionItem number="3" title="Autorização do Secretário da SEAD" description="" />
+                              <AccordionItem number="4" title="Autorização da SEFAZ" description="" />
+                            </div>
+                          )}
+                          {card.download && <DownloadButton />}
+                          {card.note && (
+                            <div className="border-2 border-dashed border-[#2A4365]/60 rounded-lg bg-white/70 px-2.5 py-2 mt-2">
+                              <p className="text-[9.5px] text-[#2A4365]/80 leading-snug">{card.note}</p>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )
+          })}
+
+          {/* Seta final apontando para cima */}
+          <div className="flex justify-center relative z-10 pt-1">
+            <div style={{ width: 0, height: 0, borderLeft: '9px solid transparent', borderRight: '9px solid transparent', borderBottom: '16px solid #2B6CB0' }} />
+          </div>
+        </div>
+      </div>
+
+      <Footer />
+    </div>
+  )
+}
+
+// ─── Layout Desktop ───────────────────────────────────────────────────────────
+function DesktopLayout() {
   const [extraTop, setExtraTop] = useState(0)
   const ref2  = useRef(null)
   const ref4  = useRef(null)
@@ -100,21 +319,7 @@ export default function ContratoTransferenciaTecnologiaPage() {
   return (
     <div className="min-h-screen select-none flex flex-col" style={{ minWidth: COLS * COL_WIDTH }}>
 
-      {/* ── Navbar ── */}
-      <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10">
-        <button
-          className="flex items-center gap-2 text-white text-sm font-medium hover:opacity-90 transition-opacity font-sans"
-          onClick={() => {
-            window.history.pushState({}, '', '/')
-            window.dispatchEvent(new PopStateEvent('popstate'))
-          }}
-        >
-          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-          Voltar ao Painel
-        </button>
-      </nav>
+      <Navbar />
 
       {/* ── Header ── */}
       <header className="bg-gradient-to-b from-[#90CDF4] to-[#63B3ED]">
@@ -296,19 +501,13 @@ export default function ContratoTransferenciaTecnologiaPage() {
         <div className="h-8" />
       </div>
 
-      {/* ── Rodapé ── */}
-      <footer className="bg-[#90CDF4] px-8 py-3 flex items-center gap-8 border-t border-white/10">
-        <div className="flex items-center gap-2 text-[#2A4365] text-[13px] font-medium">
-          <NodeCircle /><span>Início</span>
-        </div>
-        <div className="flex items-center gap-2 text-[#2A4365] text-[13px] font-medium">
-          <NodeDiamond /><span>Etapas</span>
-        </div>
-        <div className="flex items-center gap-2 text-[#2A4365] text-[13px] font-medium">
-          <NodeTriangle /><span>Fim</span>
-        </div>
-      </footer>
-
+      <Footer />
     </div>
   )
+}
+
+// ─── Página principal ─────────────────────────────────────────────────────────
+export default function ContratoTransferenciaTecnologiaPage() {
+  const isMobile = useIsMobile()
+  return isMobile ? <MobileLayout /> : <DesktopLayout />
 }

@@ -25,10 +25,15 @@ body {
   margin: 0;
   padding: 0;
   background-color: #90CDF4;
-  min-width: 1280px;
   overflow-x: auto;
   overscroll-behavior: none;
   color: var(--color-text);
+}
+
+@media (min-width: 768px) {
+  body {
+    min-width: 1280px;
+  }
 }
 
 .flow-gradient {
