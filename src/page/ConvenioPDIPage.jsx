@@ -27,6 +27,32 @@ const NODE_TOP = [206, 243, 176, 243, 176, 243, 176, 243, 176, 243, 176, 243, 20
 const COLS      = 13
 const COL_WIDTH = 185
 
+// Conteúdo de cada etapa para o layout mobile
+const CARDS = [
+  { text: 'Necessidade do órgão desenvolver uma pesquisa', download: false },
+  { text: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria;', download: true, fileKey: 'convenio-pd&i/Documento_Formalizacao_Demanda_PDI.docx' },
+  { text: 'Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n. 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados', download: true, fileKey: 'convenio-pd&i/Manifestacao_Tecnica_PDI.docx' },
+  { text: 'Minuta do Edital de chamamento', download: true },
+  { text: 'Plano de trabalho do convênio entre as instituições contendo a descrição das atividades, objetivos e metas do convênio', download: true, fileKey: 'convenio-pd&i/Modelo_Plano_de_Trabalho_PDI.docx' },
+  { text: 'Minuta do Convênio para Pesquisa, Desenvolvimento e Inovação', download: true, fileKey: 'convenio-pd&i/Minuta_Convênio_Parceria_PDI.docx' },
+  { text: 'Planilha demonstrativa dos custos operacionais incorridos na execução das atividades', download: true, fileKey: 'convenio-pd&i/Planilha_Custos_Operacionais_PDI.xlsx' },
+  { text: 'Autorização da contratação pela Comissão de Gestão Financeira e Gestão por Resultados – CGFR', download: true },
+  { accordion: true, accordionItems: [
+    { number: '1', title: 'Parceiro privado', description: '' },
+    { number: '2', title: 'Parceiro público', description: '' },
+    { number: '3', title: 'Fundação de Apoio', description: '' },
+  ], download: true },
+  { accordion: true, accordionItems: [
+    { number: '1', title: 'Análise Prévia CGE', description: '' },
+    { number: '2', title: 'Parecer PGE', description: '' },
+    { number: '3', title: 'Autorização do Secretário da SEAD', description: '' },
+    { number: '4', title: 'Parecer SEFAZ', description: '' },
+  ], download: true },
+  { text: 'Indicação do gestor do convênio PD&I', download: true },
+  { text: 'Publicação no Diário Oficial do Estado do Piauí pela SEGOV', download: false },
+  { text: 'Registro da publicação do convênio no SIGRP', download: false },
+]
+
 function CardBody({ children }) {
   return <p className="text-[10.5px] leading-snug text-[#2A4365]/90">{children}</p>
 }
@@ -74,7 +100,167 @@ const ABOVE_ANCHOR = {
   transform: 'translateX(-50%)',
 }
 
-export default function ConvenioPDIPage() {
+function useIsMobile() {
+  const mq = window.matchMedia('(max-width: 767px)')
+  const [isMobile, setIsMobile] = useState(() => mq.matches)
+  useEffect(() => {
+    const handler = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+  return isMobile
+}
+
+function Navbar() {
+  return (
+    <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10 flex-shrink-0">
+      <button
+        className="flex items-center gap-2 text-white text-sm font-medium hover:opacity-90 transition-opacity font-sans"
+        onClick={() => {
+          window.history.pushState({}, '', '/')
+          window.dispatchEvent(new PopStateEvent('popstate'))
+        }}
+      >
+        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+        Voltar ao Painel
+      </button>
+    </nav>
+  )
+}
+
+function Footer() {
+  return (
+    <footer className="bg-[#90CDF4] px-8 py-3 flex items-center gap-8 border-t border-white/10 flex-shrink-0">
+      <div className="flex items-center gap-2 text-[#2A4365] text-[13px] font-medium">
+        <NodeCircle /><span>Início</span>
+      </div>
+      <div className="flex items-center gap-2 text-[#2A4365] text-[13px] font-medium">
+        <NodeDiamond /><span>Etapas</span>
+      </div>
+      <div className="flex items-center gap-2 text-[#2A4365] text-[13px] font-medium">
+        <NodeTriangle /><span>Fim</span>
+      </div>
+    </footer>
+  )
+}
+
+function MobileLayout() {
+  return (
+    <div className="min-h-screen flex flex-col select-none">
+      <Navbar />
+      <header className="bg-[#2C5282] px-5 pt-4 pb-5">
+        <div className="inline-flex items-center gap-2 bg-[#BEE3F8] rounded-lg px-3 py-1.5 mb-3">
+          <svg className="w-3.5 h-3.5 text-[#2A4365]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </svg>
+          <span className="text-[#2A4365] text-[11px] font-semibold">Fluxo de Processo</span>
+        </div>
+        <h1 className="text-white text-xl font-bold leading-tight">CONVÊNIO DE PD&I</h1>
+      </header>
+      <div className="bg-gradient-to-b from-[#90CDF4] to-[#63B3ED] py-4 flex justify-center">
+        <img src={STAGES[0].img} alt="" className="h-28 object-contain" draggable={false} />
+      </div>
+      <div className="flow-gradient flex-1 py-6 px-4">
+        <div className="relative">
+          <div
+            className="absolute bottom-0 w-[3px] bg-[#2B6CB0]"
+            style={{ left: 'calc(50% - 1.5px)', top: '11px' }}
+          />
+          {STAGES.map((stage, i) => {
+            const card = CARDS[i]
+            const isLeft = i % 2 === 0
+            const isFirst = i === 0
+            const hasContent = card.text || card.download || card.accordion
+            return (
+              <div key={i} className="relative mb-6">
+                <div
+                  className="absolute top-[11px] h-[2px] bg-[#2B6CB0]"
+                  style={isLeft ? { right: '50%', left: '42%' } : { left: '50%', right: '42%' }}
+                />
+                <div className="flex items-start">
+                  <div className="flex-1 flex justify-end pr-3 min-w-0">
+                    {isLeft && (
+                      <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-sm text-right">
+                        {stage.label.split('\n').map((line, j) => (
+                          <div key={j} className="text-[#2A4365] font-bold text-[12px] leading-tight">{line}</div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-shrink-0 w-6 flex justify-center z-10 pt-[3px]">
+                    {isFirst ? <NodeCircle /> : <NodeDiamond />}
+                  </div>
+                  <div className="flex-1 flex justify-start pl-3 min-w-0">
+                    {!isLeft && (
+                      <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-sm">
+                        {stage.label.split('\n').map((line, j) => (
+                          <div key={j} className="text-[#2A4365] font-bold text-[12px] leading-tight">{line}</div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+                {hasContent && (
+                  <div className="flex mt-2">
+                    <div className="flex-1 pr-3 min-w-0">
+                      {isLeft && (
+                        <div>
+                          {card.text && <p className="text-[11px] leading-snug text-[#2A4365]/90 mb-1.5 text-right">{card.text}</p>}
+                          {card.accordion && (
+                            <div className="process-card bg-white/70 rounded-xl p-2.5 space-y-1 mb-1.5">
+                              {card.accordionItems.map((item, k) => (
+                                <AccordionItem key={k} number={item.number} title={item.title} description={item.description} />
+                              ))}
+                            </div>
+                          )}
+                          {card.download && <div className="flex justify-end"><DownloadButton fileKey={card.fileKey} /></div>}
+                          {card.note && (
+                            <div className="border-2 border-dashed border-[#2A4365]/60 rounded-lg bg-white/70 px-2.5 py-2 mt-2">
+                              <p className="text-[9.5px] text-[#2A4365]/80 leading-snug">{card.note}</p>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex-shrink-0 w-6" />
+                    <div className="flex-1 pl-3 min-w-0">
+                      {!isLeft && (
+                        <div>
+                          {card.text && <p className="text-[11px] leading-snug text-[#2A4365]/90 mb-1.5">{card.text}</p>}
+                          {card.accordion && (
+                            <div className="process-card bg-white/70 rounded-xl p-2.5 space-y-1 mb-1.5">
+                              {card.accordionItems.map((item, k) => (
+                                <AccordionItem key={k} number={item.number} title={item.title} description={item.description} />
+                              ))}
+                            </div>
+                          )}
+                          {card.download && <DownloadButton fileKey={card.fileKey} />}
+                          {card.note && (
+                            <div className="border-2 border-dashed border-[#2A4365]/60 rounded-lg bg-white/70 px-2.5 py-2 mt-2">
+                              <p className="text-[9.5px] text-[#2A4365]/80 leading-snug">{card.note}</p>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )
+          })}
+          <div className="flex justify-center relative z-10 pt-1">
+            <div style={{ width: 0, height: 0, borderLeft: '9px solid transparent', borderRight: '9px solid transparent', borderBottom: '16px solid #2B6CB0' }} />
+          </div>
+        </div>
+      </div>
+      <Footer />
+    </div>
+  )
+}
+
+function DesktopLayout() {
   const [extraTop, setExtraTop] = useState(0)
   const ref2  = useRef(null)
   const ref4  = useRef(null)
@@ -301,4 +487,9 @@ export default function ConvenioPDIPage() {
 
     </div>
   )
+}
+
+export default function ConvenioPDIPage() {
+  const isMobile = useIsMobile()
+  return isMobile ? <MobileLayout /> : <DesktopLayout />
 }
