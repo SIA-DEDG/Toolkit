@@ -1,59 +1,67 @@
 import React from 'react'
+import { FileText, Handshake, Cpu, ShoppingCart, RefreshCw } from 'lucide-react'
+import FlowCard from '../components/FlowCard'
 
-const PAGES = [
+const flows = [
   {
-    href: '/acordo-pd&i',
     title: 'Acordo PD&I',
     description: 'Fluxo do processo de Acordo de Parceria para PDI',
+    href: '/acordo-pd&i',
+    icon: <Handshake className="h-5 w-5" />,
   },
   {
-    href: '/convenio-pd&i',
     title: 'Convênio PD&I',
     description: 'Fluxo do processo de Convênio para PDI',
+    href: '/convenio-pd&i',
+    icon: <FileText className="h-5 w-5" />,
   },
   {
-    href: '/encomenda-tecnologica',
     title: 'Encomenda Tecnológica',
     description: 'Fluxo do processo de Encomenda Tecnológica',
+    href: '/encomenda-tecnologica',
+    icon: <Cpu className="h-5 w-5" />,
   },
   {
-    href: '/contratacao-direta',
     title: 'Contratação Direta',
     description: 'Fluxo do processo de Contratação Direta',
+    href: '/contratacao-direta',
+    icon: <ShoppingCart className="h-5 w-5" />,
   },
   {
-    href: '/contrato-transferencia-tecnologia',
     title: 'Contrato de Transferência de Tecnologia',
     description: 'Fluxo do processo de Contrato de Transferência de Tecnologia',
+    href: '/contrato-transferencia-tecnologia',
+    icon: <RefreshCw className="h-5 w-5" />,
   },
 ]
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-[#EBF8FF] flex flex-col items-center justify-center gap-8 p-8">
-      <div className="text-center">
-        <h1 className="text-3xl font-bold text-[#2A4365]">Toolkit SIA</h1>
-        <p className="text-[#2A4365]/70 mt-2">Selecione um fluxo para visualizar</p>
-      </div>
+    <div className="min-h-screen bg-[#EBF8FF] flex flex-col">
+      {/* Header */}
+      <header className="bg-gradient-to-b from-[#1a4f9e] to-[#2563c4] py-16 px-6 text-center">
+        <h1 className="text-4xl font-bold text-white md:text-5xl">Toolkit SIA</h1>
+        <p className="mt-3 text-base text-white/80">Selecione um fluxo para visualizar</p>
+      </header>
 
-      <div className="flex flex-wrap gap-6 justify-center">
-        {PAGES.map((page) => (
-          <a
-            key={page.href}
-            href={page.href}
-            onClick={(e) => {
-              e.preventDefault()
-              window.history.pushState({}, '', page.href)
-              window.dispatchEvent(new PopStateEvent('popstate'))
-            }}
-            className="bg-white rounded-2xl shadow-md p-8 w-64 flex flex-col gap-3 hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer border border-transparent hover:border-[#63B3ED]"
-          >
-            <h2 className="text-lg font-bold text-[#2A4365]">{page.title}</h2>
-            <p className="text-sm text-[#2A4365]/70">{page.description}</p>
-            <span className="mt-auto text-[#3182CE] text-sm font-medium">Ver fluxo →</span>
-          </a>
-        ))}
-      </div>
+      {/* Cards */}
+      <main className="mx-auto w-full max-w-5xl px-6 -mt-8 pb-16">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          {flows.slice(0, 4).map((flow) => (
+            <FlowCard key={flow.title} {...flow} />
+          ))}
+        </div>
+        <div className="mt-4 flex justify-start">
+          <div className="w-full sm:w-[calc(50%-8px)] lg:w-[calc(25%-12px)]">
+            <FlowCard {...flows[4]} />
+          </div>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="mt-auto py-8 text-center text-sm text-gray-400">
+        <p>© {new Date().getFullYear()} Toolkit SIA — Sistema de Inovação Aberta</p>
+      </footer>
     </div>
   )
 }
