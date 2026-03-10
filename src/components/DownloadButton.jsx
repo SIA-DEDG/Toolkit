@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { downloadFile } from '../config/minio'
+import { downloadFile } from '../config/supabase'
 
 export default function DownloadButton({ label = 'Baixar Documento', fileKey, filename }) {
   const [loading, setLoading] = useState(false)
