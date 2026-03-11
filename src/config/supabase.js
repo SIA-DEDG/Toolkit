@@ -18,16 +18,18 @@ export async function downloadFile(fileKey, filename) {
 
   const { data, error } = await supabase.storage
     .from(BUCKET)
-    .createSignedUrl(fileKey, 60)
+    .download(fileKey)
 
-  if (error || !data?.signedUrl) {
+  if (error || !data) {
     throw new Error(`Arquivo não encontrado: ${fileKey}`)
   }
 
+  const objectUrl = URL.createObjectURL(data)
   const a = document.createElement('a')
-  a.href = data.signedUrl
+  a.href = objectUrl
   a.download = filename || fileKey.split('/').pop()
   document.body.appendChild(a)
   a.click()
   a.remove()
+  setTimeout(() => URL.revokeObjectURL(objectUrl), 1000)
 }

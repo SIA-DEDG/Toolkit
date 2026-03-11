@@ -1,5 +1,3 @@
-import { useRef } from 'react'
-
 // Fila global compartilhada entre todos os botões
 let queue = []
 let running = false
@@ -15,6 +13,10 @@ async function processQueue() {
       resolve(result)
     } catch (err) {
       reject(err)
+    }
+    // Intervalo para o browser registrar o download antes do próximo
+    if (queue.length > 0) {
+      await new Promise(r => setTimeout(r, 800))
     }
   }
 

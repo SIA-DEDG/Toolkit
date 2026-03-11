@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -n '<img src={' c:/Users/uisgabrieo_/workspaces/ws-sia/Toolkit/src/page/*.jsx)"
+    ]
+  }
+}
