@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { ToastProvider } from './hooks/ToastContext'
 import HomePage from './page/HomePage'
 import AcordoPDIPage from './page/AcordoPDIPage'
 import ConvenioPDIPage from './page/ConvenioPDIPage'
@@ -29,5 +30,9 @@ export default function App() {
   }, [])
 
   const Page = ROUTES[path] ?? HomePage
-  return <Page />
+  return (
+    <ToastProvider>
+      <Page />
+    </ToastProvider>
+  )
 }
