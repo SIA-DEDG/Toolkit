@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { downloadFile } from '../config/supabase'
 import { useToastContext } from '../hooks/ToastContext'
+import { enqueueDownload } from '../hooks/useDownloadQueue'
 
 export default function DownloadButton({ label = 'Baixar Documento', fileKey, filename }) {
   const [loading, setLoading] = useState(false)
@@ -12,7 +13,7 @@ export default function DownloadButton({ label = 'Baixar Documento', fileKey, fi
     setLoading(true)
     setError(null)
     try {
-      await downloadFile(fileKey, filename)
+      await enqueueDownload(() => downloadFile(fileKey, filename))
       addToast('Download realizado com sucesso!', 'success')
     } catch (err) {
       setError('Arquivo indisponível')
