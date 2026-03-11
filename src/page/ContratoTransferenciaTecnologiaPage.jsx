@@ -162,7 +162,7 @@ function MobileLayout() {
 
       {/* Ilustração */}
       <div className="bg-gradient-to-b from-[#90CDF4] to-[#63B3ED] py-4 flex justify-center">
-        <img src={STAGES[0].img} alt="" className="h-28 object-contain" draggable={false} />
+        <img src={STAGES[0].img} alt="" className="h-28 object-contain" draggable={false} loading="eager" />
       </div>
 
       {/* Timeline */}
@@ -171,7 +171,7 @@ function MobileLayout() {
           {/* Linha vertical central */}
           <div
             className="absolute bottom-0 w-[3px] bg-[#2B6CB0]"
-            style={{ left: 'calc(50% - 1.5px)', top: '11px' }}
+            style={{ left: 'calc(50% - 1.5px)', top: '14px' }}
           />
 
           {STAGES.map((stage, i) => {
@@ -181,23 +181,19 @@ function MobileLayout() {
             const hasContent = card.text || card.download || card.accordion
 
             return (
-              <div key={i} className="relative mb-6">
-                {/* Linha horizontal conectando label ao nó */}
-                <div
-                  className="absolute top-[11px] h-[2px] bg-[#2B6CB0]"
-                  style={
-                    isLeft
-                      ? { right: '50%', left: '42%' }
-                      : { left: '50%', right: '42%' }
-                  }
-                />
-
+              <div key={i} className="mb-6">
                 {/* Label + Nó */}
-                <div className="flex items-start">
+                <div className="flex items-center relative">
+                  {/* Linha horizontal — dentro do flex para top: 50% ser relativo à altura do label+nó */}
+                  <div
+                    className="absolute top-1/2 -translate-y-1/2 h-[2px] bg-[#2B6CB0]"
+                    style={isLeft ? { right: 'calc(50% + 8px)', left: 0 } : { left: 'calc(50% + 8px)', right: 0 }}
+                  />
+
                   {/* Lado esquerdo */}
-                  <div className="flex-1 flex justify-end pr-3 min-w-0">
+                  <div className="flex-1 flex justify-end pr-3 min-w-0 relative z-[1]">
                     {isLeft && (
-                      <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-sm text-right">
+                      <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-sm text-right w-full">
                         {stage.label.split('\n').map((line, j) => (
                           <div key={j} className="text-[#2A4365] font-bold text-[12px] leading-tight">{line}</div>
                         ))}
@@ -206,14 +202,14 @@ function MobileLayout() {
                   </div>
 
                   {/* Nó */}
-                  <div className="flex-shrink-0 w-6 flex justify-center z-10 pt-[3px]">
+                  <div className="flex-shrink-0 w-6 flex justify-center relative z-10">
                     {isFirst ? <NodeCircle /> : <NodeDiamond />}
                   </div>
 
                   {/* Lado direito */}
-                  <div className="flex-1 flex justify-start pl-3 min-w-0">
+                  <div className="flex-1 flex justify-start pl-3 min-w-0 relative z-[1]">
                     {!isLeft && (
-                      <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-sm">
+                      <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-sm w-full">
                         {stage.label.split('\n').map((line, j) => (
                           <div key={j} className="text-[#2A4365] font-bold text-[12px] leading-tight">{line}</div>
                         ))}
@@ -224,7 +220,7 @@ function MobileLayout() {
 
                 {/* Conteúdo do card (alinhado ao mesmo lado do label) */}
                 {hasContent && (
-                  <div className="flex mt-2">
+                  <div className="flex mt-2 relative z-[1]">
                     <div className="flex-1 pr-3 min-w-0">
                       {isLeft && (
                         <div>
@@ -340,7 +336,7 @@ function DesktopLayout() {
           {STAGES.map((s, i) => (
             <div key={i} className="flex justify-center items-end pb-1 min-h-[6rem]">
               {s.img ? (
-                <img src={s.img} alt={s.label} className="h-24 object-contain" draggable={false} />
+                <img src={s.img} alt={s.label} className="h-24 object-contain" draggable={false} loading="lazy" />
               ) : null}
             </div>
           ))}

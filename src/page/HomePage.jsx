@@ -60,7 +60,7 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="mt-auto py-8 text-center text-sm text-gray-400">
-        <p>© {new Date().getFullYear()} Toolkit SIA — Sistema de Inovação Aberta</p>
+        <p>© {new Date().getFullYear()} Toolkit SIA — Secretaria de Inteligência Artificial, Economia Digital, Ciência, Tecnologia e Inovação</p>
       </footer>
     </div>
   )
