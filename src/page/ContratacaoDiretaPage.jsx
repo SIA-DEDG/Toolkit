@@ -155,7 +155,7 @@ function Footer() {
 
 function MobileLayout() {
   return (
-    <div className="min-h-screen flex flex-col select-none">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
       <header className="bg-[#2C5282] px-5 pt-4 pb-5">
         <div className="inline-flex items-center gap-2 bg-[#BEE3F8] rounded-lg px-3 py-1.5 mb-3">
@@ -167,7 +167,7 @@ function MobileLayout() {
         <h1 className="text-white text-xl font-bold leading-tight">CONTRATAÇÃO DIRETA</h1>
       </header>
       <div className="bg-gradient-to-b from-[#90CDF4] to-[#63B3ED] py-4 flex justify-center">
-        <img src={STAGES[0].img} alt="" className="h-28 object-contain" draggable={false} loading="eager" />
+        <img src={STAGES[0].img} alt="" className="h-28 object-contain select-none" draggable={false} loading="eager" />
       </div>
       <div className="flow-gradient flex-1 py-6 px-4">
         <div className="relative">
@@ -290,7 +290,7 @@ function DesktopLayout() {
   }, [])
 
   return (
-    <div className="min-h-screen select-none flex flex-col" style={{ minWidth: COLS * COL_WIDTH }}>
+    <div className="min-h-screen flex flex-col" style={{ minWidth: COLS * COL_WIDTH }}>
 
       {/* ── Navbar ── */}
       <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10">
@@ -325,7 +325,7 @@ function DesktopLayout() {
           {STAGES.map((s, i) => (
             <div key={i} className="flex justify-center items-end pb-1 min-h-[6rem]">
               {s.img ? (
-                <img src={s.img} alt={s.label} className="h-24 object-contain" draggable={false} loading="lazy" />
+                <img src={s.img} alt={s.label} className="h-24 object-contain select-none" draggable={false} loading="lazy" />
               ) : null}
             </div>
           ))}

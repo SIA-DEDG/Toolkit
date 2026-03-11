@@ -144,7 +144,7 @@ function Footer() {
 // ─── Layout Mobile ────────────────────────────────────────────────────────────
 function MobileLayout() {
   return (
-    <div className="min-h-screen flex flex-col select-none">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
 
       {/* Header */}
@@ -162,7 +162,7 @@ function MobileLayout() {
 
       {/* Ilustração */}
       <div className="bg-gradient-to-b from-[#90CDF4] to-[#63B3ED] py-4 flex justify-center">
-        <img src={STAGES[0].img} alt="" className="h-28 object-contain" draggable={false} loading="eager" />
+        <img src={STAGES[0].img} alt="" className="h-28 object-contain select-none" draggable={false} loading="eager" />
       </div>
 
       {/* Timeline */}
@@ -313,7 +313,7 @@ function DesktopLayout() {
   }, [])
 
   return (
-    <div className="min-h-screen select-none flex flex-col" style={{ minWidth: COLS * COL_WIDTH }}>
+    <div className="min-h-screen flex flex-col" style={{ minWidth: COLS * COL_WIDTH }}>
 
       <Navbar />
 
@@ -336,7 +336,7 @@ function DesktopLayout() {
           {STAGES.map((s, i) => (
             <div key={i} className="flex justify-center items-end pb-1 min-h-[6rem]">
               {s.img ? (
-                <img src={s.img} alt={s.label} className="h-24 object-contain" draggable={false} loading="lazy" />
+                <img src={s.img} alt={s.label} className="h-24 object-contain select-none" draggable={false} loading="lazy" />
               ) : null}
             </div>
           ))}
