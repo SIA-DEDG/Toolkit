@@ -154,7 +154,7 @@ export default function HomePage() {
                 que vão te ajudar a identificar o tipo de inovação mais adequado para o seu projeto.
               </p>
               <a
-                href="https://sei.ufmg.br"
+                href="https://inovacpin.org/trilha/planejamento/etapa/8"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#0d9ddb] hover:bg-[#0b8bc4] text-white text-sm font-semibold transition-colors"
