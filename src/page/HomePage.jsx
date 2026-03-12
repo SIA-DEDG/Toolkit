@@ -53,11 +53,11 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#EBF8FF] flex flex-col">
       {/* Hero */}
-      <header className="bg-[#EBF8FF] pt-14 pb-10 px-8 border-b border-blue-100">
+      <header className="bg-[#EBF8FF] pt-14 pb-10 px-4 md:px-8 border-b border-blue-100">
         <div className="max-w-5xl mx-auto flex items-center gap-12">
           {/* Texto */}
-          <div className="flex-[2] min-w-0">
-            <h1 className="text-5xl font-bold text-gray-900 leading-tight mb-5">Toolkit de Inovação</h1>
+          <div className="flex-1 md:flex-[2] min-w-0">
+            <h1 className="text-5xl font-bold leading-tight mb-5">Toolkit de Inovação</h1>
             <p className="text-base text-gray-500 leading-relaxed">
               O Toolkit de Inovação é um conjunto de minutas de contratos, acordos e outros instrumentos
               jurídicos para a implementação do Marco Legal de Ciência, Tecnologia e Inovação no Piauí.
@@ -71,7 +71,7 @@ export default function HomePage() {
           </div>
 
           {/* Imagem */}
-          <div className="flex-[1.5] min-w-0">
+          <div className="hidden md:block md:flex-[1.5] min-w-0">
             <img
               src="/assets/home/hero-illustration.png"
               alt="Ilustração Toolkit de Inovação"
