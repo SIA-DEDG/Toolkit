@@ -53,7 +53,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#EBF8FF] flex flex-col">
       {/* Hero */}
-      <header className="bg-gradient-to-b from-[#1565C0] to-[#2979d4] py-16 px-6 text-center">
+      <header className="bg-gradient-to-b from-[#1565C0] to-[#2979d4] pt-16 pb-0 px-6 text-center relative">
         <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 text-white text-sm font-medium mb-6">
           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -66,6 +66,12 @@ export default function HomePage() {
           caminho para inovar. Seja para encontrar o procedimento certo ou para entender os
           conceitos por trás da inovação, estamos aqui para te ajudar a dar o primeiro passo.
         </p>
+        {/* Wave divider */}
+        <div className="mt-10 -mb-px -mx-6">
+          <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full block" style={{ height: 80, display: 'block' }}>
+            <path d="M0,40 C180,80 540,80 720,40 C900,0 1260,0 1440,40 L1440,80 L0,80 Z" fill="#EBF8FF" />
+          </svg>
+        </div>
       </header>
 
       {/* Flow Section */}
