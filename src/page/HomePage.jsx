@@ -77,6 +77,7 @@ export default function HomePage() {
               alt="Ilustração Toolkit de Inovação"
               className="w-full h-auto object-contain select-none"
               draggable={false}
+              loading="eager"
             />
           </div>
         </div>
