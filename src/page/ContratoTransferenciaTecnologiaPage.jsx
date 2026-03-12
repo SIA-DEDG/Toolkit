@@ -41,7 +41,7 @@ const CARDS = [
 
 // paddingTop de cada coluna para alinhar o nó com a cobra
 // padrão: MID=206, BAIXO=243, CIMA=176, FIM=204
-const NODE_TOP = [206, 243, 176, 243, 176, 243, 176, 243, 176, 243, 176, 243, 176, 204]
+const NODE_TOP = [186, 223, 156, 223, 156, 223, 156, 223, 156, 223, 156, 223, 156, 184]
 
 const COLS      = 14
 const COL_WIDTH = 185
@@ -99,7 +99,7 @@ const GRID = {
 }
 
 const ABOVE_ANCHOR = {
-  bottom: 'calc(100% - 183px)',
+  bottom: 'calc(100% - 163px)',
   left: '50%',
   transform: 'translateX(-50%)',
 }
@@ -303,7 +303,7 @@ function DesktopLayout() {
   useEffect(() => {
     const recalculate = () => {
       const heights = refs.map(r => r.current?.offsetHeight ?? 0)
-      const overflow = Math.max(0, Math.max(...heights) - 183) + 8
+      const overflow = Math.max(0, Math.max(...heights) - 163) + 8
       setExtraTop(overflow)
     }
     recalculate()
@@ -332,11 +332,11 @@ function DesktopLayout() {
         </div>
 
         {/* imagens */}
-        <div style={GRID} className="pt-2 pb-4 px-0">
+        <div style={GRID} className="pt-2 pb-2 px-0">
           {STAGES.map((s, i) => (
-            <div key={i} className="flex justify-center items-end pb-1 min-h-[6rem]">
+            <div key={i} className="flex justify-center items-end pb-1 min-h-[5rem]">
               {s.img ? (
-                <img src={s.img} alt={s.label} className="h-24 object-contain select-none" draggable={false} loading="lazy" />
+                <img src={s.img} alt={s.label} className="h-20 object-contain select-none" draggable={false} loading="lazy" />
               ) : null}
             </div>
           ))}
@@ -358,7 +358,7 @@ function DesktopLayout() {
 
       {/* ── Área da cobra + cards ── */}
       <div className="flow-gradient pt-5 flex-1">
-        <div className="relative" style={{ ...GRID, minHeight: 520, paddingTop: extraTop }}>
+        <div className="relative" style={{ ...GRID, minHeight: 450, paddingTop: extraTop }}>
 
           {/* cobra */}
           <div className="absolute inset-0 pointer-events-none" style={{ gridColumn: '1 / -1' }}>

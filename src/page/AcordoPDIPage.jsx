@@ -16,7 +16,7 @@ const STAGES = [
   { label: 'Publicação\nno DOE',                 img: '/assets/acordo-pdi/publish-article.png' },
 ]
 
-const NODE_TOP = [206, 243, 176, 243, 176, 243, 176, 243, 204]
+const NODE_TOP = [186, 223, 156, 223, 156, 223, 156, 223, 184]
 const COL_WIDTH = 185
 
 // Conteúdo de cada etapa para o layout mobile
@@ -249,7 +249,7 @@ function DesktopLayout() {
 
     const recalculate = () => {
       const heights = refs.map(r => r.current?.offsetHeight ?? 0)
-      const overflow = Math.max(0, Math.max(...heights) - 183) + 8
+      const overflow = Math.max(0, Math.max(...heights) - 163) + 8
       setExtraTop(overflow)
     }
 
@@ -288,14 +288,14 @@ function DesktopLayout() {
           </div>
           <h1 className="text-[#2A4365] text-[24px] font-bold leading-tight">ACORDO DE PD&I</h1>
         </div>
-        <div className="grid grid-cols-9 pt-2 pb-4 px-0">
+        <div className="grid grid-cols-9 pt-2 pb-2 px-0">
           {STAGES.map((s, i) => (
-            <div key={i} className="flex justify-center items-end pb-1 min-h-[6rem]">
+            <div key={i} className="flex justify-center items-end pb-1 min-h-[5rem]">
               {s.img ? (
                 <img
                   src={s.img}
                   alt={s.label}
-                  className="h-24 object-contain select-none"
+                  className="h-20 object-contain select-none"
                   draggable={false}
                   loading="lazy"
                 />
@@ -318,7 +318,7 @@ function DesktopLayout() {
 
       <div className="flow-gradient pt-5 flex-1">
 
-        <div className="relative grid grid-cols-9" style={{ minHeight: 520, paddingTop: extraTop }}>
+        <div className="relative grid grid-cols-9" style={{ minHeight: 450, paddingTop: extraTop }}>
 
           <div className="absolute inset-0 pointer-events-none" style={{ gridColumn: '1 / -1' }}>
             <SnakePath extraTop={extraTop} colWidth={COL_WIDTH} />
@@ -344,7 +344,7 @@ function DesktopLayout() {
           </StageCol>
 
           <StageCol index={2}>
-            <div ref={aboveRef2} className="absolute flex flex-col items-center" style={{ bottom: 'calc(100% - 183px)', left: '50%', transform: 'translateX(-50%)' }}>
+            <div ref={aboveRef2} className="absolute flex flex-col items-center" style={{ bottom: 'calc(100% - 163px)', left: '50%', transform: 'translateX(-50%)' }}>
               <ProcessCard position="above" width={172}>
                 <CardBody>
                   Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados
@@ -364,7 +364,7 @@ function DesktopLayout() {
           </StageCol>
 
           <StageCol index={4}>
-            <div ref={aboveRef4} className="absolute flex flex-col items-center" style={{ bottom: 'calc(100% - 183px)', left: '50%', transform: 'translateX(-50%)' }}>
+            <div ref={aboveRef4} className="absolute flex flex-col items-center" style={{ bottom: 'calc(100% - 163px)', left: '50%', transform: 'translateX(-50%)' }}>
               <ProcessCard position="above" width={178}>
                 <CardBody>
                   Documento do Acordo de parceria firmado
@@ -421,7 +421,7 @@ function DesktopLayout() {
           </StageCol>
 
           <StageCol index={6}>
-            <div ref={aboveRef6} className="absolute flex flex-col items-center" style={{ bottom: 'calc(100% - 183px)', left: '50%', transform: 'translateX(-50%)' }}>
+            <div ref={aboveRef6} className="absolute flex flex-col items-center" style={{ bottom: 'calc(100% - 163px)', left: '50%', transform: 'translateX(-50%)' }}>
               <ProcessCard position="above" width={190}>
                 <div className="space-y-1 mb-1">
                   <AccordionItem

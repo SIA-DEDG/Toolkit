@@ -53,24 +53,32 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#EBF8FF] flex flex-col">
       {/* Hero */}
-      <header className="bg-gradient-to-b from-[#1565C0] to-[#2979d4] pt-16 pb-0 px-6 text-center relative">
-        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 text-white text-sm font-medium mb-6">
-          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-          Ferramenta interativa
-        </span>
-        <h1 className="text-4xl font-bold text-white md:text-5xl">Toolkit de Inovação</h1>
-        <p className="mt-4 text-base text-white/85 max-w-2xl mx-auto leading-relaxed">
-          O Toolkit de Inovação é uma ferramenta interativa que te guia na escolha do melhor
-          caminho para inovar. Seja para encontrar o procedimento certo ou para entender os
-          conceitos por trás da inovação, estamos aqui para te ajudar a dar o primeiro passo.
-        </p>
-        {/* Wave divider */}
-        <div className="mt-10 -mb-px -mx-6">
-          <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="w-full block" style={{ height: 80, display: 'block' }}>
-            <path d="M0,40 C180,80 540,80 720,40 C900,0 1260,0 1440,40 L1440,80 L0,80 Z" fill="#EBF8FF" />
-          </svg>
+      <header className="bg-[#EBF8FF] pt-14 pb-10 px-8 border-b border-blue-100">
+        <div className="max-w-5xl mx-auto flex items-center gap-12">
+          {/* Texto */}
+          <div className="flex-[2] min-w-0">
+            <h1 className="text-5xl font-bold text-gray-900 leading-tight mb-5">Toolkit de Inovação</h1>
+            <p className="text-base text-gray-500 leading-relaxed">
+              O Toolkit de Inovação é um conjunto de minutas de contratos, acordos e outros instrumentos
+              jurídicos para a implementação do Marco Legal de Ciência, Tecnologia e Inovação no Piauí.
+              Aqui você encontra materiais de apoio relacionados tanto a compras públicas de inovação
+              quanto a outras alternativas legais, como atividades de pesquisa, desenvolvimento e inovação,
+              sempre com o objetivo de aumentar a segurança jurídica na aplicação desses instrumentos.
+              Baseados em exemplos reais e casos concretos, os modelos foram elaborados pela Secretaria de
+              Inteligência Artificial, Economia Digital, Ciência, Tecnologia e Inovação (SIA) de maneira
+              colaborativa e validados por XX.
+            </p>
+          </div>
+
+          {/* Imagem */}
+          <div className="flex-[1.5] min-w-0">
+            <img
+              src="/assets/home/hero-illustration.png"
+              alt="Ilustração Toolkit de Inovação"
+              className="w-full h-auto object-contain select-none"
+              draggable={false}
+            />
+          </div>
         </div>
       </header>
 
@@ -81,9 +89,10 @@ export default function HomePage() {
           {/* Comece aqui button */}
           <div className="bg-white rounded-2xl border border-gray-200 shadow-sm px-10 py-8 flex flex-col items-center gap-6 w-full max-w-xl">
             <p className="text-sm text-gray-500 text-center leading-relaxed">
-              Explore as possibilidades de inovação e descubra o melhor caminho
-              para transformar suas ideias em realidade. Utilize esta ferramenta para
-              navegar pelos procedimentos disponíveis.
+              Dê o primeiro passo para inovar com segurança jurídica. 
+              Seja para entender o fluxo de etapas ou para identificar os instrumentos certos para o seu projeto, 
+              nossa ferramenta guia você pela melhor estratégia. 
+              Clique em iniciar para escolher seu perfil.
             </p>
             <button
               onClick={() => setStarted(true)}
@@ -122,7 +131,7 @@ export default function HomePage() {
                   <FileText className="w-6 h-6 text-white" />
                 </div>
                 <p className="text-sm font-medium text-gray-800 text-center leading-snug">
-                  Sabe qual procedimento e documento quer utilizar para inovação?
+                  Sabe qual procedimento e instrumento quer utilizar para inovação?
                 </p>
                 <ArrowRight className="w-4 h-4 text-gray-400" />
               </button>
@@ -140,7 +149,9 @@ export default function HomePage() {
                   <Lightbulb className="w-6 h-6 text-white" />
                 </div>
                 <p className="text-sm font-medium text-gray-800 text-center leading-snug">
-                  Quer entender qual seria a inovação?
+                  Quer compreender o contexto do desafio que 
+                  se pretende solucionar e a decisão sobre a modalidade ou o 
+                  instrumento mais adequado para a contratação?
                 </p>
                 <ArrowRight className="w-4 h-4 text-gray-400" />
               </button>
@@ -155,9 +166,9 @@ export default function HomePage() {
                 <h2 className="text-lg font-bold text-gray-900">Entenda a Inovação</h2>
               </div>
               <p className="text-sm text-gray-600 leading-relaxed mb-5">
-                Antes de começar, é importante entender os conceitos de inovação e como eles
-                podem ser aplicados no seu contexto. O link abaixo contém materiais explicativos
-                que vão te ajudar a identificar o tipo de inovação mais adequado para o seu projeto.
+                Antes de acessar o fluxo de documentações é necessário entender a solução mais apropriada para 
+                o seu desafio e qual o instrumento mais adequado para a contratação. O link abaixo da inovacpin 
+                contém uma trilha de planejamento e um quiz para lhe direcionar em qual seria o instrumento de inovação.
               </p>
               <a
                 href="https://inovacpin.org/trilha/planejamento/etapa/8"
@@ -175,11 +186,11 @@ export default function HomePage() {
             <div className="mt-6 w-full bg-white rounded-2xl border border-gray-200 p-7 shadow-sm">
               <div className="flex items-center gap-2 mb-3">
                 <FileText className="w-5 h-5 text-blue-600" />
-                <h2 className="text-lg font-bold text-gray-900">Procedimentos e Documentos</h2>
+                <h2 className="text-lg font-bold text-gray-900">Procedimentos e Intrumentos</h2>
               </div>
               <p className="text-sm text-gray-600 leading-relaxed mb-5">
                 Acesse os fluxos de inovação disponíveis. Aqui você encontra todos os
-                procedimentos e documentos necessários para implementar sua inovação.
+                procedimentos e instrumentos necessários para implementar sua inovação.
               </p>
               <button
                 onClick={() => setShowFlows(true)}
