@@ -23,7 +23,7 @@ const STAGES = [
 
 // paddingTop de cada coluna para alinhar o nó com a cobra
 // padrão: MID=206, BAIXO=243, CIMA=176, FIM=204
-const NODE_TOP = [206, 243, 176, 243, 176, 243, 176, 243, 176, 243, 176, 243, 176, 204]
+const NODE_TOP = [186, 223, 156, 223, 156, 223, 156, 223, 156, 223, 156, 223, 156, 184]
 
 const COLS      = 14
 const COL_WIDTH = 185
@@ -98,7 +98,7 @@ const GRID = {
 }
 
 const ABOVE_ANCHOR = {
-  bottom: 'calc(100% - 183px)',
+  bottom: 'calc(100% - 163px)',
   left: '50%',
   transform: 'translateX(-50%)',
 }
@@ -151,7 +151,7 @@ function Footer() {
 
 function MobileLayout() {
   return (
-    <div className="min-h-screen flex flex-col select-none">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
       <header className="bg-[#2C5282] px-5 pt-4 pb-5">
         <div className="inline-flex items-center gap-2 bg-[#BEE3F8] rounded-lg px-3 py-1.5 mb-3">
@@ -163,7 +163,7 @@ function MobileLayout() {
         <h1 className="text-white text-xl font-bold leading-tight">ENCOMENDA TECNOLÓGICA</h1>
       </header>
       <div className="bg-gradient-to-b from-[#90CDF4] to-[#63B3ED] py-4 flex justify-center">
-        <img src={STAGES[0].img} alt="" className="h-28 object-contain" draggable={false} loading="eager" />
+        <img src={STAGES[0].img} alt="" className="h-28 object-contain select-none" draggable={false} loading="eager" />
       </div>
       <div className="flow-gradient flex-1 py-6 px-4">
         <div className="relative">
@@ -276,7 +276,7 @@ function DesktopLayout() {
   useEffect(() => {
     const recalculate = () => {
       const heights = refs.map(r => r.current?.offsetHeight ?? 0)
-      const overflow = Math.max(0, Math.max(...heights) - 183) + 8
+      const overflow = Math.max(0, Math.max(...heights) - 163) + 8
       setExtraTop(overflow)
     }
     recalculate()
@@ -286,7 +286,7 @@ function DesktopLayout() {
   }, [])
 
   return (
-    <div className="min-h-screen select-none flex flex-col" style={{ minWidth: COLS * COL_WIDTH }}>
+    <div className="min-h-screen flex flex-col" style={{ minWidth: COLS * COL_WIDTH }}>
 
       {/* ── Navbar ── */}
       <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10">
@@ -317,11 +317,11 @@ function DesktopLayout() {
         </div>
 
         {/* imagens */}
-        <div style={GRID} className="pt-2 pb-4 px-0">
+        <div style={GRID} className="pt-2 pb-2 px-0">
           {STAGES.map((s, i) => (
-            <div key={i} className="flex justify-center items-end pb-1 min-h-[6rem]">
+            <div key={i} className="flex justify-center items-end pb-1 min-h-[5rem]">
               {s.img ? (
-                <img src={s.img} alt={s.label} className="h-24 object-contain" draggable={false} loading="lazy" />
+                <img src={s.img} alt={s.label} className="h-20 object-contain select-none" draggable={false} loading="lazy" />
               ) : null}
             </div>
           ))}
@@ -343,7 +343,7 @@ function DesktopLayout() {
 
       {/* ── Área da cobra + cards ── */}
       <div className="flow-gradient pt-5 flex-1">
-        <div className="relative" style={{ ...GRID, minHeight: 520, paddingTop: extraTop }}>
+        <div className="relative" style={{ ...GRID, minHeight: 450, paddingTop: extraTop }}>
 
           {/* cobra */}
           <div className="absolute inset-0 pointer-events-none" style={{ gridColumn: '1 / -1' }}>

@@ -27,7 +27,7 @@ export default function SnakePath({ extraTop = 0, cols = 9, colWidth = 140 }) {
       viewBox={`0 0 ${TOTAL_W} 170`}
       preserveAspectRatio="none"
       className="absolute left-0 w-full pointer-events-none"
-      style={{ top: 128 + extraTop, height: 170, zIndex: 0 }}
+      style={{ top: 108 + extraTop, height: 170, zIndex: 0 }}
       aria-hidden="true"
     >
       <defs>
