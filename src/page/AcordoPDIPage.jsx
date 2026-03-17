@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import DownloadButton from '../components/DownloadButton'
 import ProcessCard from '../components/ProcessCard'
 import { NodeCircle, NodeDiamond, NodeTriangle } from '../components/ProcessNode'
+import FlowNavBar from '../components/FlowNavBar'
 import SnakePath from '../components/SnakePath'
 
 const STAGES = [
@@ -67,16 +68,17 @@ function AccordionItem({ number, title, description }) {
   )
 }
 
-function StageCol({ index, children, extra }) {
+const StageCol = React.forwardRef(function StageCol({ index, children, extra }, ref) {
   const topPx = NODE_TOP[index]
 
   return (
-    <div className="flex flex-col items-center relative" style={{ paddingTop: topPx }}>
+    <div ref={ref} className="flex flex-col items-center relative" style={{ paddingTop: topPx }}>
       {children}
       {extra && <div className="mt-3">{extra}</div>}
     </div>
   )
-}
+})
+
 
 function useIsMobile() {
   const mq = window.matchMedia('(max-width: 767px)')
@@ -261,9 +263,10 @@ function DesktopLayout() {
     return () => observer.disconnect()
   }, [])
 
+
   return (
     <div className="min-h-screen flex flex-col" style={{ minWidth: 9 * COL_WIDTH }}>
-      <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10">
+      <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 30 }}>
         <button
           className="flex items-center gap-2 text-white text-sm font-medium hover:opacity-90 transition-opacity font-sans"
           onClick={() => {
@@ -277,44 +280,9 @@ function DesktopLayout() {
           Voltar ao Painel
         </button>
       </nav>
+      <div style={{ height: 44, flexShrink: 0 }} />
 
-      <header className="bg-gradient-to-b from-[#90CDF4] to-[#63B3ED]">
-        <div className="px-8 pt-4 pb-3">
-          <div className="inline-flex items-center gap-2 bg-[#BEE3F8] rounded-lg px-3 py-1.5 mb-3">
-            <svg className="w-3.5 h-3.5 text-[#2A4365]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-            </svg>
-            <span className="text-[#2A4365] text-[11px] font-semibold">Fluxo de Processo</span>
-          </div>
-          <h1 className="text-[#2A4365] text-[24px] font-bold leading-tight">ACORDO DE PD&I</h1>
-        </div>
-        <div className="grid grid-cols-9 pt-2 pb-2 px-0">
-          {STAGES.map((s, i) => (
-            <div key={i} className="flex justify-center items-end pb-1 min-h-[5rem]">
-              {s.img ? (
-                <img
-                  src={s.img}
-                  alt={s.label}
-                  className="h-20 object-contain select-none"
-                  draggable={false}
-                  loading="lazy"
-                />
-              ) : null}
-            </div>
-          ))}
-        </div>
-        <div className="grid grid-cols-9 mt-0 mb-0 gap-x-0.5 px-0">
-          {STAGES.map((s, i) => (
-            <div key={i} className="flex justify-center">
-              <div className="bg-white w-full min-w-0 h-14 flex flex-col items-center justify-center px-2 box-border">
-                {s.label.split('\n').map((line, j) => (
-                  <div key={j} className="text-[#2A4365] font-bold text-[11.5px] leading-tight text-center">{line}</div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </header>
+      <FlowNavBar />
 
       <div className="flow-gradient pt-5 flex-1">
 
@@ -377,19 +345,19 @@ function DesktopLayout() {
           <StageCol index={5}>
             <div className="flex flex-col items-center">
               <div className="w-[3px] bg-[#2B6CB0] h-10 flex-shrink-0" />
-              <div className="border-2 border-dashed border-[#2A4365] rounded-lg bg-white/80 px-3 py-1.5 text-[12px] font-bold text-[#2A4365] whitespace-nowrap shadow">
+              {/* <div className="border-2 border-dashed border-[#2A4365] rounded-lg bg-white/80 px-3 py-1.5 text-[12px] font-bold text-[#2A4365] whitespace-nowrap shadow">
                 Possui Recurso?
-              </div>
+              </div> */}
 
-              <svg width="332" height="24" viewBox="0 0 332 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-1 flex-shrink-0">
+              {/* <svg width="332" height="24" viewBox="0 0 332 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-1 flex-shrink-0">
                 <line x1="166" y1="0" x2="166" y2="12" stroke="#2A4365" strokeWidth="2" />
                 <line x1="80" y1="12" x2="252" y2="12" stroke="#2A4365" strokeWidth="2" />
                 <line x1="80" y1="12" x2="80" y2="24" stroke="#2A4365" strokeWidth="2" />
                 <line x1="252" y1="12" x2="252" y2="24" stroke="#2A4365" strokeWidth="2" />
-              </svg>
+              </svg> */}
 
               <div className="flex gap-3">
-                <div className="flex flex-col items-center">
+                {/* <div className="flex flex-col items-center">
                   <NodeDiamond />
                   <span className="text-[11px] font-bold text-[#2A4365] mb-1">Sim</span>
                   <div className="process-card p-2.5 text-[#2A4365] text-right rounded-xl transition-all duration-200 hover:bg-white hover:shadow-lg cursor-pointer" style={{ width: 160 }}>
@@ -399,16 +367,11 @@ function DesktopLayout() {
                     </p>
                     <DownloadButton fileKey="acordo-pd&i/Planilha_Custos_Operacionais_PDI.xlsx" />
                   </div>
-                </div>
+                </div> */}
 
                 <div className="flex flex-col items-center">
                   <NodeDiamond />
-                  <span className="text-[11px] font-bold text-[#2A4365] mb-1">Não</span>
                   <div className="process-card p-2.5 text-[#2A4365] text-left rounded-xl transition-all duration-200 hover:bg-white hover:shadow-lg cursor-pointer" style={{ width: 160 }}>
-                    <div className="inline-flex items-center gap-1 bg-[#2A4365]/10 border border-[#2A4365]/30 rounded-full px-2 py-0.5 mb-1">
-                      <div className="w-2 h-2 rounded-full border border-[#2A4365]" />
-                      <span className="text-[9.5px] font-bold text-[#2A4365]">Continue no Fluxo</span>
-                    </div>
                     <p className="font-bold text-[11px] text-[#2A4365] mb-1">Acordo</p>
                     <p className="text-[10px] text-[#2A4365]/90 leading-snug">
                       ⁠Autorização da contratação pela comissão de Gestão financeira e Gestão de resultados- CGFR *quando houver participação de recursos financeiro do ente público no projeto
