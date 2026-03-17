@@ -6,38 +6,26 @@ import FlowNavBar from '../components/FlowNavBar'
 import SnakePath from '../components/SnakePath'
 import MobileFlowHeader from '../components/MobileFlowHeader'
 
-const STAGES = [
-  { label: 'Início', img: '/assets/acordo-pdi/cuate.png' },
-  { label: 'Formalização\nda Demanda', img: '/assets/acordo-pdi/documentos.png' },
-  { label: 'Manifestação\nTécnica ou NIT', img: '/assets/acordo-pdi/lawyer.png' },
-  { label: 'Plano de\nTrabalho', img: '/assets/acordo-pdi/schedule.png' },
-  { label: 'Acordo de\nParceria', img: '/assets/acordo-pdi/ageement.png' },
-  { label: 'Autorização da\nContratação (CGFR)', img: '/assets/acordo-pdi/consent.png' },
-  { label: 'Autorizações', img: '/assets/acordo-pdi/sent-massage.png' },
-  { label: 'Indicação do\nGestor no Acordo', img: '/assets/acordo-pdi/business-deal.png' },
-  { label: 'Publicação\nno DOE', img: '/assets/acordo-pdi/publish-article.png' },
-]
-
 const NODE_TOP = [186, 223, 156, 223, 156, 223, 156, 223, 184]
 const COL_WIDTH = 185
 
 // Conteúdo de cada etapa para o layout mobile
 const CARDS = [
-  { text: 'Necessidade do órgão desenvolver uma pesquisa', download: false },
-  { text: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria;', download: true, fileKey: 'acordo-pd&i/Documento_Formalizacao_Demanda_PDI.docx' },
-  { text: 'Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n. 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados', download: true, fileKey: 'acordo-pd&i/Manifestacao_Tecnica_PDI.docx' },
-  { text: 'Plano de trabalho do acordo entre as instituições contendo a descrição das atividades, objetivos e metas do acordo', download: true, fileKey: 'acordo-pd&i/Modelo_Plano_de_Trabalho_PDI.docx' },
-  { text: 'Documento do Acordo de parceria firmado', download: true, fileKey: 'acordo-pd&i/Minuta_Acordo_Parceria_PDI.docx' },
-  { text: 'Autorização da contratação pela Comissão de Gestão Financeira e Gestão por Resultados (CGFR). Caso haja recurso financeiro do ente público: Convênio. Caso contrário: Acordo.', download: true, fileKey: 'acordo-pd&i/Planilha_Custos_Operacionais_PDI.xlsx' },
+  { title: 'Início', text: 'Necessidade do órgão desenvolver uma pesquisa', download: false },
+  { title: 'Formalização da Demanda', text: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria;', download: true, fileKey: 'acordo-pd&i/Documento_Formalizacao_Demanda_PDI.docx' },
+  { title: 'Manifestação Técnica ou NIT', text: 'Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n. 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados', download: true, fileKey: 'acordo-pd&i/Manifestacao_Tecnica_PDI.docx' },
+  { title: 'Plano de Trabalho', text: 'Plano de trabalho do acordo entre as instituições contendo a descrição das atividades, objetivos e metas do acordo', download: true, fileKey: 'acordo-pd&i/Modelo_Plano_de_Trabalho_PDI.docx' },
+  { title: 'Acordo de Parceria', text: 'Documento do Acordo de parceria firmado', download: true, fileKey: 'acordo-pd&i/Minuta_Acordo_Parceria_PDI.docx' },
+  { title: 'Autorização da Contratação (CGFR)', text: 'Autorização da contratação pela Comissão de Gestão Financeira e Gestão por Resultados (CGFR). Caso haja recurso financeiro do ente público: Convênio. Caso contrário: Acordo.', download: true, fileKey: 'acordo-pd&i/Planilha_Custos_Operacionais_PDI.xlsx' },
   {
-    accordion: true, accordionItems: [
+    title: 'Autorizações', accordion: true, accordionItems: [
       { number: '1', title: 'Autorização do Secretário da SEAD', description: 'Autorização do secretário da SEAD (secretário responsável pelas compras públicas) sobre o acordo de PD&I *verificar mudança para SIA' },
       { number: '2', title: 'Autorização da SEFAZ', description: 'Secretaria de Estado da Fazenda devido a repasses de recursos' },
       { number: '3', title: 'Autorização da PGE', description: 'Procuradoria Geral do Estado para verificação' },
     ], download: true, fileKey: 'acordo-pd&i/Lista de Verificação - Acordo PD&I.docx'
   },
-  { text: 'Indicação do gestor do ente público sobre quem será o gestor do acordo via SEI', download: true },
-  { text: 'Publicação no Diário Oficial do Estado do Piauí', download: false },
+  { title: 'Indicação do Gestor no Acordo', text: 'Indicação do gestor do ente público sobre quem será o gestor do acordo via SEI', download: true },
+  { title: 'Publicação no DOE', text: 'Publicação no Diário Oficial do Estado do Piauí', download: false },
 ]
 
 function CardTitle({ children }) {
@@ -141,11 +129,10 @@ function MobileLayout() {
             className="absolute bottom-0 w-[3px] bg-[#2B6CB0]"
             style={{ left: 'calc(50% - 1.5px)', top: '14px' }}
           />
-          {STAGES.map((stage, i) => {
-            const card = CARDS[i]
+          {CARDS.map((card, i) => {
             const isLeft = i % 2 === 0
             const isFirst = i === 0
-            const hasContent = card.text || card.download || card.accordion
+            const hasContent = card.title || card.text || card.download || card.accordion
             return (
               <div key={i} className="mb-6">
                 <div className="flex items-center relative">
@@ -153,33 +140,18 @@ function MobileLayout() {
                     className="absolute top-1/2 -translate-y-1/2 h-[2px] bg-[#2B6CB0]"
                     style={isLeft ? { right: 'calc(50% + 8px)', left: 0 } : { left: 'calc(50% + 8px)', right: 0 }}
                   />
-                  <div className="flex-1 flex justify-end pr-3 min-w-0 relative z-[1]">
-                    {isLeft && (
-                      <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-sm text-right w-full">
-                        {stage.label.split('\n').map((line, j) => (
-                          <div key={j} className="text-[#2A4365] font-bold text-[12px] leading-tight">{line}</div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  <div className="flex-1" />
                   <div className="flex-shrink-0 w-6 flex justify-center relative z-10">
                     {isFirst ? <NodeCircle /> : <NodeDiamond />}
                   </div>
-                  <div className="flex-1 flex justify-start pl-3 min-w-0 relative z-[1]">
-                    {!isLeft && (
-                      <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-sm w-full">
-                        {stage.label.split('\n').map((line, j) => (
-                          <div key={j} className="text-[#2A4365] font-bold text-[12px] leading-tight">{line}</div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  <div className="flex-1" />
                 </div>
                 {hasContent && (
                   <div className="flex mt-2 relative z-[1]">
                     <div className="flex-1 pr-3 min-w-0">
                       {isLeft && (
-                        <div>
+                        <div className="bg-white rounded-lg px-2.5 py-2 shadow-sm">
+                          {card.title && <p className="font-bold text-[12px] text-[#2A4365] mb-1 leading-tight text-right">{card.title}</p>}
                           {card.text && <p className="text-[11px] leading-snug text-[#2A4365]/90 mb-1.5 text-right">{card.text}</p>}
                           {card.accordion && (
                             <div className="process-card bg-white/70 rounded-xl p-2.5 space-y-1 mb-1.5">
@@ -200,7 +172,8 @@ function MobileLayout() {
                     <div className="flex-shrink-0 w-6" />
                     <div className="flex-1 pl-3 min-w-0">
                       {!isLeft && (
-                        <div>
+                        <div className="bg-white rounded-lg px-2.5 py-2 shadow-sm">
+                          {card.title && <p className="font-bold text-[12px] text-[#2A4365] mb-1 leading-tight">{card.title}</p>}
                           {card.text && <p className="text-[11px] leading-snug text-[#2A4365]/90 mb-1.5">{card.text}</p>}
                           {card.accordion && (
                             <div className="process-card bg-white/70 rounded-xl p-2.5 space-y-1 mb-1.5">
@@ -288,6 +261,7 @@ function DesktopLayout() {
           <StageCol index={0}>
             <NodeCircle />
             <ProcessCard position="below" width={148} showNode={false}>
+              <CardTitle>Início</CardTitle>
               <CardBody>
                 Necessidade do órgão desenvolver uma pesquisa
               </CardBody>
@@ -307,6 +281,7 @@ function DesktopLayout() {
           <StageCol index={2}>
             <div ref={aboveRef2} className="absolute flex flex-col items-center" style={{ bottom: 'calc(100% - 163px)', left: '50%', transform: 'translateX(-50%)' }}>
               <ProcessCard position="above" width={172}>
+                <CardTitle>Manifestação Técnica ou NIT</CardTitle>
                 <CardBody>
                   Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados
                 </CardBody>
@@ -317,6 +292,7 @@ function DesktopLayout() {
 
           <StageCol index={3}>
             <ProcessCard position="below" width={168}>
+              <CardTitle>Plano de Trabalho</CardTitle>
               <CardBody>
                 Plano de trabalho do acordo entre as instituições contendo a descrição das atividades, objetivos e metas do acordo
               </CardBody>
@@ -327,6 +303,7 @@ function DesktopLayout() {
           <StageCol index={4}>
             <div ref={aboveRef4} className="absolute flex flex-col items-center" style={{ bottom: 'calc(100% - 163px)', left: '50%', transform: 'translateX(-50%)' }}>
               <ProcessCard position="above" width={178}>
+                <CardTitle>Acordo de Parceria</CardTitle>
                 <CardBody>
                   Documento do Acordo de parceria firmado
                 </CardBody>
@@ -379,6 +356,7 @@ function DesktopLayout() {
           <StageCol index={6}>
             <div ref={aboveRef6} className="absolute flex flex-col items-center" style={{ bottom: 'calc(100% - 163px)', left: '50%', transform: 'translateX(-50%)' }}>
               <ProcessCard position="above" width={190}>
+                <CardTitle>Autorizações</CardTitle>
                 <div className="space-y-1 mb-1">
                   <AccordionItem
                     number="1"
@@ -403,6 +381,7 @@ function DesktopLayout() {
 
           <StageCol index={7}>
             <ProcessCard position="below" width={168}>
+              <CardTitle>Indicação do Gestor no Acordo</CardTitle>
               <CardBody>
                 Indicação do gestor do ente público sobre quem será o gestor do acordo via SEI
               </CardBody>

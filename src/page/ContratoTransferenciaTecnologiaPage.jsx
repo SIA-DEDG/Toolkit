@@ -6,39 +6,22 @@ import FlowNavBar from '../components/FlowNavBar'
 import SnakePath from '../components/SnakePath'
 import MobileFlowHeader from '../components/MobileFlowHeader'
 
-const STAGES = [
-  { label: 'Início',                                       img: '/assets/contrato-transferencia-tecnologia/research-paper.png' },
-  { label: 'Formalização\nda Demanda',                     img: '/assets/contrato-transferencia-tecnologia/documents.png' },
-  { label: 'Estudo Técnico\nPreliminar',                   img: '/assets/contrato-transferencia-tecnologia/studying.png' },
-  { label: 'Mapa de\nRisco' },
-  { label: 'Termo de\nReferência',                         img: '/assets/contrato-transferencia-tecnologia/lawyer.png' },
-  { label: 'Aprovações',                                   img: '/assets/contrato-transferencia-tecnologia/consent.png' },
-  { label: 'Exame e parecer\nTécnico do NIT' },
-  { label: 'Habilitação da ICT\nou Empresa' },
-  { label: 'Plano de\nTrabalho',                           img: '/assets/contrato-transferencia-tecnologia/schedule.png' },
-  { label: 'Minuta do\nContrato' },
-  { label: 'Autorizações',                                 img: '/assets/contrato-transferencia-tecnologia/consent.png' },
-  { label: 'Indicação do Fiscal do\nContrato ou Comissão', img: '/assets/contrato-transferencia-tecnologia/live-collaboration.png' },
-  { label: 'Publicação\nno DOE',                           img: '/assets/contrato-transferencia-tecnologia/publish-article.png' },
-  { label: 'Comunicação\nTCE',                             img: '/assets/contrato-transferencia-tecnologia/contact-us.png' },
-]
-
 // Conteúdo de cada etapa para o layout mobile
 const CARDS = [
-  { text: 'Necessidade do órgão desenvolver uma pesquisa', download: false },
-  { text: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria;', download: true },
-  { text: 'Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n. 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados', download: true },
-  { text: 'Planejamento que identifica, analisa e propõe o tratamento de eventos que possam comprometer a licitação ou a execução contratual.', download: true },
-  { text: 'O Termo de Referência (TR) ou projeto básico contendo a justificativa, a necessidade da administração, o objeto, prazos, custos estimados, entre outros', download: true },
-  { text: 'Aprovação do ETP e do mapa de riscos, se houver, e do termo de referência pela autoridade competente do órgão interessado', download: true },
-  { text: 'Exame e parecer técnico do Núcleo de Inovação Tecnológica – NIT', download: false, note: 'Caso a contratação preveja cláusula de exclusividade, informar se houve a manifestação de outros potenciais parceiros tecnológicos em site eletrônico oficial da ICT e se foram atendidos os §§ 1º, 4º, art. 75 do Decreto n. 10.534 / Decreto 23.676/PI' },
-  { text: null, download: false },
-  { text: 'Plano de trabalho do convênio entre as instituições contendo a descrição das atividades, objetivos e metas do convênio', download: true },
-  { text: null, download: true },
-  { accordion: true, download: true },
-  { text: null, download: false },
-  { text: 'Publicação no Diário Oficial do Estado do Piauí', download: false },
-  { text: 'Comunicação de assinatura do contrato ou documento substitutivo ao TCE até 10 dias após o ato', download: false },
+  { title: 'Início', text: 'Necessidade do órgão desenvolver uma pesquisa', download: false },
+  { title: 'Formalização da Demanda', text: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria;', download: true },
+  { title: 'Estudo Técnico Preliminar', text: 'Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n. 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados', download: true },
+  { title: 'Mapa de Risco', text: 'Planejamento que identifica, analisa e propõe o tratamento de eventos que possam comprometer a licitação ou a execução contratual.', download: true },
+  { title: 'Termo de Referência', text: 'O Termo de Referência (TR) ou projeto básico contendo a justificativa, a necessidade da administração, o objeto, prazos, custos estimados, entre outros', download: true },
+  { title: 'Aprovações', text: 'Aprovação do ETP e do mapa de riscos, se houver, e do termo de referência pela autoridade competente do órgão interessado', download: true },
+  { title: 'Exame e parecer Técnico do NIT', text: 'Exame e parecer técnico do Núcleo de Inovação Tecnológica – NIT', download: false, note: 'Caso a contratação preveja cláusula de exclusividade, informar se houve a manifestação de outros potenciais parceiros tecnológicos em site eletrônico oficial da ICT e se foram atendidos os §§ 1º, 4º, art. 75 do Decreto n. 10.534 / Decreto 23.676/PI' },
+  { title: 'Habilitação da ICT ou Empresa', text: null, download: false },
+  { title: 'Plano de Trabalho', text: 'Plano de trabalho do convênio entre as instituições contendo a descrição das atividades, objetivos e metas do convênio', download: true },
+  { title: 'Minuta do Contrato', text: null, download: true },
+  { title: 'Autorizações', accordion: true, download: true },
+  { title: 'Indicação do Fiscal do Contrato ou Comissão', text: null, download: false },
+  { title: 'Publicação no DOE', text: 'Publicação no Diário Oficial do Estado do Piauí', download: false },
+  { title: 'Comunicação TCE', text: 'Comunicação de assinatura do contrato ou documento substitutivo ao TCE até 10 dias após o ato', download: false },
 ]
 
 // paddingTop de cada coluna para alinhar o nó com a cobra
@@ -59,6 +42,9 @@ function useIsMobile() {
   return isMobile
 }
 
+function CardTitle({ children }) {
+  return <p className="font-bold text-[12px] text-[#2A4365] mb-1 leading-tight">{children}</p>
+}
 function CardBody({ children }) {
   return <p className="text-[10.5px] leading-snug text-[#2A4365]/90">{children}</p>
 }
@@ -163,48 +149,28 @@ function MobileLayout() {
             style={{ left: 'calc(50% - 1.5px)', top: '14px' }}
           />
 
-          {STAGES.map((stage, i) => {
-            const card = CARDS[i]
+          {CARDS.map((card, i) => {
             const isLeft = i % 2 === 0
             const isFirst = i === 0
-            const hasContent = card.text || card.download || card.accordion
+            const hasContent = card.title || card.text || card.download || card.accordion
 
             return (
               <div key={i} className="mb-6">
-                {/* Label + Nó */}
+                {/* Nó */}
                 <div className="flex items-center relative">
-                  {/* Linha horizontal — dentro do flex para top: 50% ser relativo à altura do label+nó */}
                   <div
                     className="absolute top-1/2 -translate-y-1/2 h-[2px] bg-[#2B6CB0]"
                     style={isLeft ? { right: 'calc(50% + 8px)', left: 0 } : { left: 'calc(50% + 8px)', right: 0 }}
                   />
 
-                  {/* Lado esquerdo */}
-                  <div className="flex-1 flex justify-end pr-3 min-w-0 relative z-[1]">
-                    {isLeft && (
-                      <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-sm text-right w-full">
-                        {stage.label.split('\n').map((line, j) => (
-                          <div key={j} className="text-[#2A4365] font-bold text-[12px] leading-tight">{line}</div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  <div className="flex-1" />
 
                   {/* Nó */}
                   <div className="flex-shrink-0 w-6 flex justify-center relative z-10">
                     {isFirst ? <NodeCircle /> : <NodeDiamond />}
                   </div>
 
-                  {/* Lado direito */}
-                  <div className="flex-1 flex justify-start pl-3 min-w-0 relative z-[1]">
-                    {!isLeft && (
-                      <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-sm w-full">
-                        {stage.label.split('\n').map((line, j) => (
-                          <div key={j} className="text-[#2A4365] font-bold text-[12px] leading-tight">{line}</div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  <div className="flex-1" />
                 </div>
 
                 {/* Conteúdo do card (alinhado ao mesmo lado do label) */}
@@ -212,7 +178,8 @@ function MobileLayout() {
                   <div className="flex mt-2 relative z-[1]">
                     <div className="flex-1 pr-3 min-w-0">
                       {isLeft && (
-                        <div>
+                        <div className="bg-white rounded-lg px-2.5 py-2 shadow-sm">
+                          {card.title && <p className="font-bold text-[12px] text-[#2A4365] mb-1 leading-tight text-right">{card.title}</p>}
                           {card.text && (
                             <p className="text-[11px] leading-snug text-[#2A4365]/90 mb-1.5 text-right">{card.text}</p>
                           )}
@@ -239,7 +206,8 @@ function MobileLayout() {
 
                     <div className="flex-1 pl-3 min-w-0">
                       {!isLeft && (
-                        <div>
+                        <div className="bg-white rounded-lg px-2.5 py-2 shadow-sm">
+                          {card.title && <p className="font-bold text-[12px] text-[#2A4365] mb-1 leading-tight">{card.title}</p>}
                           {card.text && (
                             <p className="text-[11px] leading-snug text-[#2A4365]/90 mb-1.5">{card.text}</p>
                           )}
@@ -336,6 +304,7 @@ function DesktopLayout() {
           <StageCol index={0}>
             <NodeCircle />
             <ProcessCard position="below" showNode={false}>
+              <CardTitle>Início</CardTitle>
               <CardBody>Necessidade do órgão desenvolver uma pesquisa</CardBody>
             </ProcessCard>
           </StageCol>
@@ -343,6 +312,7 @@ function DesktopLayout() {
           {/* Col 1 – Formalização da Demanda (abaixo) */}
           <StageCol index={1}>
             <ProcessCard position="below">
+              <CardTitle>Formalização da Demanda</CardTitle>
               <CardBody>Formalização da Demanda via SEI gabinete do órgão e instituição da parceria;</CardBody>
               <DownloadButton />
             </ProcessCard>
@@ -352,6 +322,7 @@ function DesktopLayout() {
           <StageCol index={2}>
             <div ref={ref2} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Estudo Técnico Preliminar</CardTitle>
                 <CardBody>Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados</CardBody>
                 <DownloadButton />
               </ProcessCard>
@@ -361,6 +332,7 @@ function DesktopLayout() {
           {/* Col 3 – Mapa de Risco (abaixo) */}
           <StageCol index={3}>
             <ProcessCard position="below">
+              <CardTitle>Mapa de Risco</CardTitle>
               <CardBody>Planejamento que identifica, analisa e propõe o tratamento de eventos que possam comprometer a licitação ou a execução contratual.</CardBody>
               <DownloadButton />
             </ProcessCard>
@@ -370,6 +342,7 @@ function DesktopLayout() {
           <StageCol index={4}>
             <div ref={ref4} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Termo de Referência</CardTitle>
                 <CardBody>O Termo de Referência (TR) ou projeto básico contendo a justificativa, a necessidade da administração, o objeto, prazos, custos estimados, entre outros</CardBody>
                 <DownloadButton />
               </ProcessCard>
@@ -379,6 +352,7 @@ function DesktopLayout() {
           {/* Col 5 – Aprovações (abaixo) */}
           <StageCol index={5}>
             <ProcessCard position="below">
+              <CardTitle>Aprovações</CardTitle>
               <CardBody>Aprovação do ETP e do mapa de riscos, se houver, e do termo de referência pela autoridade competente do órgão interessado</CardBody>
               <DownloadButton />
             </ProcessCard>
@@ -388,6 +362,7 @@ function DesktopLayout() {
           <StageCol index={6}>
             <div ref={ref6} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Exame e parecer Técnico do NIT</CardTitle>
                 <CardBody>Exame e parecer técnico do Núcleo de Inovação Tecnológica – NIT</CardBody>
               </ProcessCard>
             </div>
@@ -408,6 +383,7 @@ function DesktopLayout() {
           <StageCol index={8}>
             <div ref={ref8} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Plano de Trabalho</CardTitle>
                 <CardBody>Plano de trabalho do convênio entre as instituições contendo a descrição das atividades, objetivos e metas do convênio</CardBody>
                 <DownloadButton />
               </ProcessCard>
@@ -417,6 +393,7 @@ function DesktopLayout() {
           {/* Col 9 – Minuta do Contrato (abaixo) */}
           <StageCol index={9}>
             <ProcessCard position="below">
+              <CardTitle>Minuta do Contrato</CardTitle>
               <DownloadButton />
             </ProcessCard>
           </StageCol>
@@ -425,6 +402,7 @@ function DesktopLayout() {
           <StageCol index={10}>
             <div ref={ref10} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Autorizações</CardTitle>
                 <div className="space-y-1 mb-1">
                   <AccordionItem number="1" title="Autorização da CGE" description="" />
                   <AccordionItem number="2" title="Autorização da PGE" description="" />
@@ -439,6 +417,7 @@ function DesktopLayout() {
           {/* Col 11 – Indicação do Fiscal do Contrato ou Comissão (abaixo) */}
           <StageCol index={11}>
             <ProcessCard position="below">
+              <CardTitle>Indicação do Fiscal do Contrato ou Comissão</CardTitle>
               <CardBody></CardBody>
             </ProcessCard>
           </StageCol>
@@ -447,6 +426,7 @@ function DesktopLayout() {
           <StageCol index={12}>
             <div ref={ref12} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Publicação no DOE</CardTitle>
                 <CardBody>Publicação no Diário Oficial do Estado do Piauí</CardBody>
               </ProcessCard>
             </div>

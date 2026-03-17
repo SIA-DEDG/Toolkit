@@ -6,22 +6,6 @@ import FlowNavBar from '../components/FlowNavBar'
 import SnakePath from '../components/SnakePath'
 import MobileFlowHeader from '../components/MobileFlowHeader'
 
-const STAGES = [
-  { label: 'Início' , img: '/assets/convenio-pdi/research-paper.png'},
-  { label: 'Formalização\nda Demanda', img: '/assets/convenio-pdi/documents.png' },
-  { label: 'Manifestação\nTécnica ou NIT', img: '/assets/convenio-pdi/lawyer.png' },
-  { label: 'Edital de\nChamamento' },
-  { label: 'Plano de\nTrabalho', img: '/assets/convenio-pdi/schedule.png' },
-  { label: 'Minuta do\nConvênio' },
-  { label: 'Planilha Demonstrativa\nde Custo', img: '/assets/convenio-pdi/spreadsheets.png' },
-  { label: 'Autorização\nCGFR', img: '/assets/convenio-pdi/consent.png' },
-  { label: 'Documentações', img: '/assets/convenio-pdi/transfer-files.png' },
-  { label: 'Análises', img: '/assets/convenio-pdi/analysis.png' },
-  { label: 'Indicação do Gestor\ndo Convênio', img: '/assets/convenio-pdi/live-collaboration.png' },
-  { label: 'Publicação\nno DOE', img: '/assets/convenio-pdi/publish-article.png' },
-  { label: 'Registro da Publicação\ndo Convênio (SIGRP)', img: '/assets/convenio-pdi/online-article.png' },
-]
-
 // paddingTop de cada coluna para alinhar o nó com a cobra
 // padrão: MID=206, BAIXO=243, CIMA=176, FIM=204
 const NODE_TOP = [186, 223, 156, 223, 156, 223, 156, 223, 156, 223, 156, 223, 184]
@@ -31,30 +15,33 @@ const COL_WIDTH = 185
 
 // Conteúdo de cada etapa para o layout mobile
 const CARDS = [
-  { text: 'Necessidade do órgão desenvolver uma pesquisa', download: false },
-  { text: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria;', download: true, fileKey: 'convenio-pd&i/Documento_Formalizacao_Demanda_PDI.docx' },
-  { text: 'Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n. 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados', download: true, fileKey: 'convenio-pd&i/Manifestacao_Tecnica_PDI.docx' },
-  { text: 'Minuta do Edital de chamamento', download: true },
-  { text: 'Plano de trabalho do convênio entre as instituições contendo a descrição das atividades, objetivos e metas do convênio', download: true, fileKey: 'convenio-pd&i/Modelo_Plano_de_Trabalho_PDI.docx' },
-  { text: 'Minuta do Convênio para Pesquisa, Desenvolvimento e Inovação', download: true, fileKey: 'convenio-pd&i/Minuta_Convênio_Parceria_PDI.docx' },
-  { text: 'Planilha demonstrativa dos custos operacionais incorridos na execução das atividades', download: true, fileKey: 'convenio-pd&i/Planilha_Custos_Operacionais_PDI.xlsx' },
-  { text: 'Autorização da contratação pela Comissão de Gestão Financeira e Gestão por Resultados – CGFR', download: true },
-  { accordion: true, accordionItems: [
+  { title: 'Início', text: 'Necessidade do órgão desenvolver uma pesquisa', download: false },
+  { title: 'Formalização da Demanda', text: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria;', download: true, fileKey: 'convenio-pd&i/Documento_Formalizacao_Demanda_PDI.docx' },
+  { title: 'Manifestação Técnica ou NIT', text: 'Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n. 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados', download: true, fileKey: 'convenio-pd&i/Manifestacao_Tecnica_PDI.docx' },
+  { title: 'Edital de Chamamento', text: 'Minuta do Edital de chamamento', download: true },
+  { title: 'Plano de Trabalho', text: 'Plano de trabalho do convênio entre as instituições contendo a descrição das atividades, objetivos e metas do convênio', download: true, fileKey: 'convenio-pd&i/Modelo_Plano_de_Trabalho_PDI.docx' },
+  { title: 'Minuta do Convênio', text: 'Minuta do Convênio para Pesquisa, Desenvolvimento e Inovação', download: true, fileKey: 'convenio-pd&i/Minuta_Convênio_Parceria_PDI.docx' },
+  { title: 'Planilha Demonstrativa de Custo', text: 'Planilha demonstrativa dos custos operacionais incorridos na execução das atividades', download: true, fileKey: 'convenio-pd&i/Planilha_Custos_Operacionais_PDI.xlsx' },
+  { title: 'Autorização CGFR', text: 'Autorização da contratação pela Comissão de Gestão Financeira e Gestão por Resultados – CGFR', download: true },
+  { title: 'Documentações', accordion: true, accordionItems: [
     { number: '1', title: 'Parceiro privado', description: '' },
     { number: '2', title: 'Parceiro público', description: '' },
     { number: '3', title: 'Fundação de Apoio', description: '' },
   ], download: true },
-  { accordion: true, accordionItems: [
+  { title: 'Análises', accordion: true, accordionItems: [
     { number: '1', title: 'Análise Prévia CGE', description: '' },
     { number: '2', title: 'Parecer PGE', description: '' },
     { number: '3', title: 'Autorização do Secretário da SEAD', description: '' },
     { number: '4', title: 'Parecer SEFAZ', description: '' },
   ], download: true },
-  { text: 'Indicação do gestor do convênio PD&I', download: true },
-  { text: 'Publicação no Diário Oficial do Estado do Piauí pela SEGOV', download: false },
-  { text: 'Registro da publicação do convênio no SIGRP', download: false },
+  { title: 'Indicação do Gestor do Convênio', text: 'Indicação do gestor do convênio PD&I', download: true },
+  { title: 'Publicação no DOE', text: 'Publicação no Diário Oficial do Estado do Piauí pela SEGOV', download: false },
+  { title: 'Registro da Publicação do Convênio (SIGRP)', text: 'Registro da publicação do convênio no SIGRP', download: false },
 ]
 
+function CardTitle({ children }) {
+  return <p className="font-bold text-[12px] text-[#2A4365] mb-1 leading-tight">{children}</p>
+}
 function CardBody({ children }) {
   return <p className="text-[10.5px] leading-snug text-[#2A4365]/90">{children}</p>
 }
@@ -162,11 +149,10 @@ function MobileLayout() {
             className="absolute bottom-0 w-[3px] bg-[#2B6CB0]"
             style={{ left: 'calc(50% - 1.5px)', top: '14px' }}
           />
-          {STAGES.map((stage, i) => {
-            const card = CARDS[i]
+          {CARDS.map((card, i) => {
             const isLeft = i % 2 === 0
             const isFirst = i === 0
-            const hasContent = card.text || card.download || card.accordion
+            const hasContent = card.title || card.text || card.download || card.accordion
             return (
               <div key={i} className="mb-6">
                 <div className="flex items-center relative">
@@ -174,33 +160,18 @@ function MobileLayout() {
                     className="absolute top-1/2 -translate-y-1/2 h-[2px] bg-[#2B6CB0]"
                     style={isLeft ? { right: 'calc(50% + 8px)', left: 0 } : { left: 'calc(50% + 8px)', right: 0 }}
                   />
-                  <div className="flex-1 flex justify-end pr-3 min-w-0 relative z-[1]">
-                    {isLeft && (
-                      <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-sm text-right w-full">
-                        {stage.label.split('\n').map((line, j) => (
-                          <div key={j} className="text-[#2A4365] font-bold text-[12px] leading-tight">{line}</div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  <div className="flex-1" />
                   <div className="flex-shrink-0 w-6 flex justify-center relative z-10">
                     {isFirst ? <NodeCircle /> : <NodeDiamond />}
                   </div>
-                  <div className="flex-1 flex justify-start pl-3 min-w-0 relative z-[1]">
-                    {!isLeft && (
-                      <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-sm w-full">
-                        {stage.label.split('\n').map((line, j) => (
-                          <div key={j} className="text-[#2A4365] font-bold text-[12px] leading-tight">{line}</div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  <div className="flex-1" />
                 </div>
                 {hasContent && (
                   <div className="flex mt-2 relative z-[1]">
                     <div className="flex-1 pr-3 min-w-0">
                       {isLeft && (
-                        <div>
+                        <div className="bg-white rounded-lg px-2.5 py-2 shadow-sm">
+                          {card.title && <p className="font-bold text-[12px] text-[#2A4365] mb-1 leading-tight text-right">{card.title}</p>}
                           {card.text && <p className="text-[11px] leading-snug text-[#2A4365]/90 mb-1.5 text-right">{card.text}</p>}
                           {card.accordion && (
                             <div className="process-card bg-white/70 rounded-xl p-2.5 space-y-1 mb-1.5">
@@ -221,7 +192,8 @@ function MobileLayout() {
                     <div className="flex-shrink-0 w-6" />
                     <div className="flex-1 pl-3 min-w-0">
                       {!isLeft && (
-                        <div>
+                        <div className="bg-white rounded-lg px-2.5 py-2 shadow-sm">
+                          {card.title && <p className="font-bold text-[12px] text-[#2A4365] mb-1 leading-tight">{card.title}</p>}
                           {card.text && <p className="text-[11px] leading-snug text-[#2A4365]/90 mb-1.5">{card.text}</p>}
                           {card.accordion && (
                             <div className="process-card bg-white/70 rounded-xl p-2.5 space-y-1 mb-1.5">
@@ -311,6 +283,7 @@ function DesktopLayout() {
           <StageCol index={0}>
             <NodeCircle />
             <ProcessCard position="below" showNode={false}>
+              <CardTitle>Início</CardTitle>
               <CardBody>Necessidade do órgão desenvolver uma pesquisa</CardBody>
             </ProcessCard>
           </StageCol>
@@ -318,6 +291,7 @@ function DesktopLayout() {
           {/* Col 1 – Formalização da Demanda (abaixo) */}
           <StageCol index={1}>
             <ProcessCard position="below">
+              <CardTitle>Formalização da Demanda</CardTitle>
               <CardBody>Formalização da Demanda via SEI  gabinete do órgão e instituição da parceria;</CardBody>
               <DownloadButton fileKey="convenio-pd&i/Documento_Formalizacao_Demanda_PDI.docx" />
             </ProcessCard>
@@ -327,6 +301,7 @@ function DesktopLayout() {
           <StageCol index={2}>
             <div ref={ref2} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Manifestação Técnica ou NIT</CardTitle>
                 <CardBody>Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados</CardBody>
                 <DownloadButton fileKey="convenio-pd&i/Manifestacao_Tecnica_PDI.docx" />
               </ProcessCard>
@@ -336,6 +311,7 @@ function DesktopLayout() {
           {/* Col 3 – Edital de Chamamento (abaixo) */}
           <StageCol index={3}>
             <ProcessCard position="below">
+              <CardTitle>Edital de Chamamento</CardTitle>
               <CardBody>Minuta do Edital de chamamento</CardBody>
               <DownloadButton />
             </ProcessCard>
@@ -345,6 +321,7 @@ function DesktopLayout() {
           <StageCol index={4}>
             <div ref={ref4} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Plano de Trabalho</CardTitle>
                 <CardBody>⁠Plano de trabalho do convênio entre as instituições contendo a descrição das atividades, objetivos e metas do convênio</CardBody>
                 <DownloadButton fileKey="convenio-pd&i/Modelo_Plano_de_Trabalho_PDI.docx" />
               </ProcessCard>
@@ -354,6 +331,7 @@ function DesktopLayout() {
           {/* Col 5 – Minuta do Convênio (abaixo) */}
           <StageCol index={5}>
             <ProcessCard position="below">
+              <CardTitle>Minuta do Convênio</CardTitle>
               <CardBody>Minuta do Convênio para Pesquisa, Desenvolvimento e Inovação</CardBody>
               <DownloadButton fileKey="convenio-pd&i/Minuta_Convênio_Parceria_PDI.docx" />
             </ProcessCard>
@@ -363,6 +341,7 @@ function DesktopLayout() {
           <StageCol index={6}>
             <div ref={ref6} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Planilha Demonstrativa de Custo</CardTitle>
                 <CardBody>Planilha demonstrativa dos custos operacionais incorridos na execução das atividades</CardBody>
                 <DownloadButton fileKey="convenio-pd&i/Planilha_Custos_Operacionais_PDI.xlsx" />
               </ProcessCard>
@@ -372,6 +351,7 @@ function DesktopLayout() {
           {/* Col 7 – Autorização CGFR (abaixo) */}
           <StageCol index={7}>
             <ProcessCard position="below">
+              <CardTitle>Autorização CGFR</CardTitle>
               <CardBody>Autorização da contratação pela Comissão de Gestão Financeira e Gestão por Resultados – CGFR</CardBody>
               <DownloadButton />
             </ProcessCard>
@@ -381,6 +361,7 @@ function DesktopLayout() {
           <StageCol index={8}>
             <div ref={ref8} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Documentações</CardTitle>
                 <div className="space-y-1 mb-1">
                   <AccordionItem number="1" title="Parceiro privado" description="Descrição placeholder item 1" />
                   <AccordionItem number="2" title="Parceiro público" description="Descrição placeholder item 2" />
@@ -394,6 +375,7 @@ function DesktopLayout() {
           {/* Col 9 – Análises (abaixo, accordion) */}
           <StageCol index={9}>
             <ProcessCard position="below">
+              <CardTitle>Análises</CardTitle>
               <div className="space-y-1 mb-1">
                 <AccordionItem number="1" title="Análise Prévia CGE" description="Descrição placeholder item 1" />
                 <AccordionItem number="2" title="Parecer PGE" description="Descrição placeholder item 2" />
@@ -408,6 +390,7 @@ function DesktopLayout() {
           <StageCol index={10}>
             <div ref={ref10} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Indicação do Gestor do Convênio</CardTitle>
                 <CardBody>Indicação do gestor do convênio PD&I</CardBody>
                 <DownloadButton />
               </ProcessCard>
@@ -417,6 +400,7 @@ function DesktopLayout() {
           {/* Col 11 – Publicação no DOE (abaixo) */}
           <StageCol index={11}>
             <ProcessCard position="below">
+              <CardTitle>Publicação no DOE</CardTitle>
               <CardBody>⁠Publicação no Diário Oficial do Estado do Piauí pela SEGOV</CardBody>
             </ProcessCard>
           </StageCol>
@@ -425,6 +409,7 @@ function DesktopLayout() {
           <StageCol index={12}>
             <NodeTriangle />
             <ProcessCard position="below" showNode={false}>
+              <CardTitle>Registro da Publicação do Convênio (SIGRP)</CardTitle>
               <CardBody>Registro da publicação do convênio no SIGRP</CardBody>
             </ProcessCard>
           </StageCol>

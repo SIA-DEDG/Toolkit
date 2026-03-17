@@ -36,7 +36,6 @@ const flows = [
 ]
 
 export default function HomePage() {
-  const [started, setStarted] = useState(false)
   const [selected, setSelected] = useState(null)
   const [showFlows, setShowFlows] = useState(false)
 
@@ -87,38 +86,8 @@ export default function HomePage() {
       <main className="flex-1 flex flex-col items-center px-6 py-12 pb-16">
         <div className="w-full max-w-3xl flex flex-col items-center">
 
-          {/* Comece aqui button */}
-          <div className="bg-white rounded-2xl border border-gray-200 shadow-sm px-10 py-8 flex flex-col items-center gap-6 w-full max-w-xl">
-            <p className="text-sm text-gray-500 text-center leading-relaxed">
-              Dê o primeiro passo para inovar com segurança jurídica. 
-              Seja para entender o fluxo de etapas ou para identificar os instrumentos certos para o seu projeto, 
-              nossa ferramenta guia você pela melhor estratégia. 
-              Clique em iniciar para escolher seu perfil.
-            </p>
-            <button
-              onClick={() => setStarted(true)}
-              className="flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#0d9ddb] hover:bg-[#0b8bc4] text-white font-semibold text-base shadow-md transition-colors"
-            >
-              <Play className="w-4 h-4 fill-white" />
-              Iniciar
-            </button>
-          </div>
-
-          {/* Tree connector */}
-          <div className="flex flex-col items-center w-full">
-            {/* Vertical line down from button */}
-            {started && <div className="w-px h-8 bg-gray-300" />}
-
-            {/* Horizontal bar */}
-            {started && (
-              <div className="relative w-[55%] h-px bg-gray-300">
-                <div className="absolute left-0 top-0 w-px h-5 bg-gray-300" />
-                <div className="absolute right-0 top-0 w-px h-5 bg-gray-300" />
-              </div>
-            )}
-
-            {/* Two cards */}
-            <div className={`grid grid-cols-2 gap-4 w-full mt-5 transition-all duration-300 ${started ? 'opacity-100' : 'opacity-0 pointer-events-none h-0 overflow-hidden'}`}>
+          {/* Two cards */}
+          <div className="grid grid-cols-2 gap-4 w-full">
               {/* Card 1 - Procedimentos */}
               <button
                 onClick={() => handleSelect('procedimentos')}
@@ -157,7 +126,6 @@ export default function HomePage() {
                 <ArrowRight className="w-4 h-4 text-gray-400" />
               </button>
             </div>
-          </div>
 
           {/* Content panel */}
           {selected === 'inovacao' && (

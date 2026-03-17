@@ -6,23 +6,6 @@ import FlowNavBar from '../components/FlowNavBar'
 import SnakePath from '../components/SnakePath'
 import MobileFlowHeader from '../components/MobileFlowHeader'
 
-const STAGES = [
-  { label: 'Início',                                       img: '/assets/contratacao-direta/research-paper.png' },
-  { label: 'Formalização\nda Demanda',                     img: '/assets/contratacao-direta/documents.png' },
-  { label: 'Declaração de Inexistência\nde Ata de Preço',  img: '/assets/contratacao-direta/lawyer.png' },
-  { label: 'Estudo Técnico\nPreliminar',                   img: '/assets/contratacao-direta/studying.png' },
-  { label: 'Mapa de\nRisco' },
-  { label: 'Pesquisa\nde Preço',                           img: '/assets/contratacao-direta/finance.png' },
-  { label: 'Autorizações',                                 img: '/assets/contratacao-direta/consent.png' },
-  { label: 'Termo de Referência\nou Projeto Básico' },
-  { label: 'Autorizações',                                 img: '/assets/contratacao-direta/consent-1.png' },
-  { label: 'Minuta do\nContrato' },
-  { label: 'Autorizações',                                 img: '/assets/contratacao-direta/consent-2.png' },
-  { label: 'Indicação do Fiscal do\nContrato ou Comissão', img: '/assets/contratacao-direta/live-collaboration.png' },
-  { label: 'Publicação\nno DOE',                           img: '/assets/contratacao-direta/publish-article.png' },
-  { label: 'Comunicação\nTCE',                             img: '/assets/contratacao-direta/contact-us.png' },
-]
-
 // paddingTop de cada coluna para alinhar o nó com a cobra
 // padrão: MID=206, BAIXO=243, CIMA=176, FIM=204
 const NODE_TOP = [186, 223, 156, 223, 156, 223, 156, 223, 156, 223, 156, 223, 156, 184]
@@ -32,36 +15,39 @@ const COL_WIDTH = 185
 
 // Conteúdo de cada etapa para o layout mobile
 const CARDS = [
-  { text: 'Necessidade do órgão desenvolver uma pesquisa', download: false },
-  { text: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria;', download: true, fileKey: 'contratacao-direta/1. Documento_Formalizacao_Demanda_PDI.docx' },
-  { text: 'Declaração de inexistência de Ata de Registro de Preços gerenciados pela SEAD/PI que contemple o objeto pretendido.', download: true, fileKey: 'contratacao-direta/2. Declaracao_Inexistencia_ARP_SEAD_PI.docx' },
-  { text: 'Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n. 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados', download: true, fileKey: 'contratacao-direta/3. Estudo Preliminar_Encomenda_Tecnologica.docx' },
-  { text: 'Planejamento que identifica, analisa e propõe o tratamento de eventos que possam comprometer a licitação ou a execução contratual.', download: true, fileKey: 'contratacao-direta/4. Mapa_de_Riscos_Contratacao.docx' },
-  { text: 'Pesquisa de preço do mercado de produtos ou soluções da demanda', download: false },
-  { accordion: true, accordionItems: [
+  { title: 'Início', text: 'Necessidade do órgão desenvolver uma pesquisa', download: false },
+  { title: 'Formalização da Demanda', text: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria;', download: true, fileKey: 'contratacao-direta/1. Documento_Formalizacao_Demanda_PDI.docx' },
+  { title: 'Declaração de Inexistência de Ata de Preço', text: 'Declaração de inexistência de Ata de Registro de Preços gerenciados pela SEAD/PI que contemple o objeto pretendido.', download: true, fileKey: 'contratacao-direta/2. Declaracao_Inexistencia_ARP_SEAD_PI.docx' },
+  { title: 'Estudo Técnico Preliminar', text: 'Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n. 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados', download: true, fileKey: 'contratacao-direta/3. Estudo Preliminar_Encomenda_Tecnologica.docx' },
+  { title: 'Mapa de Risco', text: 'Planejamento que identifica, analisa e propõe o tratamento de eventos que possam comprometer a licitação ou a execução contratual.', download: true, fileKey: 'contratacao-direta/4. Mapa_de_Riscos_Contratacao.docx' },
+  { title: 'Pesquisa de Preço', text: 'Pesquisa de preço do mercado de produtos ou soluções da demanda', download: false },
+  { title: 'Autorizações', accordion: true, accordionItems: [
     { number: '1', title: 'Análise Técnico-Operacional da SEAD', description: '' },
     { number: '2', title: 'Autorização do Conselho de Transformação Digital', description: '' },
   ], download: true },
-  { text: 'O Termo de Referência (TR) ou projeto básico contendo a justificativa, a necessidade da administração, o objeto, prazos, custos estimados, entre outros', download: true, fileKey: 'contratacao-direta/6. Termo_de_Referencia.docx' },
-  { accordion: true, accordionItems: [
+  { title: 'Termo de Referência ou Projeto Básico', text: 'O Termo de Referência (TR) ou projeto básico contendo a justificativa, a necessidade da administração, o objeto, prazos, custos estimados, entre outros', download: true, fileKey: 'contratacao-direta/6. Termo_de_Referencia.docx' },
+  { title: 'Autorizações', accordion: true, accordionItems: [
     { number: '1', title: 'Aprovação do ETP e do mapa de Risco (se houver)', description: '' },
     { number: '2', title: 'Aprovação do Orçamento estimado', description: '' },
     { number: '3', title: 'Aprovação do Termo de Referência', description: '' },
     { number: '4', title: 'Autorização de Contratação da CGFR', description: '' },
   ], download: true },
-  { text: 'Minuta de Contrato ou instrumento equivalente', download: true, fileKey: 'contratacao-direta/7. Proposta_Comercial_ETEC_Modelo.docx' },
-  { accordion: true, accordionItems: [
+  { title: 'Minuta do Contrato', text: 'Minuta de Contrato ou instrumento equivalente', download: true, fileKey: 'contratacao-direta/7. Proposta_Comercial_ETEC_Modelo.docx' },
+  { title: 'Autorizações', accordion: true, accordionItems: [
     { number: '1', title: 'Análise Prévia da CGE', description: '' },
     { number: '2', title: 'Parecer PGE', description: '' },
     { number: '3', title: 'Autorização do Secretário da SEAD', description: '' },
     { number: '4', title: 'Parecer SEFAZ', description: '' },
     { number: '5', title: 'Análise Final do Procedimento pelo controle interno do órgão', description: '' },
   ], download: true },
-  { text: 'Minuta de Contrato ou instrumento equivalente', download: false },
-  { text: 'Publicação do contrato pela SEGOV no Diário Oficial do Estado do Piauí', download: false },
-  { text: 'Comunicação de assinatura do contrato ou documento substitutivo ao TCE até 10 dias após o ato', download: false },
+  { title: 'Indicação do Fiscal do Contrato ou Comissão', text: 'Minuta de Contrato ou instrumento equivalente', download: false },
+  { title: 'Publicação no DOE', text: 'Publicação do contrato pela SEGOV no Diário Oficial do Estado do Piauí', download: false },
+  { title: 'Comunicação TCE', text: 'Comunicação de assinatura do contrato ou documento substitutivo ao TCE até 10 dias após o ato', download: false },
 ]
 
+function CardTitle({ children }) {
+  return <p className="font-bold text-[12px] text-[#2A4365] mb-1 leading-tight">{children}</p>
+}
 function CardBody({ children }) {
   return <p className="text-[10.5px] leading-snug text-[#2A4365]/90">{children}</p>
 }
@@ -169,11 +155,10 @@ function MobileLayout() {
             className="absolute bottom-0 w-[3px] bg-[#2B6CB0]"
             style={{ left: 'calc(50% - 1.5px)', top: '14px' }}
           />
-          {STAGES.map((stage, i) => {
-            const card = CARDS[i]
+          {CARDS.map((card, i) => {
             const isLeft = i % 2 === 0
             const isFirst = i === 0
-            const hasContent = card.text || card.download || card.accordion
+            const hasContent = card.title || card.text || card.download || card.accordion
             return (
               <div key={i} className="mb-6">
                 <div className="flex items-center relative">
@@ -181,33 +166,18 @@ function MobileLayout() {
                     className="absolute top-1/2 -translate-y-1/2 h-[2px] bg-[#2B6CB0]"
                     style={isLeft ? { right: 'calc(50% + 8px)', left: 0 } : { left: 'calc(50% + 8px)', right: 0 }}
                   />
-                  <div className="flex-1 flex justify-end pr-3 min-w-0 relative z-[1]">
-                    {isLeft && (
-                      <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-sm text-right w-full">
-                        {stage.label.split('\n').map((line, j) => (
-                          <div key={j} className="text-[#2A4365] font-bold text-[12px] leading-tight">{line}</div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  <div className="flex-1" />
                   <div className="flex-shrink-0 w-6 flex justify-center relative z-10">
                     {isFirst ? <NodeCircle /> : <NodeDiamond />}
                   </div>
-                  <div className="flex-1 flex justify-start pl-3 min-w-0 relative z-[1]">
-                    {!isLeft && (
-                      <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-sm w-full">
-                        {stage.label.split('\n').map((line, j) => (
-                          <div key={j} className="text-[#2A4365] font-bold text-[12px] leading-tight">{line}</div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  <div className="flex-1" />
                 </div>
                 {hasContent && (
                   <div className="flex mt-2 relative z-[1]">
                     <div className="flex-1 pr-3 min-w-0">
                       {isLeft && (
-                        <div>
+                        <div className="bg-white rounded-lg px-2.5 py-2 shadow-sm">
+                          {card.title && <p className="font-bold text-[12px] text-[#2A4365] mb-1 leading-tight text-right">{card.title}</p>}
                           {card.text && <p className="text-[11px] leading-snug text-[#2A4365]/90 mb-1.5 text-right">{card.text}</p>}
                           {card.accordion && (
                             <div className="process-card bg-white/70 rounded-xl p-2.5 space-y-1 mb-1.5">
@@ -228,7 +198,8 @@ function MobileLayout() {
                     <div className="flex-shrink-0 w-6" />
                     <div className="flex-1 pl-3 min-w-0">
                       {!isLeft && (
-                        <div>
+                        <div className="bg-white rounded-lg px-2.5 py-2 shadow-sm">
+                          {card.title && <p className="font-bold text-[12px] text-[#2A4365] mb-1 leading-tight">{card.title}</p>}
                           {card.text && <p className="text-[11px] leading-snug text-[#2A4365]/90 mb-1.5">{card.text}</p>}
                           {card.accordion && (
                             <div className="process-card bg-white/70 rounded-xl p-2.5 space-y-1 mb-1.5">
@@ -319,6 +290,7 @@ function DesktopLayout() {
           <StageCol index={0}>
             <NodeCircle />
             <ProcessCard position="below" showNode={false}>
+              <CardTitle>Início</CardTitle>
               <CardBody>Necessidade do órgão desenvolver uma pesquisa</CardBody>
             </ProcessCard>
           </StageCol>
@@ -326,6 +298,7 @@ function DesktopLayout() {
           {/* Col 1 – Formalização da Demanda (abaixo) */}
           <StageCol index={1}>
             <ProcessCard position="below">
+              <CardTitle>Formalização da Demanda</CardTitle>
               <CardBody>Formalização da Demanda via SEI gabinete do órgão e instituição da parceria;</CardBody>
               <DownloadButton fileKey="contratacao-direta/1. Documento_Formalizacao_Demanda_PDI.docx" />
             </ProcessCard>
@@ -335,6 +308,7 @@ function DesktopLayout() {
           <StageCol index={2}>
             <div ref={ref2} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Declaração de Inexistência de Ata de Preço</CardTitle>
                 <CardBody>Declaração de inexistência de Ata de Registro de Preços gerenciados pela SEAD/PI que contemple o objeto pretendido.</CardBody>
                 <DownloadButton fileKey="contratacao-direta/2. Declaracao_Inexistencia_ARP_SEAD_PI.docx" />
               </ProcessCard>
@@ -344,6 +318,7 @@ function DesktopLayout() {
           {/* Col 3 – Estudo Técnico Preliminar (abaixo) */}
           <StageCol index={3}>
             <ProcessCard position="below">
+              <CardTitle>Estudo Técnico Preliminar</CardTitle>
               <CardBody>Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados</CardBody>
               <DownloadButton fileKey="contratacao-direta/3. Estudo Preliminar_Encomenda_Tecnologica.docx" />
             </ProcessCard>
@@ -353,6 +328,7 @@ function DesktopLayout() {
           <StageCol index={4}>
             <div ref={ref4} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Mapa de Risco</CardTitle>
                 <CardBody>Planejamento que identifica, analisa e propõe o tratamento de eventos que possam comprometer a licitação ou a execução contratual.</CardBody>
                 <DownloadButton fileKey="contratacao-direta/4. Mapa_de_Riscos_Contratacao.docx" />
               </ProcessCard>
@@ -362,6 +338,7 @@ function DesktopLayout() {
           {/* Col 5 – Pesquisa de Preço (abaixo) */}
           <StageCol index={5}>
             <ProcessCard position="below">
+              <CardTitle>Pesquisa de Preço</CardTitle>
               <CardBody>Pesquisa de preço do mercado de produtos ou soluções da demanda</CardBody>
             </ProcessCard>
           </StageCol>
@@ -370,6 +347,7 @@ function DesktopLayout() {
           <StageCol index={6}>
             <div ref={ref6} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Autorizações</CardTitle>
                 <div className="space-y-1 mb-1">
                   <AccordionItem number="1" title="Análise Técnico-Operacional da SEAD" description="" />
                   <AccordionItem number="2" title="Autorização do Conselho de Transformação Digital" description="" />
@@ -382,6 +360,7 @@ function DesktopLayout() {
           {/* Col 7 – Termo de Referência ou Projeto Básico (abaixo) */}
           <StageCol index={7}>
             <ProcessCard position="below">
+              <CardTitle>Termo de Referência ou Projeto Básico</CardTitle>
               <CardBody>O Termo de Referência (TR) ou projeto básico contendo a justificativa, a necessidade da administração, o objeto, prazos, custos estimados, entre outros</CardBody>
               <DownloadButton fileKey="contratacao-direta/6. Termo_de_Referencia.docx" />
             </ProcessCard>
@@ -391,6 +370,7 @@ function DesktopLayout() {
           <StageCol index={8}>
             <div ref={ref8} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Autorizações</CardTitle>
                 <div className="space-y-1 mb-1">
                   <AccordionItem number="1" title="Aprovação do ETP e do mapa de Risco (se houver)" description="" />
                   <AccordionItem number="2" title="Aprovação do Orçamento estimado" description="" />
@@ -405,6 +385,7 @@ function DesktopLayout() {
           {/* Col 9 – Minuta do Contrato (abaixo) */}
           <StageCol index={9}>
             <ProcessCard position="below">
+              <CardTitle>Minuta do Contrato</CardTitle>
               <CardBody>Minuta de Contrato ou instrumento equivalente</CardBody>
               <DownloadButton fileKey="contratacao-direta/7. Proposta_Comercial_ETEC_Modelo.docx" />
             </ProcessCard>
@@ -414,6 +395,7 @@ function DesktopLayout() {
           <StageCol index={10}>
             <div ref={ref10} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Autorizações</CardTitle>
                 <div className="space-y-1 mb-1">
                   <AccordionItem number="1" title="Análise Prévia da CGE" description="" />
                   <AccordionItem number="2" title="Parecer PGE" description="" />
@@ -429,6 +411,7 @@ function DesktopLayout() {
           {/* Col 11 – Indicação do Fiscal do Contrato ou Comissão (abaixo) */}
           <StageCol index={11}>
             <ProcessCard position="below">
+              <CardTitle>Indicação do Fiscal do Contrato ou Comissão</CardTitle>
               <CardBody>Minuta de Contrato ou instrumento equivalente</CardBody>
             </ProcessCard>
           </StageCol>
@@ -437,6 +420,7 @@ function DesktopLayout() {
           <StageCol index={12}>
             <div ref={ref12} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Publicação no DOE</CardTitle>
                 <CardBody>Publicação do contrato pela SEGOV no Diário Oficial do Estado do Piauí</CardBody>
               </ProcessCard>
             </div>
