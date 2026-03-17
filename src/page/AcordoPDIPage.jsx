@@ -4,17 +4,18 @@ import ProcessCard from '../components/ProcessCard'
 import { NodeCircle, NodeDiamond, NodeTriangle } from '../components/ProcessNode'
 import FlowNavBar from '../components/FlowNavBar'
 import SnakePath from '../components/SnakePath'
+import MobileFlowHeader from '../components/MobileFlowHeader'
 
 const STAGES = [
-  { label: 'Início',                             img: '/assets/acordo-pdi/cuate.png' },
-  { label: 'Formalização\nda Demanda',           img: '/assets/acordo-pdi/documentos.png' },
-  { label: 'Manifestação\nTécnica ou NIT',       img: '/assets/acordo-pdi/lawyer.png' },
-  { label: 'Plano de\nTrabalho',                 img: '/assets/acordo-pdi/schedule.png' },
-  { label: 'Acordo de\nParceria',                img: '/assets/acordo-pdi/ageement.png' },
+  { label: 'Início', img: '/assets/acordo-pdi/cuate.png' },
+  { label: 'Formalização\nda Demanda', img: '/assets/acordo-pdi/documentos.png' },
+  { label: 'Manifestação\nTécnica ou NIT', img: '/assets/acordo-pdi/lawyer.png' },
+  { label: 'Plano de\nTrabalho', img: '/assets/acordo-pdi/schedule.png' },
+  { label: 'Acordo de\nParceria', img: '/assets/acordo-pdi/ageement.png' },
   { label: 'Autorização da\nContratação (CGFR)', img: '/assets/acordo-pdi/consent.png' },
-  { label: 'Autorizações',                       img: '/assets/acordo-pdi/sent-massage.png' },
-  { label: 'Indicação do\nGestor no Acordo',     img: '/assets/acordo-pdi/business-deal.png' },
-  { label: 'Publicação\nno DOE',                 img: '/assets/acordo-pdi/publish-article.png' },
+  { label: 'Autorizações', img: '/assets/acordo-pdi/sent-massage.png' },
+  { label: 'Indicação do\nGestor no Acordo', img: '/assets/acordo-pdi/business-deal.png' },
+  { label: 'Publicação\nno DOE', img: '/assets/acordo-pdi/publish-article.png' },
 ]
 
 const NODE_TOP = [186, 223, 156, 223, 156, 223, 156, 223, 184]
@@ -28,11 +29,13 @@ const CARDS = [
   { text: 'Plano de trabalho do acordo entre as instituições contendo a descrição das atividades, objetivos e metas do acordo', download: true, fileKey: 'acordo-pd&i/Modelo_Plano_de_Trabalho_PDI.docx' },
   { text: 'Documento do Acordo de parceria firmado', download: true, fileKey: 'acordo-pd&i/Minuta_Acordo_Parceria_PDI.docx' },
   { text: 'Autorização da contratação pela Comissão de Gestão Financeira e Gestão por Resultados (CGFR). Caso haja recurso financeiro do ente público: Convênio. Caso contrário: Acordo.', download: true, fileKey: 'acordo-pd&i/Planilha_Custos_Operacionais_PDI.xlsx' },
-  { accordion: true, accordionItems: [
-    { number: '1', title: 'Autorização do Secretário da SEAD', description: 'Autorização do secretário da SEAD (secretário responsável pelas compras públicas) sobre o acordo de PD&I *verificar mudança para SIA' },
-    { number: '2', title: 'Autorização da SEFAZ', description: 'Secretaria de Estado da Fazenda devido a repasses de recursos' },
-    { number: '3', title: 'Autorização da PGE', description: 'Procuradoria Geral do Estado para verificação' },
-  ], download: true, fileKey: 'acordo-pd&i/Lista de Verificação - Acordo PD&I.docx' },
+  {
+    accordion: true, accordionItems: [
+      { number: '1', title: 'Autorização do Secretário da SEAD', description: 'Autorização do secretário da SEAD (secretário responsável pelas compras públicas) sobre o acordo de PD&I *verificar mudança para SIA' },
+      { number: '2', title: 'Autorização da SEFAZ', description: 'Secretaria de Estado da Fazenda devido a repasses de recursos' },
+      { number: '3', title: 'Autorização da PGE', description: 'Procuradoria Geral do Estado para verificação' },
+    ], download: true, fileKey: 'acordo-pd&i/Lista de Verificação - Acordo PD&I.docx'
+  },
   { text: 'Indicação do gestor do ente público sobre quem será o gestor do acordo via SEI', download: true },
   { text: 'Publicação no Diário Oficial do Estado do Piauí', download: false },
 ]
@@ -93,7 +96,7 @@ function useIsMobile() {
 
 function Navbar() {
   return (
-    <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10 flex-shrink-0">
+    <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 30 }}>
       <button
         className="flex items-center gap-2 text-white text-sm font-medium hover:opacity-90 transition-opacity font-sans"
         onClick={() => {
@@ -130,18 +133,8 @@ function MobileLayout() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <header className="bg-[#2C5282] px-5 pt-4 pb-5">
-        <div className="inline-flex items-center gap-2 bg-[#BEE3F8] rounded-lg px-3 py-1.5 mb-3">
-          <svg className="w-3.5 h-3.5 text-[#2A4365]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-          </svg>
-          <span className="text-[#2A4365] text-[11px] font-semibold">Fluxo de Processo</span>
-        </div>
-        <h1 className="text-white text-xl font-bold leading-tight">ACORDO DE PD&I</h1>
-      </header>
-      <div className="bg-gradient-to-b from-[#90CDF4] to-[#63B3ED] py-4 flex justify-center">
-        <img src={STAGES[0].img} alt="" className="h-28 object-contain select-none" draggable={false} loading="eager" />
-      </div>
+      <div style={{ height: 44, flexShrink: 0 }} />
+      <MobileFlowHeader />
       <div className="flow-gradient flex-1 py-6 px-4">
         <div className="relative">
           <div
@@ -317,7 +310,7 @@ function DesktopLayout() {
                 <CardBody>
                   Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados
                 </CardBody>
-                <DownloadButton fileKey={"acordo-pd&i/Manifestacao_Tecnica_PDI.docx"}/>
+                <DownloadButton fileKey={"acordo-pd&i/Manifestacao_Tecnica_PDI.docx"} />
               </ProcessCard>
             </div>
           </StageCol>

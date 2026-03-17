@@ -4,6 +4,7 @@ import ProcessCard from '../components/ProcessCard'
 import { NodeCircle, NodeDiamond, NodeTriangle } from '../components/ProcessNode'
 import FlowNavBar from '../components/FlowNavBar'
 import SnakePath from '../components/SnakePath'
+import MobileFlowHeader from '../components/MobileFlowHeader'
 
 const STAGES = [
   { label: 'Início',                                       img: '/assets/contratacao-direta/research-paper.png' },
@@ -123,7 +124,7 @@ function useIsMobile() {
 
 function Navbar() {
   return (
-    <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10 flex-shrink-0">
+    <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 30 }}>
       <button
         className="flex items-center gap-2 text-white text-sm font-medium hover:opacity-90 transition-opacity font-sans"
         onClick={() => {
@@ -160,18 +161,8 @@ function MobileLayout() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <header className="bg-[#2C5282] px-5 pt-4 pb-5">
-        <div className="inline-flex items-center gap-2 bg-[#BEE3F8] rounded-lg px-3 py-1.5 mb-3">
-          <svg className="w-3.5 h-3.5 text-[#2A4365]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-          </svg>
-          <span className="text-[#2A4365] text-[11px] font-semibold">Fluxo de Processo</span>
-        </div>
-        <h1 className="text-white text-xl font-bold leading-tight">CONTRATAÇÃO DIRETA</h1>
-      </header>
-      <div className="bg-gradient-to-b from-[#90CDF4] to-[#63B3ED] py-4 flex justify-center">
-        <img src={STAGES[0].img} alt="" className="h-28 object-contain select-none" draggable={false} loading="eager" />
-      </div>
+      <div style={{ height: 44, flexShrink: 0 }} />
+      <MobileFlowHeader />
       <div className="flow-gradient flex-1 py-6 px-4">
         <div className="relative">
           <div
