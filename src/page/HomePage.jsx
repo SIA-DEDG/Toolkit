@@ -115,7 +115,7 @@ export default function HomePage() {
                     : 'border-gray-200 bg-white hover:border-blue-300 hover:shadow-sm'}`}
               >
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors
-                  ${selected === 'inovacao' ? 'bg-blue-600' : 'bg-[#5ab4d6]'}`}>
+                  ${selected === 'inovacao' ? 'bg-blue-600' : 'bg-blue-500'}`}>
                   <Lightbulb className="w-6 h-6 text-white" />
                 </div>
                 <p className="text-sm font-medium text-gray-800 text-center leading-snug">
@@ -143,7 +143,7 @@ export default function HomePage() {
                 href="https://inovacpin.org/trilha/planejamento/etapa/8"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#0d9ddb] hover:bg-[#0b8bc4] text-white text-sm font-semibold transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors"
               >
                 Acessar Material
                 <ExternalLink className="w-4 h-4" />
