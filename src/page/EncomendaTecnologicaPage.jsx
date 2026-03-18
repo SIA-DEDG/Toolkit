@@ -1,266 +1,51 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import DownloadButton from '../components/DownloadButton'
 import ProcessCard from '../components/ProcessCard'
-import { NodeCircle, NodeDiamond, NodeTriangle } from '../components/ProcessNode'
-import SnakePath from '../components/SnakePath'
+import { NodeCircle, NodeTriangle } from '../components/ProcessNode'
+import FlowNavBar from '../components/FlowNavBar'
+import SnakePath, { ABOVE_ANCHOR } from '../components/SnakePath'
+import BackNavbar from '../components/BackNavbar'
+import FlowFooter from '../components/FlowFooter'
+import StageCol from '../components/StageCol'
+import AccordionItem from '../components/AccordionItem'
+import { CardTitle, CardBody } from '../components/CardParts'
+import MobileFlowLayout from '../components/MobileFlowLayout'
+import { useIsMobile } from '../hooks/useIsMobile'
 
-const STAGES = [
-  { label: 'Início',                                    img: '/assets/encomenda-tecnologica/research-paper.png' },
-  { label: 'Formalização\nda Demanda',                  img: '/assets/encomenda-tecnologica/documents.png' },
-  { label: 'Estudo Técnico\nPreliminar',                img: '/assets/encomenda-tecnologica/studying.png' },
-  { label: 'Mapa de\nRisco' },
-  { label: 'Manifestação\nde Interesse',                img: '/assets/encomenda-tecnologica/lawyer.png' },
-  { label: 'Termo de\nReferência' },
-  { label: 'Autorizações',                              img: '/assets/encomenda-tecnologica/consent.png' },
-  { label: 'Proposta e Documentação\ndo Fornecedor' },
-  { label: 'Autorização da\nContratação pela CGFR',     img: '/assets/encomenda-tecnologica/consent.png' },
-  { label: 'Minuta do\nContrato' },
-  { label: 'Autorizações',                              img: '/assets/encomenda-tecnologica/consent.png' },
-  { label: 'Indicação do Fiscal do\nContrato ou Comissão', img: '/assets/encomenda-tecnologica/live-collaboration.png' },
-  { label: 'Publicação\nno DOE',                        img: '/assets/encomenda-tecnologica/publish-article.png' },
-  { label: 'Comunicação\nTCE',                          img: '/assets/encomenda-tecnologica/contact-us.png' },
-]
-
-// paddingTop de cada coluna para alinhar o nó com a cobra
-// padrão: MID=206, BAIXO=243, CIMA=176, FIM=204
 const NODE_TOP = [186, 223, 156, 223, 156, 223, 156, 223, 156, 223, 156, 223, 156, 184]
-
 const COLS      = 14
 const COL_WIDTH = 185
 
-// Conteúdo de cada etapa para o layout mobile
 const CARDS = [
-  { text: 'Necessidade do órgão desenvolver uma pesquisa', download: false },
-  { text: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria;', download: true, fileKey: 'encomenda-tecnologica/1. Documento_Formalizacao_Demanda_PDI.docx' },
-  { text: 'Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n. 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados', download: true, fileKey: 'encomenda-tecnologica/2. Estudo Preliminar_Encomenda_Tecnologica.docx' },
-  { text: 'Planejamento que identifica, analisa e propõe o tratamento de eventos que possam comprometer a licitação ou a execução contratual.', download: true, fileKey: 'encomenda-tecnologica/3. Mapa_de_Riscos_Contratacao.docx' },
-  { text: 'Manifestação de interesse, quando for o caso (art. 27, §4°, do Decreto Federal n. 9.283/2018);', download: true },
-  { text: 'Minuta do Termo de Referência (art. 72, I, da Lei n. 14.133/2021; art. 17, V, do Decreto Estadual n. 21.872/2023);', download: true, fileKey: 'encomenda-tecnologica/4. Termo_de_Referencia_PDI.docx' },
-  { accordion: true, accordionItems: [
+  { title: 'Início', text: 'Necessidade do órgão desenvolver uma pesquisa', download: false },
+  { title: 'Formalização da Demanda', text: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria;', download: true, fileKey: 'encomenda-tecnologica/1. Documento_Formalizacao_Demanda_PDI.docx' },
+  { title: 'Estudo Técnico Preliminar', text: 'Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n. 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados', download: true, fileKey: 'encomenda-tecnologica/2. Estudo Preliminar_Encomenda_Tecnologica.docx' },
+  { title: 'Mapa de Risco', text: 'Planejamento que identifica, analisa e propõe o tratamento de eventos que possam comprometer a licitação ou a execução contratual.', download: true, fileKey: 'encomenda-tecnologica/3. Mapa_de_Riscos_Contratacao.docx' },
+  { title: 'Manifestação de Interesse', text: 'Manifestação de interesse, quando for o caso (art. 27, §4°, do Decreto Federal n. 9.283/2018);', download: true },
+  { title: 'Termo de Referência', text: 'Minuta do Termo de Referência (art. 72, I, da Lei n. 14.133/2021; art. 17, V, do Decreto Estadual n. 21.872/2023);', download: true, fileKey: 'encomenda-tecnologica/4. Termo_de_Referencia_PDI.docx' },
+  { title: 'Autorizações', accordion: true, accordionItems: [
     { number: '1', title: 'Aprovação do ETP, Mapa de Risco e Termo de Referência', description: 'Aprovação do ETP e do Mapa de riscos, se houver, e do termo de referência pela autoridade competente do órgão interessado' },
     { number: '2', title: 'Análise Técnico Operacional da SEAD', description: '' },
     { number: '3', title: 'Autorização do Conselho de Transformação Digital', description: '' },
   ], download: true },
-  { text: 'Minuta da Proposta comercial do fornecedor; acompanhada de justificativa para a precificação da ETEC;', download: true, fileKey: 'encomenda-tecnologica/Modelo_Plano_de_Trabalho_PDI.docx' },
-  { text: 'Minuta da Autorização da contratação pela Comissão de Gestão Financeira e Gestão por Resultados – CGFR', download: true },
-  { text: 'Minuta do contrato para celebração Encomenda Tecnológica', download: true, fileKey: 'encomenda-tecnologica/5. Minuta_Contrato_Transferencia_Tecnologia.docx' },
-  { accordion: true, accordionItems: [
+  { title: 'Proposta e Documentação do Fornecedor', text: 'Minuta da Proposta comercial do fornecedor; acompanhada de justificativa para a precificação da ETEC;', download: true, fileKey: 'encomenda-tecnologica/Modelo_Plano_de_Trabalho_PDI.docx' },
+  { title: 'Autorização da Contratação pela CGFR', text: 'Minuta da Autorização da contratação pela Comissão de Gestão Financeira e Gestão por Resultados – CGFR', download: true },
+  { title: 'Minuta do Contrato', text: 'Minuta do contrato para celebração Encomenda Tecnológica', download: true, fileKey: 'encomenda-tecnologica/5. Minuta_Contrato_Transferencia_Tecnologia.docx' },
+  { title: 'Autorizações', accordion: true, accordionItems: [
     { number: '1', title: 'Análise prévia da CGE', description: '' },
     { number: '2', title: 'Parecer PGE', description: '' },
     { number: '3', title: 'Autorização do Secretário da SEAD', description: '' },
     { number: '4', title: 'Parecer SEFAZ', description: '' },
     { number: '5', title: 'Análise Final pelo controle final do órgão', description: '' },
   ], download: true },
-  { text: 'Indicação do fiscal do contrato ou comissão equivalente, preferencialmente, do setor que receberá o bem ou serviço', download: false },
-  { text: 'Publicação no Diário Oficial do Estado do Piauí', download: false },
-  { text: 'Comunicação de assinatura do contrato ou documento substitutivo ao TCE até 10 dias após o ato', download: false },
+  { title: 'Indicação do Fiscal do Contrato ou Comissão', text: 'Indicação do fiscal do contrato ou comissão equivalente, preferencialmente, do setor que receberá o bem ou serviço', download: false },
+  { title: 'Publicação no DOE', text: 'Publicação no Diário Oficial do Estado do Piauí', download: false },
+  { title: 'Comunicação TCE', text: 'Comunicação de assinatura do contrato ou documento substitutivo ao TCE até 10 dias após o ato', download: false },
 ]
-
-function CardBody({ children }) {
-  return <p className="text-[10.5px] leading-snug text-[#2A4365]/90">{children}</p>
-}
-
-function AccordionItem({ number, title, description }) {
-  const [open, setOpen] = useState(false)
-  return (
-    <div>
-      <button
-        className="flex items-center gap-1 w-full text-left cursor-pointer bg-transparent border-0 p-0"
-        onClick={() => setOpen(o => !o)}
-      >
-        <span className="text-[10.5px] font-bold text-[#2A4365]">{number}–</span>
-        <span className="text-[10.5px] text-[#2A4365] flex-1">{title}</span>
-        <svg
-          className={`w-3 h-3 text-[#2A4365] flex-shrink-0 transition-transform duration-200 ${open ? 'rotate-90' : ''}`}
-          fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"
-        >
-          <polyline points="9 18 15 12 9 6" />
-        </svg>
-      </button>
-      {open && description && (
-        <p className="text-[9.5px] text-[#2A4365]/75 leading-snug pl-3 mt-0.5">{description}</p>
-      )}
-    </div>
-  )
-}
-
-function StageCol({ index, children }) {
-  return (
-    <div className="flex flex-col items-center relative" style={{ paddingTop: NODE_TOP[index] }}>
-      {children}
-    </div>
-  )
-}
 
 const GRID = {
   display: 'grid',
   gridTemplateColumns: `repeat(${COLS}, minmax(0, 1fr))`,
-}
-
-const ABOVE_ANCHOR = {
-  bottom: 'calc(100% - 163px)',
-  left: '50%',
-  transform: 'translateX(-50%)',
-}
-
-function useIsMobile() {
-  const mq = window.matchMedia('(max-width: 767px)')
-  const [isMobile, setIsMobile] = useState(() => mq.matches)
-  useEffect(() => {
-    const handler = (e) => setIsMobile(e.matches)
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
-  }, [])
-  return isMobile
-}
-
-function Navbar() {
-  return (
-    <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10 flex-shrink-0">
-      <button
-        className="flex items-center gap-2 text-white text-sm font-medium hover:opacity-90 transition-opacity font-sans"
-        onClick={() => {
-          window.history.pushState({}, '', '/')
-          window.dispatchEvent(new PopStateEvent('popstate'))
-        }}
-      >
-        <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-          <polyline points="15 18 9 12 15 6" />
-        </svg>
-        Voltar ao Painel
-      </button>
-    </nav>
-  )
-}
-
-function Footer() {
-  return (
-    <footer className="bg-[#90CDF4] px-8 py-3 flex items-center gap-8 border-t border-white/10 flex-shrink-0">
-      <div className="flex items-center gap-2 text-[#2A4365] text-[13px] font-medium">
-        <NodeCircle /><span>Início</span>
-      </div>
-      <div className="flex items-center gap-2 text-[#2A4365] text-[13px] font-medium">
-        <NodeDiamond /><span>Etapas</span>
-      </div>
-      <div className="flex items-center gap-2 text-[#2A4365] text-[13px] font-medium">
-        <NodeTriangle /><span>Fim</span>
-      </div>
-    </footer>
-  )
-}
-
-function MobileLayout() {
-  return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <header className="bg-[#2C5282] px-5 pt-4 pb-5">
-        <div className="inline-flex items-center gap-2 bg-[#BEE3F8] rounded-lg px-3 py-1.5 mb-3">
-          <svg className="w-3.5 h-3.5 text-[#2A4365]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-          </svg>
-          <span className="text-[#2A4365] text-[11px] font-semibold">Fluxo de Processo</span>
-        </div>
-        <h1 className="text-white text-xl font-bold leading-tight">ENCOMENDA TECNOLÓGICA</h1>
-      </header>
-      <div className="bg-gradient-to-b from-[#90CDF4] to-[#63B3ED] py-4 flex justify-center">
-        <img src={STAGES[0].img} alt="" className="h-28 object-contain select-none" draggable={false} loading="eager" />
-      </div>
-      <div className="flow-gradient flex-1 py-6 px-4">
-        <div className="relative">
-          <div
-            className="absolute bottom-0 w-[3px] bg-[#2B6CB0]"
-            style={{ left: 'calc(50% - 1.5px)', top: '14px' }}
-          />
-          {STAGES.map((stage, i) => {
-            const card = CARDS[i]
-            const isLeft = i % 2 === 0
-            const isFirst = i === 0
-            const hasContent = card.text || card.download || card.accordion
-            return (
-              <div key={i} className="mb-6">
-                <div className="flex items-center relative">
-                  <div
-                    className="absolute top-1/2 -translate-y-1/2 h-[2px] bg-[#2B6CB0]"
-                    style={isLeft ? { right: 'calc(50% + 8px)', left: 0 } : { left: 'calc(50% + 8px)', right: 0 }}
-                  />
-                  <div className="flex-1 flex justify-end pr-3 min-w-0 relative z-[1]">
-                    {isLeft && (
-                      <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-sm text-right w-full">
-                        {stage.label.split('\n').map((line, j) => (
-                          <div key={j} className="text-[#2A4365] font-bold text-[12px] leading-tight">{line}</div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                  <div className="flex-shrink-0 w-6 flex justify-center relative z-10">
-                    {isFirst ? <NodeCircle /> : <NodeDiamond />}
-                  </div>
-                  <div className="flex-1 flex justify-start pl-3 min-w-0 relative z-[1]">
-                    {!isLeft && (
-                      <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-sm w-full">
-                        {stage.label.split('\n').map((line, j) => (
-                          <div key={j} className="text-[#2A4365] font-bold text-[12px] leading-tight">{line}</div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-                {hasContent && (
-                  <div className="flex mt-2 relative z-[1]">
-                    <div className="flex-1 pr-3 min-w-0">
-                      {isLeft && (
-                        <div>
-                          {card.text && <p className="text-[11px] leading-snug text-[#2A4365]/90 mb-1.5 text-right">{card.text}</p>}
-                          {card.accordion && (
-                            <div className="process-card bg-white/70 rounded-xl p-2.5 space-y-1 mb-1.5">
-                              {card.accordionItems.map((item, k) => (
-                                <AccordionItem key={k} number={item.number} title={item.title} description={item.description} />
-                              ))}
-                            </div>
-                          )}
-                          {card.download && <div className="flex justify-end"><DownloadButton fileKey={card.fileKey} /></div>}
-                          {card.note && (
-                            <div className="border-2 border-dashed border-[#2A4365]/60 rounded-lg bg-white/70 px-2.5 py-2 mt-2">
-                              <p className="text-[9.5px] text-[#2A4365]/80 leading-snug">{card.note}</p>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                    <div className="flex-shrink-0 w-6" />
-                    <div className="flex-1 pl-3 min-w-0">
-                      {!isLeft && (
-                        <div>
-                          {card.text && <p className="text-[11px] leading-snug text-[#2A4365]/90 mb-1.5">{card.text}</p>}
-                          {card.accordion && (
-                            <div className="process-card bg-white/70 rounded-xl p-2.5 space-y-1 mb-1.5">
-                              {card.accordionItems.map((item, k) => (
-                                <AccordionItem key={k} number={item.number} title={item.title} description={item.description} />
-                              ))}
-                            </div>
-                          )}
-                          {card.download && <DownloadButton fileKey={card.fileKey} />}
-                          {card.note && (
-                            <div className="border-2 border-dashed border-[#2A4365]/60 rounded-lg bg-white/70 px-2.5 py-2 mt-2">
-                              <p className="text-[9.5px] text-[#2A4365]/80 leading-snug">{card.note}</p>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
-            )
-          })}
-          <div className="flex justify-center relative z-10 pt-1">
-            <div style={{ width: 0, height: 0, borderLeft: '9px solid transparent', borderRight: '9px solid transparent', borderBottom: '16px solid #2B6CB0' }} />
-          </div>
-        </div>
-      </div>
-      <Footer />
-    </div>
-  )
 }
 
 function DesktopLayout() {
@@ -276,8 +61,7 @@ function DesktopLayout() {
   useEffect(() => {
     const recalculate = () => {
       const heights = refs.map(r => r.current?.offsetHeight ?? 0)
-      const overflow = Math.max(0, Math.max(...heights) - 163) + 8
-      setExtraTop(overflow)
+      setExtraTop(Math.max(0, Math.max(...heights) - 163) + 8)
     }
     recalculate()
     const observer = new ResizeObserver(recalculate)
@@ -287,125 +71,72 @@ function DesktopLayout() {
 
   return (
     <div className="min-h-screen flex flex-col" style={{ minWidth: COLS * COL_WIDTH }}>
+      <BackNavbar />
+      <div style={{ height: 44, flexShrink: 0 }} />
+      <FlowNavBar />
 
-      {/* ── Navbar ── */}
-      <nav className="bg-[#2C5282] h-11 flex items-center px-6 border-b border-white/10">
-        <button
-          className="flex items-center gap-2 text-white text-sm font-medium hover:opacity-90 transition-opacity font-sans"
-          onClick={() => {
-            window.history.pushState({}, '', '/')
-            window.dispatchEvent(new PopStateEvent('popstate'))
-          }}
-        >
-          <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-          Voltar ao Painel
-        </button>
-      </nav>
-
-      {/* ── Header ── */}
-      <header className="bg-gradient-to-b from-[#90CDF4] to-[#63B3ED]">
-        <div className="px-8 pt-4 pb-3">
-          <div className="inline-flex items-center gap-2 bg-[#BEE3F8] rounded-lg px-3 py-1.5 mb-3">
-            <svg className="w-3.5 h-3.5 text-[#2A4365]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-            </svg>
-            <span className="text-[#2A4365] text-[11px] font-semibold">Fluxo de Processo</span>
-          </div>
-          <h1 className="text-[#2A4365] text-[24px] font-bold leading-tight">ENCOMENDA TECNOLÓGICA</h1>
-        </div>
-
-        {/* imagens */}
-        <div style={GRID} className="pt-2 pb-2 px-0">
-          {STAGES.map((s, i) => (
-            <div key={i} className="flex justify-center items-end pb-1 min-h-[5rem]">
-              {s.img ? (
-                <img src={s.img} alt={s.label} className="h-20 object-contain select-none" draggable={false} loading="lazy" />
-              ) : null}
-            </div>
-          ))}
-        </div>
-
-        {/* caixas brancas com nome das etapas */}
-        <div style={{ ...GRID, columnGap: 2 }}>
-          {STAGES.map((s, i) => (
-            <div key={i} className="flex justify-center">
-              <div className="bg-white w-full min-w-0 h-14 flex flex-col items-center justify-center px-2 box-border">
-                {s.label.split('\n').map((line, j) => (
-                  <div key={j} className="text-[#2A4365] font-bold text-[11.5px] leading-tight text-center">{line}</div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </header>
-
-      {/* ── Área da cobra + cards ── */}
       <div className="flow-gradient pt-5 flex-1">
         <div className="relative" style={{ ...GRID, minHeight: 450, paddingTop: extraTop }}>
-
-          {/* cobra */}
           <div className="absolute inset-0 pointer-events-none" style={{ gridColumn: '1 / -1' }}>
             <SnakePath extraTop={extraTop} cols={COLS} colWidth={COL_WIDTH} />
           </div>
 
-          {/* Col 0 – Início */}
-          <StageCol index={0}>
+          <StageCol paddingTop={NODE_TOP[0]}>
             <NodeCircle />
             <ProcessCard position="below" showNode={false}>
+              <CardTitle>Início</CardTitle>
               <CardBody>Necessidade do órgão desenvolver uma pesquisa</CardBody>
             </ProcessCard>
           </StageCol>
 
-          {/* Col 1 – Formalização da Demanda (abaixo) */}
-          <StageCol index={1}>
+          <StageCol paddingTop={NODE_TOP[1]}>
             <ProcessCard position="below">
+              <CardTitle>Formalização da Demanda</CardTitle>
               <CardBody>Formalização da Demanda via SEI gabinete do órgão e instituição da parceria;</CardBody>
               <DownloadButton fileKey="encomenda-tecnologica/1. Documento_Formalizacao_Demanda_PDI.docx" />
             </ProcessCard>
           </StageCol>
 
-          {/* Col 2 – Estudo Técnico Preliminar (acima) */}
-          <StageCol index={2}>
+          <StageCol paddingTop={NODE_TOP[2]}>
             <div ref={ref2} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Estudo Técnico Preliminar</CardTitle>
                 <CardBody>Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados</CardBody>
                 <DownloadButton fileKey="encomenda-tecnologica/2. Estudo Preliminar_Encomenda_Tecnologica.docx" />
               </ProcessCard>
             </div>
           </StageCol>
 
-          {/* Col 3 – Mapa de Risco (abaixo) */}
-          <StageCol index={3}>
+          <StageCol paddingTop={NODE_TOP[3]}>
             <ProcessCard position="below">
+              <CardTitle>Mapa de Risco</CardTitle>
               <CardBody>Planejamento que identifica, analisa e propõe o tratamento de eventos que possam comprometer a licitação ou a execução contratual.</CardBody>
               <DownloadButton fileKey="encomenda-tecnologica/3. Mapa_de_Riscos_Contratacao.docx" />
             </ProcessCard>
           </StageCol>
 
-          {/* Col 4 – Manifestação de Interesse (acima) */}
-          <StageCol index={4}>
+          <StageCol paddingTop={NODE_TOP[4]}>
             <div ref={ref4} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Manifestação de Interesse</CardTitle>
                 <CardBody>Manifestação de interesse, quando for o caso (art. 27, §4°, do Decreto Federal n. 9.283/2018);</CardBody>
                 <DownloadButton />
               </ProcessCard>
             </div>
           </StageCol>
 
-          {/* Col 5 – Termo de Referência (abaixo) */}
-          <StageCol index={5}>
+          <StageCol paddingTop={NODE_TOP[5]}>
             <ProcessCard position="below">
-              <CardBody> Minuta do Termo de Referência (art. 72, I, da Lei n. 14.133/2021; art. 17, V, do Decreto Estadual n. 21.872/2023);</CardBody>
+              <CardTitle>Termo de Referência</CardTitle>
+              <CardBody>Minuta do Termo de Referência (art. 72, I, da Lei n. 14.133/2021; art. 17, V, do Decreto Estadual n. 21.872/2023);</CardBody>
               <DownloadButton fileKey="encomenda-tecnologica/4. Termo_de_Referencia_PDI.docx" />
             </ProcessCard>
           </StageCol>
 
-          {/* Col 6 – Autorizações (acima, accordion) */}
-          <StageCol index={6}>
+          <StageCol paddingTop={NODE_TOP[6]}>
             <div ref={ref6} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Autorizações</CardTitle>
                 <div className="space-y-1 mb-1">
                   <AccordionItem number="1" title="Aprovação do ETP, Mapa de Risco e Termo de Referência" description="Aprovação do ETP e do Mapa de riscos, se houver, e do termo de referência pela autoridade competente do órgão interessado" />
                   <AccordionItem number="2" title="Análise Técnico Operacional da SEAD" description="" />
@@ -416,36 +147,36 @@ function DesktopLayout() {
             </div>
           </StageCol>
 
-          {/* Col 7 – Proposta e Documentação do Fornecedor (abaixo) */}
-          <StageCol index={7}>
+          <StageCol paddingTop={NODE_TOP[7]}>
             <ProcessCard position="below">
+              <CardTitle>Proposta e Documentação do Fornecedor</CardTitle>
               <CardBody>Minuta da Proposta comercial do fornecedor; acompanhada de justificativa para a precificação da ETEC;</CardBody>
               <DownloadButton fileKey="encomenda-tecnologica/Modelo_Plano_de_Trabalho_PDI.docx" />
             </ProcessCard>
           </StageCol>
 
-          {/* Col 8 – Autorização da Contratação pela CGFR (acima) */}
-          <StageCol index={8}>
+          <StageCol paddingTop={NODE_TOP[8]}>
             <div ref={ref8} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Autorização da Contratação pela CGFR</CardTitle>
                 <CardBody>Minuta da Autorização da contratação pela Comissão de Gestão Financeira e Gestão por Resultados – CGFR</CardBody>
                 <DownloadButton />
               </ProcessCard>
             </div>
           </StageCol>
 
-          {/* Col 9 – Minuta do Contrato (abaixo) */}
-          <StageCol index={9}>
+          <StageCol paddingTop={NODE_TOP[9]}>
             <ProcessCard position="below">
+              <CardTitle>Minuta do Contrato</CardTitle>
               <CardBody>Minuta do contrato para celebração Encomenda Tecnológica</CardBody>
               <DownloadButton fileKey="encomenda-tecnologica/5. Minuta_Contrato_Transferencia_Tecnologia.docx" />
             </ProcessCard>
           </StageCol>
 
-          {/* Col 10 – Autorizações (acima, accordion) */}
-          <StageCol index={10}>
+          <StageCol paddingTop={NODE_TOP[10]}>
             <div ref={ref10} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Autorizações</CardTitle>
                 <div className="space-y-1 mb-1">
                   <AccordionItem number="1" title="Análise prévia da CGE" description="" />
                   <AccordionItem number="2" title="Parecer PGE" description="" />
@@ -458,52 +189,39 @@ function DesktopLayout() {
             </div>
           </StageCol>
 
-          {/* Col 11 – Indicação do Fiscal do Contrato ou Comissão (abaixo) */}
-          <StageCol index={11}>
+          <StageCol paddingTop={NODE_TOP[11]}>
             <ProcessCard position="below">
+              <CardTitle>Indicação do Fiscal do Contrato ou Comissão</CardTitle>
               <CardBody>Indicação do fiscal do contrato ou comissão equivalente, preferencialmente, do setor que receberá o bem ou serviço</CardBody>
             </ProcessCard>
           </StageCol>
 
-          {/* Col 12 – Publicação no DOE (acima) */}
-          <StageCol index={12}>
+          <StageCol paddingTop={NODE_TOP[12]}>
             <div ref={ref12} className="absolute flex flex-col items-center" style={ABOVE_ANCHOR}>
               <ProcessCard position="above">
+                <CardTitle>Publicação no DOE</CardTitle>
                 <CardBody>Publicação no Diário Oficial do Estado do Piauí</CardBody>
               </ProcessCard>
             </div>
           </StageCol>
 
-          {/* Col 13 – Comunicação TCE (triângulo + abaixo) */}
-          <StageCol index={13}>
+          <StageCol paddingTop={NODE_TOP[13]}>
             <NodeTriangle />
             <ProcessCard position="below" showNode={false}>
+              <CardTitle>Comunicação TCE</CardTitle>
               <CardBody>Comunicação de assinatura do contrato ou documento substitutivo ao TCE até 10 dias após o ato</CardBody>
             </ProcessCard>
           </StageCol>
-
         </div>
         <div className="h-8" />
       </div>
 
-      {/* ── Rodapé ── */}
-      <footer className="bg-[#90CDF4] px-8 py-3 flex items-center gap-8 border-t border-white/10">
-        <div className="flex items-center gap-2 text-[#2A4365] text-[13px] font-medium">
-          <NodeCircle /><span>Início</span>
-        </div>
-        <div className="flex items-center gap-2 text-[#2A4365] text-[13px] font-medium">
-          <NodeDiamond /><span>Etapas</span>
-        </div>
-        <div className="flex items-center gap-2 text-[#2A4365] text-[13px] font-medium">
-          <NodeTriangle /><span>Fim</span>
-        </div>
-      </footer>
-
+      <FlowFooter />
     </div>
   )
 }
 
 export default function EncomendaTecnologicaPage() {
   const isMobile = useIsMobile()
-  return isMobile ? <MobileLayout /> : <DesktopLayout />
+  return isMobile ? <MobileFlowLayout cards={CARDS} /> : <DesktopLayout />
 }
