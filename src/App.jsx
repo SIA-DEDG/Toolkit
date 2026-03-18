@@ -1,5 +1,11 @@
-import React, { useEffect, useState, Component } from 'react'
+import { useEffect, useState, Component } from 'react'
 import { ToastProvider } from './hooks/ToastContext'
+import HomePage from './page/HomePage'
+import AcordoPDIPage from './page/AcordoPDIPage'
+import ConvenioPDIPage from './page/ConvenioPDIPage'
+import EncomendaTecnologicaPage from './page/EncomendaTecnologicaPage'
+import ContratacaoDiretaPage from './page/ContratacaoDiretaPage'
+import ContratoTransferenciaTecnologiaPage from './page/ContratoTransferenciaTecnologiaPage'
 
 class ErrorBoundary extends Component {
   state = { error: null }
@@ -22,12 +28,6 @@ class ErrorBoundary extends Component {
     return this.props.children
   }
 }
-import HomePage from './page/HomePage'
-import AcordoPDIPage from './page/AcordoPDIPage'
-import ConvenioPDIPage from './page/ConvenioPDIPage'
-import EncomendaTecnologicaPage from './page/EncomendaTecnologicaPage'
-import ContratacaoDiretaPage from './page/ContratacaoDiretaPage'
-import ContratoTransferenciaTecnologiaPage from './page/ContratoTransferenciaTecnologiaPage'
 
 const ROUTES = {
   '/': HomePage,

@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { FileText, Lightbulb, Play, ArrowRight, ExternalLink, Handshake, Cpu, ShoppingCart, RefreshCw } from 'lucide-react'
+import { useState } from 'react'
+import { FileText, Lightbulb, ArrowRight, ExternalLink, Handshake, Cpu, ShoppingCart, RefreshCw } from 'lucide-react'
 import FlowCard from '../components/FlowCard'
 
 const flows = [

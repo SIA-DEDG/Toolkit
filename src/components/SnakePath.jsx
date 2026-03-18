@@ -40,5 +40,11 @@ export default function SnakePath({ extraTop = 0, cols = 9, colWidth = 140 }) {
   )
 }
 
-// Exporta os valores base para alinhamento externo
+// Estilo para posicionar cards acima do caminho da cobra
+export const ABOVE_ANCHOR = {
+  bottom: 'calc(100% - 163px)',
+  left: '50%',
+  transform: 'translateX(-50%)',
+}
+
 export { MID_Y, AMPLITUDE }
