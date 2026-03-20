@@ -1,6 +1,7 @@
 import { Handshake, Cpu, ShoppingCart, RefreshCw, Workflow, ExternalLink, ChevronUp, ChevronDown } from 'lucide-react'
 import { useRef, useState, useEffect } from 'react'
 import DownloadButton from '../components/DownloadButton'
+import { useIsMobile } from '../hooks/useIsMobile'
 
 const heroBannerSrc = 'https://www.figma.com/api/mcp/asset/29bd93f3-7cdc-4145-96a7-cc8a6fddefbe'
 
@@ -278,7 +279,7 @@ function InstrumentFlowCard({ accentColor, icon: Icon, title, subtitle, cards, i
 
       {/* Steps list — visible when expanded */}
       {!collapsed && (
-        <div style={{ overflowY: 'auto', maxHeight: 360 }}>
+        <div>
           {cards.map((card, i) => (
             <StepItem key={i} card={card} accentColor={accentColor} isLast={i === cards.length - 1} />
           ))}
@@ -482,6 +483,7 @@ function ScaledFlowchart({ onInstrumentClick }) {
 // ── HomePage ─────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
+  const isMobile = useIsMobile()
   const [openIds, setOpenIds] = useState(new Set())
 
   function handleInstrumentClick(id) {
@@ -577,10 +579,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Trilha de Instrumentos */}
-      <section id="trilha-de-instrumentos" style={{ padding: 0 }}>
-        <ScaledFlowchart onInstrumentClick={handleInstrumentClick} />
-      </section>
+      {/* Trilha de Instrumentos — hidden on mobile */}
+      {!isMobile && (
+        <section id="trilha-de-instrumentos" style={{ padding: 0 }}>
+          <ScaledFlowchart onInstrumentClick={handleInstrumentClick} />
+        </section>
+      )}
 
       {/* Passo a passo section */}
       <section id="passo-a-passo" style={{ background: '#f0f4f8', padding: 'clamp(20px, 3vw, 40px) clamp(20px, 4vw, 40px) clamp(32px, 4vw, 48px)' }}>
@@ -594,19 +598,29 @@ export default function HomePage() {
           Selecione um Instrumento e explore seu fluxo
         </p>
 
-        {/* First row: 3 cards */}
-        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'clamp(14px, 2vw, 20px)', marginBottom: 'clamp(14px, 2vw, 20px)', alignItems: 'start' }}>
-          {INSTRUMENT_FLOWS.slice(0, 3).map((flow) => (
-            <InstrumentFlowCard key={flow.id} {...flow} openIds={openIds} onToggle={handleToggle} />
-          ))}
-        </div>
+        {isMobile ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            {INSTRUMENT_FLOWS.map((flow) => (
+              <InstrumentFlowCard key={flow.id} {...flow} openIds={openIds} onToggle={handleToggle} />
+            ))}
+          </div>
+        ) : (
+          <>
+            {/* First row: 3 cards */}
+            <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'clamp(14px, 2vw, 20px)', marginBottom: 'clamp(14px, 2vw, 20px)', alignItems: 'start' }}>
+              {INSTRUMENT_FLOWS.slice(0, 3).map((flow) => (
+                <InstrumentFlowCard key={flow.id} {...flow} openIds={openIds} onToggle={handleToggle} />
+              ))}
+            </div>
 
-        {/* Second row: 2 cards centered */}
-        <div style={{ maxWidth: 810, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'clamp(14px, 2vw, 20px)', alignItems: 'start' }}>
-          {INSTRUMENT_FLOWS.slice(3).map((flow) => (
-            <InstrumentFlowCard key={flow.id} {...flow} openIds={openIds} onToggle={handleToggle} />
-          ))}
-        </div>
+            {/* Second row: 2 cards centered */}
+            <div style={{ maxWidth: 810, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'clamp(14px, 2vw, 20px)', alignItems: 'start' }}>
+              {INSTRUMENT_FLOWS.slice(3).map((flow) => (
+                <InstrumentFlowCard key={flow.id} {...flow} openIds={openIds} onToggle={handleToggle} />
+              ))}
+            </div>
+          </>
+        )}
       </section>
 
       {/* Footer */}
