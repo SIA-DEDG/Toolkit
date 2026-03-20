@@ -102,24 +102,26 @@ function navigate(href) {
 function StepItem({ card, accentColor, isLast }) {
   const hasDownload = !!(card.fileKey || card.downloadLabel)
   return (
-    <div>
-      <div style={{ display: 'flex', alignItems: 'flex-start', padding: '10px 16px', gap: 10 }}>
-        {/* Dot */}
-        <div style={{ width: 10, height: 10, borderRadius: '50%', background: accentColor, flexShrink: 0, marginTop: 4 }} />
-        {/* Content */}
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <span style={{ fontWeight: 600, fontSize: 12, color: '#1a202c', lineHeight: 1.4 }}>{card.title}</span>
-          {card.description && (
-            <span style={{ fontWeight: 400, fontSize: 11, color: '#718096', lineHeight: 1.5 }}>{card.description}</span>
-          )}
-          {hasDownload && (
-            <div style={{ marginTop: 2 }}>
-              <DownloadButton fileKey={card.fileKey} label={card.downloadLabel || 'Baixar Documento'} />
-            </div>
-          )}
-        </div>
+    <div style={{ display: 'flex', gap: 10, padding: '0 16px' }}>
+      {/* Timeline column: dot + vertical line */}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 10, flexShrink: 0, paddingTop: 14 }}>
+        <div style={{ width: 10, height: 10, borderRadius: '50%', background: accentColor, flexShrink: 0 }} />
+        {!isLast && (
+          <div style={{ width: 2, flex: 1, background: accentColor, opacity: 0.25, marginTop: 4 }} />
+        )}
       </div>
-      {!isLast && <div style={{ height: 1, background: '#e2e8f0', margin: '0 16px' }} />}
+      {/* Content */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 4, padding: '10px 0', paddingBottom: isLast ? 10 : 16 }}>
+        <span style={{ fontWeight: 600, fontSize: 12, color: '#1a202c', lineHeight: 1.4, textAlign: 'left' }}>{card.title}</span>
+        {card.description && (
+          <span style={{ fontWeight: 400, fontSize: 11, color: '#718096', lineHeight: 1.5, textAlign: 'left' }}>{card.description}</span>
+        )}
+        {hasDownload && (
+          <div style={{ marginTop: 2 }}>
+            <DownloadButton fileKey={card.fileKey} label={card.downloadLabel || 'Baixar Documento'} />
+          </div>
+        )}
+      </div>
     </div>
   )
 }
@@ -144,8 +146,8 @@ function InstrumentFlowCard({ accentColor, icon: Icon, title, subtitle, href, ca
           <Icon style={{ width: 18, height: 18, color: 'white' }} />
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <p style={{ fontWeight: 700, fontSize: 13, color: 'white', margin: 0, lineHeight: 1.3 }}>{title}</p>
-          <p style={{ fontWeight: 400, fontSize: 10, color: 'rgba(255,255,255,0.8)', margin: 0, lineHeight: 1.4 }}>{subtitle}</p>
+          <p style={{ fontWeight: 700, fontSize: 13, color: 'white', margin: 0, lineHeight: 1.3, textAlign: 'left' }}>{title}</p>
+          <p style={{ fontWeight: 400, fontSize: 10, color: 'rgba(255,255,255,0.8)', margin: 0, lineHeight: 1.4, textAlign: 'left' }}>{subtitle}</p>
         </div>
         {/* Collapse toggle */}
         <button
@@ -170,7 +172,7 @@ function InstrumentFlowCard({ accentColor, icon: Icon, title, subtitle, href, ca
           </div>
 
           {/* Footer */}
-          <div style={{ borderTop: '1px solid #e8f0fe', padding: '8px 14px' }}>
+          <div style={{ borderTop: '1px solid #e8f0fe', padding: '8px 14px', display: 'flex', justifyContent: 'flex-start' }}>
             <button
               onClick={() => navigate(href)}
               style={{ background: 'none', border: 'none', cursor: 'pointer', fontWeight: 600, fontSize: 12, color: accentColor, display: 'flex', alignItems: 'center', gap: 4, padding: 0 }}
@@ -457,23 +459,23 @@ export default function HomePage() {
       <section id="passo-a-passo" style={{ background: '#f0f4f8', padding: 'clamp(20px, 3vw, 40px) clamp(20px, 4vw, 40px) clamp(32px, 4vw, 48px)' }}>
         <SectionBadge>Fluxos de Internos</SectionBadge>
 
-        <h2 style={{ fontWeight: 600, fontSize: 'clamp(18px, 2vw, 24px)', color: '#2a4365', margin: 'clamp(12px, 2vw, 20px) 0 clamp(6px, 1vw, 10px)', textAlign: 'center' }}>
+        <h2 style={{ fontWeight: 600, fontSize: 'clamp(18px, 2vw, 24px)', color: '#2a4365', margin: 'clamp(12px, 2vw, 20px) 0 clamp(6px, 1vw, 10px)' }}>
           Passo a passo de cada instrumento
         </h2>
 
-        <p style={{ fontWeight: 300, fontSize: 'clamp(14px, 1.4vw, 18px)', color: '#2a4365', margin: '0 0 clamp(20px, 3vw, 32px)', textAlign: 'center' }}>
+        <p style={{ fontWeight: 300, fontSize: 'clamp(14px, 1.4vw, 18px)', color: '#2a4365', margin: '0 0 clamp(20px, 3vw, 32px)' }}>
           Selecione um Instrumento e explore seu fluxo
         </p>
 
         {/* First row: 3 cards */}
-        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'clamp(14px, 2vw, 20px)', marginBottom: 'clamp(14px, 2vw, 20px)' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'clamp(14px, 2vw, 20px)', marginBottom: 'clamp(14px, 2vw, 20px)', alignItems: 'start' }}>
           {INSTRUMENT_FLOWS.slice(0, 3).map((flow) => (
             <InstrumentFlowCard key={flow.id} {...flow} />
           ))}
         </div>
 
         {/* Second row: 2 cards centered */}
-        <div style={{ maxWidth: 810, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'clamp(14px, 2vw, 20px)' }}>
+        <div style={{ maxWidth: 810, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 'clamp(14px, 2vw, 20px)', alignItems: 'start' }}>
           {INSTRUMENT_FLOWS.slice(3).map((flow) => (
             <InstrumentFlowCard key={flow.id} {...flow} />
           ))}

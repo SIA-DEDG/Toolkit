@@ -25,7 +25,7 @@ export default function DownloadButton({ label = 'Baixar Documento', fileKey, fi
   }
 
   return (
-    <div className="flex flex-col items-center gap-0.5">
+    <div className="flex flex-col items-start gap-0.5">
       <button
         onClick={handleClick}
         disabled={loading || !fileKey || !!error}
