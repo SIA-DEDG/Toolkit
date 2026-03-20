@@ -1,4 +1,5 @@
 import { Handshake, Cpu, ShoppingCart, RefreshCw, Workflow, ExternalLink } from 'lucide-react'
+import { useRef, useState, useEffect } from 'react'
 import FlowCard from '../components/FlowCard'
 
 const heroBannerSrc = 'https://www.figma.com/api/mcp/asset/29bd93f3-7cdc-4145-96a7-cc8a6fddefbe'
@@ -98,7 +99,7 @@ function TrilhaFlowchart() {
             A 50 50 0 0 1 820 590
             L 820 820
           "
-          stroke="#bee3f8"
+          stroke="#E3EFFF"
           strokeWidth="40"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -107,7 +108,7 @@ function TrilhaFlowchart() {
 
       {/* ── Row 1: Convênio · Haverá repasse · Acordo ──────────────────── */}
 
-      <div style={{ position: 'absolute', left: 697, top: 74, zIndex: 1 }}>
+      <div style={{ position: 'absolute', left: 710, top: 74, zIndex: 1 }}>
         <InstrumentCard
           accentColor="#209828"
           iconBg="rgba(32,152,40,0.2)"
@@ -117,21 +118,21 @@ function TrilhaFlowchart() {
         />
       </div>
 
-      <div style={{ position: 'absolute', left: 912, top: 117, zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-        <span style={{ fontSize: 12, color: '#0e59a8', marginLeft: 58, marginBottom: 2 }}>Sim</span>
+      <div style={{ position: 'absolute', left: 930, top: 100, zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+        <span style={{ fontSize: 12, color: '#0e59a8', marginLeft: 47, marginBottom: 2 }}>Sim</span>
         <StepCircle number="1" color="#209828" line="right" />
       </div>
 
-      <div style={{ position: 'absolute', left: 1004, top: 97, zIndex: 1 }}>
+      <div style={{ position: 'absolute', left: 1010, top: 97, zIndex: 1 }}>
         <DecisionBox width={80} height={80} text="Haverá repasse de recursos públicos" bg="#e3e3e3" />
       </div>
 
-      <div style={{ position: 'absolute', left: 1093, top: 117, zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
-        <span style={{ fontSize: 12, color: '#0e59a8', marginRight: 58, marginBottom: 2 }}>Não</span>
-        <StepCircle number="3" color="#a8250e" line="left" />
+      <div style={{ position: 'absolute', left: 1090, top: 100, zIndex: 1, display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+        <span style={{ fontSize: 12, color: '#0e59a8', marginRight: 47, marginBottom: 2 }}>Não</span>
+        <StepCircle number="2" color="#a8250e" line="left" />
       </div>
 
-      <div style={{ position: 'absolute', left: 1188, top: 74, zIndex: 1 }}>
+      <div style={{ position: 'absolute', left: 1190, top: 74, zIndex: 1 }}>
         <InstrumentCard
           accentColor="#a8250e"
           iconBg="rgba(168,37,14,0.2)"
@@ -147,7 +148,7 @@ function TrilhaFlowchart() {
         <StepCircle number="3" color="#0e59a8" line="up" />
       </div>
 
-      <div style={{ position: 'absolute', left: 770, top: 280, zIndex: 1 }}>
+      <div style={{ position: 'absolute', left: 770, top: 291, zIndex: 1 }}>
         <DecisionBox width={96} height={69} text="Existe Risco Tecnológico?" />
       </div>
 
@@ -155,7 +156,7 @@ function TrilhaFlowchart() {
         <StepCircle number="4" color="#dbaf00" line="right" />
       </div>
 
-      <div style={{ position: 'absolute', left: 325, top: 292, zIndex: 1 }}>
+      <div style={{ position: 'absolute', left: 325, top: 288, zIndex: 1 }}>
         <DecisionBox width={117} height={80} text="Há possibilidade de contratação Direta?" />
       </div>
 
@@ -170,7 +171,7 @@ function TrilhaFlowchart() {
         />
       </div>
 
-      <div style={{ position: 'absolute', left: 859, top: 286, zIndex: 1 }}>
+      <div style={{ position: 'absolute', left: 859, top: 376, zIndex: 1 }}>
         <InstrumentCard
           accentColor="#0e59a8"
           iconBg="rgba(14,89,168,0.2)"
@@ -183,15 +184,15 @@ function TrilhaFlowchart() {
 
       {/* ── Vertical: Não sei · Transferência ───────────────────────────── */}
 
-      <div style={{ position: 'absolute', left: 563, top: 412, zIndex: 1 }}>
+      <div style={{ position: 'absolute', left: 563, top: 539, zIndex: 1 }}>
         <DecisionBox width={80} height={80} text="Não sei qual a pergunta" />
       </div>
 
-      <div style={{ position: 'absolute', left: 578, top: 490, zIndex: 1 }}>
+      <div style={{ position: 'absolute', left: 578, top: 619, zIndex: 1 }}>
         <StepCircle number="5" color="#6a0ea8" line="up" />
       </div>
 
-      <div style={{ position: 'absolute', left: 366, top: 509, zIndex: 1 }}>
+      <div style={{ position: 'absolute', left: 366, top: 650, zIndex: 1 }}>
         <InstrumentCard
           accentColor="#6a0ea8"
           iconBg="rgba(106,14,168,0.2)"
@@ -202,12 +203,34 @@ function TrilhaFlowchart() {
           height={151}
         />
       </div>
+    </div>
+  )
+}
 
-      <div style={{ position: 'absolute', left: 43, top: 136, background: '#d9d9d9', width: 91, height: 38, borderRadius: 4, padding: '4px 6px', zIndex: 1 }}>
-        <p style={{ fontWeight: 600, fontSize: 12, color: 'black', margin: 0 }}>5</p>
-        <p style={{ fontWeight: 600, fontSize: 12, color: 'black', margin: 0 }}>Instrumentos</p>
+const FLOWCHART_WIDTH = 1440
+const FLOWCHART_HEIGHT = 820
+
+function ScaledFlowchart() {
+  const containerRef = useRef(null)
+  const [scale, setScale] = useState(1)
+
+  useEffect(() => {
+    const update = () => {
+      if (containerRef.current) {
+        const w = containerRef.current.offsetWidth
+        setScale(Math.min(1, w / FLOWCHART_WIDTH))
+      }
+    }
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
+
+  return (
+    <div ref={containerRef} style={{ width: '100%', overflow: 'hidden', height: FLOWCHART_HEIGHT * scale }}>
+      <div style={{ width: FLOWCHART_WIDTH, transformOrigin: 'top left', transform: `scale(${scale})` }}>
+        <TrilhaFlowchart />
       </div>
-
     </div>
   )
 }
@@ -227,15 +250,7 @@ export default function HomePage() {
 
       {/* ── Intro text ───────────────────────────────────────────────────── */}
       <div style={{ padding: 'clamp(28px, 4vw, 56px) clamp(20px, 5vw, 66px)' }}>
-        <div style={{
-          width: '50%',
-          minWidth: 280,
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 'clamp(14px, 2vw, 20px)',
-          borderRight: '2px dashed #90cdf4',
-          paddingRight: 'clamp(20px, 3vw, 48px)',
-        }}>
+        <div className="intro-text-box">
           <h1 style={{
             fontWeight: 600,
             fontSize: 'clamp(20px, 2.5vw, 30px)',
@@ -337,9 +352,7 @@ export default function HomePage() {
 
       {/* ── Trilha de Instrumentos section ──────────────────────────────── */}
       <section style={{ padding: 0 }}>
-        <div style={{ overflowX: 'auto' }}>
-          <TrilhaFlowchart />
-        </div>
+        <ScaledFlowchart />
       </section>
 
       {/* ── Passo a passo section ────────────────────────────────────────── */}
