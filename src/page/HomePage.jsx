@@ -69,29 +69,29 @@ function TrilhaFlowchart() {
         preserveAspectRatio="none"
         aria-hidden="true"
       >
-        {/* Main snake path – approximated from Figma imgRectangle16 */}
+        {/*
+          Snake path traced from Figma imgRectangle16 coordinates:
+          - Row 1 (y=145): horizontal right from "5 Instrumentos" box → Acordo
+          - Right U-turn at x=1440
+          - Row 2 (y=270): horizontal left → Existe Risco → Há possibilidade
+          - Left U-turn at x=205
+          - Diagonal curve toward center-right
+          - Vertical down through Não sei → Transferência
+        */}
         <path
           d="
-            M 750 145
-            L 1395 145
-            C 1435 145 1440 160 1440 200
-            C 1440 240 1435 258 1400 260
-            L 830 263
-            C 810 265 800 275 800 295
-            C 800 315 810 325 830 330
-            L 860 335
-            C 880 335 880 350 875 365
-            C 870 380 860 385 840 387
-            L 500 390
-            C 460 390 440 400 440 420
-            C 440 460 480 475 600 475
-            L 630 475
-            C 650 475 660 490 658 515
-            L 635 650
-            C 630 670 600 678 470 670
+            M 1051 0
+            L 1051 145
+            L 1187.5 145
+            A 62.5 62.5 0 0 1 1187.5 270
+            L 312.5 270
+            A 62.5 62.5 0 0 0 312.5 395
+            L 505.5 395
+            A 62.5 62.5 0 0 1 568 457.5
+            L 568 766
           "
           stroke="#bee3f8"
-          strokeWidth="80"
+          strokeWidth="40"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
