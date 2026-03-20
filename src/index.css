@@ -30,9 +30,21 @@ body {
   color: var(--color-text);
 }
 
-@media (min-width: 768px) {
-  body {
-    min-width: 1280px;
+.intro-text-box {
+  width: 50%;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2vw, 20px);
+  border-right: 2px dashed #90cdf4;
+  padding-right: clamp(20px, 3vw, 48px);
+}
+
+@media (max-width: 640px) {
+  .intro-text-box {
+    width: 100%;
+    border-right: none;
+    padding-right: 0;
   }
 }
 
