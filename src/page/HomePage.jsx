@@ -66,6 +66,17 @@ function TrilhaFlowchart() {
   return (
     <div style={{ position: 'relative', width: 1440, height: 766, overflow: 'visible' }}>
 
+      {/* Header text — top left */}
+      <div style={{ position: 'absolute', left: 43, top: 20, zIndex: 2, display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <SectionBadge>Trilha de Instrumentos</SectionBadge>
+        <h2 style={{ fontWeight: 600, fontSize: 24, color: '#2a4365', margin: 0, lineHeight: 1.25 }}>
+          Trilha de Instrumentos
+        </h2>
+        <p style={{ fontWeight: 400, fontSize: 14, color: '#2a4365', margin: 0 }}>
+          Descrição da etapa de identificação
+        </p>
+      </div>
+
       {/* Curved snake path SVG */}
       <svg
         style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 0 }}
@@ -324,30 +335,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Trilha de Instrumentos section ──────────────────────────────── */}
-      <section style={{ padding: 'clamp(20px, 3vw, 40px) 0 0' }}>
-        <div style={{ padding: '0 clamp(20px, 5vw, 66px) clamp(16px, 2vw, 24px)' }}>
-          <SectionBadge>Trilha de Instrumentos</SectionBadge>
-
-          <h2 style={{
-            fontWeight: 600,
-            fontSize: 'clamp(18px, 2vw, 24px)',
-            color: '#2a4365',
-            margin: 'clamp(12px, 2vw, 20px) 0 clamp(6px, 1vw, 10px)',
-          }}>
-            Trilha de Instrumentos
-          </h2>
-
-          <p style={{
-            fontWeight: 400,
-            fontSize: 'clamp(12px, 1.1vw, 14px)',
-            color: '#2a4365',
-            margin: 0,
-          }}>
-            Descrição da etapa de identificação
-          </p>
-        </div>
-
-        {/* Flowchart — fixed 1440px wide, scroll on smaller screens */}
+      <section style={{ padding: 0 }}>
         <div style={{ overflowX: 'auto' }}>
           <TrilhaFlowchart />
         </div>
