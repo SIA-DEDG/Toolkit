@@ -64,7 +64,7 @@ function StepCircle({ number, color, line = 'right' }) {
 
 function TrilhaFlowchart() {
   return (
-    <div style={{ position: 'relative', width: 1440, height: 766, overflow: 'visible' }}>
+    <div style={{ position: 'relative', width: 1440, height: 820, overflow: 'visible' }}>
 
       {/* Header text — top left */}
       <div style={{ position: 'absolute', left: 43, top: 20, zIndex: 2, display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -88,14 +88,15 @@ function TrilhaFlowchart() {
         <path
           d="
             M 1051 0
-            L 1051 145
-            L 1187.5 145
-            A 62.5 62.5 0 0 1 1187.5 270
-            L 312.5 270
-            A 62.5 62.5 0 0 0 312.5 395
-            L 505.5 395
-            A 62.5 62.5 0 0 1 568 457.5
-            L 568 766
+            L 1051 255
+            A 50 50 0 0 1 1001 305
+            L 350 305
+            A 50 50 0 0 0 300 355
+            L 300 490
+            A 50 50 0 0 0 350 540
+            L 770 540
+            A 50 50 0 0 1 820 590
+            L 820 820
           "
           stroke="#bee3f8"
           strokeWidth="40"
