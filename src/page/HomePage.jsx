@@ -294,11 +294,11 @@ function InstrumentFlowCard({ accentColor, icon: Icon, title, subtitle, cards, i
 
 // ── InstrumentCard (used inside the flowchart) ───────────────────────────────
 
-function InstrumentCard({ accentColor, iconBg, Icon, title, description, width = 201, height = 134, onClick }) {
+function InstrumentCard({ accentColor, iconBg, Icon, title, description, width = 201, onClick }) {
   return (
     <div
       onClick={onClick}
-      style={{ background: 'white', borderRadius: 10, boxShadow: '0px 4px 4px rgba(0,0,0,0.25)', width, height, overflow: 'hidden', flexShrink: 0, cursor: onClick ? 'pointer' : 'default', transition: 'box-shadow 0.15s' }}
+      style={{ background: 'white', borderRadius: 10, boxShadow: '0px 4px 4px rgba(0,0,0,0.25)', width, overflow: 'visible', flexShrink: 0, cursor: onClick ? 'pointer' : 'default', transition: 'box-shadow 0.15s' }}
       onMouseEnter={e => { if (onClick) e.currentTarget.style.boxShadow = '0px 6px 16px rgba(0,0,0,0.35)' }}
       onMouseLeave={e => { if (onClick) e.currentTarget.style.boxShadow = '0px 4px 4px rgba(0,0,0,0.25)' }}
     >
@@ -429,11 +429,11 @@ function TrilhaFlowchart({ onInstrumentClick }) {
       </div>
 
       <div style={{ position: 'absolute', left: 29, top: 290, zIndex: 1 }}>
-        <InstrumentCard accentColor="#dbaf00" iconBg="rgba(219,175,0,0.2)" Icon={ShoppingCart} title="Contratação Direta" description="Compra de um esforço de desenvolvimento de solução que ainda não existe no mercado e envolve alto risco tecnológico" height={151} onClick={() => onInstrumentClick('contratacao-direta')} />
+        <InstrumentCard accentColor="#dbaf00" iconBg="rgba(219,175,0,0.2)" Icon={ShoppingCart} title="Contratação Direta" description="Compra de um esforço de desenvolvimento de solução que ainda não existe no mercado e envolve alto risco tecnológico" onClick={() => onInstrumentClick('contratacao-direta')} />
       </div>
 
       <div style={{ position: 'absolute', left: 859, top: 376, zIndex: 1 }}>
-        <InstrumentCard accentColor="#0e59a8" iconBg="rgba(14,89,168,0.2)" Icon={Cpu} title="Encomenda Tecnológica" description="Compra de um esforço de desenvolvimento de solução que ainda não existe no mercado e envolve alto risco tecnológico" height={151} onClick={() => onInstrumentClick('encomenda-tecnologica')} />
+        <InstrumentCard accentColor="#0e59a8" iconBg="rgba(14,89,168,0.2)" Icon={Cpu} title="Encomenda Tecnológica" description="Compra de um esforço de desenvolvimento de solução que ainda não existe no mercado e envolve alto risco tecnológico" onClick={() => onInstrumentClick('encomenda-tecnologica')} />
       </div>
 
       {/* Vertical: Não sei · Transferência */}
@@ -446,7 +446,7 @@ function TrilhaFlowchart({ onInstrumentClick }) {
       </div>
 
       <div style={{ position: 'absolute', left: 366, top: 650, zIndex: 1 }}>
-        <InstrumentCard accentColor="#6a0ea8" iconBg="rgba(106,14,168,0.2)" Icon={RefreshCw} title="Transferência Tecnológica não patenteada" description="Compra de um esforço de desenvolvimento de solução que ainda não existe no mercado e envolve alto risco tecnológico" width={204} height={151} onClick={() => onInstrumentClick('contrato-transferencia-tecnologia')} />
+        <InstrumentCard accentColor="#6a0ea8" iconBg="rgba(106,14,168,0.2)" Icon={RefreshCw} title="Transferência Tecnológica não patenteada" description="Compra de um esforço de desenvolvimento de solução que ainda não existe no mercado e envolve alto risco tecnológico" width={204} onClick={() => onInstrumentClick('contrato-transferencia-tecnologia')} />
       </div>
     </div>
   )
