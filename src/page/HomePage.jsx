@@ -253,7 +253,10 @@ function InstrumentFlowCard({ accentColor, icon: Icon, title, subtitle, cards, i
       minWidth: 0,
     }}>
       {/* Colored header */}
-      <div style={{ background: accentColor, padding: '12px 14px' }}>
+      <div
+        onClick={() => onToggle(id)}
+        style={{ background: accentColor, padding: '12px 14px', cursor: 'pointer' }}
+      >
         {/* Title row */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <div style={{ background: iconBg, padding: 6, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
@@ -263,17 +266,12 @@ function InstrumentFlowCard({ accentColor, icon: Icon, title, subtitle, cards, i
             <p style={{ fontWeight: 700, fontSize: 13, color: 'white', margin: 0, lineHeight: 1.3, textAlign: 'left' }}>{title}</p>
             <p style={{ fontWeight: 400, fontSize: 10, color: 'rgba(255,255,255,0.8)', margin: 0, lineHeight: 1.4, textAlign: 'left' }}>{subtitle}</p>
           </div>
-          {/* Collapse toggle */}
-          <button
-            onClick={() => onToggle(id)}
-            style={{ background: 'rgba(255,255,255,0.2)', border: 'none', borderRadius: 6, padding: '3px 6px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
-            title={collapsed ? 'Expandir' : 'Compactar'}
-          >
+          <div style={{ background: 'rgba(255,255,255,0.2)', borderRadius: 6, padding: '3px 6px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             {collapsed
               ? <ChevronDown style={{ width: 14, height: 14, color: 'white' }} />
               : <ChevronUp   style={{ width: 14, height: 14, color: 'white' }} />
             }
-          </button>
+          </div>
         </div>
       </div>
 
@@ -298,7 +296,7 @@ function InstrumentCard({ accentColor, iconBg, Icon, title, description, width =
   return (
     <div
       onClick={onClick}
-      style={{ background: 'white', borderRadius: 10, boxShadow: '0px 4px 4px rgba(0,0,0,0.25)', width, overflow: 'visible', flexShrink: 0, cursor: onClick ? 'pointer' : 'default', transition: 'box-shadow 0.15s' }}
+      style={{ background: 'white', borderRadius: 10, boxShadow: '0px 4px 4px rgba(0,0,0,0.25)', border: '1.5px solid #0E59A8', width, overflow: 'visible', flexShrink: 0, cursor: onClick ? 'pointer' : 'default', transition: 'box-shadow 0.15s' }}
       onMouseEnter={e => { if (onClick) e.currentTarget.style.boxShadow = '0px 6px 16px rgba(0,0,0,0.35)' }}
       onMouseLeave={e => { if (onClick) e.currentTarget.style.boxShadow = '0px 4px 4px rgba(0,0,0,0.25)' }}
     >
@@ -319,7 +317,7 @@ function InstrumentCard({ accentColor, iconBg, Icon, title, description, width =
 
 function DecisionBox({ width, height, text, bg = '#d9d9d9' }) {
   return (
-    <div style={{ background: bg, borderRadius: 8, width, height, padding: 8, display: 'flex', alignItems: 'center' }}>
+    <div style={{ background: bg, borderRadius: 8, border: '1.5px solid #0E59A8', width, height, padding: 8, display: 'flex', alignItems: 'center' }}>
       <p style={{ fontWeight: 600, fontSize: 12, color: 'black', lineHeight: 1.3, margin: 0 }}>{text}</p>
     </div>
   )
@@ -362,12 +360,13 @@ function TrilhaFlowchart({ onInstrumentClick }) {
 
       {/* Curved snake path */}
       <svg
-        style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 0 }}
+        style={{ position: 'absolute', left: 0, top: 0, width: '100%', height: '100%', overflow: 'visible', pointerEvents: 'none', zIndex: 0 }}
         viewBox="0 0 1440 766"
         fill="none"
         preserveAspectRatio="none"
         aria-hidden="true"
       >
+        {/* Border layer */}
         <path
           d="
             M 1051 0
@@ -379,7 +378,26 @@ function TrilhaFlowchart({ onInstrumentClick }) {
             A 50 50 0 0 0 430 540
             L 770 540
             A 50 50 0 0 1 820 590
-            L 820 820
+            L 820 920
+          "
+          stroke="#0E59A8"
+          strokeWidth="44"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        {/* Fill layer */}
+        <path
+          d="
+            M 1051 0
+            L 1051 255
+            A 50 50 0 0 1 1001 305
+            L 430 305
+            A 50 50 0 0 0 380 355
+            L 380 490
+            A 50 50 0 0 0 430 540
+            L 770 540
+            A 50 50 0 0 1 820 590
+            L 820 920
           "
           stroke="#E3EFFF"
           strokeWidth="40"
@@ -453,7 +471,7 @@ function TrilhaFlowchart({ onInstrumentClick }) {
 }
 
 const FLOWCHART_WIDTH  = 1440
-const FLOWCHART_HEIGHT = 820
+const FLOWCHART_HEIGHT = 920
 
 function ScaledFlowchart({ onInstrumentClick }) {
   const containerRef = useRef(null)
@@ -540,25 +558,11 @@ export default function HomePage() {
           Identificação
         </h2>
 
-        <div style={{ display: 'flex', gap: 'clamp(16px, 2vw, 32px)', flexWrap: 'wrap' }}>
-          {/* Card 1 */}
-          <div style={{ flex: '1 1 260px', maxWidth: 600, background: '#0e59a8', borderRadius: 8, padding: 'clamp(14px, 2vw, 20px)', display: 'flex', flexDirection: 'column', gap: 'clamp(8px, 1.5vw, 14px)' }}>
-            <p style={{ fontWeight: 600, fontSize: 'clamp(11px, 1vw, 13px)', color: 'white', textAlign: 'justify', margin: 0, lineHeight: 1.4 }}>
-              Sabe qual procedimento e instrumento quer utilizar para inovação?
-            </p>
-            <p style={{ fontWeight: 300, fontSize: 'clamp(10px, 0.9vw, 12px)', color: '#e6e6e6', textAlign: 'justify', margin: 0, flex: 1, lineHeight: 1.5 }}>
-              Na trilha possuem 5 instrumentos independentes e ...........
-            </p>
-            <button
-              style={{ width: 'clamp(130px, 12vw, 160px)', height: 34, background: '#116ed0', borderRadius: 10, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
-              onClick={() => document.getElementById('trilha-de-instrumentos').scrollIntoView({ behavior: 'smooth' })}
-            >
-              <span style={{ fontWeight: 500, fontSize: 13, color: 'white' }}>Siga a Trilha</span>
-              <ExternalLink style={{ width: 14, height: 14, color: 'white', flexShrink: 0 }} />
-            </button>
-          </div>
 
           {/* Card 2 */}
+        <div style={{ display: 'flex', gap: 'clamp(16px, 2vw, 32px)', flexWrap: 'wrap' }}>
+          {/* Card 1 */}
+          
           <div style={{ flex: '1 1 260px', maxWidth: 600, background: '#0e59a8', borderRadius: 8, padding: 'clamp(14px, 2vw, 20px)', display: 'flex', flexDirection: 'column', gap: 'clamp(8px, 1.5vw, 14px)' }}>
             <p style={{ fontWeight: 600, fontSize: 'clamp(11px, 1vw, 13px)', color: 'white', textAlign: 'justify', margin: 0, lineHeight: 1.4 }}>
               Precisa entender a solução mais apropriada para o seu desafio e qual o instrumento mais adequado para a contratação?
@@ -576,6 +580,22 @@ export default function HomePage() {
               <ExternalLink style={{ width: 14, height: 14, color: 'white', flexShrink: 0 }} />
             </a>
           </div>
+
+          <div style={{ flex: '1 1 260px', maxWidth: 600, background: '#0e59a8', borderRadius: 8, padding: 'clamp(14px, 2vw, 20px)', display: 'flex', flexDirection: 'column', gap: 'clamp(8px, 1.5vw, 14px)' }}>
+            <p style={{ fontWeight: 600, fontSize: 'clamp(11px, 1vw, 13px)', color: 'white', textAlign: 'justify', margin: 0, lineHeight: 1.4 }}>
+              Sabe qual procedimento e instrumento quer utilizar para inovação?
+            </p>
+            <p style={{ fontWeight: 300, fontSize: 'clamp(10px, 0.9vw, 12px)', color: '#e6e6e6', textAlign: 'justify', margin: 0, flex: 1, lineHeight: 1.5 }}>
+              Na trilha possuem 5 instrumentos independentes e ...........
+            </p>
+            <button
+              style={{ width: 'clamp(130px, 12vw, 160px)', height: 34, background: '#116ed0', borderRadius: 10, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}
+              onClick={() => document.getElementById('trilha-de-instrumentos').scrollIntoView({ behavior: 'smooth' })}
+            >
+              <span style={{ fontWeight: 500, fontSize: 13, color: 'white' }}>Siga a Trilha</span>
+              <ExternalLink style={{ width: 14, height: 14, color: 'white', flexShrink: 0 }} />
+            </button>
+          </div>
         </div>
       </section>
 
@@ -587,7 +607,7 @@ export default function HomePage() {
       )}
 
       {/* Passo a passo section */}
-      <section id="passo-a-passo" style={{ background: '#f0f4f8', padding: 'clamp(20px, 3vw, 40px) clamp(20px, 4vw, 40px) clamp(32px, 4vw, 48px)' }}>
+      <section id="passo-a-passo" style={{ background: '#E3EFFF', padding: 'clamp(20px, 3vw, 40px) clamp(20px, 4vw, 40px) clamp(32px, 4vw, 48px)' }}>
         <SectionBadge>Fluxos de Internos</SectionBadge>
 
         <h2 style={{ fontWeight: 600, fontSize: 'clamp(18px, 2vw, 24px)', color: '#2a4365', margin: 'clamp(12px, 2vw, 20px) 0 clamp(6px, 1vw, 10px)' }}>
