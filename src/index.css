@@ -12,6 +12,7 @@ html, body {
   background-color: #90CDF4;
   overscroll-behavior: none;
   overflow-x: auto;
+  overflow-y: auto;
 }
 
 /* intro-text-box: responsive half-width with dashed right border */
