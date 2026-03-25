@@ -3,22 +3,27 @@ export default {
   theme: {
     extend: {
       colors: {
-        navy: {
-          DEFAULT: '#1a2f5e',
-          dark: '#0f2244',
-          light: '#243d7a',
+        // Brand blues
+        brand: {
+          DEFAULT: '#0e59a8',
+          mid:     '#116ed0',
+          bg:      '#E3EFFF',
+          light:   '#bee3f8',
         },
-        sky: {
-          flow: '#4a8fd4',
+        // Semantic text shades
+        ink: {
+          dark:  '#1a202c',
+          mid:   '#2a4365',
+          muted: '#718096',
+          sub:   '#4a5568',
         },
-        text: '#2A4365',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       keyframes: {
         'slide-in': {
-          '0%': { opacity: '0', transform: 'translateX(100%)' },
+          '0%':   { opacity: '0', transform: 'translateX(100%)' },
           '100%': { opacity: '1', transform: 'translateX(0)' },
         },
       },

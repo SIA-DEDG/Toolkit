@@ -1,0 +1,112 @@
+import { SectionBadge } from '../SectionBadge'
+import { InstrumentCard } from './InstrumentCard'
+import { DecisionBox } from './DecisionBox'
+import { StepCircle } from './StepCircle'
+
+// Hex values used directly in SVG stroke attributes (SVG attributes don't support Tailwind classes)
+const BRAND_BLUE = '#0e59a8'
+const BRAND_BG   = '#E3EFFF'
+
+const SNAKE_PATH = `
+  M 1051 0
+  L 1051 255
+  A 50 50 0 0 1 1001 305
+  L 430 305
+  A 50 50 0 0 0 380 355
+  L 380 490
+  A 50 50 0 0 0 430 540
+  L 770 540
+  A 50 50 0 0 1 820 590
+  L 820 920
+`
+
+export function TrilhaFlowchart({ onInstrumentClick }) {
+  return (
+    <div className="relative overflow-visible" style={{ width: 1440, height: 820 }}>
+
+      {/* Header — top left */}
+      <div className="absolute flex flex-col gap-2 z-[2]" style={{ left: 43, top: 20 }}>
+        <SectionBadge>Trilha de Instrumentos</SectionBadge>
+        <h2 className="font-semibold text-2xl text-ink-mid m-0 leading-snug">
+          Trilha de Instrumentos
+        </h2>
+        <p className="font-normal text-sm text-ink-mid m-0">
+          Descrição da etapa de identificação
+        </p>
+      </div>
+
+      {/* Curved snake path */}
+      <svg
+        className="absolute inset-0 w-full h-full overflow-visible pointer-events-none z-0"
+        viewBox="0 0 1440 766"
+        fill="none"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <path d={SNAKE_PATH} stroke={BRAND_BLUE} strokeWidth="44" strokeLinecap="round" strokeLinejoin="round" />
+        <path d={SNAKE_PATH} stroke={BRAND_BG}   strokeWidth="40" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+
+      {/* Row 1: Convênio · Haverá repasse · Acordo */}
+      <div className="absolute z-[1]" style={{ left: 710, top: 74 }}>
+        <InstrumentCard accentColor="#209828" iconBg="rgba(32,152,40,0.2)" icon="📋" title="Convênio" description="(Falta o texto)" onClick={() => onInstrumentClick('convenio-pd&i')} />
+      </div>
+
+      <div className="absolute z-[1] flex flex-col items-start" style={{ left: 918, top: 100 }}>
+        <span className="text-xs text-brand ml-14 mb-0.5">Sim</span>
+        <StepCircle number="1" color="#209828" line="right" />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 999, top: 94 }}>
+        <DecisionBox width={110} height={86} text="Haverá repasse de recursos públicos" bg={BRAND_BG} />
+      </div>
+
+      <div className="absolute z-[1] flex flex-col items-end" style={{ left: 1109, top: 100 }}>
+        <span className="text-xs text-brand mr-12 mb-0.5">Não</span>
+        <StepCircle number="2" color="#08ba9c" line="left" />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 1199, top: 74 }}>
+        <InstrumentCard accentColor="#08ba9c" iconBg="rgba(8,186,156,0.2)" icon="🤝" title="Acordo" description="(Falta o texto)" onClick={() => onInstrumentClick('acordo-pd&i')} />
+      </div>
+
+      {/* Row 2: Existe Risco · Há possibilidade · Contratação Direta */}
+      <div className="absolute z-[1]" style={{ left: 795, top: 346 }}>
+        <StepCircle number="3" color={BRAND_BLUE} line="up" />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 758, top: 288 }}>
+        <DecisionBox width={120} height={76} text="Existe Risco Tecnológico?" bg={BRAND_BG} />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 244, top: 307 }}>
+        <StepCircle number="4" color="#dbaf00" line="right" />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 314, top: 285 }}>
+        <DecisionBox width={140} height={86} text="Há possibilidade de contratação Direta?" bg={BRAND_BG} />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 29, top: 290 }}>
+        <InstrumentCard accentColor="#dbaf00" iconBg="rgba(219,175,0,0.2)" icon="📇" title="Contratação Direta" description="Compra de um esforço de desenvolvimento de solução que ainda não existe no mercado e envolve alto risco tecnológico" onClick={() => onInstrumentClick('contratacao-direta')} />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 859, top: 376 }}>
+        <InstrumentCard accentColor={BRAND_BLUE} iconBg="rgba(14,89,168,0.2)" icon="🖥️" title="Encomenda Tecnológica" description="Compra de um esforço de desenvolvimento de solução que ainda não existe no mercado e envolve alto risco tecnológico" onClick={() => onInstrumentClick('encomenda-tecnologica')} />
+      </div>
+
+      {/* Vertical: Não sei · Transferência */}
+      <div className="absolute z-[1]" style={{ left: 548, top: 536 }}>
+        <DecisionBox width={110} height={86} text="Não sei qual a pergunta" bg={BRAND_BG} />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 578, top: 619 }}>
+        <StepCircle number="5" color="#6a0ea8" line="up" />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 366, top: 650 }}>
+        <InstrumentCard accentColor="#6a0ea8" iconBg="rgba(106,14,168,0.2)" icon="🔄" title="Transferência Tecnológica não patenteada" description="Compra de um esforço de desenvolvimento de solução que ainda não existe no mercado e envolve alto risco tecnológico" width={204} onClick={() => onInstrumentClick('contrato-transferencia-tecnologia')} />
+      </div>
+    </div>
+  )
+}

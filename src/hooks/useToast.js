@@ -1,10 +1,12 @@
 import { useState, useCallback } from 'react'
 
+let _nextId = 1
+
 export function useToast() {
   const [toasts, setToasts] = useState([])
 
   const add = useCallback((message, type = 'success') => {
-    const id = Date.now()
+    const id = _nextId++
     setToasts((prev) => [...prev, { id, message, type }])
   }, [])
 
