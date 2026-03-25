@@ -1,9 +1,17 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { downloadFile } from '../config/supabase'
 import { useToastContext } from '../hooks/ToastContext'
 import { enqueueDownload } from '../hooks/useDownloadQueue'
 
-export default function DownloadButton({ label = 'Baixar Documento', fileKey, filename, large = false }) {
+function lightenHex(hex, amount = 0.25) {
+  const r = parseInt(hex.slice(1, 3), 16)
+  const g = parseInt(hex.slice(3, 5), 16)
+  const b = parseInt(hex.slice(5, 7), 16)
+  const mix = (c) => Math.round(c + (255 - c) * amount)
+  return `rgb(${mix(r)}, ${mix(g)}, ${mix(b)})`
+}
+
+export default function DownloadButton({ label = 'Baixar Documento', fileKey, filename, large = false, color }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const addToast = useToastContext()
@@ -29,15 +37,26 @@ export default function DownloadButton({ label = 'Baixar Documento', fileKey, fi
       <button
         onClick={handleClick}
         disabled={loading || !fileKey || !!error}
-        className={`mt-2 flex items-center justify-center gap-1.5 bg-white hover:bg-gray-100 text-gray-900 font-semibold font-sans rounded-lg transition-colors duration-150 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${large ? 'text-[13px]' : 'text-[11px]'}`}
-        style={{ border: large ? '2px solid #1a202c' : '1.5px solid #1a202c', width: large ? 172 : 140, height: large ? 36 : 28, boxShadow: large ? '0 2px 6px rgba(0,0,0,0.18)' : 'none' }}
+        className={[
+          'mt-2 flex items-center justify-center gap-1.5',
+          color
+            ? 'text-white font-semibold font-sans border-transparent'
+            : 'bg-white hover:bg-gray-100 text-ink-dark font-semibold font-sans border-ink-dark',
+          'rounded-lg transition-colors duration-150 cursor-pointer',
+          'disabled:opacity-50 disabled:cursor-not-allowed',
+          large
+            ? 'text-[13px] w-[172px] h-9 border-2 shadow-[0_2px_6px_rgba(0,0,0,0.18)]'
+            : 'text-[11px] w-[140px] h-7 border-[1.5px]',
+        ].join(' ')}
+        style={color ? { backgroundColor: lightenHex(color) } : undefined}
       >
         <svg
-          className={`${large ? 'w-4 h-4' : 'w-3.5 h-3.5'} flex-shrink-0`}
+          className={`${large ? 'w-4 h-4' : 'w-3.5 h-3.5'} shrink-0`}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           strokeWidth="2.5"
+          aria-hidden="true"
         >
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
           <polyline points="7 10 12 15 17 10" />
