@@ -47,7 +47,7 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="bg-white w-full overflow-x-hidden">
+    <div className="bg-white w-full overflow-x-clip">
 
       <div className="w-full overflow-hidden" style={{ height: 'clamp(140px, 16vw, 230px)' }}>
         <img
