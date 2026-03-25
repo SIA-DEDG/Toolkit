@@ -3,16 +3,22 @@
 @tailwind utilities;
 
 * {
+  font-family: 'Inter', system-ui, sans-serif;
   box-sizing: border-box;
 }
 
-html, body {
+html {
+  overscroll-behavior: none;
+  background-color: #90CDF4;
+}
+
+body {
   margin: 0;
   padding: 0;
   background-color: #90CDF4;
+  overflow-x: auto;
   overscroll-behavior: none;
-  overflow-x: hidden;
-  overflow-y: auto;
+  color: var(--color-text);
 }
 
 /* intro-text-box: responsive half-width with dashed right border */
