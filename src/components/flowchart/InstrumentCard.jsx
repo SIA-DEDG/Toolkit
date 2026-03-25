@@ -7,7 +7,7 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
       onKeyDown={onClick ? (e) => { if (e.key === 'Enter' || e.key === ' ') onClick() } : undefined}
       className={[
         'bg-white rounded-[10px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]',
-        'border-[1.5px] border-brand overflow-visible shrink-0 transition-shadow duration-150',
+        'overflow-visible shrink-0 transition-shadow duration-150',
         onClick ? 'cursor-pointer' : 'cursor-default',
       ].join(' ')}
       style={{ width }}

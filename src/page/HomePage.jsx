@@ -9,21 +9,22 @@ import { ScaledFlowchart } from '../components/flowchart/ScaledFlowchart'
 
 const HERO_BANNER_SRC = 'https://www.figma.com/api/mcp/asset/29bd93f3-7cdc-4145-96a7-cc8a6fddefbe'
 
-const RED = 'rgba(168,37,14,0.6)'
+const RED          = 'rgba(168,37,14,0.6)'
+const RED_LIGHT    = 'rgb(190,91,74)'        // vermelho esbranquiçado — instrumentos fora da trilha
 
 const INSTRUMENT_PILLS = [
-  { label: 'Acordo de PD&I',                                  color: '#08ba9c',        icon: '🤝', iconBg: 'rgba(47,255,220,0.2)' },
-  { label: 'Convênio de PD&I',                                color: '#209828',        icon: '📋', iconBg: 'rgba(31,255,38,0.2)'  },
-  { label: 'Pitches e Hackatons',                             color: RED,              icon: '💡', iconBg: 'rgba(255,64,31,0.2)'  },
-  { label: 'PMI - Procedimento de Manifestação de Interesse', color: RED,              icon: '📌', iconBg: 'rgba(255,64,31,0.2)'  },
-  { label: 'Diálogo Competitivo',                             color: RED,              icon: '💬', iconBg: 'rgba(255,64,31,0.2)'  },
-  { label: 'ETEC - Encomenda Tecnológica',                    color: '#0e59a8',        icon: '🖥️', iconBg: 'rgba(219,175,0,0.2)'  },
-  { label: 'CPSI - Contrato Público para Solução Inovadora',  color: RED,              icon: '🏗️', iconBg: 'rgba(14,89,168,0.2)'  },
-  { label: 'Concurso Público de Inovação',                    color: RED,              icon: '📝', iconBg: 'rgba(14,89,168,0.2)'  },
-  { label: 'Doação de Solução Inovadora',                     color: RED,              icon: '📨', iconBg: 'rgba(14,89,168,0.2)'  },
-  { label: 'Contratação Direta',                              color: RED,              icon: '📇', iconBg: 'rgba(14,89,168,0.2)'  },
-  { label: 'Contrato de Transferência',                       color: '#6a0ea8',        icon: '🔄', iconBg: 'rgba(206,136,253,0.2)'},
-  { label: 'Licitação',                                       color: RED,              icon: '📄', iconBg: 'rgba(14,89,168,0.2)'  },
+  { label: 'Acordo de PD&I',                                  color: '#08ba9c',        icon: '🤝', iconBg: 'rgba(47,255,220,0.2)'  },
+  { label: 'Convênio de PD&I',                                color: '#209828',        icon: '📋', iconBg: 'rgba(31,255,38,0.2)'   },
+  { label: 'Pitches e Hackatons',                             color: RED_LIGHT,        icon: '💡', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'PMI - Procedimento de Manifestação de Interesse', color: RED_LIGHT,        icon: '📌', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Diálogo Competitivo',                             color: RED_LIGHT,        icon: '💬', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'ETEC - Encomenda Tecnológica',                    color: '#0e59a8',        icon: '🖥️', iconBg: 'rgba(219,175,0,0.2)'   },
+  { label: 'CPSI - Contrato Público para Solução Inovadora',  color: RED_LIGHT,        icon: '🏗️', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Concurso Público de Inovação',                    color: RED_LIGHT,        icon: '📝', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Doação de Solução Inovadora',                     color: RED_LIGHT,        icon: '📨', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Contratação Direta',                              color: '#dbaf00',              icon: '📇', iconBg: 'rgba(14,89,168,0.2)'   },
+  { label: 'Contrato de Transferência',                       color: '#6a0ea8',        icon: '🔄', iconBg: 'rgba(206,136,253,0.2)' },
+  { label: 'Licitação',                                       color: RED_LIGHT,        icon: '📄', iconBg: 'rgba(255,255,255,0.2)' },
 ]
 
 export default function HomePage() {
@@ -73,7 +74,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="flex-[1_1_320px] flex flex-wrap gap-[6px] content-start">
+        <div className="flex-[1_1_320px] flex flex-wrap gap-[6px] content-start justify-start">
           {INSTRUMENT_PILLS.map((pill) => (
             <div
               key={pill.label}
