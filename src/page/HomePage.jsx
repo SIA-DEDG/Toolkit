@@ -63,14 +63,15 @@ export default function HomePage() {
             Toolkit de Inovação
           </h1>
           <p className="font-light text-[clamp(13px,1.1vw,16px)] text-black text-justify leading-[1.7] m-0">
-            O Toolkit de Inovação é um conjunto de minutas de contratos, acordos e outros instrumentos
-            jurídicos para a implementação do Marco Legal de Ciência, Tecnologia e Inovação no Piauí.
-            Aqui você encontra materiais de apoio relacionados tanto a compras públicas de inovação
-            quanto a outras alternativas legais, como atividades de pesquisa, desenvolvimento e inovação,
-            sempre com o objetivo de aumentar a segurança jurídica na aplicação desses instrumentos.
-            Baseados em exemplos reais e casos concretos, os modelos foram elaborados pela Secretaria de
-            Inteligência Artificial, Economia Digital, Ciência, Tecnologia e Inovação (SIA) de maneira
-            colaborativa e validados por XX.
+            O Toolkit de Inovação é um conjunto de minutas de contratos, acordos 
+            e outros instrumentos jurídicos para a implementação do Marco Legal de Ciência, 
+            Tecnologia e Inovação no Piauí. Aqui você encontra materiais de apoio relacionados 
+            tanto a compras públicas de inovação quanto a outras alternativas legais, como atividades 
+            de pesquisa, desenvolvimento e inovação, sempre com o objetivo de aumentar a 
+            segurança jurídica na aplicação desses instrumentos. Baseados em exemplos reais e 
+            casos concretos, os modelos foram elaborados pela 
+            Secretaria de Inteligência Artificial, Economia Digital, Ciência, Tecnologia e Inovação (SIA) 
+            de maneira colaborativa e validados por XX.
           </p>
         </div>
 

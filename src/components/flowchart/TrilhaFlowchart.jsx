@@ -49,7 +49,7 @@ export function TrilhaFlowchart({ onInstrumentClick }) {
 
       {/* Row 1: Convênio · Haverá repasse · Acordo */}
       <div className="absolute z-[1]" style={{ left: 710, top: 74 }}>
-        <InstrumentCard accentColor="#209828" iconBg="rgba(32,152,40,0.2)" icon="📋" title="Convênio" description="(Falta o texto)" onClick={() => onInstrumentClick('convenio-pd&i')} />
+        <InstrumentCard accentColor="#209828" iconBg="rgba(32,152,40,0.2)" icon="📋" title="Convênio" description="Instrumento jurídico que formaliza uma parceria entre instituições públicas  e entidades privadas, ICTs com Transferência de Recursos" onClick={() => onInstrumentClick('convenio-pd&i')} />
       </div>
 
       <div className="absolute z-[1] flex flex-col items-start" style={{ left: 918, top: 100 }}>
@@ -67,7 +67,7 @@ export function TrilhaFlowchart({ onInstrumentClick }) {
       </div>
 
       <div className="absolute z-[1]" style={{ left: 1199, top: 74 }}>
-        <InstrumentCard accentColor="#08ba9c" iconBg="rgba(8,186,156,0.2)" icon="🤝" title="Acordo" description="(Falta o texto)" onClick={() => onInstrumentClick('acordo-pd&i')} />
+        <InstrumentCard accentColor="#08ba9c" iconBg="rgba(8,186,156,0.2)" icon="🤝" title="Acordo" description="Instrumento jurídico que  formaliza uma parceria entre instituições públicas  e entidades privadas, ICTs sem Transferência de Recursos" onClick={() => onInstrumentClick('acordo-pd&i')} />
       </div>
 
       {/* Row 2: Existe Risco · Há possibilidade · Contratação Direta */}
@@ -88,11 +88,7 @@ export function TrilhaFlowchart({ onInstrumentClick }) {
       </div>
 
       <div className="absolute z-[1]" style={{ left: 29, top: 290 }}>
-        <InstrumentCard accentColor="#dbaf00" iconBg="rgba(219,175,0,0.2)" icon="📇" title="Contratação Direta" description="Compra de um esforço de desenvolvimento de solução que ainda não existe no mercado e envolve alto risco tecnológico" onClick={() => onInstrumentClick('contratacao-direta')} />
-      </div>
-
-      <div className="absolute z-[1]" style={{ left: 859, top: 376 }}>
-        <InstrumentCard accentColor={BRAND_BLUE} iconBg="rgba(14,89,168,0.2)" icon="🖥️" title="Encomenda Tecnológica" description="Compra de um esforço de desenvolvimento de solução que ainda não existe no mercado e envolve alto risco tecnológico" onClick={() => onInstrumentClick('encomenda-tecnologica')} />
+        <InstrumentCard accentColor="#dbaf00" iconBg="rgba(219,175,0,0.2)" icon="📇" title="Contratação Direta" description="Aquisição de bens ou serviços pela administração pública com dispensa de licitação, quando a competição é inviável ou não é obrigatória, sendo uma exceção à regra geral de licitação" onClick={() => onInstrumentClick('contratacao-direta')} />
       </div>
 
       {/* Vertical: Não sei · Transferência */}
@@ -105,7 +101,7 @@ export function TrilhaFlowchart({ onInstrumentClick }) {
       </div>
 
       <div className="absolute z-[1]" style={{ left: 366, top: 650 }}>
-        <InstrumentCard accentColor="#6a0ea8" iconBg="rgba(106,14,168,0.2)" icon="🔄" title="Transferência Tecnológica não patenteada" description="Compra de um esforço de desenvolvimento de solução que ainda não existe no mercado e envolve alto risco tecnológico" width={204} onClick={() => onInstrumentClick('contrato-transferencia-tecnologia')} />
+        <InstrumentCard accentColor="#6a0ea8" iconBg="rgba(106,14,168,0.2)" icon="🔄" title="Transferência Tecnológica não patenteada" description="Formaliza a aquisição de conhecimentos técnicos, fórmulas ou processos secretos com valor de mercado, mas não protegidos por patente" width={204} onClick={() => onInstrumentClick('contrato-transferencia-tecnologia')} />
       </div>
     </div>
   )
