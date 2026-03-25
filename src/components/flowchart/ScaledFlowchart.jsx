@@ -24,7 +24,7 @@ export function ScaledFlowchart({ onInstrumentClick }) {
   }, [])
 
   return (
-    <div ref={containerRef} className="w-full overflow-hidden" style={{ height: FLOWCHART_HEIGHT * scale }}>
+    <div ref={containerRef} className="w-full [overflow:clip]" style={{ height: FLOWCHART_HEIGHT * scale }}>
       <div style={{ width: FLOWCHART_WIDTH, transformOrigin: 'top left', transform: `translateX(${offset}px) scale(${scale})` }}>
         <TrilhaFlowchart onInstrumentClick={onInstrumentClick} />
       </div>
