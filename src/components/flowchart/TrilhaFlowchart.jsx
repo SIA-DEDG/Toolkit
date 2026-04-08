@@ -75,6 +75,10 @@ export function TrilhaFlowchart({ onInstrumentClick }) {
         <StepCircle number="3" color={BRAND_BLUE} line="up" />
       </div>
 
+      <div className="absolute z-[1]" style={{ left: 858, top: 386 }}>
+        <InstrumentCard accentColor={BRAND_BLUE} iconBg="rgba(14,89,168,0.2)" icon="💻" title="Encomenda Tecnológica" description="Compra de um esforço de desenvolvimento de solução que ainda não existe no mercado e envolve alto risco tecnológico" onClick={() => onInstrumentClick('encomenda-tecnologica')} />
+      </div>
+
       <div className="absolute z-[1]" style={{ left: 758, top: 288 }}>
         <DecisionBox width={120} height={76} text="Existe Risco Tecnológico?" bg={BRAND_BG} />
       </div>

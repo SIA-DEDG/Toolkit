@@ -7,7 +7,7 @@ import { SectionBadge } from '../components/SectionBadge'
 import { InstrumentFlowCard } from '../components/InstrumentFlowCard'
 import { ScaledFlowchart } from '../components/flowchart/ScaledFlowchart'
 
-const HERO_BANNER_SRC = 'https://www.figma.com/api/mcp/asset/29bd93f3-7cdc-4145-96a7-cc8a6fddefbe'
+const HERO_BANNER_SRC = '/assets/home/banner.png'
 
 const RED          = 'rgba(168,37,14,0.6)'
 const RED_LIGHT    = 'rgb(190,91,74)'        // vermelho esbranquiçado — instrumentos fora da trilha
