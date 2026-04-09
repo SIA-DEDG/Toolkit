@@ -13,18 +13,15 @@ function lightenHex(hex, amount = 0.25) {
 
 export default function DownloadButton({ label = 'Baixar Documento', fileKey, filename, large = false, color }) {
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
   const addToast = useToastContext()
 
   async function handleClick() {
     if (!fileKey) return
     setLoading(true)
-    setError(null)
     try {
       await enqueueDownload(() => downloadFile(fileKey, filename))
       addToast('Download realizado com sucesso!', 'success')
     } catch (err) {
-      setError('Arquivo indisponível')
       addToast('Arquivo indisponível. Tente novamente.', 'error')
       console.error(err)
     } finally {
@@ -36,7 +33,7 @@ export default function DownloadButton({ label = 'Baixar Documento', fileKey, fi
     <div className="flex flex-col items-start gap-0.5">
       <button
         onClick={handleClick}
-        disabled={loading || !fileKey || !!error}
+        disabled={loading || !fileKey}
         className={[
           'mt-2 flex items-center justify-center gap-1.5',
           color
@@ -64,7 +61,6 @@ export default function DownloadButton({ label = 'Baixar Documento', fileKey, fi
         </svg>
         {loading ? 'Baixando...' : label}
       </button>
-      {error && <span className="text-[10px] text-red-500">{error}</span>}
     </div>
   )
 }

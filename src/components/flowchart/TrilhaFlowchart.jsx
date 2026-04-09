@@ -97,10 +97,10 @@ export function TrilhaFlowchart({ onInstrumentClick }) {
 
       {/* Vertical: Não sei · Transferência */}
       <div className="absolute z-[1]" style={{ left: 548, top: 536 }}>
-        <DecisionBox width={110} height={86} text="Não sei qual a pergunta" bg={BRAND_BG} />
+        <DecisionBox width={125} height={95} text="O objeto da parceria envolve a transferência de tecnologia não patenteada?" bg={BRAND_BG} />
       </div>
 
-      <div className="absolute z-[1]" style={{ left: 578, top: 619 }}>
+      <div className="absolute z-[1]" style={{ left: 578, top: 630 }}>
         <StepCircle number="5" color="#6a0ea8" line="up" />
       </div>
 
