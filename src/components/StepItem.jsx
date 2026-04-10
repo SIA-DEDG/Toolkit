@@ -29,9 +29,12 @@ export function StepItem({ card, accentColor, isLast }) {
           <div className="flex flex-col gap-0.5 mt-0.5">
             {card.subitems.map((item, i) => (
               <div key={i} className="flex gap-1.5 items-start">
-                <span className="font-bold text-[10px] shrink-0 leading-relaxed" style={{ color: accentColor }}>
-                  {item.number}.
-                </span>
+                {item.dote
+                  ? <span className="w-1.5 h-1.5 rounded-full shrink-0 mt-1" style={{ background: accentColor }} />
+                  : <span className="font-bold text-[10px] shrink-0 leading-relaxed" style={{ color: accentColor }}>
+                      {item.number}.
+                    </span>
+                }
                 <div className="flex flex-col">
                   <span className="font-semibold text-[10px] text-ink-sub leading-snug">{item.title}</span>
                   {item.description && (

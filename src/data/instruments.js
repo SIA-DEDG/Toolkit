@@ -44,19 +44,27 @@ export const INSTRUMENT_FLOWS = [
       {
         title: 'Autorizações',
         subitems: [
-          { number: '1', title: 'Análise prévia da CGE', 
-            description: 'Análise prévia da Controladoria Geral do Estado (CGE) em contratações de grandes valores e complexidade' },
-          { number: '2', 
-            title: 'Autorização da PGE', 
-            description: 'Procuradoria Geral do Estado para verificação' },
-          { number: '3', title: 'Autorização do Secretário da SEAD', 
-            description: 'Autorização do secretário da SEAD (secretário responsável pelas compras públicas) sobre o acordo de PD&I *verificar mudança para SIA' },
-          { number: '4', title: 'Autorização da SEFAZ', 
-            description: 'Secretaria de Estado da Fazenda devido a repasses de recursos' },
+          {
+            number: '1', title: 'Análise prévia da CGE',
+            description: 'Análise prévia da Controladoria Geral do Estado (CGE) em contratações de grandes valores e complexidade'
+          },
+          {
+            number: '2',
+            title: 'Autorização da PGE',
+            description: 'Procuradoria Geral do Estado para verificação'
+          },
+          {
+            number: '3', title: 'Autorização do Secretário da SEAD',
+            description: 'Autorização do secretário da SEAD (secretário responsável pelas compras públicas) sobre o acordo de PD&I *verificar mudança para SIA'
+          },
+          {
+            number: '4', title: 'Autorização da SEFAZ',
+            description: 'Secretaria de Estado da Fazenda devido a repasses de recursos'
+          },
         ],
       },
       { title: 'Indicação do Gestor no Acordo', description: 'Indicação do gestor do ente público sobre quem será o gestor do acordo via SEI' },
-      { title: 'Publicação no DOE', description: 'Publicação no Diário Oficial do Estado do Piauí' },
+      { title: 'Publicação no DOE e PNCP', description: 'Publicação no Diário Oficial do Estado do Piauí' },
     ],
   },
   {
@@ -66,7 +74,7 @@ export const INSTRUMENT_FLOWS = [
     href: '/convenio-pd&i',
     accentColor: '#209828',
     icon: '📋',
-    downloadKey: 'convenio-pd&i/Documento_Formalizacao_Demanda_PDI.docx',
+    downloadKey: '',
     cards: [
       {
         title: 'Início',
@@ -101,6 +109,10 @@ export const INSTRUMENT_FLOWS = [
         fileKey: 'convenio-pd&i/Planilha_Custos_Operacionais_PDI.xlsx'
       },
       {
+        title: 'Autorização do Órgão Interessado',
+        description: 'Autorização para celebração do convênio pela autoridade competente do órgão interessado'
+      },
+      {
         title: 'Autorização CGFR',
         description: 'Autorização da contratação pela Comissão de Gestão Financeira e Gestão por Resultados – CGFR'
       },
@@ -126,8 +138,8 @@ export const INSTRUMENT_FLOWS = [
         description: 'Indicação do gestor do convênio PD&I'
       },
       {
-        title: 'Publicação no DOE',
-        description: 'Publicação no Diário Oficial do Estado do Piauí pela SEGOV'
+        title: 'Publicação no DOE e PNCP',
+        description: 'Publicação do contrato pela SEGOV no Diário Oficial do Estado do Piauí'
       },
       {
         title: 'Registro da Publicação do Convênio (SIGRP)',
@@ -142,7 +154,7 @@ export const INSTRUMENT_FLOWS = [
     href: '/encomenda-tecnologica',
     accentColor: '#0e59a8',
     icon: '🖥️',
-    downloadKey: 'encomenda-tecnologica/1. Documento_Formalizacao_Demanda_PDI.docx',
+    downloadKey: '',
     cards: [
       {
         title: 'Início',
@@ -164,20 +176,33 @@ export const INSTRUMENT_FLOWS = [
         fileKey: 'encomenda-tecnologica/3. Mapa_de_Riscos_Contratacao.docx'
       },
       {
+        title: 'Ato de formação do Comitê Técnico de Especialistas',
+        description: 'O comitê de especialistas é facultativo. Se o contratante tiver capacidade técnica suficiente, não precisará constituir esse comitê.'
+      },
+      {
         title: 'Manifestação de Interesse',
         description: 'Manifestação de interesse, quando for o caso (art. 27, §4°, do Decreto Federal n. 9.283/2018)'
       },
       {
         title: 'Termo de Referência',
-        description: 'Minuta do Termo de Referência (art. 72, I, da Lei n. 14.133/2021; art. 17, V, do Decreto Estadual n. 21.872/2023)',
+        description: 'O termo deve apenas descrever as necessidades da Administração a fim de permitir que os interessados identifiquem a natureza do problema técnico existente e a visão global do produto, serviço ou processo inovador, sem a necessidade de detalhar previamente todas as especificações técnicas do objeto (art. 27, § 3º, do Decreto Federal nº 9.283/2018).',
         fileKey: 'encomenda-tecnologica/4. Termo_de_Referencia_PDI.docx'
       },
       {
         title: 'Autorizações',
         subitems: [
-          { number: '1', title: 'Aprovação do ETP, Mapa de Risco e Termo de Referência', description: 'Aprovação do ETP e do Mapa de riscos, se houver, e do termo de referência pela autoridade competente do órgão interessado' },
-          { number: '2', title: 'Análise Técnico Operacional da SEAD' },
-          { number: '3', title: 'Autorização do Conselho de Transformação Digital' },
+          {
+            number: '1', title: 'Aprovação do ETP, Mapa de Risco e Termo de Referência',
+            description: 'AprovFDação do ETP e do Mapa de riscos, se houver, e do termo de referência pela autoridade competente do órgão interessado'
+          },
+          {
+            number: '2', title: 'Análise Técnico Operacional da SEAD',
+            description: 'Caso se trate de contratação de soluções de Tecnologia da Informação e Comunicação – TIC (Art. 17, III, “f”, da Lei Estadual n. 7.884/2022);'
+          },
+          {
+            number: '3', title: 'Transformação Digital, Economia Digital, Inteligência Artificial e Inovação',
+            description: 'Caso se trate de contratação de soluções digitais (Art. 2º, II, da Lei n. 7.990/2023);'
+          },
         ],
       },
       {
@@ -187,6 +212,30 @@ export const INSTRUMENT_FLOWS = [
       {
         title: 'Autorização da Contratação pela CGFR',
         description: 'Minuta da Autorização da contratação pela Comissão de Gestão Financeira e Gestão por Resultados – CGFR'
+      },
+      {
+        title: 'Habilitação completa do fornecedor',
+        description: 'Habilitação jurídica, Qualificação técnica e econômico-financeira, Regularidade fiscal, social e trabalhista e Prova de que o fornecedor  não tenha sido declarado inidôneo ou suspenso no âmbito da União ou da Administração Estadual.'
+      },
+      {
+        title: 'Documentos de Justificativas',
+        subitems: [
+          { dote: true, title: 'Justificativa acerca da necessidade de contratação pelo órgão solicitante;' },
+          { dote: true, title: 'Descrição fundamentada da situação que justifica a contratação direta, indicando o fundamento legal (arts. 74 e 75 da Lei n. 14.133/2021);' },
+          { dote: true, title: 'Razões que motivaram a escolha do fornecedor;' },
+          { dote: true, title: 'Justificativa fundamentada quanto ao preço proposto, precedida de pesquisa de preços no mercado, se possível;' },
+        ]
+      },
+      {
+        title: 'Nota de Reserva',
+        description: '(art. 72, IV, Lei n. 14.133/2021; art. 52, Decreto Estadual n. 21.872/2023);'
+      },
+      {
+        title: 'Autorização para a celebração de contrato através de contratação direta pela autoridade competente do órgão interessado',
+        description: '(art. 72, VIII, Lei n. 14.133/2021; art. 17, VIII, e 53, do Decreto Estadual n. 21.872/2023);'
+      },
+      {
+        title: 'Declaração de utilização das minutas padronizadas da PGE, quando houver'
       },
       {
         title: 'Minuta do Contrato',
@@ -208,8 +257,8 @@ export const INSTRUMENT_FLOWS = [
         description: 'Indicação do fiscal do contrato ou comissão equivalente, preferencialmente, do setor que receberá o bem ou serviço'
       },
       {
-        title: 'Publicação no DOE',
-        description: 'Publicação no Diário Oficial do Estado do Piauí'
+        title: 'Publicação no DOE e PNCP e PNCP',
+        description: 'Publicação do contrato pela SEGOV no Diário Oficial do Estado do Piauí'
       },
       {
         title: 'Comunicação TCE',
@@ -224,7 +273,7 @@ export const INSTRUMENT_FLOWS = [
     href: '/contratacao-direta',
     accentColor: '#dbaf00',
     icon: '📇',
-    downloadKey: 'contratacao-direta/1. Documento_Formalizacao_Demanda_PDI.docx',
+    downloadKey: '',
     cards: [
       {
         title: 'Início',
@@ -232,7 +281,7 @@ export const INSTRUMENT_FLOWS = [
       },
       {
         title: 'Formalização da Demanda',
-        description: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria',
+        description: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria que evidencie e detalhe a necessidade administrativa do objeto a ser contratado (art. 18, I, da Lei n. 14.133/2021; art. 17, I, do Decreto Estadual n. 21.872/2023)',
         fileKey: 'contratacao-direta/1. Documento_Formalizacao_Demanda_PDI.docx'
       },
       {
@@ -257,8 +306,14 @@ export const INSTRUMENT_FLOWS = [
       {
         title: 'Autorizações',
         subitems: [
-          { number: '1', title: 'Análise Técnico-Operacional da SEAD' },
-          { number: '2', title: 'Autorização do Conselho de Transformação Digital' },
+          {
+            number: '1', title: 'Análise Técnico-Operacional da SEAD',
+            description: 'Caso se trate de contratação de soluções de Tecnologia da Informação e Comunicação – TIC (Art. 17, III, “f”, da Lei Estadual n. 7.884/2022);'
+          },
+          {
+            number: '2', title: 'Autorização do Conselho de Transformação Digital, Economia Digital, Inteligência Artificial e Inovação',
+            description: 'Caso se trate de contratação de soluções digitais (Art. 2º, II, da Lei n. 7.990/2023);'
+          },
         ],
       },
       {
@@ -271,11 +326,42 @@ export const INSTRUMENT_FLOWS = [
         subitems: [
           { number: '1', title: 'Aprovação do ETP e do mapa de Risco (se houver)' },
           { number: '2', title: 'Aprovação do Orçamento estimado' },
-          { number: '3', title: 'Aprovação do Termo de Referência' },
+          { number: '3', title: 'Aprovação do Termo de Referência pela autoridade competente do órgão interessado (art. 18 do Decreto Estadual n. 21.872/2023)' },
           { number: '4', title: 'Autorização de Contratação da CGFR' },
         ],
       },
-      { title: 'Minuta do Contrato', description: 'Minuta de Contrato ou instrumento equivalente', fileKey: 'contratacao-direta/7. Proposta_Comercial_ETEC_Modelo.docx' },
+      {
+        title: 'Declaração de exclusividade expedida pela entidade competente',
+        description: 'No caso de inexigibilidade de licitação em razão de produtor, empresa ou representante comercial exclusivos (art. 74, § 1º, Lei n. 14.133/2021);'
+      },
+      {
+        title: 'Habilitação completa do fornecedor',
+        description: 'Habilitação jurídica, Qualificação técnica e econômico-financeira, Regularidade fiscal, social e trabalhista e Prova de que a contratada não tenha sido declarado inidôneo ou suspenso no âmbito da União ou da Administração Estadual'
+      },
+      {
+        title: 'Documentos de Justificativas',
+        subitems: [
+          { dote: true, title: 'Justificativa acerca da necessidade de contratação pelo órgão solicitante;' },
+          { dote: true, title: 'Descrição fundamentada da situação que justifica a contratação direta, indicando o fundamento legal (arts. 74 e 75 da Lei n. 14.133/2021);' },
+          { dote: true, title: 'Razões que motivaram a escolha do fornecedor;' },
+          { dote: true, title: 'Justificativa fundamentada quanto ao preço proposto, precedida de pesquisa de preços no mercado, se possível.' }
+        ]
+      },
+      {
+        title: 'Nota de Reserva',
+        description: '(art. 72, IV, Lei n. 14.133/2021; art. 52, Decreto Estadual n. 21.872/2023);'
+      },
+      {
+        title: 'Autorização para a celebração de contrato através de contratação direta pela autoridade competente do órgão interessado',
+        description: '(art. 72, VIII, Lei n. 14.133/2021; art. 17, VIII, e 53, do Decreto Estadual n. 21.872/2023);'
+      },
+      {
+        title: 'Declaração de utilização das minutas padronizadas da PGE',
+      },
+      {
+        title: 'Minuta do Contrato ou instrumento equivalente',
+        description: 'Minuta de Contrato ou instrumento equivalente',
+      },
       {
         title: 'Autorizações',
         subitems: [
@@ -291,7 +377,7 @@ export const INSTRUMENT_FLOWS = [
         description: 'Minuta de Contrato ou instrumento equivalente'
       },
       {
-        title: 'Publicação no DOE',
+        title: 'Publicação no DOE e PNCP',
         description: 'Publicação do contrato pela SEGOV no Diário Oficial do Estado do Piauí'
       },
       {
@@ -335,12 +421,32 @@ export const INSTRUMENT_FLOWS = [
       {
         title: 'Exame e Parecer Técnico do NIT',
         description: 'Exame e parecer técnico do Núcleo de Inovação Tecnológica – NIT',
-        note: 'Caso a contratação preveja cláusula de exclusividade, informar se houve a manifestação de outros potenciais parceiros tecnológicos em site eletrônico oficial da ICT e se foram atendidos os §§ 1º, 4º, art. 75 do Decreto n. 10.534 / Decreto 23.676/PI'
       },
-      { title: 'Habilitação da ICT ou Empresa' },
+      {
+        note: 'Caso a contratação preveja cláusula de exclusividade, informar se houve a publicação prévia de extrato de oferta tecnológica em sítio eletrônico oficial da ICT e se foram atendidos os §§ 1º, 4º, 6º, 7º e 8º do art. 12 do Decreto nº 9.283/18;'
+      },
+      {
+        title: 'Habilitação da ICT ou Empresa',
+        description: 'Habilitação jurídica, Qualificação técnica e econômico-financeira, Regularidade fiscal, social e trabalhista e Prova de que a empresa ou ICT privada não tenha sido declarada inidônea ou suspensa no âmbito da União ou da Administração Estadual'
+      },
+      {
+        title: 'Documento Fundação de Apoio quando houver interveniência'
+      },
+      {
+        title: 'Documentos de Justificativas',
+        subitems: [
+          { dote: true, title: 'Justificativa acerca da necessidade de contratação pelo órgão solicitante;' },
+          { dote: true, title: 'Descrição fundamentada da situação que justifica a contratação direta, indicando o fundamento legal (arts. 74 e 75, da Lei n. 14.133/2021);' },
+          { dote: true, title: 'Razões que motivaram a escolha da empresa ou ICT privada;' },
+          { dote: true, title: 'Justificativa fundamentada quanto ao preço proposto, precedida de pesquisa de preços no mercado, se possível.' }
+        ]
+      },
+      {
+        title: 'Autorização para a celebração de contrato através de contratação direta pela autoridade competente do órgão interessado',
+        description: '(art. 72, VIII, Lei n. 14.133/2021; art. 17, VIII, e 53, do Decreto Estadual n. 21.872/2023);'
+      },
       {
         title: 'Plano de Trabalho',
-        description: 'Plano de trabalho do convênio entre as instituições contendo a descrição das atividades, objetivos e metas do convênio'
       },
       { title: 'Minuta do Contrato' },
       {
@@ -349,12 +455,14 @@ export const INSTRUMENT_FLOWS = [
           { number: '1', title: 'Autorização da CGE' },
           { number: '2', title: 'Autorização da PGE' },
           { number: '3', title: 'Autorização do Secretário da SEAD' },
-          { number: '4', title: 'Autorização da SEFAZ' },
         ],
       },
-      { title: 'Indicação do Fiscal do Contrato ou Comissão' },
       {
-        title: 'Publicação no DOE',
+        title: 'Indicação do Fiscal do Contrato ou Comissão equivalente',
+        description: 'preferencialmente, do setor que receberá o bem ou serviço (art. 117 c/c 7º da Lei n. 14.133/2021; arts. 65 a 67 do Decreto Estadual n. 21.872/2023);'
+      },
+      {
+        title: 'Publicação no DOE e PNCP',
         description: 'Publicação no Diário Oficial do Estado do Piauí'
       },
       {
