@@ -11,7 +11,7 @@ try {
   supabase = null
 }
 
-const BUCKET = import.meta.env.VITE_SUPABASE_BUCKET || 'toolkit-docs'
+const BUCKET = import.meta.env.VITE_SUPABASE_BUCKET || 'sia-arquivos'
 
 export async function downloadFile(fileKey, filename) {
   if (!supabase) throw new Error('Serviço de arquivos indisponível')

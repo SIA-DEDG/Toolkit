@@ -49,25 +49,25 @@ export function TrilhaFlowchart({ onInstrumentClick }) {
 
       {/* Row 1: Convênio · Haverá repasse · Acordo */}
       <div className="absolute z-[1]" style={{ left: 710, top: 74 }}>
-        <InstrumentCard accentColor="#209828" iconBg="rgba(32,152,40,0.2)" icon="📋" title="Convênio" description="Instrumento jurídico que formaliza uma parceria entre instituições públicas  e entidades privadas, ICTs com Transferência de Recursos" onClick={() => onInstrumentClick('convenio-pd&i')} />
+        <InstrumentCard accentColor="#08ba9c" iconBg="rgba(8,186,156,0.2)" icon="🤝" title="Acordo" description="Instrumento jurídico que  formaliza uma parceria entre instituições públicas  e entidades privadas, ICTs sem Transferência de Recursos" onClick={() => onInstrumentClick('acordo-pd&i')} />
       </div>
 
-      <div className="absolute z-[1] flex flex-col items-start" style={{ left: 918, top: 100 }}>
-        <span className="text-xs text-brand ml-14 mb-0.5">Sim</span>
-        <StepCircle number="1" color="#209828" line="right" />
+      <div className="absolute z-[1] flex flex-col items-center" style={{ left: 918, top: 100 }}>
+        <span className="relative top-[20px] text-xs text-brand ml-12 mb-0.5">Não</span>
+        <StepCircle number="1" color="#08ba9c" line="right" />
       </div>
 
       <div className="absolute z-[1]" style={{ left: 999, top: 94 }}>
         <DecisionBox width={110} height={86} text="Haverá repasse de recursos públicos" bg={BRAND_BG} />
       </div>
 
-      <div className="absolute z-[1] flex flex-col items-end" style={{ left: 1109, top: 100 }}>
-        <span className="text-xs text-brand mr-12 mb-0.5">Não</span>
-        <StepCircle number="2" color="#08ba9c" line="left" />
+      <div className="absolute z-[1] flex flex-col items-center" style={{ left: 1109, top: 100 }}>
+        <span className="relative top-[20px] text-xs text-brand mr-12 mb-0.5">Sim</span>
+        <StepCircle number="2" color="#209828" line="left" />
       </div>
 
       <div className="absolute z-[1]" style={{ left: 1199, top: 74 }}>
-        <InstrumentCard accentColor="#08ba9c" iconBg="rgba(8,186,156,0.2)" icon="🤝" title="Acordo" description="Instrumento jurídico que  formaliza uma parceria entre instituições públicas  e entidades privadas, ICTs sem Transferência de Recursos" onClick={() => onInstrumentClick('acordo-pd&i')} />
+        <InstrumentCard accentColor="#209828" iconBg="rgba(32,152,40,0.2)" icon="📋" title="Convênio" description="Instrumento jurídico que formaliza uma parceria entre instituições públicas  e entidades privadas, ICTs com Transferência de Recursos" onClick={() => onInstrumentClick('convenio-pd&i')} />
       </div>
 
       {/* Row 2: Existe Risco · Há possibilidade · Contratação Direta */}

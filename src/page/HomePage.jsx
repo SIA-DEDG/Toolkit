@@ -155,11 +155,11 @@ export default function HomePage() {
       >
         <SectionBadge>Fluxos de Internos</SectionBadge>
 
-        <h2 className="font-semibold text-[clamp(18px,2vw,24px)] text-ink-mid my-[clamp(12px,2vw,20px)] mb-[clamp(6px,1vw,10px)]">
+        <h2 className="font-semibold text-2xl text-ink-mid m-0 leading-snug">
           Passo a passo de cada instrumento
         </h2>
 
-        <p className="font-light text-[clamp(14px,1.4vw,18px)] text-ink-mid mb-[clamp(20px,3vw,32px)] mt-0">
+        <p className="font-light text-sm text-ink-mid mb-[clamp(20px,3vw,32px)] mt-0">
           Selecione um Instrumento e explore seu fluxo
         </p>
 
@@ -177,7 +177,6 @@ export default function HomePage() {
               ))}
             </div>
 
-            {/* 2ª linha com 2 cards centralizada para manter simetria visual com a 1ª linha de 3 */}
             <div className="max-w-[810px] mx-auto grid grid-cols-2 gap-[clamp(14px,2vw,20px)] items-start">
               {INSTRUMENT_FLOWS.slice(3).map((flow) => (
                 <InstrumentFlowCard key={flow.id} {...flow} openIds={openIds} onToggle={handleToggle} />
