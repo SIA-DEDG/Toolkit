@@ -58,7 +58,7 @@ export function TrilhaFlowchart({ onInstrumentClick }) {
       </div>
 
       <div className="absolute z-[1]" style={{ left: 999, top: 94 }}>
-        <DecisionBox width={110} height={86} text="Haverá repasse de recursos públicos" bg={BRAND_BG} />
+        <DecisionBox width={110} height={86} text="Haverá repasse de recursos públicos?" bg={BRAND_BG} />
       </div>
 
       <div className="absolute z-[1] flex flex-col items-center" style={{ left: 1109, top: 100 }}>
