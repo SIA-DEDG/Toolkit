@@ -107,6 +107,20 @@ export function TrilhaFlowchart({ onInstrumentClick }) {
       <div className="absolute z-[1]" style={{ left: 366, top: 650 }}>
         <InstrumentCard accentColor="#6a0ea8" iconBg="rgba(106,14,168,0.2)" icon="🔄" title="Transferência Tecnológica não patenteada" description="Formaliza a aquisição de conhecimentos técnicos, fórmulas ou processos secretos com valor de mercado, mas não protegidos por patente" width={204} onClick={() => onInstrumentClick('contrato-transferencia-tecnologia')} />
       </div>
+
+      {/* Card 6: Pitches e Hackatons */}
+      <div className="absolute z-[1]" style={{ left: 710, top: 640 }}>
+        <DecisionBox width={180} height={76} text="Envolve inovação aberta (pitch/hackathon)?" bg={BRAND_BG} />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 890, top: 650 }}>
+        <StepCircle number="6" color="rgb(0,162,127)" line="left" />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 900, top: 710 }}>
+        <InstrumentCard accentColor="rgb(0,162,127)" iconBg="rgba(0,162,127,0.2)" icon="💡" title="Pitches e Hackatons" description="Metodologia exploratória para identificar soluções inovadoras por meio de competições abertas, com possibilidade de contratação futura (CPSI – Lei 14.133/21, art. 75, IV)" onClick={() => onInstrumentClick('pitch-hackton')} />
+      </div>
+
     </div>
   )
 }

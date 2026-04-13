@@ -18,7 +18,7 @@ const COLOR_OFF_TRACK = 'rgb(190,91,74)'
 const INSTRUMENT_PILLS = [
   { label: 'Acordo de PD&I',                                  color: '#08ba9c',      icon: '🤝', iconBg: 'rgba(47,255,220,0.2)'  },
   { label: 'Convênio de PD&I',                                color: '#209828',      icon: '📋', iconBg: 'rgba(31,255,38,0.2)'   },
-  { label: 'Pitches e Hackatons',                             color: COLOR_OFF_TRACK, icon: '💡', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Pitches e Hackatons',                             color: 'rgb(0, 162, 127)', icon: '💡', iconBg: 'rgba(255,255,255,0.2)' },
   { label: 'PMI - Procedimento de Manifestação de Interesse', color: COLOR_OFF_TRACK, icon: '📌', iconBg: 'rgba(255,255,255,0.2)' },
   { label: 'Diálogo Competitivo',                             color: COLOR_OFF_TRACK, icon: '💬', iconBg: 'rgba(255,255,255,0.2)' },
   { label: 'ETEC - Encomenda Tecnológica',                    color: '#0e59a8',      icon: '🖥️', iconBg: 'rgba(219,175,0,0.2)'   },
@@ -82,7 +82,7 @@ function IntroSection() {
           acordos e outros instrumentos jurídicos voltados à
           implementação do Marco Legal de Ciência, Tecnologia e Inovação
           no Estado do Piauí. <br />
-          A plataforma disponibiliza materiais de apoio que
+          A trilha disponibiliza materiais de apoio que
           abrangem desde compras públicas de inovação até outras
           alternativas legais, como iniciativas de pesquisa,
           desenvolvimento e inovação (PD&I), com foco em ampliar a
@@ -93,6 +93,7 @@ function IntroSection() {
           Secretaria de Inteligência Artificial, Economia Digital,
           Ciência, Tecnologia e Inovação (SIA) e validados pela
           Procuradoria-Geral do Estado.<br />
+          Conteúdos elaborados de forma colaborativa para SIA e PGE.<br />
         </p>
       </div>
 
@@ -136,7 +137,7 @@ function IdentificationSection() {
         <div className="flex gap-[clamp(16px,2vw,32px)] flex-wrap">
           <IdentificationCard
             title="Precisa <span class='font-extrabold'>entender</span> a solução mais apropriada para o seu desafio e qual o instrumento mais adequado?"
-            description="O link abaixo da <strong>INOVACPIN</strong> contém uma trilha de planejamento e um quiz para lhe direcionar em qual seria o instrumento de inovação."
+            description="Acesse o link da <strong>CPIN</strong> que contém uma trilha de planejamento e um quiz para lhe direcionar em qual seria o instrumento de inovação."
             action={
               <a
                 href="https://inovacpin.org/trilha/planejamento/etapa/8"
@@ -152,7 +153,7 @@ function IdentificationSection() {
           />
 
           <IdentificationCard
-            title="Sabe qual procedimento e instrumento quer utilizar para inovação?"
+            title="Você já sabe qual instrumento usar para implementar sua inovação?"
             description="Esta trilha contém os instrumentos do Toolkit para inovação. O uso dos instrumentos é independente, permitindo a escolha da solução mais adequada para o problema identificado."
             action={
               <button
@@ -183,7 +184,7 @@ function DesktopFlowGrid({ openIds, onToggle }) {
         ))}
       </div>
 
-      <div className="max-w-[810px] mx-auto grid grid-cols-2 gap-[clamp(14px,2vw,20px)] items-start">
+      <div className="max-w-[1200px] mx-auto grid grid-cols-3 gap-[clamp(14px,2vw,20px)] items-start">
         {remaining.map((flow) => (
           <InstrumentFlowCard key={flow.id} {...flow} openIds={openIds} onToggle={onToggle} />
         ))}
