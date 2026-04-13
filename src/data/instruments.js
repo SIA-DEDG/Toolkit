@@ -452,6 +452,7 @@ export const INSTRUMENT_FLOWS = [
       },
       {
         title: 'Plano de Trabalho',
+        fileKey: 'contrato-transferencia-tecnologia/Modelo_Plano_de_Trabalho_PDI.docx'
       },
       { title: 'Minuta do Contrato',
         fileKey: 'contrato-transferencia-tecnologia/5. Minuta_Contrato_Transferencia_Tecnologia.docx'
