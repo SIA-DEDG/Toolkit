@@ -108,12 +108,12 @@ function IntroSection() {
 function IdentificationCard({ title, description, action }) {
   return (
     <div className="flex-[1_1_260px] max-w-[600px] bg-brand rounded-lg p-[clamp(14px,2vw,20px)] flex flex-col gap-[clamp(8px,1.5vw,14px)]">
-      <p className="font-semibold text-[clamp(11px,1vw,13px)] text-white text-justify m-0 leading-snug">
-        {title}
-      </p>
-      <p className="font-light text-[clamp(10px,0.9vw,12px)] text-white/90 text-justify m-0 flex-1 leading-relaxed">
-        {description}
-      </p>
+      <p className="font-semibold text-[clamp(11px,1vw,13px)] text-white text-justify m-0 leading-snug"
+        dangerouslySetInnerHTML={{ __html: title }}
+      />
+      <p className="font-light text-[clamp(10px,0.9vw,12px)] text-white/90 text-justify m-0 flex-1 leading-relaxed"
+        dangerouslySetInnerHTML={{ __html: description }}
+      />
       {action}
     </div>
   )
@@ -135,8 +135,8 @@ function IdentificationSection() {
 
         <div className="flex gap-[clamp(16px,2vw,32px)] flex-wrap">
           <IdentificationCard
-            title="Precisa entender a solução mais apropriada para o seu desafio e qual o instrumento mais adequado para a contratação?"
-            description="O link abaixo da inovacpin contém uma trilha de planejamento e um quiz para lhe direcionar em qual seria o instrumento de inovação."
+            title="Precisa <span class='font-extrabold'>entender</span> a solução mais apropriada para o seu desafio e qual o instrumento mais adequado?"
+            description="O link abaixo da <strong>INOVACPIN</strong> contém uma trilha de planejamento e um quiz para lhe direcionar em qual seria o instrumento de inovação."
             action={
               <a
                 href="https://inovacpin.org/trilha/planejamento/etapa/8"

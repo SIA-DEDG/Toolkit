@@ -7,6 +7,10 @@
   box-sizing: border-box;
 }
 
+strong {
+  font-weight: 700;
+}
+
 html {
   overscroll-behavior: none;
   background-color: #90CDF4;

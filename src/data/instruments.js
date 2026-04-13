@@ -18,7 +18,7 @@ export const INSTRUMENT_FLOWS = [
         fileKey: 'acordo-pd&i/Documento_Formalizacao_Demanda_PDI.docx'
       },
       {
-        title: 'Manifestação Técnica ou NIT',
+        title: 'Manifestação Técnica ou do NIT',
         description: 'Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n. 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados',
         fileKey: 'acordo-pd&i/Manifestacao_Tecnica_PDI.docx'
       },
@@ -86,7 +86,7 @@ export const INSTRUMENT_FLOWS = [
         fileKey: 'convenio-pd&i/Documento_Formalizacao_Demanda_PDI.docx'
       },
       {
-        title: 'Manifestação Técnica ou NIT',
+        title: 'Manifestação Técnica ou do NIT',
         description: 'Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n. 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados', fileKey: 'convenio-pd&i/Manifestacao_Tecnica_PDI.docx'
       },
       {
@@ -401,19 +401,23 @@ export const INSTRUMENT_FLOWS = [
       },
       {
         title: 'Formalização da Demanda',
-        description: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria'
+        description: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria',
+        fileKey: 'contrato-transferencia-tecnologia/1. Documento_Formalizacao_Demanda_PDI.docx'
       },
       {
         title: 'Estudo Técnico Preliminar',
-        description: 'Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n. 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados'
+        description: 'Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n. 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados',
+        fileKey: 'contrato-transferencia-tecnologia/2. Estudo Preliminar_Encomenda_Tecnologica.docx'
       },
       {
         title: 'Mapa de Risco',
-        description: 'Planejamento que identifica, analisa e propõe o tratamento de eventos que possam comprometer a licitação ou a execução contratual.'
+        description: 'Planejamento que identifica, analisa e propõe o tratamento de eventos que possam comprometer a licitação ou a execução contratual.',
+        fileKey: 'contrato-transferencia-tecnologia/3. Mapa_de_Riscos_Contratacao.docx'
       },
       {
         title: 'Termo de Referência',
-        description: 'O Termo de Referência (TR) ou projeto básico contendo a justificativa, a necessidade da administração, o objeto, prazos, custos estimados, entre outros'
+        description: 'O Termo de Referência (TR) ou projeto básico contendo a justificativa, a necessidade da administração, o objeto, prazos, custos estimados, entre outros',
+        fileKey: 'contrato-transferencia-tecnologia/4. Termo_de_Referencia_PDI.docx'
       },
       {
         title: 'Aprovações',
@@ -449,7 +453,9 @@ export const INSTRUMENT_FLOWS = [
       {
         title: 'Plano de Trabalho',
       },
-      { title: 'Minuta do Contrato' },
+      { title: 'Minuta do Contrato',
+        fileKey: 'contrato-transferencia-tecnologia/5. Minuta_Contrato_Transferencia_Tecnologia.docx'
+      },
       {
         title: 'Autorizações',
         subitems: [
