@@ -193,7 +193,7 @@ export const INSTRUMENT_FLOWS = [
         subitems: [
           {
             number: '1', title: 'Aprovação do ETP, Mapa de Risco e Termo de Referência',
-            description: 'AprovFDação do ETP e do Mapa de riscos, se houver, e do termo de referência pela autoridade competente do órgão interessado'
+            description: 'Aprovação do ETP e do Mapa de riscos, se houver, e do termo de referência pela autoridade competente do órgão interessado'
           },
           {
             number: '2', title: 'Análise Técnico Operacional da SEAD',
@@ -257,7 +257,7 @@ export const INSTRUMENT_FLOWS = [
         description: 'Indicação do fiscal do contrato ou comissão equivalente, preferencialmente, do setor que receberá o bem ou serviço'
       },
       {
-        title: 'Publicação no DOE e PNCP e PNCP',
+        title: 'Publicação no DOE e PNCP',
         description: 'Publicação do contrato pela SEGOV no Diário Oficial do Estado do Piauí'
       },
       {
@@ -393,6 +393,7 @@ export const INSTRUMENT_FLOWS = [
     href: '/contrato-transferencia-tecnologia',
     accentColor: '#6a0ea8',
     icon: '🔄',
+    downloadKey: '',
     cards: [
       {
         title: 'Início',
