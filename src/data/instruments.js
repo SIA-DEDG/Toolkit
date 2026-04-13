@@ -479,4 +479,13 @@ export const INSTRUMENT_FLOWS = [
       },
     ],
   },
+  {
+    id: 'pitch-hackton',
+    title: 'Transferência Tecnológica',
+    subtitle: 'Know-how interno · Instrumento 5',
+    href: '/contrato-transferencia-tecnologia',
+    accentColor: '#6a0ea8',
+    icon: '🔄',
+    downloadKey: '',
+  }
 ]
