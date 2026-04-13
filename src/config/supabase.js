@@ -16,20 +16,17 @@ const BUCKET = import.meta.env.VITE_SUPABASE_BUCKET || 'sia-arquivos'
 export async function downloadFile(fileKey, filename) {
   if (!supabase) throw new Error('Serviço de arquivos indisponível')
 
-  const { data, error } = await supabase.storage
+  const { data } = supabase.storage
     .from(BUCKET)
-    .download(fileKey)
+    .getPublicUrl(fileKey)
 
-  if (error || !data) {
-    throw new Error(`Arquivo não encontrado: ${fileKey}`)
-  }
+  const check = await fetch(data.publicUrl, { method: 'HEAD' })
+  if (!check.ok) throw new Error(`Arquivo não encontrado: ${fileKey}`)
 
-  const objectUrl = URL.createObjectURL(data)
   const a = document.createElement('a')
-  a.href = objectUrl
+  a.href = data.publicUrl
   a.download = filename || fileKey.split('/').pop()
   document.body.appendChild(a)
   a.click()
   a.remove()
-  setTimeout(() => URL.revokeObjectURL(objectUrl), 1000)
 }
