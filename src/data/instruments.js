@@ -14,12 +14,12 @@ export const INSTRUMENT_FLOWS = [
       },
       {
         title: 'Formalização da Demanda',
-        description: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria',
+        description: 'Registrar a demanda no SEI, com envio pelo gabinete do órgão e formalização da parceria.',
         fileKey: 'acordo-pd&i/Documento_Formalizacao_Demanda_PDI.docx'
       },
       {
         title: 'Manifestação Técnica ou do NIT',
-        description: 'Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n. 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados',
+        description: 'Análise técnica da parceria, indicando como ela se enquadra na Lei de Inovação, quem será dono da propriedade intelectual e como os resultados serão compartilhados.',
         fileKey: 'acordo-pd&i/Manifestacao_Tecnica_PDI.docx'
       },
       {
@@ -33,12 +33,8 @@ export const INSTRUMENT_FLOWS = [
         fileKey: 'acordo-pd&i/Planilha_Custos_Operacionais_PDI.xlsx'
       },
       {
-        title: 'Autorização da Contratação (CGFR)',
-        description: 'Autorização da contratação pela Comissão de Gestão Financeira e Gestão por Resultados (CGFR). Caso haja recurso financeiro do ente público: Convênio. Caso contrário: Acordo.'
-      },
-      {
         title: 'Acordo de Parceria',
-        description: 'Documento do Acordo de Parceria Firmado (Privado, Público, Fundação de Apoio)',
+        description: 'Documento do acordo de parceria firmado com a instituição envolvida.',
         fileKey: 'acordo-pd&i/Minuta_Acordo_Parceria_PDI.docx'
       },
       {
@@ -481,11 +477,84 @@ export const INSTRUMENT_FLOWS = [
   },
   {
     id: 'pitch-hackton',
-    title: 'Transferência Tecnológica',
-    subtitle: 'Know-how interno · Instrumento 5',
-    href: '/contrato-transferencia-tecnologia',
-    accentColor: '#6a0ea8',
-    icon: '🔄',
+    title: 'Pitches e Hackatons',
+    subtitle: 'CPSI (Lei 14.133/21) · Instrumento 6',
+    href: '/pitch-hackton',
+    accentColor: 'rgb(0, 162, 127)',
+    icon: '💡',
     downloadKey: '',
+    cards: [
+      {
+        title: 'Início',
+        description: 'Identificação de necessidade pública passível de solução inovadora por meio de pitch ou hackathon'
+      },
+      {
+        title: 'Documento de Formalização da Demanda (DFD simplificado)',
+        description: 'Baseado no DFD e justificativa do modelo PD&I',
+        fileKey: 'pitches_e_hackatons/01_DFD_Simplificado_Revisado.docx',
+        subitems: [
+          { dote: true, title: 'Problema público claro (ex: violência, pobreza, saúde)' },
+          { dote: true, title: 'Justificativa de uso de inovação (não solução pronta)' },
+          { dote: true, title: 'Indicação de abordagem exploratória (pitch/hackathon)' },
+        ]
+      },
+      {
+        title: 'Enquadramento Jurídico',
+        subitems: [
+          { dote: true, title: 'CPSI (Lei 14.133/21, art. 75, IV / contratação por inovação)' },
+          { dote: true, title: 'Lei de Inovação (Lei 10.973/2004)' },
+          { dote: true, title: 'Sandbox regulatório (se aplicável)' },
+          { dote: true, title: 'Acordo de cooperação (quando não há pagamento)' },
+        ]
+      },
+      {
+        title: 'Manifestação do NIT / Área Técnica',
+        subitems: [
+          { dote: true, title: 'Validação do problema' },
+          { dote: true, title: 'Indicação de viabilidade técnica' },
+          { dote: true, title: 'Risco tecnológico' },
+        ]
+      },
+      {
+        title: 'Plano de Trabalho do Hackathon / Pitch',
+        description: 'Equivalente ao "Plano de Trabalho" do PD&I — define escopo, objetivos e cronograma do evento',
+        fileKey: 'pitches_e_hackatons/02_Plano_de_Trabalho_PDI_Revisado.docx'
+      },
+      {
+        title: 'Termo de Referência Simplificado / Regulamento',
+        subitems: [
+          { dote: true, title: 'Objetivo do desafio' },
+          { dote: true, title: 'Escopo do problema' },
+          { dote: true, title: 'Entregáveis esperados (protótipo, MVP, modelo)' },
+          { dote: true, title: 'Metodologia (design thinking, dados, IA, etc.)' },
+          { dote: true, title: 'Possibilidade de contratação futura' },
+          { dote: true, title: 'Acesso a dados ou infraestrutura' },
+        ]
+      },
+      {
+        title: 'Cronograma (pitch → hackathon → teste)',
+        fileKey: 'pitches_e_hackatons/03_Cronograma_Revisado.docx'
+      },
+      {
+        title: 'Critérios de Avaliação',
+        fileKey: 'pitches_e_hackatons/04_Criterios_de_Avaliacao_Revisado.docx'
+      },
+      {
+        title: 'Plano de Execução',
+        fileKey: 'pitches_e_hackatons/05_Plano_de_Execucao_Revisado.docx'
+      },
+      {
+        title: 'Etapas do Hackathon / Pitch',
+        subitems: [
+          { number: '1', title: 'Inscrição' },
+          { number: '2', title: 'Seleção' },
+          { number: '3', title: 'Pitch' },
+          { number: '4', title: 'Hackathon' },
+          { number: '5', title: 'Demo Day' },
+          { number: '6', title: 'Definição de incentivos' },
+          { number: '7', title: 'Premiação (financeira ou não)' },
+        ]
+      },
+    ]
   }
 ]
