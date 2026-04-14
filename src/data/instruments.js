@@ -55,10 +55,14 @@ export const INSTRUMENT_FLOWS = [
           },
         ],
       },
-      { title: 'Indicação do Gestor no Acordo', 
-        description: 'Indicação do gestor do ente público sobre quem será o gestor do acordo via SEI' },
-      { title: 'Publicação no Diário Oficial do Estado do Piauí (DOE) e no PNCP (Portal Nacional de Contratações Públicas)', 
-        description: 'Publicação no Diário Oficial do Estado do Piauí' },
+      {
+        title: 'Indicação do Gestor no Acordo',
+        description: 'Indicação do gestor do ente público sobre quem será o gestor do acordo via SEI'
+      },
+      {
+        title: 'Publicação no Diário Oficial do Estado do Piauí (DOE) e no PNCP (Portal Nacional de Contratações Públicas)',
+        description: 'Publicação no Diário Oficial do Estado do Piauí'
+      },
     ],
   },
   {
@@ -81,7 +85,7 @@ export const INSTRUMENT_FLOWS = [
       },
       {
         title: 'Manifestação Técnica ou do NIT',
-        description: 'Análise técnica da parceria, indicando como ela se enquadra na Lei de Inovação, quem será dono da propriedade intelectual e como os resultados serão compartilhados.', 
+        description: 'Análise técnica da parceria, indicando como ela se enquadra na Lei de Inovação, quem será dono da propriedade intelectual e como os resultados serão compartilhados.',
         fileKey: 'convenio-pd&i/Manifestacao_Tecnica_PDI.docx'
       },
       {
@@ -249,11 +253,19 @@ export const INSTRUMENT_FLOWS = [
       {
         title: 'Autorizações',
         subitems: [
-          { number: '1', title: 'Análise prévia da CGE' },
-          { number: '2', title: 'Parecer PGE' },
-          { number: '3', title: 'Autorização do Secretário da SEAD' },
-          { number: '4', title: 'Parecer SEFAZ' },
-          { number: '5', title: 'Análise Final pelo controle final do órgão' },
+          {
+            number: '1',
+            title: 'Autorização da PGE',
+            description: 'Procuradoria Geral do Estado para verificação'
+          },
+          {
+            number: '2', title: 'Autorização do Secretário da SEAD',
+            description: 'Autorização do secretário da SEAD (secretário responsável pelas compras públicas) sobre o acordo de PD&I *verificar mudança para SIA'
+          },
+          {
+            number: '3', title: 'Autorização da SEFAZ',
+            description: 'Secretaria de Estado da Fazenda devido a repasses de recursos'
+          },
         ],
       },
       {
@@ -369,10 +381,19 @@ export const INSTRUMENT_FLOWS = [
       {
         title: 'Autorizações',
         subitems: [
-          { number: '1', title: 'Análise Prévia da CGE' },
-          { number: '2', title: 'Parecer PGE' },
-          { number: '3', title: 'Autorização do Secretário da SEAD' },
-          { number: '4', title: 'Parecer SEFAZ' },
+          {
+            number: '1',
+            title: 'Autorização da PGE',
+            description: 'Procuradoria Geral do Estado para verificação'
+          },
+          {
+            number: '2', title: 'Autorização do Secretário da SEAD',
+            description: 'Autorização do secretário da SEAD (secretário responsável pelas compras públicas) sobre o acordo de PD&I *verificar mudança para SIA'
+          },
+          {
+            number: '3', title: 'Autorização da SEFAZ',
+            description: 'Secretaria de Estado da Fazenda devido a repasses de recursos'
+          },
           { number: '5', title: 'Análise Final do Procedimento pelo controle interno do órgão' },
         ],
       },
@@ -458,7 +479,8 @@ export const INSTRUMENT_FLOWS = [
         title: 'Plano de Trabalho',
         fileKey: 'contrato-transferencia-tecnologia/Modelo_Plano_de_Trabalho_PDI.docx'
       },
-      { title: 'Minuta do Contrato',
+      {
+        title: 'Minuta do Contrato',
         fileKey: 'contrato-transferencia-tecnologia/5. Minuta_Contrato_Transferencia_Tecnologia.docx'
       },
       {
