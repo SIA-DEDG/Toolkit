@@ -483,7 +483,7 @@ export const INSTRUMENT_FLOWS = [
     title: 'Pitches e Hackatons',
     subtitle: 'Pitches e Hackatons · Instrumento 6',
     href: '/pitch-hackton',
-    accentColor: 'rgb(0, 162, 127)',
+    accentColor: '#00A27F',
     icon: '💡',
     downloadKey: '',
     cards: [
