@@ -41,20 +41,16 @@ export const INSTRUMENT_FLOWS = [
         title: 'Autorizações',
         subitems: [
           {
-            number: '1', title: 'Análise prévia da CGE',
-            description: 'Análise prévia da Controladoria Geral do Estado (CGE) em contratações de grandes valores e complexidade'
-          },
-          {
-            number: '2',
+            number: '1',
             title: 'Autorização da PGE',
             description: 'Procuradoria Geral do Estado para verificação'
           },
           {
-            number: '3', title: 'Autorização do Secretário da SEAD',
+            number: '2', title: 'Autorização do Secretário da SEAD',
             description: 'Autorização do secretário da SEAD (secretário responsável pelas compras públicas) sobre o acordo de PD&I *verificar mudança para SIA'
           },
           {
-            number: '4', title: 'Autorização da SEFAZ',
+            number: '3', title: 'Autorização da SEFAZ',
             description: 'Secretaria de Estado da Fazenda devido a repasses de recursos'
           },
         ],
@@ -126,10 +122,19 @@ export const INSTRUMENT_FLOWS = [
       {
         title: 'Análises',
         subitems: [
-          { number: '1', title: 'Análise Prévia CGE' },
-          { number: '2', title: 'Parecer PGE' },
-          { number: '3', title: 'Autorização do Secretário da SEAD' },
-          { number: '4', title: 'Parecer SEFAZ' },
+          {
+            number: '1',
+            title: 'Autorização da PGE',
+            description: 'Procuradoria Geral do Estado para verificação'
+          },
+          {
+            number: '2', title: 'Autorização do Secretário da SEAD',
+            description: 'Autorização do secretário da SEAD (secretário responsável pelas compras públicas) sobre o acordo de PD&I *verificar mudança para SIA'
+          },
+          {
+            number: '3', title: 'Autorização da SEFAZ',
+            description: 'Secretaria de Estado da Fazenda devido a repasses de recursos'
+          },
         ],
       },
       {
