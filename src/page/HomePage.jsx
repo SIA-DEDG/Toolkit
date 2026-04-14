@@ -91,9 +91,8 @@ function IntroSection() {
           Desenvolvidos a partir de experiências reais e casos concretos,
           os modelos foram elaborados de forma colaborativa pela
           Secretaria de Inteligência Artificial, Economia Digital,
-          Ciência, Tecnologia e Inovação (SIA) e validados pela
-          Procuradoria-Geral do Estado.<br />
-          Conteúdos elaborados de forma colaborativa para SIA e PGE.<br />
+          Ciência, Tecnologia e Inovação (SIA) e pela
+          Procuradoria-Geral do Estado (PGE).<br />
         </p>
       </div>
 
@@ -146,7 +145,7 @@ function IdentificationSection() {
                 className={`no-underline ${ACTION_BUTTON_CLASS}`}
                 style={ACTION_BUTTON_STYLE}
               >
-                <span className="font-medium text-[13px]">Acessar Material</span>
+                <span className="font-medium text-[13px]">Acesse o Material</span>
                 <ExternalLink className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
               </a>
             }

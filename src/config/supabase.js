@@ -26,6 +26,7 @@ export async function downloadFile(fileKey, filename) {
   const a = document.createElement('a')
   a.href = data.publicUrl
   a.download = filename || fileKey.split('/').pop()
+  a.target = '_blank'
   document.body.appendChild(a)
   a.click()
   a.remove()
