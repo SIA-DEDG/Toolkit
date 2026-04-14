@@ -7,12 +7,9 @@ import { SectionBadge } from '../components/SectionBadge'
 import { InstrumentFlowCard } from '../components/InstrumentFlowCard'
 import { ScaledFlowchart } from '../components/flowchart/ScaledFlowchart'
 
-// ─── Constants ───────────────────────────────────────────────────────────────
-
 const HERO_BANNER_SRC = '/assets/home/banner.png'
 const SCROLL_DELAY_MS = 50
 
-/** Instruments that are outside the main innovation track use this color. */
 const COLOR_OFF_TRACK = 'rgb(190,91,74)'
 
 const INSTRUMENT_PILLS = [
@@ -30,15 +27,11 @@ const INSTRUMENT_PILLS = [
   { label: 'Licitação',                                       color: COLOR_OFF_TRACK, icon: '📄', iconBg: 'rgba(255,255,255,0.2)' },
 ]
 
-// ─── Helpers ─────────────────────────────────────────────────────────────────
-
 function scrollToSection(id, delay = 0) {
   setTimeout(() => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
   }, delay)
 }
-
-// ─── Sub-components ───────────────────────────────────────────────────────────
 
 function HeroBanner() {
   return (
