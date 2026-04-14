@@ -59,8 +59,10 @@ export const INSTRUMENT_FLOWS = [
           },
         ],
       },
-      { title: 'Indicação do Gestor no Acordo', description: 'Indicação do gestor do ente público sobre quem será o gestor do acordo via SEI' },
-      { title: 'Publicação no DOE e PNCP', description: 'Publicação no Diário Oficial do Estado do Piauí' },
+      { title: 'Indicação do Gestor no Acordo', 
+        description: 'Indicação do gestor do ente público sobre quem será o gestor do acordo via SEI' },
+      { title: 'Publicação no Diário Oficial do Estado do Piauí (DOE) e no PNCP (Portal Nacional de Contratações Públicas)', 
+        description: 'Publicação no Diário Oficial do Estado do Piauí' },
     ],
   },
   {
@@ -78,12 +80,13 @@ export const INSTRUMENT_FLOWS = [
       },
       {
         title: 'Formalização da Demanda',
-        description: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria',
+        description: 'Registrar a demanda no SEI, com envio pelo gabinete do órgão e formalização da parceria.',
         fileKey: 'convenio-pd&i/Documento_Formalizacao_Demanda_PDI.docx'
       },
       {
         title: 'Manifestação Técnica ou do NIT',
-        description: 'Manifestação técnica enquadramento jurídico da parceria proposta no âmbito da lei federal n. 10.973/2004 (Lei de inovação) com análise da titularidade da propriedade intelectual gerada e participação dos resultados', fileKey: 'convenio-pd&i/Manifestacao_Tecnica_PDI.docx'
+        description: 'Análise técnica da parceria, indicando como ela se enquadra na Lei de Inovação, quem será dono da propriedade intelectual e como os resultados serão compartilhados.', 
+        fileKey: 'convenio-pd&i/Manifestacao_Tecnica_PDI.docx'
       },
       {
         title: 'Edital de Chamamento',
@@ -134,7 +137,7 @@ export const INSTRUMENT_FLOWS = [
         description: 'Indicação do gestor do convênio PD&I'
       },
       {
-        title: 'Publicação no DOE e PNCP',
+        title: 'Publicação no Diário Oficial do Estado do Piauí (DOE) e no PNCP (Portal Nacional de Contratações Públicas)',
         description: 'Publicação do contrato pela SEGOV no Diário Oficial do Estado do Piauí'
       },
       {
@@ -158,7 +161,7 @@ export const INSTRUMENT_FLOWS = [
       },
       {
         title: 'Formalização da Demanda',
-        description: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria',
+        description: 'Registrar a demanda no SEI, com envio pelo gabinete do órgão e formalização da parceria.',
         fileKey: 'encomenda-tecnologica/1. Documento_Formalizacao_Demanda_PDI.docx'
       },
       {
@@ -253,7 +256,7 @@ export const INSTRUMENT_FLOWS = [
         description: 'Indicação do fiscal do contrato ou comissão equivalente, preferencialmente, do setor que receberá o bem ou serviço'
       },
       {
-        title: 'Publicação no DOE e PNCP',
+        title: 'Publicação no Diário Oficial do Estado do Piauí (DOE) e no PNCP (Portal Nacional de Contratações Públicas)',
         description: 'Publicação do contrato pela SEGOV no Diário Oficial do Estado do Piauí'
       },
       {
@@ -277,7 +280,7 @@ export const INSTRUMENT_FLOWS = [
       },
       {
         title: 'Formalização da Demanda',
-        description: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria que evidencie e detalhe a necessidade administrativa do objeto a ser contratado (art. 18, I, da Lei n. 14.133/2021; art. 17, I, do Decreto Estadual n. 21.872/2023)',
+        description: 'Registrar a demanda no SEI, com envio pelo gabinete do órgão e formalização da parceria.',
         fileKey: 'contratacao-direta/1. Documento_Formalizacao_Demanda_PDI.docx'
       },
       {
@@ -373,7 +376,7 @@ export const INSTRUMENT_FLOWS = [
         description: 'Minuta de Contrato ou instrumento equivalente'
       },
       {
-        title: 'Publicação no DOE e PNCP',
+        title: 'Publicação no Diário Oficial do Estado do Piauí (DOE) e no PNCP (Portal Nacional de Contratações Públicas)',
         description: 'Publicação do contrato pela SEGOV no Diário Oficial do Estado do Piauí'
       },
       {
@@ -397,7 +400,7 @@ export const INSTRUMENT_FLOWS = [
       },
       {
         title: 'Formalização da Demanda',
-        description: 'Formalização da Demanda via SEI gabinete do órgão e instituição da parceria',
+        description: 'Registrar a demanda no SEI, com envio pelo gabinete do órgão e formalização da parceria.',
         fileKey: 'contrato-transferencia-tecnologia/1. Documento_Formalizacao_Demanda_PDI.docx'
       },
       {
@@ -466,7 +469,7 @@ export const INSTRUMENT_FLOWS = [
         description: 'preferencialmente, do setor que receberá o bem ou serviço (art. 117 c/c 7º da Lei n. 14.133/2021; arts. 65 a 67 do Decreto Estadual n. 21.872/2023);'
       },
       {
-        title: 'Publicação no DOE e PNCP',
+        title: 'Publicação no Diário Oficial do Estado do Piauí (DOE) e no PNCP (Portal Nacional de Contratações Públicas)',
         description: 'Publicação no Diário Oficial do Estado do Piauí'
       },
       {
@@ -478,7 +481,7 @@ export const INSTRUMENT_FLOWS = [
   {
     id: 'pitch-hackton',
     title: 'Pitches e Hackatons',
-    subtitle: 'CPSI (Lei 14.133/21) · Instrumento 6',
+    subtitle: 'Pitches e Hackatons · Instrumento 6',
     href: '/pitch-hackton',
     accentColor: 'rgb(0, 162, 127)',
     icon: '💡',
