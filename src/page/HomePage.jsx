@@ -223,19 +223,15 @@ function PageFooter() {
   )
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
-
 export default function HomePage() {
   const isMobile = useIsMobile()
   const [openIds, setOpenIds] = useState(new Set())
 
-  /** Called by the flowchart when the user clicks an instrument node. */
   const handleInstrumentClick = useCallback((id) => {
     setOpenIds(new Set([id]))
     scrollToSection('passo-a-passo', SCROLL_DELAY_MS)
   }, [])
 
-  /** Toggles a single card open/closed in the step-by-step section. */
   const handleToggle = useCallback((id) => {
     setOpenIds((prev) => {
       const next = new Set(prev)
@@ -250,7 +246,6 @@ export default function HomePage() {
       <IntroSection />
       <IdentificationSection />
 
-      {/* Flowchart is desktop-only — the SVG does not scale well on mobile */}
       {!isMobile && (
         <section id="trilha-de-instrumentos" className="p-0">
           <ScaledFlowchart onInstrumentClick={handleInstrumentClick} />

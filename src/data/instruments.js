@@ -523,11 +523,11 @@ export const INSTRUMENT_FLOWS = [
         description: 'Identificação de necessidade pública passível de solução inovadora por meio de pitch ou hackathon'
       },
       {
-        title: 'Documento de Formalização da Demanda (DFD simplificado)',
-        description: 'Baseado no DFD e justificativa do modelo PD&I',
+        title: 'Estruturação da Demanda (FASE PRÉ-HACKATHON)',
+        description: 'Baseado no DFD (Documento de Formalização de Demanda) e justificativa do modelo PD&I',
         fileKey: 'pitches_e_hackatons/01_DFD_Simplificado_Revisado.docx',
         subitems: [
-          { dote: true, title: 'Problema público claro (ex: violência, pobreza, saúde)' },
+          { dote: true, title: 'Definição de problema público claro (ex: violência, pobreza, saúde)' },
           { dote: true, title: 'Justificativa de uso de inovação (não solução pronta)' },
           { dote: true, title: 'Indicação de abordagem exploratória (pitch/hackathon)' },
         ]

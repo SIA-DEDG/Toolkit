@@ -10,7 +10,6 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
 
   return (
     <div className="bg-white rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.12)] overflow-hidden flex flex-col min-w-0">
-      {/* Colored header */}
       <button
         onClick={handleToggle}
         aria-expanded={isOpen}
@@ -38,7 +37,6 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
         </div>
       </button>
 
-      {/* Steps list */}
       {isOpen && (
         <div id={`flow-${id}`}>
           {cards.map((card, i) => (
@@ -47,7 +45,6 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
         </div>
       )}
 
-      {/* Footer */}
       <div className="px-3.5 py-2.5" style={{ background: accentColor }}>
         <DownloadButton fileKey={downloadKey} label="Baixar Relatório" large color={accentColor} />
       </div>

@@ -1,4 +1,3 @@
-// line: 'right' | 'left' | 'up' | none
 export function StepCircle({ number, color, line = 'right' }) {
   const circle = (
     <div className="relative w-[50px] h-[50px] shrink-0 flex items-center justify-center">

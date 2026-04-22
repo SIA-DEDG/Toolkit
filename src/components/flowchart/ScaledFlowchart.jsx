@@ -15,7 +15,6 @@ export function ScaledFlowchart({ onInstrumentClick }) {
       const w = containerRef.current.offsetWidth
       const s = Math.min(1, w / FLOWCHART_WIDTH)
       setScale(s)
-      // Quando viewport > 1440px, centraliza o canvas; abaixo disso preenche todo o container
       setOffset(Math.max(0, (w - FLOWCHART_WIDTH * s) / 2))
     }
     update()

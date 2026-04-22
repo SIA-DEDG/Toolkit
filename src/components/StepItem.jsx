@@ -5,7 +5,6 @@ export function StepItem({ card, accentColor, isLast }) {
 
   return (
     <div className="flex gap-2.5 px-4">
-      {/* Timeline column */}
       <div className="flex flex-col items-center w-2.5 shrink-0 pt-3.5">
         <div className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: accentColor }} />
         {!isLast && (
@@ -13,7 +12,6 @@ export function StepItem({ card, accentColor, isLast }) {
         )}
       </div>
 
-      {/* Content */}
       <div className={`flex-1 flex flex-col gap-1 pt-2.5 ${isLast ? 'pb-2.5' : 'pb-4'}`}>
         <span className="font-semibold text-xs text-ink-dark leading-snug text-left">
           {card.title}

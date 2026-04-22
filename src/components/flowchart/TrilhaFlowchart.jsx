@@ -3,7 +3,6 @@ import { InstrumentCard } from './InstrumentCard'
 import { DecisionBox } from './DecisionBox'
 import { StepCircle } from './StepCircle'
 
-// Hex values used directly in SVG stroke attributes (SVG attributes don't support Tailwind classes)
 const BRAND_BLUE = '#0e59a8'
 const BRAND_BG   = '#E3EFFF'
 
@@ -24,7 +23,6 @@ export function TrilhaFlowchart({ onInstrumentClick }) {
   return (
     <div className="relative overflow-visible" style={{ width: 1440, height: 820 }}>
 
-      {/* Header — top left */}
       <div className="absolute flex flex-col gap-2 z-[2]" style={{ left: 43, top: 20 }}>
         <SectionBadge>Trilha de Instrumentos</SectionBadge>
         <h2 className="font-semibold text-2xl text-ink-mid m-0 leading-snug">
@@ -35,7 +33,6 @@ export function TrilhaFlowchart({ onInstrumentClick }) {
         </p>
       </div>
 
-      {/* Curved snake path */}
       <svg
         className="absolute inset-0 w-full h-full overflow-visible pointer-events-none z-0"
         viewBox="0 0 1440 766"
@@ -47,7 +44,6 @@ export function TrilhaFlowchart({ onInstrumentClick }) {
         <path d={SNAKE_PATH} stroke={BRAND_BG}   strokeWidth="40" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
 
-      {/* Row 1: Convênio · Haverá repasse · Acordo */}
       <div className="absolute z-[1]" style={{ left: 710, top: 74 }}>
         <InstrumentCard accentColor="#08ba9c" iconBg="rgba(8,186,156,0.2)" icon="🤝" title="Acordo" description="Instrumento jurídico que  formaliza uma parceria entre instituições públicas  e entidades privadas, ICTs sem Transferência de Recursos" onClick={() => onInstrumentClick('acordo-pd&i')} />
       </div>
@@ -70,7 +66,6 @@ export function TrilhaFlowchart({ onInstrumentClick }) {
         <InstrumentCard accentColor="#209828" iconBg="rgba(32,152,40,0.2)" icon="📋" title="Convênio" description="Instrumento jurídico que formaliza uma parceria entre instituições públicas  e entidades privadas, ICTs com Transferência de Recursos" onClick={() => onInstrumentClick('convenio-pd&i')} />
       </div>
 
-      {/* Row 2: Existe Risco · Há possibilidade · Contratação Direta */}
       <div className="absolute z-[1]" style={{ left: 795, top: 346 }}>
         <StepCircle number="3" color={BRAND_BLUE} line="up" />
       </div>
@@ -95,7 +90,6 @@ export function TrilhaFlowchart({ onInstrumentClick }) {
         <InstrumentCard accentColor="#dbaf00" iconBg="rgba(219,175,0,0.2)" icon="📇" title="Contratação Direta" description="Aquisição de bens ou serviços pela administração pública com dispensa de licitação, quando a competição é inviável ou não é obrigatória, sendo uma exceção à regra geral de licitação" onClick={() => onInstrumentClick('contratacao-direta')} />
       </div>
 
-      {/* Vertical: Não sei · Transferência */}
       <div className="absolute z-[1]" style={{ left: 548, top: 536 }}>
         <DecisionBox width={125} height={95} text="O objeto da parceria envolve a transferência de tecnologia não patenteada?" bg={BRAND_BG} />
       </div>
@@ -108,7 +102,6 @@ export function TrilhaFlowchart({ onInstrumentClick }) {
         <InstrumentCard accentColor="#6a0ea8" iconBg="rgba(106,14,168,0.2)" icon="🔄" title="Transferência Tecnológica não patenteada" description="Formaliza a aquisição de conhecimentos técnicos, fórmulas ou processos secretos com valor de mercado, mas não protegidos por patente" width={204} onClick={() => onInstrumentClick('contrato-transferencia-tecnologia')} />
       </div>
 
-      {/* Card 6: Pitches e Hackatons */}
       <div className="absolute z-[1]" style={{ left: 710, top: 640 }}>
         <DecisionBox width={180} height={76} text="Envolve inovação aberta (pitch/hackathon)?" bg={BRAND_BG} />
       </div>
