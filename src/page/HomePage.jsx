@@ -19,7 +19,7 @@ const INSTRUMENT_PILLS = [
   { label: 'PMI - Procedimento de Manifestação de Interesse', color: COLOR_OFF_TRACK, icon: '📌', iconBg: 'rgba(255,255,255,0.2)' },
   { label: 'Diálogo Competitivo',                             color: COLOR_OFF_TRACK, icon: '💬', iconBg: 'rgba(255,255,255,0.2)' },
   { label: 'ETEC - Encomenda Tecnológica',                    color: '#0e59a8',      icon: '🖥️', iconBg: 'rgba(219,175,0,0.2)'   },
-  { label: 'CPSI - Contrato Público para Solução Inovadora',  color: COLOR_OFF_TRACK, icon: '🏗️', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'CPSI - Contrato Público para Solução Inovadora',  color: '#c21d00', icon: '🏗️', iconBg: 'rgba(255,255,255,0.2)' },
   { label: 'Concurso Público de Inovação',                    color: COLOR_OFF_TRACK, icon: '📝', iconBg: 'rgba(255,255,255,0.2)' },
   { label: 'Doação de Solução Inovadora',                     color: COLOR_OFF_TRACK, icon: '📨', iconBg: 'rgba(255,255,255,0.2)' },
   { label: 'Contratação Direta',                              color: '#dbaf00',      icon: '📇', iconBg: 'rgba(14,89,168,0.2)'   },
