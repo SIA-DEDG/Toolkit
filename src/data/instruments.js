@@ -387,15 +387,20 @@ export const INSTRUMENT_FLOWS = [
         subitems: [
           {
             number: '1',
+            title: 'Autorização da CGE',
+            description: 'Controladoria-Geral do Estado do Piauí'
+          },
+          {
+            number: '2',
             title: 'Autorização da PGE',
             description: 'Procuradoria Geral do Estado para verificação'
           },
           {
-            number: '2', title: 'Autorização do Secretário da SEAD',
+            number: '3', title: 'Autorização do Secretário da SEAD',
             description: 'Autorização do secretário da SEAD (secretário responsável pelas compras públicas) sobre o acordo de PD&I *verificar mudança para SIA'
           },
           {
-            number: '3', title: 'Autorização da SEFAZ',
+            number: '4', title: 'Autorização da SEFAZ',
             description: 'Secretaria de Estado da Fazenda devido a repasses de recursos'
           },
           { number: '5', title: 'Análise Final do Procedimento pelo controle interno do órgão' },
