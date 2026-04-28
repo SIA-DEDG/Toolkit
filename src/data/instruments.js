@@ -590,5 +590,175 @@ export const INSTRUMENT_FLOWS = [
         ]
       },
     ]
+  },
+  {
+    id: 'contrato-publico',
+    title: 'CPSI - Contrato Público para Solução Inovadora',
+    subtitle: 'CPSI - Contrato Público para Solução Inovadora · Instrumento 7',
+    href: '/contrato-publico',
+    accentColor: '#c21d00',
+    icon: '🏗️',
+    downloadKey: '',
+    cards: [
+      {
+        title: 'Início',
+        description: 'Necessidade do órgão solucionar um problema público por meio de solução inovadora'
+      },
+      {
+        title: 'Documento de Formalização da Demanda',
+        description: 'Documento que evidencie e detalhe a necessidade administrativa, o problema público a ser solucionado e a justificativa para utilização do CPSI (art. 18, I, da Lei nº 14.133/2021 c/c art. 12 da LC nº 182/2021)'
+      },
+      {
+        title: 'Estudo Técnico Preliminar – ETP',
+        description: 'Obrigatório em razão da natureza do CPSI (art. 18, II, Lei n. 14.133/2021; art. 17, II, do Decreto Estadual n. 21.872/2023)',
+        subitems: [
+          { dote: true, title: 'Caracterização do problema público a ser solucionado' },
+          { dote: true, title: 'Demonstração da insuficiência ou inadequação das soluções disponíveis no mercado' },
+          { dote: true, title: 'Análise da necessidade de desenvolvimento de solução inovadora' },
+          { dote: true, title: 'Identificação da existência de risco tecnológico, quando houver' },
+          { dote: true, title: 'Justificativa técnica para adoção do CPSI' },
+          { dote: true, title: 'Demonstração da viabilidade da contratação e dos resultados esperados' },
+        ]
+      },
+      {
+        title: 'Mapa de Riscos',
+        description: 'Identificação, análise e tratamento dos riscos técnicos, operacionais, financeiros e de insucesso tecnológico inerentes ao desenvolvimento da solução inovadora (art. 18, X, da Lei n. 14.133/2021; art. 17, III, e 31, do Decreto Estadual n. 21.872/2023)'
+      },
+      {
+        title: 'Designação da Comissão Especial de Avaliação',
+        description: 'Comissão integrada por, no mínimo, 3 pessoas de reputação ilibada e reconhecido conhecimento no assunto, das quais 1 servidor público do órgão contratante e 1 professor de instituição pública de educação superior na área relacionada (art. 13, § 3º, da LC 182/2021)'
+      },
+      {
+        title: 'Termo de Referência ou Documento Técnico de Desafio',
+        description: 'Descrição funcional do problema público a ser resolvido, dos resultados esperados e dos parâmetros mínimos de desempenho, sem prévia definição exaustiva da solução técnica (art. 12 da LC nº 182/2021)'
+      },
+      {
+        title: 'Pesquisa de Preços',
+        description: 'Pesquisas de preços e justificativa da estimativa de custos da contratação, observando a natureza experimental da contratação e a possibilidade de remuneração compatível com o desenvolvimento da solução inovadora'
+      },
+      {
+        title: 'Autorizações Tecnológicas',
+        subitems: [
+          {
+            number: '1',
+            title: 'Análise Técnico-Operacional da SEAD',
+            description: 'Caso se trate de contratação de soluções de Tecnologia da Informação e Comunicação – TIC (Art. 17, III, "f", da Lei Estadual n. 7.884/2022)'
+          },
+          {
+            number: '2',
+            title: 'Autorização do Conselho de Transformação Digital, Economia Digital, IA e Inovação',
+            description: 'Caso se trate de contratação de soluções digitais (Art. 2º, II, da Lei n. 7.990/2023)'
+          },
+        ]
+      },
+      {
+        title: 'Justificativas',
+        subitems: [
+          { dote: true, title: 'Adoção do CPSI como regime jurídico aplicável' },
+          { dote: true, title: 'Eventual dispensa parcial de documentos de habilitação (art. 13, § 8º, da LC 182/2021)' },
+          { dote: true, title: 'Critérios de julgamento adotados' },
+          { dote: true, title: 'Exigências de qualificação técnica' },
+          { dote: true, title: 'Regras pertinentes à participação de empresas em consórcio, quando admitida' },
+          { dote: true, title: 'Exigência ou não de prestação de garantia contratual' },
+        ]
+      },
+      {
+        title: 'Aprovação pela Autoridade Competente do Órgão',
+        description: 'Aprovação do ETP, do mapa de riscos, da estimativa de custos e do termo de referência pela autoridade competente do órgão interessado (art. 18 do Decreto Estadual nº 21.872/2023)'
+      },
+      {
+        title: 'Autorização de Abertura do Procedimento Licitatório',
+        description: '(art. 17, VIII, e 53, do Decreto Estadual n. 21.872/2023)'
+      },
+      {
+        title: 'Autorização da CGFR',
+        description: 'Autorização da contratação pela Comissão de Gestão Financeira e Gestão por Resultados – CGFR (art. 3º, II, do Decreto Estadual n. 21.908/2023)'
+      },
+      {
+        title: 'Nota de Reserva',
+        description: '(art. 72, IV, Lei n. 14.133/2021; art. 52, Decreto Estadual n. 21.872/2023)'
+      },
+      {
+        title: 'Declaração de Utilização das Minutas Padronizadas da PGE',
+        description: 'Quando houver minutas padronizadas da PGE aplicáveis ao CPSI'
+      },
+      {
+        title: 'Minuta de Edital de Chamamento Público'
+      },
+      {
+        title: 'Minuta do Contrato Público para Solução Inovadora – CPSI',
+        description: 'Nos termos do art. 13 da LC nº 182/2021, poderá haver seleção de mais de uma proposta, devendo ser formalizado contrato individual para cada solução selecionada'
+      },
+      {
+        title: 'Análise Prévia da CGE',
+        description: 'Recomendada em contratações de grande vulto e acentuada complexidade, ou com dúvidas acerca da adequação da pesquisa de preços (Despacho PGE n. 760/2023)'
+      },
+      {
+        title: 'Autorizações',
+        subitems: [
+          {
+            number: '1',
+            title: 'Parecer PGE',
+            description: 'Procuradoria Geral do Estado para verificação (art. 53, § 4º, Lei n. 14.133/2021; art. 69 do Decreto Estadual n. 21.872/2023)'
+          },
+          {
+            number: '2',
+            title: 'Autorização do Secretário da SEAD',
+            description: 'Autorização do secretário da SEAD para a contratação (art. 17, III, XV e XIX, da Lei Estadual n. 7.884/2022)'
+          },
+        ]
+      },
+      {
+        title: 'Publicação do Edital de Chamamento',
+        description: '(art. 13, § 2º, da Lei Complementar 182/2021)'
+      },
+      {
+        title: 'Comunicação de Abertura ao TCE',
+        description: 'Comunicação ao Tribunal de Contas do Estado do Piauí até o dia útil imediatamente posterior ao da última publicação do aviso de licitação (art. 6º, Instrução Normativa nº 06/2017 - TCE/PI)'
+      },
+      {
+        title: 'Atas, Relatórios e Deliberações do Certame',
+        description: 'Atas, relatórios e deliberações ocorridas durante o certame, incluindo possível negociação com os selecionados acerca de condições econômicas mais vantajosas e critérios de remuneração'
+      },
+      {
+        title: 'Análise Final pelo Controle Interno do Órgão',
+        description: '(Art. 13 da Instrução Normativa nº 05/2017, do Tribunal de Contas do Estado do Piauí)'
+      },
+      {
+        title: 'Homologação e Formalização da Seleção',
+        description: 'Atos de homologação e formalização da seleção da(s) solução(ões) escolhida(s) e respectivas publicações'
+      },
+      {
+        title: 'Parecer SEFAZ e Autorização de Reserva Orçamentária – ARO',
+        description: 'Nos casos especificados no Decreto Estadual 17.084/2017 (art. 3º, parágrafo único, do Decreto Estadual n. 21.908/2023)'
+      },
+      {
+        title: 'Indicação do Fiscal do Contrato ou Comissão Equivalente',
+        description: 'Preferencialmente, do setor que receberá o bem ou serviço (art. 117 c/c 7º da Lei n. 14.133/2021; arts. 65 a 67 do Decreto Estadual n. 21.872/2023)'
+      },
+      {
+        title: 'Publicação no Diário Oficial do Estado do Piauí (DOE) e no PNCP (Portal Nacional de Contratações Públicas)',
+        description: 'Publicação do contrato CPSI pela SEGOV (art. 72, parágrafo único, c/c art. 94 da Lei n. 14.133/2021; art. 8º, do Decreto Estadual nº 17.084/2017)'
+      },
+      {
+        title: 'Comunicações ao TCE',
+        subitems: [
+          {
+            number: '1',
+            title: 'Comunicação de Encerramento do Procedimento Licitatório',
+            description: 'Em até 10 dias úteis após a homologação, ainda que parcial (art. 7º, Instrução Normativa nº 06/2017 - TCE/PI)'
+          },
+          {
+            number: '2',
+            title: 'Comunicação de Assinatura do Contrato',
+            description: 'Em até 10 dias úteis após o ato (art. 11, Instrução Normativa nº 06/2017 – TCE/PI)'
+          },
+        ]
+      },
+      {
+        title: 'Ordem de Serviço',
+        description: 'Devidamente ratificada pelo Secretário de Governo ou por agente delegado, e publicada no Diário Oficial do Estado (art. 1º do Decreto Estadual n. 23.644/2025)'
+      },
+    ]
   }
 ]
