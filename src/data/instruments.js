@@ -6,7 +6,7 @@ export const INSTRUMENT_FLOWS = [
     href: '/acordo-pd&i',
     accentColor: '#08ba9c',
     icon: '🤝',
-    downloadKey: 'acordo-pd&i/relatorio_acordo_pd&i.pdf',
+    downloadKey: 'acordo-pd&i/Guia Explicativo Acordo PD&I.pdf',
     cards: [
       {
         title: 'Início',

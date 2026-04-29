@@ -1,119 +1,160 @@
-import { SectionBadge } from '../SectionBadge'
+import { Fragment } from 'react'
 import { InstrumentCard } from './InstrumentCard'
-import { DecisionBox } from './DecisionBox'
-import { StepCircle } from './StepCircle'
 
-const BRAND_BLUE = '#0e59a8'
-const BRAND_BG   = '#E3EFFF'
+// ─── Layout constants ──────────────────────────────────────────────────────────
+const PAD_X    = 30
+const PAD_Y    = 20
+const CARD_W   = 150
+const CARD_H   = 150   // fixed — all cards identical size
+const Q_W      = 150
+const Q_H      = 50
+const Q_GAP    = 4     // gap between Q box and adjacent cards
+const STEP_GAP = 16    // horizontal gap between columns
+const BRAND    = '#0e59a8'
 
-const SNAKE_PATH = `
-  M 1051 0
-  L 1051 255
-  A 50 50 0 0 1 1001 305
-  L 430 305
-  A 50 50 0 0 0 380 355
-  L 380 490
-  A 50 50 0 0 0 430 540
-  L 770 540
-  A 50 50 0 0 1 820 590
-  L 820 920
-`
+// Vertical positions (absolute, shared by all steps)
+//   PAD_Y ─── card-above top
+//          ── card-above bottom  (PAD_Y + CARD_H)
+//   Q_GAP gap
+//   Q_Y  ─── Q-box top
+//          ── Q-box bottom  (Q_Y + Q_H)
+//   Q_GAP gap
+//   BELOW_Y ─ card-below top
+//           ─ card-below bottom  (BELOW_Y + CARD_H)
+//   PAD_Y
+const Q_Y     = PAD_Y + CARD_H + Q_GAP        // 20 + 150 + 4 = 174
+const BELOW_Y = Q_Y + Q_H + Q_GAP             // 174 + 50 + 4 = 228
 
+// Horizontal positions — 6×(150+16) - 16 + 60 = 1040
+const stepX = i => PAD_X + i * (CARD_W + STEP_GAP)
+
+// Canvas dimensions
+//   Width:  30 + 6×166 - 16 + 30 = 1040
+//   Height: 20 + 150 + 4 + 50 + 4 + 150 + 20 = 398
+export const FLOWCHART_W = 1040
+export const FLOWCHART_H = 400
+
+// ─── Step data ─────────────────────────────────────────────────────────────────
+// cardAbove: rendered ABOVE the question box (step 1 only)
+// card:      rendered BELOW the question box (all steps)
+const STEPS = [
+  {
+    question: 'Haverá repasse de recursos públicos?',
+    cardAbove: {
+      id: 'acordo-pd&i', badge: 'nao',
+      accentColor: '#08ba9c', iconBg: 'rgba(8,186,156,0.15)',
+      icon: '🤝', title: 'Acordo', description: 'Sem repasse financeiro',
+    },
+    card: {
+      id: 'convenio-pd&i', badge: 'sim',
+      accentColor: '#209828', iconBg: 'rgba(32,152,40,0.15)',
+      icon: '📋', title: 'Convênio', description: 'Com repasse financeiro',
+    },
+  },
+  {
+    question: 'Existe risco tecnológico?',
+    card: {
+      id: 'encomenda-tecnologica',
+      accentColor: '#0e59a8', iconBg: 'rgba(14,89,168,0.15)',
+      icon: '🖥️', title: 'Encomenda Tecnológica', description: 'Lei nº 10.973/2004',
+    },
+  },
+  {
+    question: 'Permite contratação direta?',
+    card: {
+      id: 'contratacao-direta',
+      accentColor: '#dbaf00', iconBg: 'rgba(219,175,0,0.15)',
+      icon: '📇', title: 'Contratação Direta', description: 'Dispensa / Inexigibilidade',
+    },
+  },
+  {
+    question: 'Transferência tecnológica não patenteada?',
+    card: {
+      id: 'contrato-transferencia-tecnologia',
+      accentColor: '#6a0ea8', iconBg: 'rgba(106,14,168,0.15)',
+      icon: '🔄', title: 'Transferência Tecnológica', description: 'Know-how interno',
+    },
+  },
+  {
+    question: 'Envolve inovação aberta?',
+    card: {
+      id: 'pitch-hackton',
+      accentColor: '#00A27F', iconBg: 'rgba(0,162,127,0.15)',
+      icon: '💡', title: 'Pitches e Hackatons', description: 'Pitches, hackatons e afins',
+    },
+  },
+  {
+    question: 'Contratar solução inovadora?',
+    card: {
+      id: 'contrato-publico',
+      accentColor: '#c21d00', iconBg: 'rgba(194,29,0,0.15)',
+      icon: '🏗️', title: 'CPSI', description: 'Contrato Público para Solução Inovadora',
+    },
+  },
+]
+
+// ─── Sub-components ────────────────────────────────────────────────────────────
+
+function QuestionBox({ text }) {
+  return (
+    <div
+      className="flex items-center justify-center rounded-[5px]"
+      style={{ width: Q_W, height: Q_H, background: BRAND, padding: '6px 12px' }}
+    >
+      <p className="m-0 text-center leading-snug"
+         style={{ fontSize: 12, fontWeight: 500, color: '#fff' }}>
+        {text}
+      </p>
+    </div>
+  )
+}
+
+function Card({ data, onInstrumentClick }) {
+  if (!data) return null
+  return (
+    <InstrumentCard
+      accentColor={data.accentColor}
+      iconBg={data.iconBg}
+      icon={data.icon}
+      title={data.title}
+      description={data.description}
+      badge={data.badge}
+      width={CARD_W}
+      height={CARD_H}
+      onClick={() => onInstrumentClick(data.id)}
+    />
+  )
+}
+
+// ─── Main export ───────────────────────────────────────────────────────────────
 export function TrilhaFlowchart({ onInstrumentClick }) {
   return (
-    <div className="relative overflow-visible" style={{ width: 1440, height: 820 }}>
+    <div style={{ position: 'relative', width: FLOWCHART_W, height: FLOWCHART_H }}>
 
-      <div className="absolute flex flex-col gap-2 z-[2]" style={{ left: 43, top: 20 }}>
-        <SectionBadge>Trilha de Instrumentos</SectionBadge>
-        <h2 className="font-semibold text-2xl text-ink-mid m-0 leading-snug">
-          Trilha de Instrumentos
-        </h2>
-        <p className="font-normal text-sm text-ink-mid m-0">
-          Descrição da etapa de identificação
-        </p>
-      </div>
 
-      <svg
-        className="absolute inset-0 w-full h-full overflow-visible pointer-events-none z-0"
-        viewBox="0 0 1440 766"
-        fill="none"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        <path d={SNAKE_PATH} stroke={BRAND_BLUE} strokeWidth="44" strokeLinecap="round" strokeLinejoin="round" />
-        <path d={SNAKE_PATH} stroke={BRAND_BG}   strokeWidth="40" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      {/* ── Per-step: Q box + cards ── */}
+      {STEPS.map((step, i) => (
+        <Fragment key={i}>
+          {/* Card ABOVE Q box (step 1: Acordo / NÃO) */}
+          {step.cardAbove && (
+            <div style={{ position: 'absolute', left: stepX(i), top: PAD_Y }}>
+              <Card data={step.cardAbove} onInstrumentClick={onInstrumentClick} />
+            </div>
+          )}
 
-      <div className="absolute z-[1]" style={{ left: 710, top: 74 }}>
-        <InstrumentCard accentColor="#08ba9c" iconBg="rgba(8,186,156,0.2)" icon="🤝" title="Acordo" description="Instrumento jurídico que  formaliza uma parceria entre instituições públicas  e entidades privadas, ICTs sem Transferência de Recursos" onClick={() => onInstrumentClick('acordo-pd&i')} />
-      </div>
+          {/* Question box */}
+          <div style={{ position: 'absolute', left: stepX(i), top: Q_Y }}>
+            <QuestionBox text={step.question} />
+          </div>
 
-      <div className="absolute z-[1] flex flex-col items-center" style={{ left: 918, top: 100 }}>
-        <span className="relative top-[20px] text-xs text-brand ml-12 mb-0.5">Não</span>
-        <StepCircle number="1" color="#08ba9c" line="right" />
-      </div>
-
-      <div className="absolute z-[1]" style={{ left: 999, top: 94 }}>
-        <DecisionBox width={110} height={86} text="Haverá repasse de recursos públicos?" bg={BRAND_BG} />
-      </div>
-
-      <div className="absolute z-[1] flex flex-col items-center" style={{ left: 1109, top: 100 }}>
-        <span className="relative top-[20px] text-xs text-brand mr-12 mb-0.5">Sim</span>
-        <StepCircle number="2" color="#209828" line="left" />
-      </div>
-
-      <div className="absolute z-[1]" style={{ left: 1199, top: 74 }}>
-        <InstrumentCard accentColor="#209828" iconBg="rgba(32,152,40,0.2)" icon="📋" title="Convênio" description="Instrumento jurídico que formaliza uma parceria entre instituições públicas  e entidades privadas, ICTs com Transferência de Recursos" onClick={() => onInstrumentClick('convenio-pd&i')} />
-      </div>
-
-      <div className="absolute z-[1]" style={{ left: 795, top: 346 }}>
-        <StepCircle number="3" color={BRAND_BLUE} line="up" />
-      </div>
-
-      <div className="absolute z-[1]" style={{ left: 858, top: 386 }}>
-        <InstrumentCard accentColor={BRAND_BLUE} iconBg="rgba(14,89,168,0.2)" icon="💻" title="Encomenda Tecnológica" description="Compra de um esforço de desenvolvimento de solução que ainda não existe no mercado e envolve alto risco tecnológico" onClick={() => onInstrumentClick('encomenda-tecnologica')} />
-      </div>
-
-      <div className="absolute z-[1]" style={{ left: 758, top: 288 }}>
-        <DecisionBox width={120} height={76} text="Existe Risco Tecnológico?" bg={BRAND_BG} />
-      </div>
-
-      <div className="absolute z-[1]" style={{ left: 244, top: 307 }}>
-        <StepCircle number="4" color="#dbaf00" line="right" />
-      </div>
-
-      <div className="absolute z-[1]" style={{ left: 314, top: 285 }}>
-        <DecisionBox width={140} height={86} text="Há possibilidade de contratação Direta?" bg={BRAND_BG} />
-      </div>
-
-      <div className="absolute z-[1]" style={{ left: 29, top: 290 }}>
-        <InstrumentCard accentColor="#dbaf00" iconBg="rgba(219,175,0,0.2)" icon="📇" title="Contratação Direta" description="Aquisição de bens ou serviços pela administração pública com dispensa de licitação, quando a competição é inviável ou não é obrigatória, sendo uma exceção à regra geral de licitação" onClick={() => onInstrumentClick('contratacao-direta')} />
-      </div>
-
-      <div className="absolute z-[1]" style={{ left: 548, top: 536 }}>
-        <DecisionBox width={125} height={95} text="O objeto da parceria envolve a transferência de tecnologia não patenteada?" bg={BRAND_BG} />
-      </div>
-
-      <div className="absolute z-[1]" style={{ left: 578, top: 630 }}>
-        <StepCircle number="5" color="#6a0ea8" line="up" />
-      </div>
-
-      <div className="absolute z-[1]" style={{ left: 366, top: 650 }}>
-        <InstrumentCard accentColor="#6a0ea8" iconBg="rgba(106,14,168,0.2)" icon="🔄" title="Transferência Tecnológica não patenteada" description="Formaliza a aquisição de conhecimentos técnicos, fórmulas ou processos secretos com valor de mercado, mas não protegidos por patente" width={204} onClick={() => onInstrumentClick('contrato-transferencia-tecnologia')} />
-      </div>
-
-      <div className="absolute z-[1]" style={{ left: 710, top: 640 }}>
-        <DecisionBox width={180} height={76} text="Envolve inovação aberta (pitch/hackathon)?" bg={BRAND_BG} />
-      </div>
-
-      <div className="absolute z-[1]" style={{ left: 890, top: 650 }}>
-        <StepCircle number="6" color="rgb(0,162,127)" line="left" />
-      </div>
-
-      <div className="absolute z-[1]" style={{ left: 900, top: 710 }}>
-        <InstrumentCard accentColor="rgb(0,162,127)" iconBg="rgba(0,162,127,0.2)" icon="💡" title="Pitches e Hackatons" description="Metodologia exploratória para identificar soluções inovadoras por meio de competições abertas, com possibilidade de contratação futura (CPSI – Lei 14.133/21, art. 75, IV)" onClick={() => onInstrumentClick('pitch-hackton')} />
-      </div>
-
+          {/* Card BELOW Q box */}
+          {step.card && (
+            <div style={{ position: 'absolute', left: stepX(i), top: BELOW_Y }}>
+              <Card data={step.card} onInstrumentClick={onInstrumentClick} />
+            </div>
+          )}
+        </Fragment>
+      ))}
     </div>
   )
 }
