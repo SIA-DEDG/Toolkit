@@ -29,7 +29,8 @@ export function ScaledFlowchart({ onInstrumentClick }) {
           Trilha de Instrumentos
         </h2>
         <p className="font-normal text-sm text-ink-mid m-0">
-          Selecione o instrumento mais adequado para seu caso
+        Responda as perguntas abaixo para descobrir quais instrumentos <br/> 
+        de fomento são mais adequados para o seu caso.  
         </p>
       </div>
 
