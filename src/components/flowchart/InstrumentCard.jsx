@@ -1,4 +1,17 @@
-export function InstrumentCard({ accentColor, iconBg, icon, title, description, width = 201, onClick }) {
+// Figma reference: node 540:239 / 540:242
+// Card: bg-white, w=136, rounded-[5px], shadow-[0px_4px_4px_rgba(0,0,0,0.25)]
+// Top bar: h=6px, rounded-tl-[10px] rounded-tr-[10px], accent color
+// Badge (top-right): h=10px, w=27px, rounded-[5px] — dot (4px) + label (9px medium)
+// Internal layout (from top after bar): INSTRUMENTO → icon → title → description
+
+const BADGE = {
+  sim: { bg: 'rgba(37,212,37,0.5)',   dot: '#25d425', color: '#006d10', label: 'Sim' },
+  nao: { bg: 'rgba(251,135,135,0.5)', dot: '#cc3030', color: '#ab0000', label: 'Não' },
+}
+
+export function InstrumentCard({ accentColor, iconBg, icon, title, description, width = 136, height, badge, onClick }) {
+  const b = badge ? BADGE[badge] : null
+
   return (
     <div
       onClick={onClick}
@@ -6,32 +19,77 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
       tabIndex={onClick ? 0 : undefined}
       onKeyDown={onClick ? (e) => { if (e.key === 'Enter' || e.key === ' ') onClick() } : undefined}
       className={[
-        'bg-white rounded-[10px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]',
-        'overflow-visible shrink-0 transition-shadow duration-150',
+        'relative bg-white rounded-[5px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]',
+        'shrink-0 transition-shadow duration-150',
         onClick ? 'cursor-pointer' : 'cursor-default',
       ].join(' ')}
-      style={{ width }}
-      onMouseEnter={e => { if (onClick) e.currentTarget.style.boxShadow = '0px 6px 16px rgba(0,0,0,0.35)' }}
+      style={{ width, ...(height ? { height, overflow: 'hidden' } : {}) }}
+      onMouseEnter={e => { if (onClick) e.currentTarget.style.boxShadow = '0px 6px 16px rgba(0,0,0,0.30)' }}
       onMouseLeave={e => { if (onClick) e.currentTarget.style.boxShadow = '0px 4px 4px rgba(0,0,0,0.25)' }}
     >
-      <div className="h-1.5 rounded-t-[10px]" style={{ background: accentColor }} />
-      <div className="px-3.5 pt-1.5 pb-2.5 flex flex-col gap-1.5">
-        <p className="font-medium text-[9px] text-black m-0 leading-normal tracking-[0.05em]">
+      {/* Coloured top bar */}
+      <div
+        className="rounded-tl-[10px] rounded-tr-[10px]"
+        style={{ height: 6, background: accentColor }}
+      />
+
+      {/* Sim / Não badge — top-right, matching Figma exactly */}
+      {b && (
+        <div
+          className="absolute flex items-center gap-[3px] rounded-[5px]"
+          style={{
+            top: 13, right: 6,
+            height: 14, paddingLeft: 5, paddingRight: 5,
+            background: b.bg,
+            whiteSpace: 'nowrap',
+          }}
+        >
+          <div className="rounded-full shrink-0" style={{ width: 4, height: 4, background: b.dot }} />
+          <span style={{ fontSize: 9, fontWeight: 500, color: b.color, lineHeight: 1 }}>{b.label}</span>
+        </div>
+      )}
+
+      {/* Card body — matches Figma internal offsets */}
+      <div style={{ paddingLeft: 12, paddingRight: 12, paddingTop: 6, paddingBottom: 10 }}>
+        {/* "INSTRUMENTO" label — top=1168 relative to card top=1156 → 12px from top = 6px from bar bottom */}
+        <p
+          className="m-0 leading-normal"
+          style={{ fontSize: 9, fontWeight: 500, color: '#000', letterSpacing: '0.05em' }}
+        >
           INSTRUMENTO
         </p>
-        <div className="flex flex-col gap-1">
-          <div
-            className="p-0.5 rounded w-[22px] h-[22px] flex items-center justify-center shrink-0"
-            style={{ background: iconBg }}
-          >
-            {typeof icon === 'string'
-              ? <span className="text-[14px] leading-none" aria-hidden="true">{icon}</span>
-              : (() => { const Icon = icon; return <Icon className="w-4 h-4" aria-hidden="true" /> })()
-            }
-          </div>
-          <p className="font-semibold text-sm leading-normal m-0" style={{ color: accentColor }}>{title}</p>
-          <p className="font-light text-[10px] text-black leading-snug m-0">{description}</p>
+
+        {/* Icon — top=1185 → 17px below INSTRUMENTO baseline */}
+        <div
+          className="flex items-center justify-center rounded-[4px] shrink-0"
+          style={{
+            width: 22, height: 22,
+            marginTop: 6,
+            padding: 3,
+            background: iconBg,
+          }}
+        >
+          {typeof icon === 'string'
+            ? <span style={{ fontSize: 14, lineHeight: 1 }} aria-hidden="true">{icon}</span>
+            : (() => { const I = icon; return <I style={{ width: 16, height: 16 }} aria-hidden="true" /> })()
+          }
         </div>
+
+        {/* Title — top=1211 → ~26px below icon top (icon is 22px + 4px gap) */}
+        <p
+          className="m-0 leading-normal"
+          style={{ fontSize: 14, fontWeight: 600, color: accentColor, marginTop: 4 }}
+        >
+          {title}
+        </p>
+
+        {/* Description — top=1229 → ~18px below title */}
+        <p
+          className="m-0 leading-snug"
+          style={{ fontSize: 10, fontWeight: 300, color: '#000', marginTop: 3 }}
+        >
+          {description}
+        </p>
       </div>
     </div>
   )
