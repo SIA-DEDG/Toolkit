@@ -72,7 +72,7 @@ export const INSTRUMENT_FLOWS = [
     href: '/convenio-pd&i',
     accentColor: '#209828',
     icon: '📋',
-    downloadKey: '',
+    downloadKey: 'convenio-pd&i/Guia Explicativo Convenio PD&I.pdf',
     cards: [
       {
         title: 'Início',
