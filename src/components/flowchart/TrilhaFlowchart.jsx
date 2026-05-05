@@ -2,12 +2,12 @@ import { Fragment } from 'react'
 import { InstrumentCard } from './InstrumentCard'
 
 // ─── Layout constants ──────────────────────────────────────────────────────────
-const PAD_X    = 30
+const PAD_X    = 0
 const PAD_Y    = 20
-const CARD_W   = 150
+const CARD_W   = 170
 const CARD_H   = 150   // fixed — all cards identical size
-const Q_W      = 150
-const Q_H      = 50
+const Q_W      = 170
+const Q_H      = 60
 const Q_GAP    = 15     // gap between Q box and adjacent cards
 const STEP_GAP = 16    // horizontal gap between columns
 const BRAND    = '#0e59a8'
