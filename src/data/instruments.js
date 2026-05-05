@@ -293,7 +293,7 @@ export const INSTRUMENT_FLOWS = [
     href: '/contratacao-direta',
     accentColor: '#dbaf00',
     icon: '📇',
-    downloadKey: '',
+    downloadKey: 'contratacao-direta/Guia Explicativo de Contratacao Direta.pdf',
     cards: [
       {
         title: 'Início',
