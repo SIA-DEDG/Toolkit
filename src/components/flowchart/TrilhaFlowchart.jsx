@@ -8,7 +8,7 @@ const CARD_W   = 150
 const CARD_H   = 150   // fixed — all cards identical size
 const Q_W      = 150
 const Q_H      = 50
-const Q_GAP    = 4     // gap between Q box and adjacent cards
+const Q_GAP    = 15     // gap between Q box and adjacent cards
 const STEP_GAP = 16    // horizontal gap between columns
 const BRAND    = '#0e59a8'
 
@@ -32,7 +32,7 @@ const stepX = i => PAD_X + i * (CARD_W + STEP_GAP)
 //   Width:  30 + 6×166 - 16 + 30 = 1040
 //   Height: 20 + 150 + 4 + 50 + 4 + 150 + 20 = 398
 export const FLOWCHART_W = 1040
-export const FLOWCHART_H = 400
+export const FLOWCHART_H = 450
 
 // ─── Step data ─────────────────────────────────────────────────────────────────
 // cardAbove: rendered ABOVE the question box (step 1 only)
