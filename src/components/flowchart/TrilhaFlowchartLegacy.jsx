@@ -76,7 +76,7 @@ export function TrilhaFlowchartLegacy({ onInstrumentClick, headerAction }) {
         <StepCircle number="3" color={BRAND_BLUE} line="up" />
       </div>
 
-      <div className="absolute z-[1]" style={{ left: 858, top: 386 }}>
+      <div className="absolute z-[1]" style={{ left: 858, top: 375 }}>
         <InstrumentCardLegacy accentColor={BRAND_BLUE} iconBg="rgba(14,89,168,0.2)" icon="💻" title="Encomenda Tecnológica" description="Compra de um esforço de desenvolvimento de solução que ainda não existe no mercado e envolve alto risco tecnológico" onClick={() => onInstrumentClick('encomenda-tecnologica')} />
       </div>
 
@@ -96,28 +96,40 @@ export function TrilhaFlowchartLegacy({ onInstrumentClick, headerAction }) {
         <InstrumentCardLegacy accentColor="#dbaf00" iconBg="rgba(219,175,0,0.2)" icon="📇" title="Contratação Direta" description="Aquisição de bens ou serviços pela administração pública com dispensa de licitação, quando a competição é inviável ou não é obrigatória, sendo uma exceção à regra geral de licitação" onClick={() => onInstrumentClick('contratacao-direta')} />
       </div>
 
-      <div className="absolute z-[1]" style={{ left: 548, top: 536 }}>
+      <div className="absolute z-[1]" style={{ left: 314, top: 536 }}>
         <DecisionBoxLegacy width={125} height={95} text="O objeto da parceria envolve a transferência de tecnologia não patenteada?" bg={BRAND_BG} />
       </div>
 
-      <div className="absolute z-[1]" style={{ left: 578, top: 630 }}>
+      <div className="absolute z-[1]" style={{ left: 344, top: 630 }}>
         <StepCircle number="5" color="#6a0ea8" line="up" />
       </div>
 
-      <div className="absolute z-[1]" style={{ left: 366, top: 650 }}>
+      <div className="absolute z-[1]" style={{ left: 132, top: 650 }}>
         <InstrumentCardLegacy accentColor="#6a0ea8" iconBg="rgba(106,14,168,0.2)" icon="🔄" title="Transferência Tecnológica não patenteada" description="Formaliza a aquisição de conhecimentos técnicos, fórmulas ou processos secretos com valor de mercado, mas não protegidos por patente" width={204} onClick={() => onInstrumentClick('contrato-transferencia-tecnologia')} />
       </div>
 
-      <div className="absolute z-[1]" style={{ left: 710, top: 640 }}>
+      <div className="absolute z-[1]" style={{ left: 710, top: 536 }}>
         <DecisionBoxLegacy width={180} height={76} text="Envolve inovação aberta (pitch/hackathon)?" bg={BRAND_BG} />
       </div>
 
-      <div className="absolute z-[1]" style={{ left: 890, top: 650 }}>
+      <div className="absolute z-[1]" style={{ left: 890, top: 545 }}>
         <StepCircle number="6" color="rgb(0,162,127)" line="left" />
       </div>
 
-      <div className="absolute z-[1]" style={{ left: 900, top: 710 }}>
+      <div className="absolute z-[1]" style={{ left: 900, top: 607 }}>
         <InstrumentCardLegacy accentColor="rgb(0,162,127)" iconBg="rgba(0,162,127,0.2)" icon="💡" title="Pitches e Hackatons" description="Metodologia exploratória para identificar soluções inovadoras por meio de competições abertas, com possibilidade de contratação futura (CPSI – Lei 14.133/21, art. 75, IV)" onClick={() => onInstrumentClick('pitch-hackton')} />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 710, top: 790 }}>
+        <DecisionBoxLegacy width={180} height={76} text="Precisa de contratação de solução inovadora?" bg={BRAND_BG} />
+      </div>
+
+      <div className="absolute z-[1] flex flex-col items-center" style={{ left: 630, top: 800 }}>
+        <StepCircle number="7" color="#c21d00" line="right" />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 420, top: 760 }}>
+        <InstrumentCardLegacy accentColor="#c21d00" iconBg="rgba(194,29,0,0.15)" icon="🏗️" title="CPSI" description="Contrato Público para Solução Inovadora (Lei 14.133/21)" onClick={() => onInstrumentClick('contrato-publico')} />
       </div>
 
     </div>
