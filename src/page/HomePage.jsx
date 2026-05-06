@@ -3,9 +3,11 @@ import { ExternalLink, ArrowRight } from 'lucide-react'
 
 import { INSTRUMENT_FLOWS } from '../data/instruments'
 import { useIsMobile } from '../hooks/useIsMobile'
+import { useLayoutVariant } from '../hooks/useLayoutVariant'
 import { SectionBadge } from '../components/SectionBadge'
 import { InstrumentFlowCard } from '../components/InstrumentFlowCard'
 import { ScaledFlowchart } from '../components/flowchart/ScaledFlowchart'
+import { ScaledFlowchartLegacy } from '../components/flowchart/ScaledFlowchartLegacy'
 
 const HERO_BANNER_SRC = '/assets/home/banner.png'
 const SCROLL_DELAY_MS = 50
@@ -214,6 +216,29 @@ function StepByStepSection({ isMobile, openIds, onToggle }) {
   )
 }
 
+function LayoutToggle({ isLegacy, onToggle }) {
+  const base = 'text-xs font-medium px-3 py-1.5 rounded-[8px] transition-all border-none cursor-pointer'
+  const active = 'bg-brand text-white shadow-sm'
+  const inactive = 'bg-transparent text-gray-400 hover:text-gray-600'
+
+  return (
+    <div className="flex items-center gap-0.5 bg-gray-100 rounded-[10px] p-1">
+      <button
+        onClick={() => { if (isLegacy) onToggle() }}
+        className={`${base} ${!isLegacy ? active : inactive}`}
+      >
+        Atual
+      </button>
+      <button
+        onClick={() => { if (!isLegacy) onToggle() }}
+        className={`${base} ${isLegacy ? active : inactive}`}
+      >
+        Anterior
+      </button>
+    </div>
+  )
+}
+
 function PageFooter() {
   return (
     <footer className="text-center py-[clamp(20px,3vw,32px)] px-4 text-[clamp(11px,1vw,14px)] text-gray-400 bg-white">
@@ -225,6 +250,7 @@ function PageFooter() {
 
 export default function HomePage() {
   const isMobile = useIsMobile()
+  const { isLegacy, toggle } = useLayoutVariant()
   const [openIds, setOpenIds] = useState(new Set())
 
   const handleInstrumentClick = useCallback((id) => {
@@ -248,7 +274,10 @@ export default function HomePage() {
 
       {!isMobile && (
         <section id="trilha-de-instrumentos" className="p-0">
-          <ScaledFlowchart onInstrumentClick={handleInstrumentClick} />
+          {isLegacy
+            ? <ScaledFlowchartLegacy onInstrumentClick={handleInstrumentClick} headerAction={<LayoutToggle isLegacy={isLegacy} onToggle={toggle} />} />
+            : <ScaledFlowchart       onInstrumentClick={handleInstrumentClick} headerAction={<LayoutToggle isLegacy={isLegacy} onToggle={toggle} />} />
+          }
         </section>
       )}
 

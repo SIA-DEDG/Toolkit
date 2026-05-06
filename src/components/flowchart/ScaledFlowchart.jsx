@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from 'react'
 import { SectionBadge } from '../SectionBadge'
 import { TrilhaFlowchart, FLOWCHART_W, FLOWCHART_H } from './TrilhaFlowchart'
 
-export function ScaledFlowchart({ onInstrumentClick }) {
+export function ScaledFlowchart({ onInstrumentClick, headerAction }) {
   const containerRef = useRef(null)
   const [scale, setScale]   = useState(1)
   const [offset, setOffset] = useState(0)
@@ -23,15 +23,18 @@ export function ScaledFlowchart({ onInstrumentClick }) {
   return (
     <div className="w-full">
       {/* Title rendered outside the scaled canvas — stays readable at all sizes */}
-      <div className="py-[clamp(20px,3vw,40px)] px-[clamp(20px,5vw,66px)] pb-0">
-        <SectionBadge>Trilha de Instrumentos</SectionBadge>
-        <h2 className="font-semibold text-[clamp(18px,2vw,24px)] text-ink-mid mt-3 mb-1">
-          Trilha de Instrumentos
-        </h2>
-        <p className="font-normal text-sm text-ink-mid m-0">
-        Responda as perguntas abaixo para descobrir quais instrumentos <br/> 
-        de fomento são mais adequados para o seu caso.  
-        </p>
+      <div className="py-[clamp(20px,3vw,40px)] px-[clamp(20px,5vw,66px)] pb-0 flex items-start justify-between gap-4">
+        <div>
+          <SectionBadge>Trilha de Instrumentos</SectionBadge>
+          <h2 className="font-semibold text-[clamp(18px,2vw,24px)] text-ink-mid mt-3 mb-1">
+            Trilha de Instrumentos
+          </h2>
+          <p className="font-normal text-sm text-ink-mid m-0">
+            Responda as perguntas abaixo para descobrir quais instrumentos <br/>
+            de fomento são mais adequados para o seu caso.
+          </p>
+        </div>
+        {headerAction && <div className="mt-2 shrink-0">{headerAction}</div>}
       </div>
 
       {/* Scaled canvas */}
