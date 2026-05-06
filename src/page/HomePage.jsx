@@ -227,7 +227,7 @@ function LayoutToggle({ isLegacy, onToggle }) {
         onClick={() => { if (isLegacy) onToggle() }}
         className={`${base} ${!isLegacy ? active : inactive}`}
       >
-        Atual
+        Para validar
       </button>
       <button
         onClick={() => { if (!isLegacy) onToggle() }}
