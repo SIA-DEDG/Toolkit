@@ -1,42 +1,29 @@
 import { Fragment } from 'react'
 import { InstrumentCard } from './InstrumentCard'
 
-// ─── Layout constants ──────────────────────────────────────────────────────────
-const PAD_X    = 0
-const PAD_Y    = 20
-const CARD_W   = 170
-const CARD_H   = 150   // fixed — all cards identical size
-const Q_W      = 170
-const Q_H      = 60
-const Q_GAP    = 15     // gap between Q box and adjacent cards
-const STEP_GAP = 16    // horizontal gap between columns
-const BRAND    = '#0e59a8'
+const PAD_X = 0
+const PAD_Y = 20
+const CARD_W = 170
+const CARD_H = 150
+const Q_W = 170
+const Q_H = 60
+const Q_GAP = 15
+const STEP_GAP = 16
+const BRAND = '#0e59a8'
 
-// Vertical positions (absolute, shared by all steps)
-//   PAD_Y ─── card-above top
-//          ── card-above bottom  (PAD_Y + CARD_H)
-//   Q_GAP gap
-//   Q_Y  ─── Q-box top
-//          ── Q-box bottom  (Q_Y + Q_H)
-//   Q_GAP gap
-//   BELOW_Y ─ card-below top
-//           ─ card-below bottom  (BELOW_Y + CARD_H)
-//   PAD_Y
-const Q_Y     = PAD_Y + CARD_H + Q_GAP        // 20 + 150 + 4 = 174
-const BELOW_Y = Q_Y + Q_H + Q_GAP             // 174 + 50 + 4 = 228
+const Q_Y = PAD_Y + CARD_H + Q_GAP
+const BELOW_Y = Q_Y + Q_H + Q_GAP
 
-// Horizontal positions — 6×(150+16) - 16 + 60 = 1040
 const stepX = i => PAD_X + i * (CARD_W + STEP_GAP)
 
-// Canvas dimensions
-//   Width:  30 + 6×166 - 16 + 30 = 1040
-//   Height: 20 + 150 + 4 + 50 + 4 + 150 + 20 = 398
-export const FLOWCHART_W = 1040
-export const FLOWCHART_H = 450
+const ROW_H = PAD_Y + CARD_H + Q_GAP + Q_H + Q_GAP + CARD_H + PAD_Y  // 430
+const ROW_GAP = 0
+const ROW1_W = 5 * (CARD_W + STEP_GAP) - STEP_GAP  // 914
+const ROW1_OFFSET_X = (6 * (CARD_W + STEP_GAP) - STEP_GAP - ROW1_W) / 2  // 93
 
-// ─── Step data ─────────────────────────────────────────────────────────────────
-// cardAbove: rendered ABOVE the question box (step 1 only)
-// card:      rendered BELOW the question box (all steps)
+export const FLOWCHART_W = 6 * (CARD_W + STEP_GAP) - STEP_GAP  // 1100
+export const FLOWCHART_H = ROW_H * 2 + ROW_GAP                   // 870
+
 const STEPS = [
   {
     question: 'Haverá repasse de recursos públicos?',
@@ -91,7 +78,51 @@ const STEPS = [
       icon: '🏗️', title: 'CPSI', description: 'Contrato Público para Solução Inovadora',
     },
   },
+  {
+    question: 'Deseja consultar o mercado antes de definir o objeto?',
+    card: {
+      id: 'pmi',
+      accentColor: '#e65100', iconBg: 'rgba(230,81,0,0.15)',
+      icon: '🔍', title: 'PMI', description: 'Procedimento de Manifestação de Interesse',
+    },
+  },
+  {
+    question: 'É possível definir as especificações técnicas ex ante?',
+    card: {
+      id: 'dialogo-competitivo',
+      accentColor: '#006064', iconBg: 'rgba(0,96,100,0.15)',
+      icon: '💬', title: 'Diálogo Competitivo', description: 'Definição de especificações',
+    },
+  },
+  {
+    question: 'Deseja selecionar por melhor técnica com premiação?',
+    card: {
+      id: 'concurso-publico-inovacao',
+      accentColor: '#880e4f', iconBg: 'rgba(136,14,79,0.15)',
+      icon: '🏆', title: 'Concurso Público de Inovação', description: 'Seleção por melhor técnica',
+    },
+  },
+  {
+    question: 'Existe recursos orçamentários para contratação?',
+    card: {
+      id: 'doacao-solucao-inovadora',
+      accentColor: '#1b5e20', iconBg: 'rgba(27,94,32,0.15)',
+      icon: '🎁', title: 'Doação de Solução Inovadora', description: 'Oferta gratuita de solução',
+    },
+  },
+  {
+    question: 'Há possibilidade de contratação direta?',
+    card: {
+      id: 'licitacao',
+      badge: 'nao',
+      accentColor: '#37474f', iconBg: 'rgba(55,71,79,0.15)',
+      icon: '📑', title: 'Licitação', description: 'Processo licitatório',
+    },
+  },
 ]
+
+const STEPS_ROW1 = STEPS.slice(0, 5)   // Acordo/Convênio → Pitches
+const STEPS_ROW2 = STEPS.slice(5)      // CPSI → Licitação
 
 // ─── Sub-components ────────────────────────────────────────────────────────────
 
@@ -102,7 +133,7 @@ function QuestionBox({ text }) {
       style={{ width: Q_W, height: Q_H, background: BRAND, padding: '6px 12px' }}
     >
       <p className="m-0 text-center leading-snug"
-         style={{ fontSize: 12, fontWeight: 500, color: '#fff' }}>
+        style={{ fontSize: 12, fontWeight: 500, color: '#fff' }}>
         {text}
       </p>
     </div>
@@ -131,30 +162,48 @@ export function TrilhaFlowchart({ onInstrumentClick }) {
   return (
     <div style={{ position: 'relative', width: FLOWCHART_W, height: FLOWCHART_H }}>
 
-
-      {/* ── Per-step: Q box + cards ── */}
-      {STEPS.map((step, i) => (
-        <Fragment key={i}>
-          {/* Card ABOVE Q box (step 1: Acordo / NÃO) */}
-          {step.cardAbove && (
-            <div style={{ position: 'absolute', left: stepX(i), top: PAD_Y }}>
-              <Card data={step.cardAbove} onInstrumentClick={onInstrumentClick} />
+      {STEPS_ROW1.map((step, i) => {
+        const x = stepX(i) + ROW1_OFFSET_X
+        return (
+          <Fragment key={`r1-${i}`}>
+            {step.cardAbove && (
+              <div style={{ position: 'absolute', left: x, top: PAD_Y }}>
+                <Card data={step.cardAbove} onInstrumentClick={onInstrumentClick} />
+              </div>
+            )}
+            <div style={{ position: 'absolute', left: x, top: Q_Y }}>
+              <QuestionBox text={step.question} />
             </div>
-          )}
+            {step.card && (
+              <div style={{ position: 'absolute', left: x, top: BELOW_Y }}>
+                <Card data={step.card} onInstrumentClick={onInstrumentClick} />
+              </div>
+            )}
+          </Fragment>
+        )
+      })}
 
-          {/* Question box */}
-          <div style={{ position: 'absolute', left: stepX(i), top: Q_Y }}>
-            <QuestionBox text={step.question} />
-          </div>
-
-          {/* Card BELOW Q box */}
-          {step.card && (
-            <div style={{ position: 'absolute', left: stepX(i), top: BELOW_Y }}>
-              <Card data={step.card} onInstrumentClick={onInstrumentClick} />
+      {/* ── Row 2 (6 steps) ── */}
+      {STEPS_ROW2.map((step, i) => {
+        const r2 = 250
+        return (
+          <Fragment key={`r2-${i}`}>
+            {step.cardAbove && (
+              <div style={{ position: 'absolute', left: stepX(i), top: r2 + PAD_Y }}>
+                <Card data={step.cardAbove} onInstrumentClick={onInstrumentClick} />
+              </div>
+            )}
+            <div style={{ position: 'absolute', left: stepX(i), top: r2 + Q_Y }}>
+              <QuestionBox text={step.question} />
             </div>
-          )}
-        </Fragment>
-      ))}
+            {step.card && (
+              <div style={{ position: 'absolute', left: stepX(i), top: r2 + BELOW_Y }}>
+                <Card data={step.card} onInstrumentClick={onInstrumentClick} />
+              </div>
+            )}
+          </Fragment>
+        )
+      })}
     </div>
   )
 }

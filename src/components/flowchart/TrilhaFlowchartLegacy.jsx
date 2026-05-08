@@ -16,7 +16,7 @@ const SNAKE_PATH = `
   A 50 50 0 0 0 430 540
   L 770 540
   A 50 50 0 0 1 820 590
-  L 820 920
+  L 820 1920
 `
 
 export function TrilhaFlowchartLegacy({ onInstrumentClick, headerAction }) {
