@@ -8,6 +8,7 @@ import { SectionBadge } from '../components/SectionBadge'
 import { InstrumentFlowCard } from '../components/InstrumentFlowCard'
 import { ScaledFlowchart } from '../components/flowchart/ScaledFlowchart'
 import { ScaledFlowchartLegacy } from '../components/flowchart/ScaledFlowchartLegacy'
+import { ScaledFlowchartDecision } from '../components/flowchart/ScaledFlowchartDecision'
 
 const HERO_BANNER_SRC = '/assets/home/banner.png'
 const SCROLL_DELAY_MS = 50
@@ -216,24 +217,21 @@ function StepByStepSection({ isMobile, openIds, onToggle }) {
   )
 }
 
-function LayoutToggle({ isLegacy, onToggle }) {
+function LayoutToggle({ variant, setVariant }) {
   const base = 'text-xs font-medium px-3 py-1.5 rounded-[8px] transition-all border-none cursor-pointer'
   const active = 'bg-brand text-white shadow-sm'
   const inactive = 'bg-transparent text-gray-400 hover:text-gray-600'
 
   return (
     <div className="flex items-center gap-0.5 bg-gray-100 rounded-[10px] p-1">
-      <button
-        onClick={() => { if (isLegacy) onToggle() }}
-        className={`${base} ${!isLegacy ? active : inactive}`}
-      >
-        Para validar
+      <button onClick={() => setVariant('decision')} className={`${base} ${variant === 'decision' ? active : inactive}`}>
+        Árvore
       </button>
-      <button
-        onClick={() => { if (!isLegacy) onToggle() }}
-        className={`${base} ${isLegacy ? active : inactive}`}
-      >
-        Anterior
+      <button onClick={() => setVariant('grid')} className={`${base} ${variant === 'grid' ? active : inactive}`}>
+        Grade
+      </button>
+      <button onClick={() => setVariant('snake')} className={`${base} ${variant === 'snake' ? active : inactive}`}>
+        Trilha
       </button>
     </div>
   )
@@ -250,7 +248,7 @@ function PageFooter() {
 
 export default function HomePage() {
   const isMobile = useIsMobile()
-  const { isLegacy, toggle } = useLayoutVariant()
+  const { variant, setVariant } = useLayoutVariant()
   const [openIds, setOpenIds] = useState(new Set())
 
   const handleInstrumentClick = useCallback((id) => {
@@ -274,9 +272,11 @@ export default function HomePage() {
 
       {!isMobile && (
         <section id="trilha-de-instrumentos" className="p-0">
-          {isLegacy
-            ? <ScaledFlowchartLegacy onInstrumentClick={handleInstrumentClick} headerAction={<LayoutToggle isLegacy={isLegacy} onToggle={toggle} />} />
-            : <ScaledFlowchart       onInstrumentClick={handleInstrumentClick} headerAction={<LayoutToggle isLegacy={isLegacy} onToggle={toggle} />} />
+          {variant === 'snake'
+            ? <ScaledFlowchartLegacy  onInstrumentClick={handleInstrumentClick} headerAction={<LayoutToggle variant={variant} setVariant={setVariant} />} />
+            : variant === 'grid'
+            ? <ScaledFlowchart        onInstrumentClick={handleInstrumentClick} headerAction={<LayoutToggle variant={variant} setVariant={setVariant} />} />
+            : <ScaledFlowchartDecision onInstrumentClick={handleInstrumentClick} headerAction={<LayoutToggle variant={variant} setVariant={setVariant} />} />
           }
         </section>
       )}

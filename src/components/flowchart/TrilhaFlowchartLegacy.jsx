@@ -10,13 +10,17 @@ const SNAKE_PATH = `
   M 1051 0
   L 1051 255
   A 50 50 0 0 1 1001 305
-  L 430 305
+  L 430 305 
   A 50 50 0 0 0 380 355
   L 380 490
   A 50 50 0 0 0 430 540
-  L 770 540
-  A 50 50 0 0 1 820 590
-  L 820 1920
+  L 1200 540
+  A 50 50 0 0 1 1250 590
+  L 1250 740
+  A 50 50 0 0 1 1200 790
+  L 460 780
+  A 50 50 0 0 0 410 830
+  L 410 960
 `
 
 export function TrilhaFlowchartLegacy({ onInstrumentClick, headerAction }) {
@@ -108,29 +112,31 @@ export function TrilhaFlowchartLegacy({ onInstrumentClick, headerAction }) {
         <InstrumentCardLegacy accentColor="#6a0ea8" iconBg="rgba(106,14,168,0.2)" icon="🔄" title="Transferência Tecnológica não patenteada" description="Formaliza a aquisição de conhecimentos técnicos, fórmulas ou processos secretos com valor de mercado, mas não protegidos por patente" width={204} onClick={() => onInstrumentClick('contrato-transferencia-tecnologia')} />
       </div>
 
-      <div className="absolute z-[1]" style={{ left: 710, top: 536 }}>
+      <div className="absolute z-[1]" style={{ left: 650, top: 540 }}>
         <DecisionBoxLegacy width={180} height={76} text="Envolve inovação aberta (pitch/hackathon)?" bg={BRAND_BG} />
       </div>
 
-      <div className="absolute z-[1]" style={{ left: 890, top: 545 }}>
-        <StepCircle number="6" color="rgb(0,162,127)" line="left" />
+      <div className="absolute z-[1]" style={{ left: 710, top: 460 }}>
+        <StepCircle number="6" color="rgb(0,162,127)" line="down" />
       </div>
 
-      <div className="absolute z-[1]" style={{ left: 900, top: 607 }}>
+      <div className="absolute z-[1]" style={{ left: 500, top: 365 }}>
         <InstrumentCardLegacy accentColor="rgb(0,162,127)" iconBg="rgba(0,162,127,0.2)" icon="💡" title="Pitches e Hackatons" description="Metodologia exploratória para identificar soluções inovadoras por meio de competições abertas, com possibilidade de contratação futura (CPSI – Lei 14.133/21, art. 75, IV)" onClick={() => onInstrumentClick('pitch-hackton')} />
       </div>
 
-      <div className="absolute z-[1]" style={{ left: 710, top: 790 }}>
+      <div className="absolute z-[1]" style={{ left: 950, top: 540 }}>
         <DecisionBoxLegacy width={180} height={76} text="Precisa de contratação de solução inovadora?" bg={BRAND_BG} />
       </div>
 
-      <div className="absolute z-[1] flex flex-col items-center" style={{ left: 630, top: 800 }}>
-        <StepCircle number="7" color="#c21d00" line="right" />
+      <div className="absolute z-[1] flex flex-col items-center" style={{ left: 950, top: 615 }}>
+        <StepCircle number="7" color="#c21d00" line="up" />
       </div>
 
-      <div className="absolute z-[1]" style={{ left: 420, top: 760 }}>
-        <InstrumentCardLegacy accentColor="#c21d00" iconBg="rgba(194,29,0,0.15)" icon="🏗️" title="CPSI" description="Contrato Público para Solução Inovadora (Lei 14.133/21)" onClick={() => onInstrumentClick('contrato-publico')} />
+      <div className="absolute z-[1]" style={{ left: 1010, top: 660 }}>
+        <InstrumentCardLegacy accentColor="#c21d00" iconBg="rgba(194,29,0,0.15)" icon="🏗️" title="CPSI - Contrato Público para Solução Inovadora" description="Contrato Público para Solução Inovadora (Lei 14.133/21)" onClick={() => onInstrumentClick('contrato-publico')} />
       </div>
+
+      
 
     </div>
   )

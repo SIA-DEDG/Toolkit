@@ -48,8 +48,15 @@ const STEPS = [
   },
   {
     question: 'Permite contratação direta?',
+    cardAbove: {
+      id: 'licitacao',
+      badge: 'nao',
+      accentColor: '#37474f', iconBg: 'rgba(55,71,79,0.15)',
+      icon: '📑', title: 'Licitação', description: 'Processo licitatório',
+    },
     card: {
       id: 'contratacao-direta',
+      badge: 'sim',
       accentColor: '#dbaf00', iconBg: 'rgba(219,175,0,0.15)',
       icon: '📇', title: 'Contratação Direta', description: 'Dispensa / Inexigibilidade',
     },
@@ -108,15 +115,6 @@ const STEPS = [
       id: 'doacao-solucao-inovadora',
       accentColor: '#1b5e20', iconBg: 'rgba(27,94,32,0.15)',
       icon: '🎁', title: 'Doação de Solução Inovadora', description: 'Oferta gratuita de solução',
-    },
-  },
-  {
-    question: 'Há possibilidade de contratação direta?',
-    card: {
-      id: 'licitacao',
-      badge: 'nao',
-      accentColor: '#37474f', iconBg: 'rgba(55,71,79,0.15)',
-      icon: '📑', title: 'Licitação', description: 'Processo licitatório',
     },
   },
 ]
