@@ -10,7 +10,7 @@ const SNAKE_PATH = `
   M 1051 0
   L 1051 255
   A 50 50 0 0 1 1001 305
-  L 430 305 
+  L 430 305
   A 50 50 0 0 0 380 355
   L 380 490
   A 50 50 0 0 0 430 540
@@ -18,14 +18,14 @@ const SNAKE_PATH = `
   A 50 50 0 0 1 1250 590
   L 1250 740
   A 50 50 0 0 1 1200 790
-  L 460 780
+  L 460 790
   A 50 50 0 0 0 410 830
-  L 410 960
+  L 410 1150
 `
 
 export function TrilhaFlowchartLegacy({ onInstrumentClick, headerAction }) {
   return (
-    <div className="relative overflow-visible" style={{ width: 1440, height: 820 }}>
+    <div className="relative overflow-visible" style={{ width: 1440, height: 1200 }}>
 
       {headerAction && (
         <div className="absolute z-[2]" style={{ right: 20, top: 20 }}>
@@ -45,7 +45,7 @@ export function TrilhaFlowchartLegacy({ onInstrumentClick, headerAction }) {
 
       <svg
         className="absolute inset-0 w-full h-full overflow-visible pointer-events-none z-0"
-        viewBox="0 0 1440 766"
+        viewBox="0 0 1440 1121"
         fill="none"
         preserveAspectRatio="none"
         aria-hidden="true"
@@ -132,11 +132,59 @@ export function TrilhaFlowchartLegacy({ onInstrumentClick, headerAction }) {
         <StepCircle number="7" color="#c21d00" line="up" />
       </div>
 
-      <div className="absolute z-[1]" style={{ left: 1010, top: 660 }}>
+      <div className="absolute z-[1]" style={{ left: 1010, top: 640 }}>
         <InstrumentCardLegacy accentColor="#c21d00" iconBg="rgba(194,29,0,0.15)" icon="🏗️" title="CPSI - Contrato Público para Solução Inovadora" description="Contrato Público para Solução Inovadora (Lei 14.133/21)" onClick={() => onInstrumentClick('contrato-publico')} />
       </div>
 
-      
+      {/* ── Segmento 6: horizontal esquerda (y≈835) ── */}
+
+      <div className="absolute z-[1]" style={{ left: 940, top: 797 }}>
+        <DecisionBoxLegacy width={165} height={76} text="Deseja consultar o mercado antes de definir o objeto?" bg={BRAND_BG} />
+      </div>
+
+      <div className="absolute z-[1] flex flex-col items-center" style={{ left: 950, top: 872 }}>
+        <StepCircle number="8" color="#e65100" line="up" />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 1020, top: 917 }}>
+        <InstrumentCardLegacy accentColor="#e65100" iconBg="rgba(230,81,0,0.2)" icon="🔍" title="PMI" description="Procedimento de Manifestação de Interesse" onClick={() => onInstrumentClick('pmi')} />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 545, top: 797 }}>
+        <DecisionBoxLegacy width={180} height={86} text="É possível definir as especificações técnicas ex ante?" bg={BRAND_BG} />
+      </div>
+
+      <div className="absolute z-[1] flex flex-col items-center" style={{ left: 560, top: 716 }}>
+        <StepCircle number="9" color="#006064" line="down" />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 620, top: 650 }}>
+        <InstrumentCardLegacy accentColor="#006064" iconBg="rgba(0,96,100,0.2)" icon="💬" title="Diálogo Competitivo" description="Definição colaborativa das especificações técnicas" onClick={() => onInstrumentClick('dialogo-competitivo')} />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 345, top: 910 }}>
+        <DecisionBoxLegacy width={130} height={86} text="Deseja selecionar por melhor técnica com premiação?" bg={BRAND_BG} />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 475, top: 925 }}>
+        <StepCircle number="10" color="#880e4f" line="left" />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 560, top: 900 }}>
+        <InstrumentCardLegacy accentColor="#880e4f" iconBg="rgba(136,14,79,0.2)" icon="🏆" title="Concurso Público de Inovação" description="Seleção por melhor técnica com premiação" width={195} onClick={() => onInstrumentClick('concurso-publico-inovacao')} />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 345, top: 1070 }}>
+        <DecisionBoxLegacy width={130} height={76} text="Existe recursos orçamentários para contratação?" bg={BRAND_BG} />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 265, top: 1080 }}>
+        <StepCircle number="11" color="#1b5e20" line="right" />
+      </div>
+
+      <div className="absolute z-[1]" style={{ left: 50, top: 1030 }}>
+        <InstrumentCardLegacy accentColor="#1b5e20" iconBg="rgba(27,94,32,0.2)" icon="🎁" title="Doação de Solução Inovadora" description="Oferta gratuita de solução inovadora pela iniciativa privada" width={195} onClick={() => onInstrumentClick('doacao-solucao-inovadora')} />
+      </div>
 
     </div>
   )

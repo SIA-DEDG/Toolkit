@@ -184,18 +184,19 @@ export function TrilhaFlowchart({ onInstrumentClick }) {
       {/* ── Row 2 (6 steps) ── */}
       {STEPS_ROW2.map((step, i) => {
         const r2 = 250
+        const x = stepX(i) + ROW1_OFFSET_X
         return (
           <Fragment key={`r2-${i}`}>
             {step.cardAbove && (
-              <div style={{ position: 'absolute', left: stepX(i), top: r2 + PAD_Y }}>
+              <div style={{ position: 'absolute', left: x, top: r2 + PAD_Y }}>
                 <Card data={step.cardAbove} onInstrumentClick={onInstrumentClick} />
               </div>
             )}
-            <div style={{ position: 'absolute', left: stepX(i), top: r2 + Q_Y }}>
+            <div style={{ position: 'absolute', left: x, top: r2 + Q_Y }}>
               <QuestionBox text={step.question} />
             </div>
             {step.card && (
-              <div style={{ position: 'absolute', left: stepX(i), top: r2 + BELOW_Y }}>
+              <div style={{ position: 'absolute', left: x, top: r2 + BELOW_Y }}>
                 <Card data={step.card} onInstrumentClick={onInstrumentClick} />
               </div>
             )}

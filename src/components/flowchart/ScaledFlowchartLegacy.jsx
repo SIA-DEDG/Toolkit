@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from 'react'
 import { TrilhaFlowchartLegacy } from './TrilhaFlowchartLegacy'
 
 const FLOWCHART_WIDTH  = 1440
-const FLOWCHART_HEIGHT = 1020
+const FLOWCHART_HEIGHT = 1200
 
 export function ScaledFlowchartLegacy({ onInstrumentClick, headerAction }) {
   const containerRef = useRef(null)
