@@ -774,7 +774,127 @@ export const INSTRUMENT_FLOWS = [
     accentColor: '#e65100',
     icon: '🔍',
     downloadKey: '',
-    cards: [],
+    cards: [
+      {
+        "title": "Início",
+        "description": "Necessidade do órgão de obter estudos, levantamentos, investigações, projetos ou soluções inovadoras voltados à estruturação de futuras contratações ou decisões administrativas relevantes"
+      },
+      {
+        "title": "Documento de Formalização da Demanda – DFD",
+        "description": "Documento que evidencie e detalhe a necessidade administrativa, o problema público identificado e os objetivos institucionais pretendidos (art. 18, I, da Lei nº 14.133/2021 c/c art. 81 da Lei nº 14.133/2021)"
+      },
+      {
+        "title": "Estudo Técnico Preliminar – ETP",
+        "description": "Obrigatório em razão da natureza exploratória e preparatória do PMI (art. 18, II, da Lei nº 14.133/2021; art. 17, II, do Decreto Estadual nº 21.872/2023)",
+        "subitems": [
+          { "number": "1", "title": "Caracterização do problema público ou da necessidade administrativa a ser solucionada" },
+          { "number": "2", "title": "Demonstração da insuficiência de informações técnicas disponíveis internamente na Administração" },
+          { "number": "3", "title": "Análise da necessidade de prospecção de soluções existentes no mercado" },
+          { "number": "4", "title": "Justificativa técnica para utilização do Procedimento de Manifestação de Interesse – PMI" },
+          { "number": "5", "title": "Demonstração da utilidade dos estudos pretendidos para subsidiar futura contratação ou decisão administrativa" },
+          { "number": "6", "title": "Identificação da existência de aspectos inovadores, tecnológicos, operacionais ou de elevada complexidade técnica, quando houver" },
+          { "number": "7", "title": "Demonstração dos resultados esperados com os estudos, levantamentos, investigações ou projetos pretendidos" }
+        ]
+      },
+      {
+        "title": "Mapa de Riscos",
+        "description": "Identificação, análise e tratamento dos riscos técnicos, operacionais, jurídicos, informacionais e relacionados à utilização dos estudos produzidos, à confidencialidade das informações e à eventual futura contratação (art. 18, X, da Lei nº 14.133/2021; art. 17, III, e art. 31 do Decreto Estadual nº 21.872/2023)"
+      },
+      {
+        "title": "Designação de comissão técnica, equipe de apoio ou grupo de trabalho",
+        "description": "Responsável pela condução do PMI e avaliação dos estudos apresentados. Recomenda-se composição multidisciplinar compatível com a complexidade do objeto, especialmente em procedimentos relacionados à inovação, tecnologia da informação, engenharia, transformação digital ou soluções especializadas"
+      },
+      {
+        "title": "Termo de Referência, Documento Técnico de Desafio ou documento equivalente",
+        "subitems": [
+          { "number": "1", "title": "Descrição funcional do problema público ou da necessidade administrativa" },
+          { "number": "2", "title": "Delimitação do objeto do PMI" },
+          { "number": "3", "title": "Resultados esperados" },
+          { "number": "4", "title": "Escopo dos estudos, levantamentos, investigações ou projetos pretendidos" },
+          { "number": "5", "title": "Premissas técnicas mínimas, quando necessárias" },
+          { "number": "6", "title": "Critérios objetivos de avaliação dos estudos" },
+          { "number": "7", "title": "Critérios de eventual ressarcimento" },
+          { "number": "8", "title": "Regras relativas à propriedade intelectual, confidencialidade e aproveitamento dos estudos" }
+        ]
+      },
+      {
+        "title": "Aprovação do ETP, mapa de riscos e Termo de Referência",
+        "description": "Aprovação pela autoridade competente do órgão interessado (art. 18 do Decreto Estadual nº 21.872/2023)"
+      },
+      {
+        "title": "Autorização de abertura do PMI",
+        "description": "Autorização pela autoridade competente para abertura do Procedimento de Manifestação de Interesse"
+      },
+      {
+        "title": "Autorizações Tecnológicas",
+        "subitems": [
+          {
+            "number": "1",
+            "title": "Análise técnico-operacional da SEAD",
+            "description": "Caso o PMI envolva soluções de Tecnologia da Informação e Comunicação – TIC (art. 17, III, \"f\", da Lei Estadual nº 7.884/2022)"
+          },
+          {
+            "number": "2",
+            "title": "Autorização do Conselho de Transformação Digital, Economia Digital, IA e Inovação",
+            "description": "Caso o PMI envolva soluções digitais, softwares, aplicativos ou transformação digital, nos termos da legislação estadual pertinente"
+          }
+        ]
+      },
+      {
+        "title": "Declaração de utilização das minutas padronizadas da PGE",
+        "description": "Quando houver minutas padronizadas da PGE aplicáveis ao procedimento"
+      },
+      {
+        "title": "Minuta de Edital de Chamamento Público do PMI",
+        "description": "Minuta do edital de chamamento público com os requisitos mínimos legais para chamamento dos interessados"
+      },
+      {
+        "title": "Minuta de Termo de Autorização",
+        "description": "Quando houver autorização formal individualizada para realização dos estudos"
+      },
+      {
+        "title": "Análise prévia pela Controladoria-Geral do Estado – CGE",
+        "description": "Recomendada em contratações de grande vulto e acentuada complexidade, ou com dúvidas acerca da adequação da pesquisa de preços (Despacho PGE n. 760/2023)"
+      },
+      {
+        "title": "Parecer da PGE",
+        "description": "Procuradoria Geral do Estado para verificação (art. 53, § 4º, Lei n. 14.133/2021; art. 69 do Decreto Estadual n. 21.872/2023)"
+      },
+      {
+        "title": "Autorização do Secretário da SEAD para a contratação",
+        "description": "art. 17, III, XV e XIX, da Lei Estadual n. 7.884/2022"
+      },
+      {
+        "title": "Publicação do Edital de Chamamento",
+        "description": "Publicação do edital de chamamento público do PMI"
+      },
+      {
+        "title": "Cadastro eletrônico do PMI no Sistema Licitações Web",
+        "description": "art. 5º, § 3º, III, da Instrução Normativa nº 02/2026 - TCE/PI"
+      },
+      {
+        "title": "Ata, relatório ou documento equivalente de avaliação técnica",
+        "description": "Documento contendo a avaliação técnica dos estudos, levantamentos, investigações ou projetos apresentados"
+      },
+      {
+        "title": "Parecer técnico fundamentado acerca da adequação e suficiência dos estudos",
+        "subitems": [
+          { "number": "1", "title": "Análise da aderência dos estudos às necessidades da Administração" },
+          { "number": "2", "title": "Avaliação das premissas técnicas adotadas" },
+          { "number": "3", "title": "Análise comparativa entre as soluções apresentadas, quando houver pluralidade de estudos" },
+          { "number": "4", "title": "Manifestação acerca da viabilidade, economicidade e utilidade dos estudos" },
+          { "number": "5", "title": "Conclusão quanto ao aproveitamento integral, parcial ou não aproveitamento dos estudos" }
+        ]
+      },
+      {
+        "title": "Decisão administrativa fundamentada sobre o aproveitamento dos estudos",
+        "description": "Decisão acerca do aproveitamento dos estudos apresentados e da eventual realização de contratação subsequente"
+      },
+      {
+        "title": "Registro da finalização do PMI no Sistema Licitações Web",
+        "description": "Inclusive nos casos de encerramento sem aproveitamento dos estudos, suspensão, revogação ou anulação do procedimento (IN TCE/PI nº 02/2026)"
+      }
+    ],
   },
   {
     id: 'dialogo-competitivo',
