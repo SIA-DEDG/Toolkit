@@ -3,9 +3,9 @@ import { SectionBadge } from '../SectionBadge'
 import { TrilhaFlowchartDecision } from './TrilhaFlowchartDecision'
 
 const FLOWCHART_W = 1440
-const FLOWCHART_H = 620
+const FLOWCHART_H = 690
 
-export function ScaledFlowchartDecision({ onInstrumentClick, headerAction }) {
+export function ScaledFlowchartDecision({ onInstrumentClick }) {
   const containerRef = useRef(null)
   const [scale, setScale] = useState(1)
   const [offset, setOffset] = useState(0)
@@ -35,7 +35,6 @@ export function ScaledFlowchartDecision({ onInstrumentClick, headerAction }) {
             Siga as perguntas para identificar o instrumento mais adequado para a sua necessidade.
           </p>
         </div>
-        {headerAction && <div className="mt-2 shrink-0">{headerAction}</div>}
       </div>
 
       <div

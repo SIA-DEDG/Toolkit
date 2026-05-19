@@ -1,6 +1,7 @@
 let queue = []
 let running = false
 
+// Executa os downloads da fila sequencialmente com intervalo de 800ms entre eles
 async function processQueue() {
   if (running || queue.length === 0) return
   running = true
@@ -22,6 +23,7 @@ async function processQueue() {
   running = false
 }
 
+// Adiciona um download à fila e retorna uma Promise que resolve quando concluído
 export function enqueueDownload(task) {
   return new Promise((resolve, reject) => {
     queue.push({ task, resolve, reject })

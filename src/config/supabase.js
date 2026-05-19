@@ -13,6 +13,7 @@ try {
 
 const BUCKET = import.meta.env.VITE_SUPABASE_BUCKET || 'sia-arquivos'
 
+// Obtém a URL pública do arquivo e aciona o download no browser
 export async function downloadFile(fileKey, filename) {
   if (!supabase) throw new Error('Serviço de arquivos indisponível')
 

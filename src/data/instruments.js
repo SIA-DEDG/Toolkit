@@ -929,11 +929,170 @@ export const INSTRUMENT_FLOWS = [
   {
     id: 'licitacao',
     title: 'Licitação',
-    subtitle: 'Licitação · Instrumento 12',
+    subtitle: 'Pregão Eletrônico (Bens e Serviços Comuns – sem SRP) · Instrumento 12',
     href: '/licitacao',
     accentColor: '#37474f',
     icon: '📑',
     downloadKey: '',
-    cards: [],
+    cards: [
+    {
+      title: 'Início',
+      description: 'Necessidade administrativa de contratação de bens ou serviços comuns mediante Pregão Eletrônico, nos termos da Lei nº 14.133/2021 (sem Sistema de Registro de Preços).'
+    },
+    {
+      title: 'Documento de Formalização da Demanda – DFD',
+      description: 'Documento que evidencie e detalhe a necessidade administrativa do objeto a ser contratado (art. 18, I, da Lei nº 14.133/2021; art. 17, I, do Decreto Estadual nº 21.872/2023).',
+      subitems: [
+        { dote: true, title: 'Descrição da necessidade que se pretende atender por meio da aquisição do bem ou serviço, com manifestação acerca da natureza comum do objeto (art. 6º, XLI, da Lei nº 14.133/2021);' },
+        { dote: true, title: 'Estimativa de quantitativo do objeto a ser contratado, justificada conforme o Plano Anual de Contratações, se houver, ou no quantitativo contratado em exercícios anteriores;' },
+        { dote: true, title: 'Justificativa simplificada da necessidade da contratação, inclusive com demonstração da sua previsão no Plano Anual de Contratações, quando houver;' },
+        { dote: true, title: 'Previsão de data em que deve ser iniciada a prestação dos serviços ou realizado o fornecimento dos bens.' },
+      ],
+    },
+    {
+      title: 'Declaração da SEAD acerca de ARP',
+      description: 'Declaração da Secretaria de Administração acerca da existência de Ata de Registro de Preços vigente ou de intenção de registro de preços em andamento (art. 40 do Decreto Estadual nº 21.938/2023). Dispensada nas hipóteses do Decreto Estadual nº 21.909/2023.'
+    },
+    {
+      title: 'Estudo Técnico Preliminar – ETP',
+      description: 'Estudo Técnico Preliminar que demonstre a viabilidade da contratação e fundamente a solução escolhida (art. 18, II, Lei nº 14.133/2021; art. 17, II, do Decreto Estadual nº 21.872/2023). Facultado nas hipóteses dos incisos I, II, VII e VIII do art. 75 e do §7º do art. 90 da Lei nº 14.133/2021; dispensado na hipótese do inciso III do art. 75 e em prorrogações de contratos contínuos. Poderá ainda ser dispensado quando o valor estimado for de até 10 vezes os limites dos incisos I e II do art. 75 da Lei nº 14.133/2021.',
+      fileKey: 'licitacao/ETP_SIA-PI_Modelo.pdf'
+    },
+    {
+      title: 'Mapa de Riscos',
+      description: 'Planejamento que identifica, analisa e propõe o tratamento de eventos que possam comprometer a licitação ou a execução contratual (art. 18, X, da Lei nº 14.133/2021; arts. 17, III, e 31 do Decreto Estadual nº 21.872/2023).',
+      fileKey: 'licitacao/Mapa_Riscos_Pregao_Eletronico_SIA-PI.pdf'
+    },
+    {
+      title: 'Termo de Referência – TR',
+      description: 'Termo de Referência elaborado conforme arts. 35 a 38 do Decreto Estadual nº 21.872/2023 (art. 18, I e II, da Lei nº 14.133/2021; art. 17, V, do Decreto Estadual nº 21.872/2023). Deverá contemplar as exigências de práticas e/ou critérios de sustentabilidade, conforme Decreto Estadual nº 23.891/2025.'
+    },
+    {
+      title: 'Pesquisa de Preços',
+      description: 'Pesquisa de preços com metodologia documentada (art. 18, IV, da Lei nº 14.133/2021; art. 17, VI, e arts. 43 a 51 do Decreto Estadual nº 21.872/2023).'
+    },
+    {
+      title: 'Autorizações Tecnológicas',
+      subitems: [
+        {
+          number: '1',
+          title: 'Análise Técnico-Operacional da SEAD',
+          description: 'Caso se trate de contratação de soluções de Tecnologia da Informação e Comunicação – TIC (Art. 17, III, “f”, da Lei Estadual nº 7.884/2022). TIC abrange hardware, serviços de TI, softwares e aplicativos (Anexo II da IN SGD/ME nº 94/2022).'
+        },
+        {
+          number: '2',
+          title: 'Autorização do Conselho de Transformação Digital, Economia Digital, IA e Inovação',
+          description: 'Caso se trate de contratação de soluções digitais – serviços de TIC, softwares e aplicativos (Art. 2º, II e V, da Lei nº 7.990/2023).'
+        },
+      ],
+    },
+    {
+      title: 'Justificativas',
+      subitems: [
+        { dote: true, title: 'Adoção de orçamento sigiloso, quando for o caso (art. 24 da Lei nº 14.133/2021; arts. 51 e 91 do Decreto Estadual nº 21.872/2023);' },
+        { dote: true, title: 'Adoção de pregão presencial, se for o caso (art. 17, §2º, da Lei nº 14.133/2021; art. 187 do Decreto Estadual nº 21.872/2023);' },
+        { dote: true, title: 'Inversão entre as fases de habilitação e de apresentação de propostas e lances e de julgamento, se for o caso (art. 17, §1º, da Lei nº 14.133/2021; art. 87, §1º, do Decreto Estadual nº 21.872/2023);' },
+        { dote: true, title: 'Exigências de qualificação técnica (parcelas de maior relevância técnica ou valor significativo) e de qualificação econômico-financeira;' },
+        { dote: true, title: 'Justificativa das regras pertinentes à participação de empresas em consórcio (art. 15 da Lei nº 14.133/2021);' },
+        { dote: true, title: 'Justificativa das regras pertinentes à participação de cooperativas (art. 16 da Lei nº 14.133/2021).' },
+      ],
+    },
+    {
+      title: 'Aprovação pela Autoridade Competente do Órgão',
+      description: 'Aprovação do ETP e do Mapa de Riscos (se houver), do orçamento estimado e do Termo de Referência pela autoridade competente do órgão interessado (art. 18 do Decreto Estadual nº 21.872/2023). A aprovação e a autorização de abertura podem constar no mesmo documento.'
+    },
+    {
+      title: 'Autorização de Abertura do Procedimento Licitatório',
+      description: 'Autorização de abertura do procedimento licitatório pela autoridade competente do órgão interessado (art. 17, VIII, e 53 do Decreto Estadual nº 21.872/2023).'
+    },
+    {
+      title: 'Autorização da CGFR',
+      description: 'Autorização da contratação pela Comissão de Gestão Financeira e Gestão por Resultados – CGFR (art. 3º, II, do Decreto Estadual nº 21.908/2023). Dispensada em casos que não ultrapassem o valor de alçada definido pela CGFR.'
+    },
+    {
+      title: 'Nota de Reserva',
+      description: 'Nota de Reserva orçamentária (arts. 17, VII, e 52 do Decreto Estadual nº 21.872/2023).'
+    },
+    {
+      title: 'Designação de Pregoeiro e Equipe de Apoio',
+      description: 'Designação formal do pregoeiro e da equipe de apoio (art. 17, IX, do Decreto Estadual nº 21.872/2023).'
+    },
+    {
+      title: 'Matriz de Riscos',
+      description: 'Matriz de Riscos, quando for o caso (arts. 17, III, 33 e 34 do Decreto Estadual nº 21.872/2023). Obrigatória nas contratações cujo valor estimado superar 2% do limite do art. 6º, XXII, da Lei nº 14.133/2021, e quando a natureza do processo envolver riscos relevantes que possam ocasionar desequilíbrio econômico-financeiro do contrato.'
+    },
+    {
+      title: 'Declaração de Utilização das Minutas Padronizadas da PGE',
+      description: 'Declaração de utilização das minutas padronizadas de edital e contrato da PGE.'
+    },
+    {
+      title: 'Minutas do Edital, Contrato e Anexos',
+      description: 'Minutas do edital, do contrato e respectivos anexos (art. 18, V e VI, da Lei nº 14.133/2021; art. 17, X e XI, do Decreto Estadual nº 21.872/2023). O contrato pode ser substituído por nota de empenho acompanhada de autorização de compra ou ordem de serviço (art. 95, I, da Lei nº 14.133/2021), sendo obrigatória, em qualquer caso, a publicação do extrato.'
+    },
+    {
+      title: 'Análise Prévia da CGE',
+      description: 'Análise prévia pela Controladoria-Geral do Estado, recomendada em contratações de grande vulto e acentuada complexidade, ou em casos de dúvidas acerca da adequação da pesquisa de preços (Despacho PGE nº 760/2023, SEI nº 00012.000487/2023-96).'
+    },
+    {
+      title: 'Parecer PGE',
+      description: 'Parecer da Procuradoria-Geral do Estado (art. 53, §4º, da Lei nº 14.133/2021; art. 69 do Decreto Estadual nº 21.872/2023).'
+    },
+    {
+      title: 'Autorização de Abertura de Licitação pelo Secretário da SEAD',
+      description: 'Autorização do Secretário da SEAD para abertura da licitação (Art. 17, III, XV e XIX, da Lei Estadual nº 7.884/2022).'
+    },
+    {
+      title: 'Publicação do Aviso do Edital',
+      description: 'Publicação do aviso do edital no Diário Oficial do Estado do Piauí (DOE-PI), no Portal Nacional de Contratações Públicas (PNCP) e no sítio eletrônico oficial do órgão (art. 54 da Lei nº 14.133/2021; art. 93 do Decreto Estadual nº 21.872/2023).',
+      fileKey: 'licitacao/Aviso_Licitacao_Pregao_Eletronico_SIA-PI.pdf'
+    },
+    {
+      title: 'Comunicação de Abertura ao TCE',
+      description: 'Comunicação de abertura do procedimento licitatório ao Tribunal de Contas do Estado do Piauí até o dia útil imediatamente posterior ao da última publicação do aviso de licitação (art. 6º, Instrução Normativa nº 06/2017 - TCE/PI).'
+    },
+    {
+      title: 'Atas, Relatórios e Deliberações do Pregoeiro',
+      description: 'Atas, relatórios e deliberações do Pregoeiro e equipe de apoio durante a condução do certame.'
+    },
+    {
+      title: 'Análise Final pelo Controle Interno do Órgão',
+      description: 'Análise final do procedimento pelo controle interno do órgão (Art. 13 da Instrução Normativa nº 05/2017, do Tribunal de Contas do Estado do Piauí).'
+    },
+    {
+      title: 'Adjudicação e Homologação',
+      description: 'Atos de adjudicação do objeto da licitação e de homologação, com as respectivas publicações.'
+    },
+    {
+      title: 'Parecer SEFAZ e Autorização de Reserva Orçamentária – ARO',
+      description: 'Parecer SEFAZ, nos casos especificados no Decreto Estadual nº 17.084/2017, e/ou Autorização de Reserva Orçamentária – ARO. A manifestação específica da SEFAZ poderá ser dispensada em casos que não ultrapassem o valor de alçada definido pela CGFR (art. 3º, parágrafo único, do Decreto Estadual nº 21.908/2023).'
+    },
+    {
+      title: 'Indicação do Gestor e do Fiscal do Contrato ou Comissão Equivalente',
+      description: 'Indicação do gestor e do fiscal do contrato ou comissão equivalente, preferencialmente do setor que receberá o bem ou serviço (art. 117 da Lei nº 14.133/2021; arts. 65 a 67 do Decreto Estadual nº 21.872/2023).'
+    },
+    {
+      title: 'Publicação no Diário Oficial do Estado do Piauí (DOE) e no PNCP (Portal Nacional de Contratações Públicas)',
+      description: 'Publicação do contrato (art. 94 da Lei nº 14.133/2021; art. 8º do Decreto Estadual nº 17.084/2017). A publicação do extrato no PNCP e no DOE-PI é condição de eficácia do contrato.'
+    },
+    {
+      title: 'Comunicações ao TCE',
+      subitems: [
+        {
+          number: '1',
+          title: 'Comunicação de Encerramento do Procedimento Licitatório',
+          description: 'Em até 10 (dez) dias úteis após a homologação, ainda que parcial, relacionada a cada procedimento licitatório (art. 7º, Instrução Normativa nº 06/2017 - TCE/PI).'
+        },
+        {
+          number: '2',
+          title: 'Comunicação de Assinatura do Contrato',
+          description: 'Comunicação de assinatura do contrato ou documento substitutivo ao TCE em até 10 (dez) dias úteis após o ato (art. 11, Instrução Normativa nº 06/2017 – TCE/PI).'
+        },
+      ],
+    },
+    {
+      title: 'Ordem de Serviço',
+      description: 'Ordem de Serviço devidamente ratificada pelo Secretário de Governo ou por agente delegado, e publicada no Diário Oficial do Estado (art. 1º do Decreto Estadual nº 23.644/2025). O descumprimento implica nulidade da ordem de serviço e bloqueio da unidade gestora no SIAFE-PI (parágrafo único).'
+    },
+  ],
   },
 ]

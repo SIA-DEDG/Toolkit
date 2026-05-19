@@ -1,5 +1,6 @@
 import DownloadButton from './DownloadButton'
 
+// Item de etapa com marcador, descrição, subitens e download opcional
 export function StepItem({ card, accentColor, isLast }) {
   const hasDownload = !!(card.fileKey || card.downloadLabel)
 

@@ -1,5 +1,6 @@
 import { Component } from 'react'
 
+// Captura erros de renderização e exibe tela de fallback com opção de reload
 export class ErrorBoundary extends Component {
   state = { error: null }
 

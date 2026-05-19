@@ -3,11 +3,8 @@ import { ExternalLink, ArrowRight } from 'lucide-react'
 
 import { INSTRUMENT_FLOWS } from '../data/instruments'
 import { useIsMobile } from '../hooks/useIsMobile'
-import { useLayoutVariant } from '../hooks/useLayoutVariant'
 import { SectionBadge } from '../components/SectionBadge'
 import { InstrumentFlowCard } from '../components/InstrumentFlowCard'
-import { ScaledFlowchart } from '../components/flowchart/ScaledFlowchart'
-import { ScaledFlowchartLegacy } from '../components/flowchart/ScaledFlowchartLegacy'
 import { ScaledFlowchartDecision } from '../components/flowchart/ScaledFlowchartDecision'
 
 const HERO_BANNER_SRC = '/assets/home/banner.png'
@@ -16,26 +13,28 @@ const SCROLL_DELAY_MS = 50
 const COLOR_OFF_TRACK = 'rgb(190,91,74)'
 
 const INSTRUMENT_PILLS = [
-  { label: 'Acordo de PD&I',                                  color: '#08ba9c',      icon: '🤝', iconBg: 'rgba(47,255,220,0.2)'  },
-  { label: 'Convênio de PD&I',                                color: '#209828',      icon: '📋', iconBg: 'rgba(31,255,38,0.2)'   },
+  { label: 'Acordo de PD&I',                                  color: '#08ba9c',          icon: '🤝', iconBg: 'rgba(47,255,220,0.2)'  },
+  { label: 'Convênio de PD&I',                                color: '#209828',          icon: '📋', iconBg: 'rgba(31,255,38,0.2)'   },
   { label: 'Pitches e Hackatons',                             color: 'rgb(0, 162, 127)', icon: '💡', iconBg: 'rgba(255,255,255,0.2)' },
-  { label: 'PMI - Procedimento de Manifestação de Interesse', color: COLOR_OFF_TRACK, icon: '📌', iconBg: 'rgba(255,255,255,0.2)' },
-  { label: 'Diálogo Competitivo',                             color: COLOR_OFF_TRACK, icon: '💬', iconBg: 'rgba(255,255,255,0.2)' },
-  { label: 'ETEC - Encomenda Tecnológica',                    color: '#0e59a8',      icon: '🖥️', iconBg: 'rgba(219,175,0,0.2)'   },
-  { label: 'CPSI - Contrato Público para Solução Inovadora',  color: '#c21d00', icon: '🏗️', iconBg: 'rgba(255,255,255,0.2)' },
-  { label: 'Concurso Público de Inovação',                    color: COLOR_OFF_TRACK, icon: '📝', iconBg: 'rgba(255,255,255,0.2)' },
-  { label: 'Doação de Solução Inovadora',                     color: COLOR_OFF_TRACK, icon: '📨', iconBg: 'rgba(255,255,255,0.2)' },
-  { label: 'Contratação Direta',                              color: '#dbaf00',      icon: '📇', iconBg: 'rgba(14,89,168,0.2)'   },
-  { label: 'Contrato de Transferência',                       color: '#6a0ea8',      icon: '🔄', iconBg: 'rgba(206,136,253,0.2)' },
-  { label: 'Licitação',                                       color: COLOR_OFF_TRACK, icon: '📄', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'PMI - Procedimento de Manifestação de Interesse', color: COLOR_OFF_TRACK,    icon: '📌', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Diálogo Competitivo',                             color: COLOR_OFF_TRACK,    icon: '💬', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'ETEC - Encomenda Tecnológica',                    color: '#0e59a8',          icon: '🖥️', iconBg: 'rgba(219,175,0,0.2)'   },
+  { label: 'CPSI - Contrato Público para Solução Inovadora',  color: '#c21d00',          icon: '🏗️', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Concurso Público de Inovação',                    color: COLOR_OFF_TRACK,    icon: '📝', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Doação de Solução Inovadora',                     color: COLOR_OFF_TRACK,    icon: '📨', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Contratação Direta',                              color: '#dbaf00',          icon: '📇', iconBg: 'rgba(14,89,168,0.2)'   },
+  { label: 'Contrato de Transferência',                       color: '#6a0ea8',          icon: '🔄', iconBg: 'rgba(206,136,253,0.2)' },
+  { label: 'Licitação',                                       color: COLOR_OFF_TRACK,    icon: '📄', iconBg: 'rgba(255,255,255,0.2)' },
 ]
 
+// Rola suavemente até um elemento pelo id
 function scrollToSection(id, delay = 0) {
   setTimeout(() => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
   }, delay)
 }
 
+// Banner de topo com imagem de capa
 function HeroBanner() {
   return (
     <div className="w-full overflow-hidden" style={{ height: 'clamp(140px, 16vw, 230px)' }}>
@@ -48,6 +47,7 @@ function HeroBanner() {
   )
 }
 
+// Pílula colorida com ícone e label de instrumento
 function InstrumentPill({ label, color, icon, iconBg }) {
   return (
     <div
@@ -66,6 +66,7 @@ function InstrumentPill({ label, color, icon, iconBg }) {
   )
 }
 
+// Seção de introdução com texto institucional e grade de pílulas de instrumentos
 function IntroSection() {
   return (
     <div className="py-[clamp(28px,4vw,56px)] px-[clamp(20px,5vw,66px)] flex gap-[clamp(24px,4vw,56px)] flex-wrap items-center">
@@ -101,6 +102,7 @@ function IntroSection() {
   )
 }
 
+// Card de chamada à ação com título, descrição e botão
 function IdentificationCard({ title, description, action }) {
   return (
     <div className="flex-[1_1_260px] max-w-[600px] bg-brand rounded-lg p-[clamp(14px,2vw,20px)] flex flex-col gap-[clamp(8px,1.5vw,14px)]">
@@ -119,6 +121,7 @@ const ACTION_BUTTON_CLASS =
   'flex items-center justify-center gap-1.5 bg-brand-mid rounded-[10px] h-[34px] text-white'
 const ACTION_BUTTON_STYLE = { width: 'clamp(130px, 12vw, 160px)' }
 
+// Seção de triagem com dois cards de identificação de instrumento
 function IdentificationSection() {
   return (
     <section className="select-border-top-dashed select-border-bottom bg-brand-bg">
@@ -167,6 +170,7 @@ function IdentificationSection() {
   )
 }
 
+// Grade de cards de instrumentos em layout desktop dividida em duas linhas
 function DesktopFlowGrid({ openIds, onToggle }) {
   const firstRow  = INSTRUMENT_FLOWS.slice(0, 3)
   const remaining = INSTRUMENT_FLOWS.slice(3)
@@ -188,6 +192,7 @@ function DesktopFlowGrid({ openIds, onToggle }) {
   )
 }
 
+// Seção com o passo a passo expandível de cada instrumento
 function StepByStepSection({ isMobile, openIds, onToggle }) {
   return (
     <section
@@ -217,26 +222,7 @@ function StepByStepSection({ isMobile, openIds, onToggle }) {
   )
 }
 
-function LayoutToggle({ variant, setVariant }) {
-  const base = 'text-xs font-medium px-3 py-1.5 rounded-[8px] transition-all border-none cursor-pointer'
-  const active = 'bg-brand text-white shadow-sm'
-  const inactive = 'bg-transparent text-gray-400 hover:text-gray-600'
-
-  return (
-    <div className="flex items-center gap-0.5 bg-gray-100 rounded-[10px] p-1">
-      <button onClick={() => setVariant('decision')} className={`${base} ${variant === 'decision' ? active : inactive}`}>
-        Árvore
-      </button>
-      <button onClick={() => setVariant('grid')} className={`${base} ${variant === 'grid' ? active : inactive}`}>
-        Grade
-      </button>
-      <button onClick={() => setVariant('snake')} className={`${base} ${variant === 'snake' ? active : inactive}`}>
-        Trilha
-      </button>
-    </div>
-  )
-}
-
+// Rodapé com copyright institucional
 function PageFooter() {
   return (
     <footer className="text-center py-[clamp(20px,3vw,32px)] px-4 text-[clamp(11px,1vw,14px)] text-gray-400 bg-white">
@@ -246,9 +232,9 @@ function PageFooter() {
   )
 }
 
+// Página principal que compõe todas as seções e gerencia o estado de abertura dos cards
 export default function HomePage() {
   const isMobile = useIsMobile()
-  const { variant, setVariant } = useLayoutVariant()
   const [openIds, setOpenIds] = useState(new Set())
 
   const handleInstrumentClick = useCallback((id) => {
@@ -272,12 +258,7 @@ export default function HomePage() {
 
       {!isMobile && (
         <section id="trilha-de-instrumentos" className="p-0">
-          {variant === 'snake'
-            ? <ScaledFlowchartLegacy  onInstrumentClick={handleInstrumentClick} headerAction={<LayoutToggle variant={variant} setVariant={setVariant} />} />
-            : variant === 'grid'
-            ? <ScaledFlowchart        onInstrumentClick={handleInstrumentClick} headerAction={<LayoutToggle variant={variant} setVariant={setVariant} />} />
-            : <ScaledFlowchartDecision onInstrumentClick={handleInstrumentClick} headerAction={<LayoutToggle variant={variant} setVariant={setVariant} />} />
-          }
+          <ScaledFlowchartDecision onInstrumentClick={handleInstrumentClick} />
         </section>
       )}
 

@@ -1,14 +1,9 @@
-// Figma reference: node 540:239 / 540:242
-// Card: bg-white, w=136, rounded-[5px], shadow-[0px_4px_4px_rgba(0,0,0,0.25)]
-// Top bar: h=6px, rounded-tl-[10px] rounded-tr-[10px], accent color
-// Badge (top-right): h=10px, w=27px, rounded-[5px] — dot (4px) + label (9px medium)
-// Internal layout (from top after bar): INSTRUMENTO → icon → title → description
-
 const BADGE = {
-  sim: { bg: 'rgba(37,212,37,0.5)',   dot: '#25d425', color: '#006d10', label: 'Sim' },
+  sim: { bg: 'rgba(37,212,37,0.5)', dot: '#25d425', color: '#006d10', label: 'Sim' },
   nao: { bg: 'rgba(251,135,135,0.5)', dot: '#cc3030', color: '#ab0000', label: 'Não' },
 }
 
+// Card compacto de instrumento com barra colorida, ícone e badge opcional
 export function InstrumentCard({ accentColor, iconBg, icon, title, description, width = 136, height, badge, onClick }) {
   const b = badge ? BADGE[badge] : null
 
@@ -27,13 +22,11 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
       onMouseEnter={e => { if (onClick) e.currentTarget.style.boxShadow = '0px 6px 16px rgba(0,0,0,0.30)' }}
       onMouseLeave={e => { if (onClick) e.currentTarget.style.boxShadow = '0px 4px 4px rgba(0,0,0,0.25)' }}
     >
-      {/* Coloured top bar */}
       <div
         className="rounded-tl-[10px] rounded-tr-[10px]"
         style={{ height: 6, background: accentColor }}
       />
 
-      {/* Sim / Não badge — top-right, matching Figma exactly */}
       {b && (
         <div
           className="absolute flex items-center gap-[3px] rounded-[5px]"
@@ -49,9 +42,7 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
         </div>
       )}
 
-      {/* Card body — matches Figma internal offsets */}
       <div style={{ paddingLeft: 12, paddingRight: 12, paddingTop: 6, paddingBottom: 10 }}>
-        {/* "INSTRUMENTO" label — top=1168 relative to card top=1156 → 12px from top = 6px from bar bottom */}
         <p
           className="m-0 leading-normal"
           style={{ fontSize: 9, fontWeight: 500, color: '#000', letterSpacing: '0.05em' }}
@@ -59,7 +50,6 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
           INSTRUMENTO
         </p>
 
-        {/* Icon — top=1185 → 17px below INSTRUMENTO baseline */}
         <div
           className="flex items-center justify-center rounded-[4px] shrink-0"
           style={{
@@ -75,7 +65,6 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
           }
         </div>
 
-        {/* Title — top=1211 → ~26px below icon top (icon is 22px + 4px gap) */}
         <p
           className="m-0 leading-normal"
           style={{ fontSize: 14, fontWeight: 600, color: accentColor, marginTop: 4 }}
@@ -83,7 +72,6 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
           {title}
         </p>
 
-        {/* Description — top=1229 → ~18px below title */}
         <p
           className="m-0 leading-snug"
           style={{ fontSize: 10, fontWeight: 300, color: '#000', marginTop: 3 }}

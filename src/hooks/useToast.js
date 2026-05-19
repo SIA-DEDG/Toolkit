@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react'
 
 let _nextId = 1
 
+// Gerencia a lista de toasts ativos com funções de add e remove
 export function useToast() {
   const [toasts, setToasts] = useState([])
 

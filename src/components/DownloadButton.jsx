@@ -3,6 +3,7 @@ import { downloadFile } from '../config/supabase'
 import { useToastContext } from '../hooks/ToastContext'
 import { enqueueDownload } from '../hooks/useDownloadQueue'
 
+// Clareia uma cor hex misturando com branco pelo fator amount
 function lightenHex(hex, amount = 0.25) {
   const r = parseInt(hex.slice(1, 3), 16)
   const g = parseInt(hex.slice(3, 5), 16)
@@ -11,6 +12,7 @@ function lightenHex(hex, amount = 0.25) {
   return `rgb(${mix(r)}, ${mix(g)}, ${mix(b)})`
 }
 
+// Botão que baixa um arquivo do Supabase Storage e exibe feedback de toast
 export default function DownloadButton({ label = 'Baixar Documento', fileKey, filename, large = false, color }) {
   const [loading, setLoading] = useState(false)
   const addToast = useToastContext()

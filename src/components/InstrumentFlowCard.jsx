@@ -3,6 +3,7 @@ import { useCallback } from 'react'
 import { StepItem } from './StepItem'
 import DownloadButton from './DownloadButton'
 
+// Card expansível com header colorido, lista de passos e botão de download
 export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, id, openIds, onToggle, downloadKey }) {
   const isOpen = openIds.has(id)
 

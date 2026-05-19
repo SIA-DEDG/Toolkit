@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 
+// Container que empilha as notificações ativas no canto superior direito
 export function Toast({ toasts, remove }) {
   return (
     <div className="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none">
@@ -10,6 +11,7 @@ export function Toast({ toasts, remove }) {
   )
 }
 
+// Item individual de toast com auto-remoção após 4s
 function ToastItem({ toast, remove }) {
   useEffect(() => {
     const timer = setTimeout(() => remove(toast.id), 4000)
