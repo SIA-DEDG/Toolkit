@@ -13,18 +13,18 @@ const SCROLL_DELAY_MS = 50
 const COLOR_OFF_TRACK = 'rgb(190,91,74)'
 
 const INSTRUMENT_PILLS = [
-  { label: 'Acordo de PD&I',                                  color: '#08ba9c',          icon: '🤝', iconBg: 'rgba(47,255,220,0.2)'  },
-  { label: 'Convênio de PD&I',                                color: '#209828',          icon: '📋', iconBg: 'rgba(31,255,38,0.2)'   },
-  { label: 'Pitches e Hackatons',                             color: '#00A27F', icon: '💡', iconBg: 'rgba(255,255,255,0.2)' },
-  { label: 'PMI - Procedimento de Manifestação de Interesse', color: '#e65100',    icon: '📌', iconBg: 'rgba(255,255,255,0.2)' },
-  { label: 'Diálogo Competitivo',                             color: '#006064',    icon: '💬', iconBg: 'rgba(255,255,255,0.2)' },
-  { label: 'ETEC - Encomenda Tecnológica',                    color: '#0e59a8',          icon: '🖥️', iconBg: 'rgba(219,175,0,0.2)'   },
-  { label: 'CPSI - Contrato Público para Solução Inovadora',  color: '#c21d00',          icon: '🏗️', iconBg: 'rgba(255,255,255,0.2)' },
-  { label: 'Concurso Público de Inovação',                    color: '#880e4f',    icon: '📝', iconBg: 'rgba(255,255,255,0.2)' },
-  { label: 'Doação de Solução Inovadora',                     color: '#1b5e20',    icon: '📨', iconBg: 'rgba(255,255,255,0.2)' },
-  { label: 'Contratação Direta',                              color: '#dbaf00',          icon: '📇', iconBg: 'rgba(14,89,168,0.2)'   },
-  { label: 'Contrato de Transferência',                       color: '#6a0ea8',          icon: '🔄', iconBg: 'rgba(206,136,253,0.2)' },
-  { label: 'Licitação',                                       color: '#37474f',    icon: '📄', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Acordo de PD&I', color: '#08ba9c', icon: '🤝', iconBg: 'rgba(47,255,220,0.2)' },
+  { label: 'Convênio de PD&I', color: '#209828', icon: '📋', iconBg: 'rgba(31,255,38,0.2)' },
+  { label: 'Pitches e Hackatons', color: '#00A27F', icon: '💡', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'PMI - Procedimento de Manifestação de Interesse', color: '#e65100', icon: '📌', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Diálogo Competitivo', color: '#006064', icon: '💬', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'ETEC - Encomenda Tecnológica', color: '#0e59a8', icon: '🖥️', iconBg: 'rgba(219,175,0,0.2)' },
+  { label: 'CPSI - Contrato Público para Solução Inovadora', color: '#c21d00', icon: '🏗️', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Concurso Público de Inovação', color: '#880e4f', icon: '📝', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Doação de Solução Inovadora', color: '#1b5e20', icon: '📨', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Contratação Direta', color: '#dbaf00', icon: '📇', iconBg: 'rgba(14,89,168,0.2)' },
+  { label: 'Contrato de Transferência', color: '#6a0ea8', icon: '🔄', iconBg: 'rgba(206,136,253,0.2)' },
+  { label: 'Licitação', color: '#37474f', icon: '📄', iconBg: 'rgba(255,255,255,0.2)' },
 ]
 
 // Rola suavemente até um elemento pelo id
@@ -172,7 +172,7 @@ function IdentificationSection() {
 
 // Grade de cards de instrumentos em layout desktop dividida em duas linhas
 function DesktopFlowGrid({ openIds, onToggle }) {
-  const firstRow  = INSTRUMENT_FLOWS.slice(0, 3)
+  const firstRow = INSTRUMENT_FLOWS.slice(0, 3)
   const remaining = INSTRUMENT_FLOWS.slice(3)
 
   return (
