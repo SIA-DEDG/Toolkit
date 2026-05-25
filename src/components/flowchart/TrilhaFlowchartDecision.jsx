@@ -2,26 +2,29 @@ import { InstrumentCard } from './InstrumentCard'
 
 const BRAND = '#0e59a8'
 const BRAND_BG = '#E3EFFF'
+const FAM_A = '#6d28d9'
+const FAM_B = '#0e7490'
+const FAM_C = '#b45309'
 const CARD_W = 130
 
 // Coordenadas X (centro) de cada elemento nas colunas
 const CX = {
   root: 720,
   p2a: 278, p2b: 720, p2c: 1000,
-  p3a: 143, p3b: 423,
+  p3a: 143, p3b: 403,
   p3c: 570, p3d: 870,
   pmi: 800, dialogo: 1000, p3e: 1180,
   convenio: 55, doacao: 200,
-  acordo: 355, transferencia: 500,
+  acordo: 340, transferencia: 485,
   licitacao: 470, direta: 640,
   etec: 810, cpsi: 980,
   pitch: 1010, concurso: 1290,
 }
 
 // Coordenadas Y por nível de cada coluna
-const EL1_Y = 90
+const EL1_Y = 95
 const EL1_H = 65
-const EBUS2_Y = 195
+const EBUS2_Y = 195 
 const EL2_Y = 205
 const EL2_H = 65
 const EBUS3_Y = 310
@@ -35,7 +38,7 @@ const CL2_H = 65
 const CBUS3_Y = 560
 const CL3_Y = 570
 
-const DL1_Y = 90
+const DL1_Y = 95
 const DL1_H = 65
 const DBUS2_Y = 195
 const DL2_Y = 205
@@ -46,7 +49,7 @@ const DL3_Y = 380
 const CANVAS_H = 720
 
 // Dados de cada instrumento — id referencia o modal de detalhes
-const INSTRUMENTS = {
+export const INSTRUMENTS = {
   convenio: { id: 'convenio-pd&i', accentColor: '#209828', iconBg: 'rgba(32,152,40,0.15)', icon: '📋', title: 'Convênio', description: 'PD&I — com repasse' },
   doacao: { id: 'doacao-solucao', accentColor: '#209828', iconBg: 'rgba(32,152,40,0.15)', icon: '🎁', title: 'Doação', description: 'Inovadora art. 14-A' },
   acordo: { id: 'acordo-pd&i', accentColor: '#08ba9c', iconBg: 'rgba(8,186,156,0.15)', icon: '🤝', title: 'Acordo', description: 'PD&I — criar nova' },
@@ -102,11 +105,25 @@ function abs(left, top) {
 
 // Label de texto SVG exibida sobre as linhas de conexão
 function BranchLabel({ x, y, text, anchor = 'middle' }) {
+  const PAD_X = 6
+  const PAD_Y = 3
+  const EST_W = text.length * 5.5 + PAD_X * 2
+  const H = 16 + PAD_Y * 2
+  const rx = anchor === 'middle' ? x - EST_W / 2 : anchor === 'end' ? x - EST_W : x
   return (
-    <text x={x} y={y} textAnchor={anchor}
-      style={{ fontSize: 10, fontWeight: 500, fill: BRAND, fontFamily: 'inherit'}}>
-      {text}
-    </text>
+    <g>
+      <rect
+        x={rx} y={y - 12 - PAD_Y}
+        width={EST_W} height={H}
+        rx={4} ry={4}
+        fill="white" stroke={BRAND} strokeWidth={1}
+      />
+      <text x={x} y={y}
+        textAnchor={anchor}
+        style={{ fontSize: 10, fontWeight: 500, fill: BRAND, fontFamily: 'inherit' }}>
+        {text}
+      </text>
+    </g>
   )
 }
 
@@ -225,7 +242,7 @@ export function TrilhaFlowchartDecision({ onInstrumentClick, headerAction }) {
         <BranchLabel x={c.concurso} y={DBUS3_Y - 14} text="Com prêmio" />
       </svg>
 
-      <div style={abs(530, 0)} className="z-[1] relative">
+      <div style={abs(530, -22)} className="z-[1] relative">
         <QBox
           text="O que a instituição precisa?"
           subtitle="Pergunta 1 — ponto de partida da necessidade"
@@ -234,27 +251,27 @@ export function TrilhaFlowchartDecision({ onInstrumentClick, headerAction }) {
       </div>
 
       <div style={abs(183, EL1_Y)} className="z-[1] relative">
-        <QBox text="Quem executa o projeto?" width={190} height={EL1_H} />
+        <QBox text="Quem executa o projeto?" width={190} height={EL1_H} bg={FAM_A} />
       </div>
       <div style={abs(610, CL1_Y)} className="z-[1] relative">
-        <QBox text="A solução já existe no mercado?" width={220} height={CL1_H} />
+        <QBox text="A solução já existe no mercado?" width={220} height={CL1_H} bg={FAM_B} />
       </div>
       <div style={abs(905, DL1_Y)} className="z-[1] relative">
-        <QBox text="O que querem obter?" width={190} height={DL1_H} />
+        <QBox text="O que querem obter?" width={190} height={DL1_H} bg={FAM_C} />
       </div>
 
       <div style={abs(78, EL2_Y)} className="z-[1] relative">
-        <QBox text={<>Há repasse<br />financeiro?</>} width={130} height={EL2_H} />
+        <QBox text={<>Há repasse<br />financeiro?</>} width={130} height={EL2_H} bg={FAM_A} />
       </div>
       <div style={abs(348, EL2_Y)} className="z-[1] relative">
-        <QBox text={<>Criar nova ou<br />licenciar existente?</>} width={130} height={EL2_H} />
+        <QBox text={<>Criar nova ou<br />licenciar existente?</>} width={130} height={EL2_H} bg={FAM_A} />
       </div>
 
       <div style={abs(505, CL2_Y)} className="z-[1] relative">
-        <QBox text={<>Há mais de um<br />fornecedor?</>} width={130} height={CL2_H} />
+        <QBox text={<>Há mais de um<br />fornecedor?</>} width={130} height={CL2_H} bg={FAM_B} />
       </div>
       <div style={abs(805, CL2_Y)} className="z-[1] relative">
-        <QBox text={<>Qual o nível de<br />risco tecnológico?</>} width={130} height={CL2_H} />
+        <QBox text={<>Qual o nível de<br />risco tecnológico?</>} width={130} height={CL2_H} bg={FAM_B} />
       </div>
 
       <div style={abs(cl(c.pmi), DL2_Y)} className="z-[1] relative">
@@ -264,7 +281,7 @@ export function TrilhaFlowchartDecision({ onInstrumentClick, headerAction }) {
         <Card data={INSTRUMENTS.dialogo} onInstrumentClick={onInstrumentClick} />
       </div>
       <div style={abs(1115, DL2_Y)} className="z-[1] relative">
-        <QBox text={<>Informal ou<br />com premiação?</>} width={130} height={DL2_H} />
+        <QBox text={<>Informal ou<br />com premiação?</>} width={130} height={DL2_H} bg={FAM_C} />
       </div>
 
       <div style={abs(cl(c.convenio), EL3_Y)} className="z-[1] relative">

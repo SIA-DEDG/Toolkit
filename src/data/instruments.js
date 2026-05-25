@@ -6,7 +6,7 @@ export const INSTRUMENT_FLOWS = [
     href: '/acordo-pd&i',
     accentColor: '#08ba9c',
     icon: '🤝',
-    downloadKey: 'acordo-pd&i/Guia Explicativo Acordo PD&I.pdf',
+    downloadKey: 'acordo-pd&i/Guia Explicativo Acordo PD&I-1.pdf',
     cards: [
       {
         title: 'Início',
@@ -166,7 +166,7 @@ export const INSTRUMENT_FLOWS = [
     href: '/encomenda-tecnologica',
     accentColor: '#0e59a8',
     icon: '🖥️',
-    downloadKey: '',
+    downloadKey: 'encomenda-tecnologica/Guia Explicativo Encomenda Tecnologica.pdf',
     cards: [
       {
         title: 'Início',
@@ -427,7 +427,7 @@ export const INSTRUMENT_FLOWS = [
     href: '/contrato-transferencia-tecnologia',
     accentColor: '#6a0ea8',
     icon: '🔄',
-    downloadKey: '',
+    downloadKey: 'transferencia-tecnologia/Guia Explicativo Transferencia Tecnologica nao patendeada.pdf',
     cards: [
       {
         title: 'Início',
@@ -521,7 +521,7 @@ export const INSTRUMENT_FLOWS = [
     href: '/pitch-hackton',
     accentColor: '#00A27F',
     icon: '💡',
-    downloadKey: '',
+    downloadKey: 'pitches_e_hackatons/Guia Explicativo Pitches e Hackatons.pdf',
     cards: [
       {
         title: 'Início',
@@ -603,7 +603,7 @@ export const INSTRUMENT_FLOWS = [
     href: '/contrato-publico',
     accentColor: '#c21d00',
     icon: '🏗️',
-    downloadKey: '',
+    downloadKey: 'contrato-publico-solucao-inovadora/Guia Explicativo de Contrato Publico de Solucao Inovadora.pdf',
     cards: [
       {
         title: 'Início',
