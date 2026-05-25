@@ -192,7 +192,7 @@ export function TrilhaFlowchartDecision({ onInstrumentClick, headerAction }) {
   ]
 
   return (
-    <div className="relative overflow-visible" style={{ width: 1440, height: CANVAS_H, transform: 'translateX(70px)' }}>
+    <div className="relative overflow-visible" style={{ width: 1440, height: CANVAS_H, transform: 'translateX(40px)' }}>
 
       {headerAction && (
         <div className="absolute z-[2]" style={{ right: 20, top: 20 }}>
