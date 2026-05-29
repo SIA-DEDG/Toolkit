@@ -2,8 +2,8 @@ import { useRef, useState, useEffect } from 'react'
 import { SectionBadge } from '../SectionBadge'
 import { TrilhaFlowchartDecision, INSTRUMENTS } from './TrilhaFlowchartDecision'
 
-const FLOWCHART_W = 1440
-const FLOWCHART_H = 690
+const FLOWCHART_W = 1900
+const FLOWCHART_H = 1100
 
 const FAMILIES = [
   {
@@ -28,7 +28,7 @@ const FAMILIES = [
     color: '#b45309',
     border: 'rgba(180,83,9,0.25)',
     bg: '#fef3c7',
-    keys: ['pmi', 'dialogo', 'pitch', 'concurso'],
+    keys: ['pmi', 'dialogo', 'pitch', 'hackathon', 'concurso'],
   },
 ]
 
@@ -76,14 +76,14 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
 
       <div
         ref={containerRef}
-        className="w-full [overflow:clip] mt-[61px]"
-        style={{ height: FLOWCHART_H * scale + 55 }}
+        className="w-full [overflow:clip] mt-[20px]"
+        style={{ height: FLOWCHART_H * scale + 10 }}
       >
         <div
           style={{
             width: FLOWCHART_W,
             transformOrigin: 'top left',
-            transform: `translateX(${offset}px) translateY(55px) scale(${scale})`,
+            transform: `translateX(${offset}px) translateY(10px) scale(${scale})`,
           }}
         >
           <TrilhaFlowchartDecision onInstrumentClick={onInstrumentClick} />
@@ -92,7 +92,7 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
 
       <div className="px-[clamp(20px,5vw,66px)] pt-6 pb-8 flex flex-col gap-3">
         <p className="m-0 mb-1 text-sm font-medium text-ink-mid">
-          Resumo por família — os 12 instrumentos
+          Resumo por família — os 13 instrumentos
         </p>
         {FAMILIES.map(family => {
           const isOpen = openFamilies.has(family.id)

@@ -67,14 +67,14 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
 
         <p
           className="m-0 leading-normal"
-          style={{ fontSize: 14, fontWeight: 600, color: accentColor, marginTop: 4 }}
+          style={{ fontSize: 16, fontWeight: 600, color: accentColor, marginTop: 4 }}
         >
           {title}
         </p>
 
         <p
           className="m-0 leading-snug"
-          style={{ fontSize: 10, fontWeight: 300, color: '#000', marginTop: 3 }}
+          style={{ fontSize: 14, fontWeight: 300, color: '#000', marginTop: 3 }}
         >
           {description}
         </p>
