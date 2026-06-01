@@ -773,7 +773,7 @@ export const INSTRUMENT_FLOWS = [
     href: '/pmi',
     accentColor: '#e65100',
     icon: '🔍',
-    downloadKey: '',
+    downloadKey: 'procedimento-de-manifestacao-de-interesse/Guia Explicativo de PMI.pdf',
     cards: [
       {
         "title": "Início",
@@ -904,7 +904,181 @@ export const INSTRUMENT_FLOWS = [
     accentColor: '#006064',
     icon: '💬',
     downloadKey: '',
-    cards: [],
+    cards: [
+      {
+        title: 'Início',
+        description: 'Necessidade do órgão caracterizada por elevada complexidade técnica, operacional, tecnológica, jurídica ou econômico-financeira, especialmente em contratações relacionadas à inovação, transformação digital, inteligência artificial, soluções de TIC, infraestrutura tecnológica, cidades inteligentes e modernização de serviços públicos (art. 6º, XLII, e art. 32 da Lei nº 14.133/2021).'
+      },
+      {
+        title: 'Documento de Formalização da Demanda – DFD',
+        description: 'Documento que evidencie e detalhe a necessidade administrativa, o problema público identificado, os objetivos institucionais pretendidos e a complexidade da contratação (art. 18, I, c/c art. 32 da Lei nº 14.133/2021; art. 17, I, do Decreto Estadual nº 21.872/2023).'
+      },
+      {
+        title: 'Estudo Técnico Preliminar simplificado',
+        description: 'Contendo a descrição da necessidade administrativa e a justificativa da adoção do diálogo competitivo (art. 18, II, da Lei nº 14.133/2021; art. 17, II, do Decreto Estadual nº 21.872/2023; art. 11 da IN SEGES/MGI nº 512/2025).'
+      },
+      {
+        title: 'Mapa de Riscos Inicial',
+        description: 'Contendo a identificação, análise e tratamento dos riscos técnicos, operacionais, tecnológicos, concorrenciais, econômicos, jurídicos e relacionados à confidencialidade das informações (art. 18, X, da Lei nº 14.133/2021; art. 17, III, e art. 31 do Decreto Estadual nº 21.872/2023).'
+      },
+      {
+        title: 'Pesquisa de Mercado e Estudos Setoriais',
+        description: 'Pesquisa de mercado, benchmarking, estudos setoriais ou documentos equivalentes que demonstrem a existência de múltiplas soluções possíveis para atendimento da necessidade administrativa.'
+      },
+      {
+        title: 'Designação da Comissão de Contratação',
+        description: 'Designação da comissão de contratação responsável pela condução do diálogo competitivo, bem como de assessores técnicos, consultores ou especialistas externos, quando houver (art. 32, XI, da Lei nº 14.133/2021).'
+      },
+      {
+        title: 'Documentação Técnica Preliminar',
+        description: 'Termo de Referência preliminar, anteprojeto, documento técnico de necessidades ou documento equivalente preliminar.'
+      },
+      {
+        title: 'Aprovações da Fase Preparatória',
+        subitems: [
+          {
+            number: '1',
+            title: 'Aprovação do ETP simplificado, do mapa de riscos inicial e dos documentos técnicos preliminares pela autoridade competente',
+            description: '(art. 18 do Decreto Estadual nº 21.872/2023)'
+          },
+          {
+            number: '2',
+            title: 'Autorização de abertura do Procedimento de Pré-Seleção pela autoridade competente'
+          },
+        ],
+      },
+      {
+        title: 'Declaração de utilização das minutas padronizadas da PGE',
+        description: 'Quando houver.'
+      },
+      {
+        title: 'Minuta do Edital de Pré-Seleção',
+        description: 'Minuta do edital de pré-seleção dos participantes.'
+      },
+      {
+        title: 'Parecer da PGE – Fase de Pré-Seleção',
+        description: 'Parecer da PGE acerca do cabimento do diálogo competitivo, da regularidade da fase preparatória e da minuta do edital de pré-seleção dos participantes (art. 53 da Lei nº 14.133/2021; art. 20 da IN SEGES/MGI nº 512/2025).'
+      },
+      {
+        title: 'Publicação do Aviso do Edital de Pré-Seleção',
+        description: 'Publicação do aviso do edital de pré-seleção (art. 54 da Lei nº 14.133/2021; art. 93 do Decreto Estadual nº 21.872/2023).'
+      },
+      {
+        title: 'Termos de Confidencialidade',
+        description: 'Termos de confidencialidade ou cláusulas equivalentes aplicáveis à comissão de contratação, assessores técnicos e participantes. A Administração Pública não poderá revelar aos demais participantes as soluções propostas ou informações sigilosas sem consentimento do interessado (art. 32, §1º, VIII, da Lei nº 14.133/2021).'
+      },
+      {
+        title: 'Documentação da Fase de Diálogo',
+        description: 'Atas, gravações, registros audiovisuais, relatórios técnicos e deliberações produzidas durante a fase de diálogo. Recomenda-se a gravação audiovisual das sessões para reforço da transparência, da rastreabilidade e da segurança jurídica do procedimento.'
+      },
+      {
+        title: 'Relatório Técnico Conclusivo da Comissão de Contratação',
+        description: 'Relatório contendo as soluções avaliadas, os fundamentos da solução selecionada e a justificativa do encerramento da fase de diálogo (arts. 47 a 50 da IN SEGES/MGI nº 512/2025). A fase competitiva somente será iniciada se a comissão decidir pela continuidade do processo (art. 42, I, da IN SEGES/MGI nº 512/2025).'
+      },
+      {
+        title: 'ETP Complementar e Documentação Técnica Definitiva',
+        description: 'Estudo Técnico Preliminar complementar e consolidação do Termo de Referência, Projeto Básico, anteprojeto ou documento técnico definitivo, previamente à fase competitiva, após encerramento da fase de diálogo, contendo a definição da solução apta a atender à necessidade administrativa e os requisitos técnicos, operacionais, jurídicos e econômico-financeiros da contratação (art. 11, §1º, da IN SEGES/MGI nº 512/2025).'
+      },
+      {
+        title: 'Matriz de Alocação de Riscos Contratual',
+        description: 'Quando cabível, elaborada após a consolidação da solução decorrente da fase de diálogo (arts. 22 e 103 da Lei nº 14.133/2021; arts. 33 e 34 do Decreto Estadual nº 21.872/2023).'
+      },
+      {
+        title: 'Pesquisa de Preços Consolidada',
+        description: 'Pesquisa de preços consolidada ou justificativa da estimativa definitiva do valor da contratação, elaborada após a consolidação da solução decorrente da fase de diálogo (art. 23 da Lei nº 14.133/2021; arts. 43 a 51 do Decreto Estadual nº 21.872/2023).'
+      },
+      {
+        title: 'Autorizações Tecnológicas',
+        subitems: [
+          {
+            number: '1',
+            title: 'Análise técnico-operacional da SEAD',
+            description: 'Caso se trate de contratação relacionada à Tecnologia da Informação e Comunicação – TIC (art. 17, III, "f", da Lei Estadual nº 7.884/2022).'
+          },
+          {
+            number: '2',
+            title: 'Autorização do Conselho de Transformação Digital, Economia Digital, Inteligência Artificial e Inovação',
+            description: 'Caso se trate de soluções digitais (art. 2º, II, da Lei Estadual nº 7.990/2023).'
+          },
+        ],
+      },
+      {
+        title: 'Autorização da CGFR',
+        description: 'Autorização da contratação pela Comissão de Gestão Financeira e Gestão por Resultados – CGFR (art. 3º, II, do Decreto Estadual nº 21.908/2023).'
+      },
+      {
+        title: 'Nota de Reserva',
+        description: '(arts. 17, VII, e 52 do Decreto Estadual nº 21.872/2023).'
+      },
+      {
+        title: 'Declaração de utilização das minutas padronizadas da PGE',
+        description: 'Quando houver.'
+      },
+      {
+        title: 'Minuta do Edital da Fase Competitiva, Contrato e Anexos',
+        description: 'Minuta do edital da fase competitiva, acompanhada de minuta de contrato e demais anexos (art. 18, V e VI, da Lei n. 14.133/2021; art. 17, X e XI, do Decreto Estadual n. 21.872/2023).'
+      },
+      {
+        title: 'Análise Prévia pela Controladoria-Geral do Estado',
+        description: 'Recomendada em contratações de grande vulto e acentuada complexidade, bem como em casos de dúvidas acerca da adequação da pesquisa de preços. O gestor deve justificar nos autos em caso de renúncia à consulta (Despacho PGE n. 760/2023, processo SEI 00012.000487/2023-96).'
+      },
+      {
+        title: 'Parecer da PGE – Fase Competitiva',
+        description: 'Parecer da Procuradoria-Geral do Estado (art. 53, §4º, Lei n. 14.133/2021; art. 69 do Decreto Estadual n. 21.872/2023; art. 53 da IN SEGES/MGI nº 512/2025).'
+      },
+      {
+        title: 'Autorização de Abertura de Licitação pelo Secretário da SEAD',
+        description: 'Autorização de abertura da licitação pelo Secretário da SEAD (Art. 17, III, XV e XIX, da Lei Estadual n. 7.884/2022).'
+      },
+      {
+        title: 'Publicação do Aviso do Edital da Fase Competitiva',
+        description: 'Publicação do aviso do edital (art. 54 da Lei n. 14.133/2021; art. 93 do Decreto Estadual n. 21.872/2023; art. 54 da IN SEGES/MGI nº 512/2025).'
+      },
+      {
+        title: 'Cadastro da Fase Competitiva no Sistema Licitações Web',
+        description: 'Cadastro da fase competitiva no Sistema Licitações Web, com disponibilização do edital e respectivos anexos, observado o prazo do art. 6º, §7º, da Instrução Normativa TCE-PI nº 02/2026.'
+      },
+      {
+        title: 'Atas e Relatórios de Julgamento',
+        description: 'Atas e relatórios de julgamento da fase competitiva final.'
+      },
+      {
+        title: 'Análise Final pelo Controle Interno do Órgão',
+        description: 'Análise final do procedimento pelo controle interno do órgão (Art. 13 da Instrução Normativa nº 05/2017, do Tribunal de Contas do Estado do Piauí).'
+      },
+      {
+        title: 'Adjudicação e Homologação',
+        description: 'Atos de adjudicação e homologação e respectivas publicações.'
+      },
+      {
+        title: 'Registro no Sistema Licitações Web',
+        description: 'Registro das informações relativas à homologação da fase competitiva no Sistema Licitações Web, observado o prazo do art. 8º da Instrução Normativa TCE-PI nº 02/2026.'
+      },
+      {
+        title: 'Parecer SEFAZ e Autorização de Reserva Orçamentária – ARO',
+        description: 'Nos casos especificados no Decreto Estadual 17.084/2017. A manifestação específica da SEFAZ poderá ser dispensada em casos que não ultrapassem o valor de alçada definido pela CGFR (art. 3º, parágrafo único, do Decreto Estadual n. 21.908/2023).'
+      },
+      {
+        title: 'Indicação do Gestor e do Fiscal do Contrato',
+        description: 'Indicação do gestor e do fiscal do contrato ou comissão equivalente, preferencialmente do setor que receberá o bem ou serviço (art. 117 da Lei n. 14.133/2021; arts. 65 a 67 do Decreto Estadual n. 21.872/2023).'
+      },
+      {
+        title: 'Publicação do Contrato',
+        description: 'Publicação do contrato no Diário Oficial do Estado do Piauí (art. 94 da Lei n. 14.133/2021; art. 8º do Decreto Estadual nº 17.084/2017).'
+      },
+      {
+        title: 'Cadastro do Contrato no Sistema Contratos Web',
+        description: 'Cadastro do contrato e respectivos documentos no Sistema Contratos Web, observado o prazo do art. 11 da Instrução Normativa TCE-PI nº 02/2026.'
+      },
+      {
+        title: 'Registro da Publicação do Resumo do Instrumento Contratual',
+        description: 'Registro da publicação do resumo do instrumento contratual no Sistema Contratos Web (art. 11, §1º, da Instrução Normativa TCE-PI nº 02/2026).'
+      },
+      {
+        title: 'Ordem de Serviço',
+        description: 'Ordem de Serviço devidamente ratificada pelo Secretário de Governo ou agente delegado, e publicada no Diário Oficial do Estado, quando aplicável (Decreto Estadual nº 23.644/2025). O descumprimento implica nulidade da ordem de serviço e bloqueio da unidade gestora no SIAFE-PI.'
+      },
+    ],
   },
   {
     id: 'concurso-publico-inovacao',
@@ -933,7 +1107,7 @@ export const INSTRUMENT_FLOWS = [
     href: '/licitacao',
     accentColor: '#37474f',
     icon: '📑',
-    downloadKey: '',
+    downloadKey: 'licitacao/Guia Explicativo de Licitacao.pdf',
     cards: [
     {
       title: 'Início',

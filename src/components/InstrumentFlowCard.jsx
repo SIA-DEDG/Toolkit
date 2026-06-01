@@ -15,7 +15,7 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
         onClick={handleToggle}
         aria-expanded={isOpen}
         aria-controls={`flow-${id}`}
-        className="w-full text-left border-none cursor-pointer px-3.5 py-3"
+        className="w-full text-left border-none cursor-pointer px-3.5 py-3 min-h-[80px]"
         style={{ background: accentColor }}
       >
         <div className="flex items-center gap-2.5">
