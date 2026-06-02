@@ -1098,7 +1098,144 @@ export const INSTRUMENT_FLOWS = [
     accentColor: '#1b5e20',
     icon: '🎁',
     downloadKey: '',
-    cards: [],
+    cards: [
+      {
+        title: 'Início',
+        description: 'Necessidade do órgão de incorporar solução tecnológica disponibilizada gratuitamente por pessoa física ou jurídica, tal como software, aplicativo, plataforma digital, sistema informatizado, modelo de inteligência artificial, equipamento tecnológico ou outra solução inovadora (art. 184 da Lei nº 14.133/2021; Decreto Federal nº 9.764/2019).'
+      },
+      {
+        title: 'Documento de Formalização da Demanda – DFD',
+        description: 'Documento que evidencie e detalhe a necessidade administrativa, os objetivos institucionais pretendidos e a conveniência do recebimento da doação (art. 18, I, da Lei nº 14.133/2021).'
+      },
+      {
+        title: 'Estudo Técnico Preliminar – ETP',
+        description: '(art. 18, II, da Lei nº 14.133/2021; art. 17, II, do Decreto Estadual nº 21.872/2023), contendo no mínimo:',
+        subitems: [
+          { number: '1', title: 'Caracterização da necessidade administrativa' },
+          { number: '2', title: 'Demonstração da utilidade pública da solução ofertada' },
+          { number: '3', title: 'Análise da aderência da solução aos objetivos institucionais' },
+          { number: '4', title: 'Avaliação dos impactos operacionais decorrentes da utilização da solução, incluindo avaliação do risco de aprisionamento tecnológico (lock-in) e garantia de portabilidade dos dados' },
+          { number: '5', title: 'Análise dos custos diretos e indiretos eventualmente associados à implantação, utilização, manutenção ou evolução da solução' },
+          { number: '6', title: 'Demonstração da vantajosidade do recebimento da doação' },
+          { number: '7', title: 'Demonstração dos resultados esperados com a utilização do objeto doado' },
+        ]
+      },
+      {
+        title: 'Mapa de Riscos',
+        description: 'Contendo a identificação, análise e tratamento dos riscos operacionais, tecnológicos, jurídicos, reputacionais e relacionados à continuidade da solução (art. 18, X, da Lei nº 14.133/2021; art. 17, III, e art. 31 do Decreto Estadual nº 21.872/2023). Atenção especial aos riscos de dependência tecnológica, segurança da informação, proteção de dados pessoais e propriedade intelectual.'
+      },
+      {
+        title: 'Designação da Comissão Técnica',
+        description: 'Designação da comissão técnica, equipe de apoio ou grupo de trabalho responsável pela condução do procedimento e avaliação das propostas apresentadas. Recomenda-se composição multidisciplinar compatível com a complexidade do objeto da doação.'
+      },
+      {
+        title: 'Termo de Referência ou Documento Técnico de Desafio',
+        description: 'Documento contendo:',
+        subitems: [
+          { number: '1', title: 'Descrição funcional da necessidade administrativa' },
+          { number: '2', title: 'Delimitação do objeto pretendido' },
+          { number: '3', title: 'Resultados esperados' },
+          { number: '4', title: 'Requisitos mínimos para aceitação da solução' },
+          { number: '5', title: 'Critérios objetivos de avaliação das propostas' },
+          { number: '6', title: 'Condições de utilização da solução pela Administração' },
+          { number: '7', title: 'Regras relativas à propriedade intelectual, confidencialidade, proteção de dados pessoais e aproveitamento da solução, quando aplicáveis' },
+        ]
+      },
+      {
+        title: 'Aprovação do ETP, do Mapa de Riscos e do Termo de Referência',
+        description: 'Aprovação pela autoridade competente do órgão interessado (art. 18 do Decreto Estadual nº 21.872/2023).'
+      },
+      {
+        title: 'Autorização de Abertura do Processo de Seleção',
+        description: 'Autorização de abertura do processo de seleção de solução pela autoridade competente.'
+      },
+      {
+        title: 'Autorizações Tecnológicas',
+        subitems: [
+          {
+            number: '1',
+            title: 'Análise técnico-operacional da SEAD',
+            description: 'Quando a doação envolver soluções de Tecnologia da Informação e Comunicação – TIC (art. 17, III, "f", da Lei Estadual nº 7.884/2022).'
+          },
+          {
+            number: '2',
+            title: 'Autorização do Conselho de Transformação Digital, Economia Digital, Inteligência Artificial e Inovação',
+            description: 'Quando a doação envolver soluções digitais, softwares, aplicativos ou transformação digital (Art. 2º, II, da Lei n. 7.990/2023).'
+          },
+        ],
+      },
+      {
+        title: 'Declaração de utilização das minutas padronizadas da PGE',
+        description: 'Quando houver.'
+      },
+      {
+        title: 'Minuta de Edital de Chamamento Público ou Manifestação de Interesse',
+        description: 'E respectivos anexos, inclusive minuta de contrato ou termo de doação, conforme o caso. Doações sem ônus: chamamento público ou manifestação de interesse. Doações com ônus ou encargo: manifestação de interesse (art. 6º do Decreto Federal n. 9.764/2019).'
+      },
+      {
+        title: 'Análise Prévia pela Controladoria-Geral do Estado',
+        description: 'Recomendada em contratações de grande vulto e acentuada complexidade, bem como em casos de dúvidas acerca da adequação da pesquisa de preços. O gestor deve justificar nos autos em caso de renúncia à consulta (Despacho PGE n. 760/2023, processo SEI 00012.000487/2023-96).'
+      },
+      {
+        title: 'Parecer da PGE',
+        description: '(art. 53, §4º, Lei n. 14.133/2021; art. 69 do Decreto Estadual n. 21.872/2023).'
+      },
+      {
+        title: 'Autorização do Secretário da SEAD',
+        description: 'Autorização para o procedimento (art. 17, III, XV e XIX, da Lei Estadual n. 7.884/2022).'
+      },
+      {
+        title: 'Publicação do Edital de Chamamento ou Manifestação de Interesse',
+        description: 'Publicação do edital de chamamento público ou da manifestação de interesse.'
+      },
+      {
+        title: 'Cadastro Eletrônico da Seleção no Sistema Licitações Web',
+        description: '(art. 5º, §1º, da Instrução Normativa nº 02/2026 - TCE/PI).'
+      },
+      {
+        title: 'Ata, Relatório ou Documento Equivalente',
+        description: 'Documento contendo a avaliação das propostas apresentadas.'
+      },
+      {
+        title: 'Parecer Técnico Fundamentado acerca da Proposta Selecionada',
+        description: 'Contendo no mínimo:',
+        subitems: [
+          { number: '1', title: 'Análise da aderência da proposta às necessidades da Administração' },
+          { number: '2', title: 'Avaliação da viabilidade técnica da solução' },
+          { number: '3', title: 'Análise das condições de utilização da solução' },
+          { number: '4', title: 'Avaliação dos impactos operacionais decorrentes da implementação' },
+          { number: '5', title: 'Manifestação acerca da conveniência e oportunidade da aceitação da doação' },
+        ]
+      },
+      {
+        title: 'Decisão Administrativa Fundamentada',
+        description: 'Decisão administrativa fundamentada acerca da seleção da proposta e da aceitação da doação.'
+      },
+      {
+        title: 'Análise Final pelo Controle Interno do Órgão',
+        description: '(Art. 13 da Instrução Normativa nº 05/2017, do Tribunal de Contas do Estado do Piauí).'
+      },
+      {
+        title: 'Registro no Sistema Licitações Web',
+        description: 'Registro das informações relativas à homologação no Sistema Licitações Web, observado o prazo do art. 8º da Instrução Normativa TCE-PI nº 02/2026.'
+      },
+      {
+        title: 'Indicação do Gestor e do Fiscal',
+        description: 'Indicação do gestor e do fiscal do contrato de doação ou comissão equivalente, preferencialmente do setor que receberá o bem ou serviço, quando for o caso de contrato de doação (art. 117 da Lei n. 14.133/2021; arts. 65 a 67 do Decreto Estadual n. 21.872/2023). A formalização ocorre por contrato de doação (com encargo) ou por termo de doação (sem encargo), nos termos dos arts. 20 e 21 do Decreto Federal nº 9.764/2019.'
+      },
+      {
+        title: 'Publicação do Contrato ou Termo de Doação',
+        description: '(art. 94 da Lei n. 14.133/2021; art. 8º do Decreto Estadual nº 17.084/2017; art. 20, §2º, Decreto Federal n. 9.764/2019).'
+      },
+      {
+        title: 'Cadastro do Contrato ou Termo de Doação no Sistema Contratos Web',
+        description: 'Cadastro e respectivos documentos no Sistema Contratos Web, observado o prazo do art. 11 da Instrução Normativa TCE-PI nº 02/2026.'
+      },
+      {
+        title: 'Registro da Publicação do Resumo do Instrumento',
+        description: 'Registro da publicação do resumo do instrumento contratual ou do termo de doação no Sistema Contratos Web (art. 11, §1º, da Instrução Normativa TCE-PI nº 02/2026).'
+      },
+    ],
   },
   {
     id: 'licitacao',
