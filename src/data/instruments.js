@@ -1088,7 +1088,113 @@ export const INSTRUMENT_FLOWS = [
     accentColor: '#880e4f',
     icon: '🏆',
     downloadKey: '',
-    cards: [],
+    cards: [
+      {
+        title: 'Início',
+        description: 'Identificação de problema público, desafio de inovação ou oportunidade de modernização administrativa que justifique a mobilização do ecossistema de inovação por meio de concurso público (arts. 218, 219, 219-A e 219-B da CF; Lei nº 10.973/2004; art. 184 da Lei nº 14.133/2021).'
+      },
+      {
+        title: 'Documento de Formalização da Demanda – DFD',
+        description: 'Documento que evidencie e detalhe o problema público identificado, os objetivos institucionais pretendidos, os resultados esperados e a justificativa para utilização do Concurso Público de Inovação (art. 18, I, da Lei nº 14.133/2021).'
+      },
+      {
+        title: 'Estudo Técnico Preliminar – ETP',
+        description: '(art. 18, II, da Lei nº 14.133/2021; art. 17, II, do Decreto Estadual nº 21.872/2023), contendo no mínimo:',
+        subitems: [
+          { number: '1', title: 'Caracterização do problema público ou desafio a ser enfrentado' },
+          { number: '2', title: 'Demonstração da relevância da iniciativa para o interesse público' },
+          { number: '3', title: 'Justificativa para utilização do Concurso Público de Inovação como instrumento de estímulo à inovação e à participação colaborativa da sociedade' },
+          { number: '4', title: 'Demonstração dos benefícios esperados para a Administração Pública e para a coletividade' },
+          { number: '5', title: 'Definição dos resultados esperados com a realização do concurso' },
+          { number: '6', title: 'Demonstração da compatibilidade entre os resultados esperados e os critérios de avaliação e julgamento das propostas' },
+        ]
+      },
+      {
+        title: 'Mapa de Riscos',
+        description: 'Contendo a identificação, análise e tratamento dos riscos técnicos, operacionais, jurídicos, reputacionais, relacionados à propriedade intelectual, à proteção de dados pessoais, à transparência do certame, à imparcialidade do julgamento e à eventual utilização dos resultados produzidos pelos participantes (art. 18, X, da Lei nº 14.133/2021; art. 17, III, e art. 31 do Decreto Estadual nº 21.872/2023).'
+      },
+      {
+        title: 'Designação das Comissões',
+        description: 'Atos de designação da comissão organizadora responsável pela coordenação do concurso e da comissão julgadora ou banca avaliadora responsável pela análise e classificação das propostas.'
+      },
+      {
+        title: 'Termo de Referência do Concurso Público de Inovação',
+        description: 'Contendo no mínimo:',
+        subitems: [
+          { number: '1', title: 'Descrição do problema público ou desafio de inovação a ser enfrentado' },
+          { number: '2', title: 'Justificativa da realização do concurso e dos benefícios esperados para a Administração Pública' },
+          { number: '3', title: 'Definição dos objetivos e resultados pretendidos' },
+          { number: '4', title: 'Critérios técnicos que orientarão a avaliação e seleção das propostas' },
+          { number: '5', title: 'Justificativa da premiação e dos critérios para sua concessão' },
+          { number: '6', title: 'Diretrizes relativas à propriedade intelectual, utilização institucional das propostas e eventual aproveitamento futuro dos resultados produzidos' },
+        ]
+      },
+      {
+        title: 'Justificativa da Premiação ou Incentivo',
+        description: 'Contendo:',
+        subitems: [
+          { number: '1', title: 'Descrição dos benefícios, incentivos ou premiações a serem concedidos (financeiros ou não financeiros: dinheiro, bolsas, mentorias, incubação, aceleração, capacitações, certificações, apoio técnico, reconhecimento institucional, projetos-piloto, etc.)' },
+          { number: '2', title: 'Justificativa para sua definição' },
+          { number: '3', title: 'Critérios para sua concessão' },
+        ]
+      },
+      {
+        title: 'Aprovação do ETP, do Mapa de Riscos e do Termo de Referência',
+        description: 'Aprovação pela autoridade competente do órgão interessado (art. 18 do Decreto Estadual nº 21.872/2023).'
+      },
+      {
+        title: 'Autorização de Abertura do Concurso',
+        description: 'Autorização de abertura do concurso pela autoridade competente.'
+      },
+      {
+        title: 'Documentos Orçamentários (se houver premiação financeira)',
+        subitems: [
+          { number: '1', title: 'Nota de Reserva Orçamentária (arts. 17, VII, e 52 do Decreto Estadual n. 21.872/2023)' },
+          { number: '2', title: 'Autorização da CGFR, quando exigível (art. 3º, II, do Decreto Estadual n. 21.908/2023)' },
+          { number: '3', title: 'Parecer SEFAZ e/ou Autorização de Reserva Orçamentária – ARO, nos casos especificados no Decreto Estadual 17.084/2017' },
+        ]
+      },
+      {
+        title: 'Declaração de utilização das minutas padronizadas da PGE',
+        description: 'Quando houver.'
+      },
+      {
+        title: 'Minuta de Edital e Respectivos Anexos',
+        description: 'Minuta do edital do Concurso Público de Inovação e seus anexos.'
+      },
+      {
+        title: 'Análise Prévia pela Controladoria-Geral do Estado',
+        description: 'Recomendada em contratações de grande vulto e acentuada complexidade, bem como em casos de dúvidas acerca da adequação da pesquisa de preços. O gestor deve justificar nos autos em caso de renúncia à consulta (Despacho PGE n. 760/2023, processo SEI 00012.000487/2023-96).'
+      },
+      {
+        title: 'Parecer da PGE',
+        description: '(art. 53, §4º, Lei n. 14.133/2021; art. 69 do Decreto Estadual n. 21.872/2023).'
+      },
+      {
+        title: 'Publicação do Edital',
+        description: 'Publicação do edital do Concurso Público de Inovação.'
+      },
+      {
+        title: 'Atas, Relatórios e Pareceres das Comissões',
+        description: 'Atas, relatórios, pareceres e demais documentos produzidos pela Comissão Organizadora e pela Comissão Julgadora durante o certame.'
+      },
+      {
+        title: 'Resultado Final, Homologação e Publicação',
+        description: 'Resultado final do concurso, ato de homologação e respectiva publicação.'
+      },
+      {
+        title: 'Análise Final pelo Controle Interno (se houver premiação financeira)',
+        description: 'Análise final do procedimento pelo controle interno do órgão (Art. 13 da Instrução Normativa nº 05/2017, do Tribunal de Contas do Estado do Piauí).'
+      },
+      {
+        title: 'Documentos de Execução da Premiação Financeira (se houver)',
+        subitems: [
+          { number: '1', title: 'Comprovação da concessão da premiação' },
+          { number: '2', title: 'Documentos comprobatórios da execução da despesa' },
+          { number: '3', title: 'Demais registros contábeis, financeiros e patrimoniais exigíveis' },
+        ]
+      },
+    ],
   },
   {
     id: 'doacao-solucao-inovadora',
