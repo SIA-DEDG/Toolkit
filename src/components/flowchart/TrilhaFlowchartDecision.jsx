@@ -1,4 +1,5 @@
 import { InstrumentCard } from './InstrumentCard'
+import { Handshake, NotepadText, Lightbulb, MessageCircle, Computer, Wrench, Package, ClipboardCheck, RefreshCw, FileText, Search, Trophy, Zap } from 'lucide-react'
 
 const BRAND = '#0e59a8'
 const BRAND_BG = '#E3EFFF'
@@ -7,30 +8,19 @@ const FAM_B = '#0e7490'
 const FAM_C = '#b45309'
 const CARD_W = 280
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// AJUSTE DE ALTURAS — mude os valores abaixo para controlar cada ramo
-// ═══════════════════════════════════════════════════════════════════════════════
-
-// Comprimento do ramo de PERGUNTA 1 até cada caixa P2
 const ARM_P2A = 20    // ramo até P2A (esquerda)
 const ARM_P2B = 290   // ramo até P2B (centro)
 const ARM_P2C = 20    // ramo até P2C (direita)
 
-// Coluna A — espaço entre pai e filhos (gap do fundo da caixa até o topo dos filhos)
 const A_GAP1 = 60     // P2A → Convênio / Acordo
 
-// Coluna B — um valor por nível
 const B_GAP1 = 50     // P2B → Licitação / P3risco
 const B_GAP2 = 60    // P3risco → ETEC / CPSI / P4B
 const B_GAP3 = 90     // P4B → Direta / Doação / Transfer
 
-// Coluna C — um valor por nível
 const C_GAP1 = 60     // P2C → PMI / Diálogo / P3C
 const C_GAP2 = 140     // P3C → Pitch / Hackathon / Concurso
 
-// ═══════════════════════════════════════════════════════════════════════════════
-
-// ─── Y compartilhados (raiz, P1) ─────────────────────────────────────────────
 const NECESSIDADE_Y   = 15
 const NECESSIDADE_H   = 50
 const NECESSIDADE_BOT = NECESSIDADE_Y + NECESSIDADE_H
@@ -41,7 +31,6 @@ const P1_BOT = P1_Y + P1_H
 
 const BUS1_Y = P1_BOT + 50
 
-// ─── Y dos P2 ────────────────────────────────────────────────────────────────
 const P2_H    = 70
 const P2A_Y   = BUS1_Y + ARM_P2A
 const P2A_BOT = P2A_Y + P2_H
@@ -50,10 +39,8 @@ const P2B_BOT = P2B_Y + P2_H
 const P2C_Y   = BUS1_Y + ARM_P2C
 const P2C_BOT = P2C_Y + P2_H
 
-// ─── Altura das caixas de decisão intermediárias ─────────────────────────────
 const QBOX_H = 70
 
-// ─── Y por coluna — bus a 60 % do gap, filhos a 100 % ────────────────────────
 const A_BUS2 = P2A_BOT + Math.round(A_GAP1 * 0.6)
 const A_L3   = P2A_BOT + A_GAP1
 
@@ -75,12 +62,11 @@ const C_L4   = C_L3B + C_GAP2
 const CANVAS_W = 1900
 const CANVAS_H = Math.max(A_L3 + 200, B_L5 + 200, C_L4 + 200)
 
-// ─── X centers ───────────────────────────────────────────────────────────────
 const CX = {
   root: 640,
   p2a: 250, p2b: 640, p2c: 1120,
   convenio: 120, acordo: 410,
-  licitacao: 320, p3risco: 840,
+  licitacao: 305, p3risco: 840,
   etec: 550, cpsi: 840, p4b: 1070,
   direta: 780, doacao: 1070, transferencia: 1360,
   pmi: 810, dialogo: 1120, p3c: 1380,
@@ -88,21 +74,22 @@ const CX = {
 }
 
 export const INSTRUMENTS = {
-  convenio: { id: 'convenio-pd&i', accentColor: '#209828', iconBg: 'rgba(32,152,40,0.15)', icon: '📋', title: 'Convênio', description: 'de PD&I — Art. 9º, Lei 10.973' },
-  acordo: { id: 'acordo-pd&i', accentColor: '#08ba9c', iconBg: 'rgba(8,186,156,0.15)', icon: '🤝', title: 'Acordo', description: 'de PD&I — Art. 9º, Lei 10.973' },
-  doacao: { id: 'doacao-solucao', accentColor: '#209828', iconBg: 'rgba(32,152,40,0.15)', icon: '🎁', title: 'Doação', description: 'Solução Inovadora — Art. 14-A' },
-  transferencia: { id: 'transferencia-tecnologia', accentColor: '#6a0ea8', iconBg: 'rgba(106,14,168,0.15)', icon: '🔄', title: 'Transfer.', description: 'Tecnologia — Arts. 6º/37' },
-  licitacao: { id: 'licitacao', accentColor: '#37474f', iconBg: 'rgba(55,71,79,0.15)', icon: '📑', title: 'Licitação', description: 'convencional — Lei 14.133/2021' },
-  direta: { id: 'contratacao-direta', accentColor: '#dbaf00', iconBg: 'rgba(219,175,0,0.15)', icon: '📇', title: 'Contrat. Direta', description: 'Arts. 72-75 — Lei 14.133' },
-  etec: { id: 'encomenda-tecnologica', accentColor: '#0e59a8', iconBg: 'rgba(14,89,168,0.15)', icon: '🖥️', title: 'ETEC', description: 'Encomenda Tecnológica — Arts. 20-22' },
-  cpsi: { id: 'contrato-publico', accentColor: '#c21d00', iconBg: 'rgba(194,29,0,0.15)', icon: '🏗️', title: 'CPSI', description: 'por fases competitivas — Arts. 49-51' },
-  pmi: { id: 'pmi', accentColor: '#e65100', iconBg: 'rgba(230,81,0,0.15)', icon: '🔍', title: 'PMI', description: 'Manifestação de Interesse — Art. 26' },
-  dialogo: { id: 'dialogo-competitivo', accentColor: '#006064', iconBg: 'rgba(0,96,100,0.15)', icon: '💬', title: 'Diálogo', description: 'Competitivo — Art. 32, Lei 14.133' },
-  pitch: { id: 'pitch-hackton', accentColor: '#00A27F', iconBg: 'rgba(0,162,127,0.15)', icon: '💡', title: 'Pitch', description: 'Apresentação de Ideias' },
-  hackathon: { id: 'pitch-hackton', accentColor: '#00A27F', iconBg: 'rgba(0,162,127,0.15)', icon: '⚡', title: 'Hackathon', description: 'Prototipagem coletiva' },
-  concurso: { id: 'concurso-publico-inovacao', accentColor: '#880e4f', iconBg: 'rgba(136,14,79,0.15)', icon: '🏆', title: 'Concurso', description: 'Formal com prêmio — Art. 29' },
+  convenio: { id: 'convenio-pd&i', accentColor: '#209828', iconBg: 'rgba(32,152,40,0.15)', icon: NotepadText, title: 'Convênio', description: 'de PD&I - Art. 9º, Lei 10.973' },
+  acordo: { id: 'acordo-pd&i', accentColor: '#08ba9c', iconBg: 'rgba(8,186,156,0.15)', icon: Handshake, title: 'Acordo', description: 'de PD&I - Art. 9º, Lei 10.973' },
+  doacao: { id: 'doacao-solucao', accentColor: '#209828', iconBg: 'rgba(32,152,40,0.15)', icon: Package, title: 'Doação', description: 'Solução Inovadora - Art. 14-A' },
+  transferencia: { id: 'transferencia-tecnologia', accentColor: '#6a0ea8', iconBg: 'rgba(106,14,168,0.15)', icon: RefreshCw, title: 'Transfer.', description: 'Tecnologia - Arts. 6º/37' },
+  licitacao: { id: 'licitacao', accentColor: '#37474f', iconBg: 'rgba(55,71,79,0.15)', icon: FileText, title: 'Licitação', description: 'convencional - Lei 14.133/2021' },
+  direta: { id: 'contratacao-direta', accentColor: '#dbaf00', iconBg: 'rgba(219,175,0,0.15)', icon: ClipboardCheck, title: 'Contrat. Direta', description: 'Arts. 72-75 - Lei 14.133' },
+  etec: { id: 'encomenda-tecnologica', accentColor: '#0e59a8', iconBg: 'rgba(14,89,168,0.15)', icon: Computer, title: 'ETEC', description: 'Encomenda Tecnológica - Arts. 20-22' },
+  cpsi: { id: 'contrato-publico', accentColor: '#c21d00', iconBg: 'rgba(194,29,0,0.15)', icon: Wrench, title: 'CPSI', description: 'por fases competitivas - Arts. 49-51' },
+  pmi: { id: 'pmi', accentColor: '#e65100', iconBg: 'rgba(230,81,0,0.15)', icon: Search, title: 'PMI', description: 'Manifestação de Interesse - Art. 26' },
+  dialogo: { id: 'dialogo-competitivo', accentColor: '#006064', iconBg: 'rgba(0,96,100,0.15)', icon: MessageCircle, title: 'Diálogo', description: 'Competitivo - Art. 32, Lei 14.133' },
+  pitch: { id: 'pitch-hackton', accentColor: '#00A27F', iconBg: 'rgba(0,162,127,0.15)', icon: Lightbulb, title: 'Pitch', description: 'Apresentação de Ideias' },
+  hackathon: { id: 'pitch-hackton', accentColor: '#00A27F', iconBg: 'rgba(0,162,127,0.15)', icon: Zap, title: 'Hackathon', description: 'Prototipagem coletiva' },
+  concurso: { id: 'concurso-publico-inovacao', accentColor: '#880e4f', iconBg: 'rgba(136,14,79,0.15)', icon: Trophy, title: 'Concurso', description: 'Formal com prêmio - Art. 29' },
 }
 
+// Caixa de decisão ou rótulo no fluxograma
 function QBox({ text, subtitle, width = 160, height = 65, bg = BRAND, color = '#fff', pill = false }) {
   return (
     <div
@@ -121,6 +108,7 @@ function QBox({ text, subtitle, width = 160, height = 65, bg = BRAND, color = '#
   )
 }
 
+// Card clicável de instrumento posicionado no fluxograma
 function Card({ data, onInstrumentClick }) {
   return (
     <InstrumentCard
@@ -135,12 +123,14 @@ function Card({ data, onInstrumentClick }) {
   )
 }
 
+// Retorna estilo de posicionamento absoluto para elementos do canvas
 function abs(left, top) {
   return { position: 'absolute', left, top }
 }
 
+// Rótulo SVG com fundo branco posicionado sobre os conectores do fluxograma
 function BranchLabel({ x, y, text, anchor = 'middle' }) {
-  const PAD_X = 25
+  const PAD_X = 35
   const PAD_Y = 3
   const EST_W = text.length * 5.5 + PAD_X * 2
   const H = 16 + PAD_Y * 2
@@ -158,11 +148,11 @@ function BranchLabel({ x, y, text, anchor = 'middle' }) {
 const cl = (cx) => cx - CARD_W / 2
 const qcl = (cx, w) => cx - w / 2
 
+// Fluxograma de decisão em canvas absoluto com conectores SVG e cards de instrumentos
 export function TrilhaFlowchartDecision({ onInstrumentClick, headerAction }) {
   const c = CX
 
   const segs = [
-    // Raiz → P1 → BUS1 → P2 (cada drop usa o Y do seu próprio P2)
     `M${c.root},${NECESSIDADE_BOT} V${P1_Y}`,
     `M${c.root},${P1_BOT} V${BUS1_Y}`,
     `M${c.p2a},${BUS1_Y} H${c.p2c}`,
@@ -170,13 +160,11 @@ export function TrilhaFlowchartDecision({ onInstrumentClick, headerAction }) {
     `M${c.p2b},${BUS1_Y} V${P2B_Y}`,
     `M${c.p2c},${BUS1_Y} V${P2C_Y}`,
 
-    // ── Coluna A (P2A → Convênio, Acordo) ────────────────────────────────────
     `M${c.p2a},${P2A_BOT} V${A_BUS2}`,
     `M${c.convenio},${A_BUS2} H${c.acordo}`,
     `M${c.convenio},${A_BUS2} V${A_L3}`,
     `M${c.acordo},${A_BUS2} V${A_L3}`,
 
-    // ── Coluna B (P2B → Licitação | P3risco → ETEC, CPSI | P4B → Direta, Doação, Transfer) ──
     `M${c.p2b},${P2B_BOT} V${B_BUS2}`,
     `M${c.licitacao},${B_BUS2} H${c.p3risco}`,
     `M${c.licitacao},${B_BUS2} V${B_L3}`,
@@ -192,7 +180,6 @@ export function TrilhaFlowchartDecision({ onInstrumentClick, headerAction }) {
     `M${c.doacao},${B_BUS4} V${B_L5}`,
     `M${c.transferencia},${B_BUS4} V${B_L5}`,
 
-    // ── Coluna C (P2C → PMI, Diálogo | P3C → Pitch, Hackathon, Concurso) ────
     `M${c.p2c},${P2C_BOT} V${C_BUS2}`,
     `M${c.pmi},${C_BUS2} H${c.p3c}`,
     `M${c.pmi},${C_BUS2} V${C_L3}`,
@@ -229,16 +216,16 @@ export function TrilhaFlowchartDecision({ onInstrumentClick, headerAction }) {
         </g>
 
         <BranchLabel x={c.p2a} y={BUS1_Y - 14} text="Desenvolver" />
-        <BranchLabel x={c.p2b} y={BUS1_Y - 14} text="Adquirir / contratar" />
+        <BranchLabel x={c.p2b} y={BUS1_Y - 14} text="Adquirir / Contratar" />
         <BranchLabel x={c.p2c} y={BUS1_Y - 14} text="Explorar mercado" />
 
         <BranchLabel x={c.convenio} y={A_BUS2 - 14} text="Outra entidade executa" />
-        <BranchLabel x={c.acordo} y={A_BUS2 - 14} text="institucional executa junto" />
+        <BranchLabel x={c.acordo} y={A_BUS2 - 14} text="Institucional executa junto" />
 
-        <BranchLabel x={c.licitacao} y={B_BUS2 - 14} text="Sim — solução padronizada" />
-        <BranchLabel x={c.p3risco} y={B_BUS2 - 14} text="Não — a desenvolver" />
+        <BranchLabel x={c.licitacao} y={B_BUS2 - 14} text="Sim - Solução padronizada" />
+        <BranchLabel x={c.p3risco} y={B_BUS2 - 14} text="Não - A desenvolver" />
 
-        <BranchLabel x={c.etec} y={B_BUS3 - 14} text="Alto risco — inexiste" />
+        <BranchLabel x={c.etec} y={B_BUS3 - 14} text="Alto risco - Inexiste" />
         <BranchLabel x={c.cpsi} y={B_BUS3 - 14} text="Risco moderado" />
         <BranchLabel x={c.p4b} y={B_BUS3 - 14} text="Caso especial de doação" />
 
@@ -251,19 +238,17 @@ export function TrilhaFlowchartDecision({ onInstrumentClick, headerAction }) {
         <BranchLabel x={c.concurso} y={C_BUS3 - 14} text="Formal com prêmio" />
       </svg>
 
-      {/* ── Raiz e P1 ─────────────────────────────────────────────────────────── */}
       <div style={abs(qcl(c.root, 300), NECESSIDADE_Y)} className="z-[1] relative">
         <QBox text="Necessidade institucional" width={300} height={NECESSIDADE_H} bg="#637074" pill />
       </div>
       <div style={abs(qcl(c.root, 800), P1_Y)} className="z-[1] relative">
         <QBox
-          text="PERGUNTA 1 — O que a instituição precisa fazer?"
+          text="O que a instituição precisa fazer?"
           subtitle="Ponto de partida da necessidade institucional"
           width={800} height={P1_H}
         />
       </div>
 
-      {/* ── P2 ────────────────────────────────────────────────────────────────── */}
       <div style={abs(qcl(c.p2a, 200), P2A_Y)} className="z-[1] relative">
         <QBox text="Quem executa o projeto de P&D?" width={200} height={P2_H} bg={FAM_A} />
       </div>
@@ -274,7 +259,6 @@ export function TrilhaFlowchartDecision({ onInstrumentClick, headerAction }) {
         <QBox text="O que quer descobrir/mapear?" width={200} height={P2_H} bg={FAM_C} />
       </div>
 
-      {/* ── Coluna A ──────────────────────────────────────────────────────────── */}
       <div style={abs(cl(c.convenio), A_L3)} className="z-[1] relative">
         <Card data={INSTRUMENTS.convenio} onInstrumentClick={onInstrumentClick} />
       </div>
@@ -282,7 +266,6 @@ export function TrilhaFlowchartDecision({ onInstrumentClick, headerAction }) {
         <Card data={INSTRUMENTS.acordo} onInstrumentClick={onInstrumentClick} />
       </div>
 
-      {/* ── Coluna B ──────────────────────────────────────────────────────────── */}
       <div style={abs(cl(c.licitacao), B_L3)} className="z-[1] relative">
         <Card data={INSTRUMENTS.licitacao} onInstrumentClick={onInstrumentClick} />
       </div>
@@ -308,7 +291,6 @@ export function TrilhaFlowchartDecision({ onInstrumentClick, headerAction }) {
         <Card data={INSTRUMENTS.transferencia} onInstrumentClick={onInstrumentClick} />
       </div>
 
-      {/* ── Coluna C ──────────────────────────────────────────────────────────── */}
       <div style={abs(cl(c.pmi), C_L3)} className="z-[1] relative">
         <Card data={INSTRUMENTS.pmi} onInstrumentClick={onInstrumentClick} />
       </div>

@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { ExternalLink, ArrowRight } from 'lucide-react'
-
+import { Handshake, NotepadText, Lightbulb, Pin, MessageCircle, Computer, Wrench, NotebookPen, Package, ClipboardCheck, RefreshCw, FileText } from 'lucide-react'
 import { INSTRUMENT_FLOWS } from '../data/instruments'
 import { useIsMobile } from '../hooks/useIsMobile'
 import { SectionBadge } from '../components/SectionBadge'
@@ -13,60 +13,60 @@ const SCROLL_DELAY_MS = 50
 const COLOR_OFF_TRACK = 'rgb(190,91,74)'
 
 const INSTRUMENT_PILLS = [
-  { label: 'Acordo de PD&I', color: '#08ba9c', icon: '🤝', iconBg: 'rgba(47,255,220,0.2)' },
-  { label: 'Convênio de PD&I', color: '#209828', icon: '📋', iconBg: 'rgba(31,255,38,0.2)' },
-  { label: 'Pitches e Hackatons', color: '#00A27F', icon: '💡', iconBg: 'rgba(255,255,255,0.2)' },
-  { label: 'PMI - Procedimento de Manifestação de Interesse', color: '#e65100', icon: '📌', iconBg: 'rgba(255,255,255,0.2)' },
-  { label: 'Diálogo Competitivo', color: '#006064', icon: '💬', iconBg: 'rgba(255,255,255,0.2)' },
-  { label: 'ETEC - Encomenda Tecnológica', color: '#0e59a8', icon: '🖥️', iconBg: 'rgba(219,175,0,0.2)' },
-  { label: 'CPSI - Contrato Público para Solução Inovadora', color: '#c21d00', icon: '🏗️', iconBg: 'rgba(255,255,255,0.2)' },
-  { label: 'Concurso Público de Inovação', color: '#880e4f', icon: '📝', iconBg: 'rgba(255,255,255,0.2)' },
-  { label: 'Doação de Solução Inovadora', color: '#1b5e20', icon: '📨', iconBg: 'rgba(255,255,255,0.2)' },
-  { label: 'Contratação Direta', color: '#dbaf00', icon: '📇', iconBg: 'rgba(14,89,168,0.2)' },
-  { label: 'Contrato de Transferência', color: '#6a0ea8', icon: '🔄', iconBg: 'rgba(206,136,253,0.2)' },
-  { label: 'Licitação', color: '#37474f', icon: '📄', iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Acordo de PD&I', color: '#08ba9c', icon: Handshake, iconBg: 'rgba(47,255,220,0.2)' },
+  { label: 'Convênio de PD&I', color: '#209828', icon: NotepadText, iconBg: 'rgba(31,255,38,0.2)' },
+  { label: 'Pitches e Hackatons', color: '#00A27F', icon: Lightbulb, iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'PMI - Procedimento de Manifestação de Interesse', color: '#e65100', icon: Pin, iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Diálogo Competitivo', color: '#006064', icon: MessageCircle, iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'ETEC - Encomenda Tecnológica', color: '#0e59a8', icon: Computer, iconBg: 'rgba(219,175,0,0.2)' },
+  { label: 'CPSI - Contrato Público para Solução Inovadora', color: '#c21d00', icon: Wrench, iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Concurso Público de Inovação', color: '#880e4f', icon: NotebookPen, iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Doação de Solução Inovadora', color: '#1b5e20', icon: Package, iconBg: 'rgba(255,255,255,0.2)' },
+  { label: 'Contratação Direta', color: '#dbaf00', icon: ClipboardCheck, iconBg: 'rgba(14,89,168,0.2)' },
+  { label: 'Contrato de Transferência', color: '#6a0ea8', icon: RefreshCw, iconBg: 'rgba(206,136,253,0.2)' },
+  { label: 'Licitação', color: '#37474f', icon: FileText, iconBg: 'rgba(255,255,255,0.2)' },
 ]
 
-// Rola suavemente até um elemento pelo id
+// Rola suavemente até a seção indicada pelo id, com atraso opcional para aguardar re-renders
 function scrollToSection(id, delay = 0) {
   setTimeout(() => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
   }, delay)
 }
 
-// Banner de topo com imagem de capa
-function HeroBanner() {
-  return (
-    <div className="w-full overflow-hidden" style={{ height: 'clamp(140px, 16vw, 230px)' }}>
-      <img
-        src={HERO_BANNER_SRC}
-        alt="Banner Toolkit de Inovação"
-        className="w-full h-full object-cover block"
-      />
-    </div>
-  )
-}
+// Imagem de capa em largura total no topo da página
+// function HeroBanner() {
+//   return (
+//     <div className="w-full overflow-hidden" style={{ height: 'clamp(140px, 16vw, 230px)' }}>
+//       <img
+//         src={HERO_BANNER_SRC}
+//         alt="Banner Toolkit de Inovação"
+//         className="w-full h-full object-cover block"
+//       />
+//     </div>
+//   )
+// }
 
-// Pílula colorida com ícone e label de instrumento
-function InstrumentPill({ label, color, icon, iconBg }) {
+// Pílula colorida representando um instrumento na grade de introdução
+function InstrumentPill({ label, color, icon: Icon, iconBg }) {
   return (
     <div
       className="flex items-center gap-[7px] px-[8px] py-[9px] rounded-[10px]"
       style={{ backgroundColor: color }}
     >
       <div
-        className="flex items-center justify-center rounded-[4px] shrink-0 w-[22px] h-[22px] text-[14px]"
+        className="flex items-center justify-center rounded-[4px] shrink-0 w-[22px] h-[22px]"
         style={{ backgroundColor: iconBg }}
         aria-hidden="true"
       >
-        {icon}
+        <Icon className="w-3.5 h-3.5 text-white" strokeWidth={2} />
       </div>
       <span className="font-semibold text-[12px] text-white leading-snug">{label}</span>
     </div>
   )
 }
 
-// Seção de introdução com texto institucional e grade de pílulas de instrumentos
+// Texto institucional do toolkit à esquerda e grade de pílulas de instrumentos à direita
 function IntroSection() {
   return (
     <div className="py-[clamp(28px,4vw,56px)] px-[clamp(20px,5vw,66px)] flex gap-[clamp(24px,4vw,56px)] flex-wrap items-center">
@@ -102,7 +102,7 @@ function IntroSection() {
   )
 }
 
-// Card de chamada à ação com título, descrição e botão
+// Card de triagem com texto e ação para direcionar o usuário ao instrumento correto
 function IdentificationCard({ title, description, action }) {
   return (
     <div className="flex-[1_1_260px] max-w-[600px] bg-brand rounded-lg p-[clamp(14px,2vw,20px)] flex flex-col gap-[clamp(8px,1.5vw,14px)]">
@@ -121,7 +121,7 @@ const ACTION_BUTTON_CLASS =
   'flex items-center justify-center gap-1.5 bg-brand-mid rounded-[10px] h-[34px] text-white'
 const ACTION_BUTTON_STYLE = { width: 'clamp(130px, 12vw, 160px)' }
 
-// Seção de triagem com dois cards de identificação de instrumento
+// Seção de triagem com dois caminhos: quiz externo da CPIN ou trilha interna
 function IdentificationSection() {
   return (
     <section className="select-border-top-dashed select-border-bottom bg-brand-bg">
@@ -170,7 +170,7 @@ function IdentificationSection() {
   )
 }
 
-// Grade de cards de instrumentos em layout desktop dividida em duas linhas
+// Grid desktop de cards de instrumentos em duas linhas para evitar espaço vazio no final
 function DesktopFlowGrid({ openIds, onToggle }) {
   const firstRow = INSTRUMENT_FLOWS.slice(0, 3)
   const remaining = INSTRUMENT_FLOWS.slice(3)
@@ -192,7 +192,7 @@ function DesktopFlowGrid({ openIds, onToggle }) {
   )
 }
 
-// Seção com o passo a passo expandível de cada instrumento
+// Seção expandível com o passo a passo de cada instrumento, responsiva para mobile e desktop
 function StepByStepSection({ isMobile, openIds, onToggle }) {
   return (
     <section
@@ -222,17 +222,17 @@ function StepByStepSection({ isMobile, openIds, onToggle }) {
   )
 }
 
-// Rodapé com copyright institucional
+// Rodapé com copyright da SIA
 function PageFooter() {
   return (
     <footer className="text-center py-[clamp(20px,3vw,32px)] px-4 text-[clamp(11px,1vw,14px)] text-gray-400 bg-white">
-      © {new Date().getFullYear()} Toolkit SIA — Secretaria de Inteligência Artificial,
+      © {new Date().getFullYear()} Toolkit SIA - Secretaria de Inteligência Artificial,
       Economia Digital, Ciência, Tecnologia e Inovação
     </footer>
   )
 }
 
-// Página principal que compõe todas as seções e gerencia o estado de abertura dos cards
+// Página principal: compõe todas as seções e gerencia qual card de instrumento está aberto
 export default function HomePage() {
   const isMobile = useIsMobile()
   const [openIds, setOpenIds] = useState(new Set())
@@ -252,7 +252,7 @@ export default function HomePage() {
 
   return (
     <div className="bg-white w-full overflow-x-clip">
-      <HeroBanner />
+      {/* <HeroBanner /> */}
       <IntroSection />
       <IdentificationSection />
 

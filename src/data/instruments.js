@@ -1,3 +1,5 @@
+import { Handshake, NotepadText, Computer, ClipboardCheck, RefreshCw, Lightbulb, Wrench, Search, MessageCircle, Trophy, Package, FileText } from 'lucide-react'
+
 export const INSTRUMENT_FLOWS = [
   {
     id: 'acordo-pd&i',
@@ -5,7 +7,7 @@ export const INSTRUMENT_FLOWS = [
     subtitle: 'Sem repasse financeiro · Instrumento 1',
     href: '/acordo-pd&i',
     accentColor: '#08ba9c',
-    icon: '🤝',
+    icon: Handshake,
     downloadKey: 'acordo-pd&i/Guia Explicativo Acordo PD&I-1.pdf',
     cards: [
       {
@@ -71,7 +73,7 @@ export const INSTRUMENT_FLOWS = [
     subtitle: 'Com repasse financeiro · Instrumento 2',
     href: '/convenio-pd&i',
     accentColor: '#209828',
-    icon: '📋',
+    icon: NotepadText,
     downloadKey: 'convenio-pd&i/Guia Explicativo Convenio PD&I.pdf',
     cards: [
       {
@@ -165,7 +167,7 @@ export const INSTRUMENT_FLOWS = [
     subtitle: 'Lei nº 10.973/2004 · Instrumento 3',
     href: '/encomenda-tecnologica',
     accentColor: '#0e59a8',
-    icon: '🖥️',
+    icon: Computer,
     downloadKey: 'encomenda-tecnologica/Guia Explicativo Encomenda Tecnologica.pdf',
     cards: [
       {
@@ -292,7 +294,7 @@ export const INSTRUMENT_FLOWS = [
     subtitle: 'Dispensa / Inexigibilidade · Instrumento 4',
     href: '/contratacao-direta',
     accentColor: '#dbaf00',
-    icon: '📇',
+    icon: ClipboardCheck,
     downloadKey: 'contratacao-direta/Guia Explicativo de Contratacao Direta.pdf',
     cards: [
       {
@@ -426,7 +428,7 @@ export const INSTRUMENT_FLOWS = [
     subtitle: 'Know-how interno · Instrumento 5',
     href: '/contrato-transferencia-tecnologia',
     accentColor: '#6a0ea8',
-    icon: '🔄',
+    icon: RefreshCw,
     downloadKey: 'transferencia-tecnologia/Guia Explicativo Transferencia Tecnologica nao patendeada.pdf',
     cards: [
       {
@@ -520,7 +522,7 @@ export const INSTRUMENT_FLOWS = [
     subtitle: 'Pitches e Hackatons · Instrumento 6',
     href: '/pitch-hackton',
     accentColor: '#00A27F',
-    icon: '💡',
+    icon: Lightbulb,
     downloadKey: 'pitches_e_hackatons/Guia Explicativo Pitches e Hackatons.pdf',
     cards: [
       {
@@ -556,7 +558,7 @@ export const INSTRUMENT_FLOWS = [
       },
       {
         title: 'Plano de Trabalho do Hackathon / Pitch',
-        description: 'Equivalente ao "Plano de Trabalho" do PD&I — define escopo, objetivos e cronograma do evento',
+        description: 'Equivalente ao "Plano de Trabalho" do PD&I - define escopo, objetivos e cronograma do evento',
         fileKey: 'pitches_e_hackatons/02_Plano_de_Trabalho_PDI_Revisado.docx'
       },
       {
@@ -602,7 +604,7 @@ export const INSTRUMENT_FLOWS = [
     subtitle: 'CPSI - Contrato Público para Solução Inovadora · Instrumento 7',
     href: '/contrato-publico',
     accentColor: '#c21d00',
-    icon: '🏗️',
+    icon: Wrench,
     downloadKey: 'contrato-publico-solucao-inovadora/Guia Explicativo de Contrato Publico de Solucao Inovadora.pdf',
     cards: [
       {
@@ -772,7 +774,7 @@ export const INSTRUMENT_FLOWS = [
     subtitle: 'Procedimento de Manifestação de Interesse · Instrumento 8',
     href: '/pmi',
     accentColor: '#e65100',
-    icon: '🔍',
+    icon: Search,
     downloadKey: 'procedimento-de-manifestacao-de-interesse/Guia Explicativo de PMI.pdf',
     cards: [
       {
@@ -902,7 +904,7 @@ export const INSTRUMENT_FLOWS = [
     subtitle: 'Diálogo Competitivo · Instrumento 9',
     href: '/dialogo-competitivo',
     accentColor: '#006064',
-    icon: '💬',
+    icon: MessageCircle,
     downloadKey: '',
     cards: [
       {
@@ -1086,7 +1088,7 @@ export const INSTRUMENT_FLOWS = [
     subtitle: 'Concurso Público de Inovação · Instrumento 10',
     href: '/concurso-publico-inovacao',
     accentColor: '#880e4f',
-    icon: '🏆',
+    icon: Trophy,
     downloadKey: '',
     cards: [
       {
@@ -1202,7 +1204,7 @@ export const INSTRUMENT_FLOWS = [
     subtitle: 'Doação de Solução Inovadora · Instrumento 11',
     href: '/doacao-solucao-inovadora',
     accentColor: '#1b5e20',
-    icon: '🎁',
+    icon: Package,
     downloadKey: '',
     cards: [
       {
@@ -1349,7 +1351,7 @@ export const INSTRUMENT_FLOWS = [
     subtitle: 'Pregão Eletrônico (Bens e Serviços Comuns – sem SRP) · Instrumento 12',
     href: '/licitacao',
     accentColor: '#37474f',
-    icon: '📑',
+    icon: FileText,
     downloadKey: 'licitacao/Guia Explicativo de Licitacao.pdf',
     cards: [
     {
