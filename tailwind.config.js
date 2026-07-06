@@ -5,11 +5,15 @@ export default {
       colors: {
         // Brand blues
         brand: {
-          DEFAULT: '#0e59a8',
+          DEFAULT: '#0e50a6',
           mid:     '#116ed0',
+          deep:    '#042d63',
           bg:      '#E3EFFF',
           light:   '#bee3f8',
         },
+        // Grupos de instrumentos
+        secondary: '#6561f7',
+        tertiary:  '#0e9ca6',
         // Semantic text shades
         ink: {
           dark:  '#1a202c',
@@ -19,7 +23,7 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Montserrat', 'Inter', 'system-ui', 'sans-serif'],
       },
       keyframes: {
         'slide-in': {

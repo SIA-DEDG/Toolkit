@@ -42,7 +42,7 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
         </div>
       )}
 
-      <div style={{ paddingLeft: 12, paddingRight: 12, paddingTop: 6, paddingBottom: 10 }}>
+      <div style={{ paddingLeft: 12, paddingRight: 12, paddingTop: 5, paddingBottom: 8 }}>
         <p
           className="m-0 leading-normal"
           style={{ fontSize: 9, fontWeight: 500, color: '#000', letterSpacing: '0.05em' }}
@@ -53,28 +53,28 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
         <div
           className="flex items-center justify-center rounded-[4px] shrink-0"
           style={{
-            width: 22, height: 22,
-            marginTop: 6,
+            width: 20, height: 20,
+            marginTop: 5,
             padding: 3,
             background: iconBg,
           }}
         >
           {typeof icon === 'string'
-            ? <span style={{ fontSize: 14, lineHeight: 1 }} aria-hidden="true">{icon}</span>
-            : (() => { const I = icon; return <I style={{ width: 16, height: 16 }} aria-hidden="true" /> })()
+            ? <span style={{ fontSize: 13, lineHeight: 1 }} aria-hidden="true">{icon}</span>
+            : (() => { const I = icon; return <I style={{ width: 14, height: 14 }} aria-hidden="true" /> })()
           }
         </div>
 
         <p
-          className="m-0 leading-normal"
-          style={{ fontSize: 16, fontWeight: 600, color: accentColor, marginTop: 4 }}
+          className="m-0 leading-tight"
+          style={{ fontSize: 15, fontWeight: 600, color: accentColor, marginTop: 4 }}
         >
           {title}
         </p>
 
         <p
-          className="m-0 leading-snug"
-          style={{ fontSize: 14, fontWeight: 300, color: '#000', marginTop: 3 }}
+          className="m-0 leading-tight"
+          style={{ fontSize: 11, fontWeight: 400, color: '#4a5568', marginTop: 2 }}
         >
           {description}
         </p>
