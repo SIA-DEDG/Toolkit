@@ -6,7 +6,7 @@ export const INSTRUMENT_FLOWS = [
     title: 'Acordo de Parceria PD&I',
     subtitle: 'Sem repasse financeiro · Instrumento 1',
     href: '/acordo-pd&i',
-    accentColor: '#08ba9c',
+    accentColor: '#6d28d9',
     icon: Handshake,
     downloadKey: 'acordo-pd&i/Guia Explicativo Acordo PD&I-1.pdf',
     cards: [
@@ -72,7 +72,7 @@ export const INSTRUMENT_FLOWS = [
     title: 'Convênio de PD&I',
     subtitle: 'Com repasse financeiro · Instrumento 2',
     href: '/convenio-pd&i',
-    accentColor: '#209828',
+    accentColor: '#6d28d9',
     icon: NotepadText,
     downloadKey: 'convenio-pd&i/Guia Explicativo Convenio PD&I.pdf',
     cards: [
@@ -166,7 +166,7 @@ export const INSTRUMENT_FLOWS = [
     title: 'Encomenda Tecnológica',
     subtitle: 'Lei nº 10.973/2004 · Instrumento 3',
     href: '/encomenda-tecnologica',
-    accentColor: '#0e59a8',
+    accentColor: '#0e7490',
     icon: Computer,
     downloadKey: 'encomenda-tecnologica/Guia Explicativo Encomenda Tecnologica.pdf',
     cards: [
@@ -293,7 +293,7 @@ export const INSTRUMENT_FLOWS = [
     title: 'Contratação Direta',
     subtitle: 'Dispensa / Inexigibilidade · Instrumento 4',
     href: '/contratacao-direta',
-    accentColor: '#dbaf00',
+    accentColor: '#0e7490',
     icon: ClipboardCheck,
     downloadKey: 'contratacao-direta/Guia Explicativo de Contratacao Direta.pdf',
     cards: [
@@ -427,7 +427,7 @@ export const INSTRUMENT_FLOWS = [
     title: 'Transferência Tecnológica',
     subtitle: 'Know-how interno · Instrumento 5',
     href: '/contrato-transferencia-tecnologia',
-    accentColor: '#6a0ea8',
+    accentColor: '#0e7490',
     icon: RefreshCw,
     downloadKey: 'transferencia-tecnologia/Guia Explicativo Transferencia Tecnologica nao patendeada.pdf',
     cards: [
@@ -521,7 +521,7 @@ export const INSTRUMENT_FLOWS = [
     title: 'Pitches e Hackatons',
     subtitle: 'Pitches e Hackatons · Instrumento 6',
     href: '/pitch-hackton',
-    accentColor: '#00A27F',
+    accentColor: '#b45309',
     icon: Lightbulb,
     downloadKey: 'pitches_e_hackatons/Guia Explicativo Pitches e Hackatons.pdf',
     cards: [
@@ -603,7 +603,7 @@ export const INSTRUMENT_FLOWS = [
     title: 'CPSI - Contrato Público para Solução Inovadora',
     subtitle: 'CPSI - Contrato Público para Solução Inovadora · Instrumento 7',
     href: '/contrato-publico',
-    accentColor: '#c21d00',
+    accentColor: '#0e7490',
     icon: Wrench,
     downloadKey: 'contrato-publico-solucao-inovadora/Guia Explicativo de Contrato Publico de Solucao Inovadora.pdf',
     cards: [
@@ -773,7 +773,7 @@ export const INSTRUMENT_FLOWS = [
     title: 'PMI - Procedimento de Manifestação de Interesse',
     subtitle: 'Procedimento de Manifestação de Interesse · Instrumento 8',
     href: '/pmi',
-    accentColor: '#e65100',
+    accentColor: '#b45309',
     icon: Search,
     downloadKey: 'procedimento-de-manifestacao-de-interesse/Guia Explicativo de PMI.pdf',
     cards: [
@@ -903,7 +903,7 @@ export const INSTRUMENT_FLOWS = [
     title: 'Diálogo Competitivo',
     subtitle: 'Diálogo Competitivo · Instrumento 9',
     href: '/dialogo-competitivo',
-    accentColor: '#006064',
+    accentColor: '#b45309',
     icon: MessageCircle,
     downloadKey: '',
     cards: [
@@ -1087,7 +1087,7 @@ export const INSTRUMENT_FLOWS = [
     title: 'Concurso Público de Inovação',
     subtitle: 'Concurso Público de Inovação · Instrumento 10',
     href: '/concurso-publico-inovacao',
-    accentColor: '#880e4f',
+    accentColor: '#b45309',
     icon: Trophy,
     downloadKey: '',
     cards: [
@@ -1203,7 +1203,7 @@ export const INSTRUMENT_FLOWS = [
     title: 'Doação de Solução Inovadora',
     subtitle: 'Doação de Solução Inovadora · Instrumento 11',
     href: '/doacao-solucao-inovadora',
-    accentColor: '#1b5e20',
+    accentColor: '#0e7490',
     icon: Package,
     downloadKey: '',
     cards: [
@@ -1350,7 +1350,7 @@ export const INSTRUMENT_FLOWS = [
     title: 'Licitação',
     subtitle: 'Pregão Eletrônico (Bens e Serviços Comuns – sem SRP) · Instrumento 12',
     href: '/licitacao',
-    accentColor: '#37474f',
+    accentColor: '#0e7490',
     icon: FileText,
     downloadKey: 'licitacao/Guia Explicativo de Licitacao.pdf',
     cards: [
