@@ -3,17 +3,12 @@ import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react'
 import { SectionBadge } from '../SectionBadge'
 import { TrilhaFlowchartDecision, INSTRUMENTS } from './TrilhaFlowchartDecision'
 
-const FLOWCHART_W = 1960
-const FLOWCHART_H = 900
+const COLLAPSED_H = 520
 
-// Altura visível quando a trilha está recolhida (mostra apenas o topo da árvore)
-const COLLAPSED_H = 470
-
-// Grupos de instrumentos exibidos como legenda/filtro no cabeçalho da trilha
 const GROUPS = [
   { id: 'A', name: 'Parceria e P&D', dot: '#6d28d9', keys: ['convenio', 'acordo'] },
   { id: 'B', name: 'Contratação pública', dot: '#0e7490', keys: ['licitacao', 'etec', 'cpsi', 'direta', 'doacao', 'transferencia'] },
-  { id: 'C', name: 'Exploração de mercado', dot: '#b45309', keys: ['pmi', 'dialogo', 'pitch', 'hackathon', 'concurso'] },
+  { id: 'C', name: 'Exploração de mercado', dot: '#b45309', keys: ['pmi', 'dialogo', 'pitchHackathon', 'concurso'] },
 ]
 
 // Chip de grupo com bolinha colorida e menu recolhível dos instrumentos daquele grupo
@@ -23,9 +18,8 @@ function GroupChip({ group, open, onToggle, onInstrumentClick }) {
       <button
         type="button"
         onClick={onToggle}
-        className={`flex items-center gap-2 cursor-pointer border rounded-full pl-2.5 pr-2 py-1.5 transition-colors ${
-          open ? 'bg-black/[0.03] border-black/10' : 'bg-white border-black/10 hover:bg-black/[0.03]'
-        }`}
+        className={`flex items-center gap-2 cursor-pointer border rounded-full pl-2.5 pr-2 py-1.5 transition-colors ${open ? 'bg-black/[0.03] border-black/10' : 'bg-white border-black/10 hover:bg-black/[0.03]'
+          }`}
       >
         <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: group.dot }} />
         <span className="font-medium text-sm text-ink-mid whitespace-nowrap">{group.name}</span>
@@ -79,9 +73,23 @@ function GroupChip({ group, open, onToggle, onInstrumentClick }) {
 // e controle para recolher/expandir a altura visível.
 export function ScaledFlowchartDecision({ onInstrumentClick }) {
   const scrollRef = useRef(null)
+  const canvasRef = useRef(null)
+  const trackRef = useRef(null)
   const [openGroup, setOpenGroup] = useState(null)
   const [expanded, setExpanded] = useState(false)
   const [thumb, setThumb] = useState({ width: 100, left: 0 })
+  const [naturalH, setNaturalH] = useState(0)
+
+  // Mede a altura nativa do fluxograma (em tamanho real) para o recolher/expandir
+  useEffect(() => {
+    const el = canvasRef.current
+    if (!el) return
+    const measure = () => setNaturalH(el.scrollHeight)
+    measure()
+    const ro = new ResizeObserver(measure)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
 
   // Atualiza posição/tamanho do indicador de scroll horizontal
   const updateThumb = useCallback(() => {
@@ -101,11 +109,34 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
     updateThumb()
     window.addEventListener('resize', updateThumb)
     return () => window.removeEventListener('resize', updateThumb)
-  }, [updateThumb, expanded])
+  }, [updateThumb, expanded, naturalH])
 
   const scrollBy = (delta) => {
     scrollRef.current?.scrollBy({ left: delta, behavior: 'smooth' })
   }
+
+  // Move o scroll horizontal proporcionalmente à posição do mouse na barra
+  const scrollToClientX = useCallback((clientX) => {
+    const el = scrollRef.current
+    const track = trackRef.current
+    if (!el || !track) return
+    const { left, width } = track.getBoundingClientRect()
+    const ratio = Math.min(1, Math.max(0, (clientX - left) / width))
+    el.scrollLeft = ratio * (el.scrollWidth - el.clientWidth)
+  }, [])
+
+  // Arrasto da barra de rolagem (thumb) com o mouse
+  const handleThumbPointerDown = useCallback((e) => {
+    e.preventDefault()
+    scrollToClientX(e.clientX)
+    const onMove = (ev) => scrollToClientX(ev.clientX)
+    const onUp = () => {
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', onUp)
+    }
+    window.addEventListener('pointermove', onMove)
+    window.addEventListener('pointerup', onUp)
+  }, [scrollToClientX])
 
   return (
     <div className="w-full">
@@ -141,9 +172,9 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
           ref={scrollRef}
           onScroll={updateThumb}
           className="no-scrollbar w-full overflow-x-auto overflow-y-hidden transition-[max-height] duration-300 ease-in-out"
-          style={{ maxHeight: expanded ? FLOWCHART_H : COLLAPSED_H }}
+          style={{ maxHeight: expanded ? (naturalH || 4000) + 10 : COLLAPSED_H }}
         >
-          <div style={{ width: FLOWCHART_W, paddingBottom: 10 }}>
+          <div ref={canvasRef} style={{ paddingBottom: 10 }}>
             <TrilhaFlowchartDecision onInstrumentClick={onInstrumentClick} />
           </div>
         </div>
@@ -174,9 +205,14 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
             <ChevronLeft className="w-6 h-6" />
           </button>
 
-          <div className="relative flex-1 h-1.5 rounded-full bg-brand-light/60 overflow-hidden">
+          <div
+            ref={trackRef}
+            onPointerDown={handleThumbPointerDown}
+            className="relative flex-1 h-1.5 rounded-full bg-brand-light/60 cursor-pointer group py-2 -my-2"
+          >
+            <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-1.5 rounded-full bg-brand-light/60" />
             <div
-              className="absolute top-0 h-full rounded-full bg-brand transition-[left] duration-75"
+              className="absolute top-1/2 -translate-y-1/2 h-1.5 rounded-full bg-brand transition-[left] duration-75 cursor-grab active:cursor-grabbing group-active:h-2.5"
               style={{ width: `${thumb.width}%`, left: `${thumb.left}%` }}
             />
           </div>

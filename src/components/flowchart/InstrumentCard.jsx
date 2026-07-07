@@ -14,17 +14,17 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
       tabIndex={onClick ? 0 : undefined}
       onKeyDown={onClick ? (e) => { if (e.key === 'Enter' || e.key === ' ') onClick() } : undefined}
       className={[
-        'relative bg-white rounded-[5px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]',
+        'relative bg-white rounded-[8px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]',
         'shrink-0 transition-shadow duration-150',
         onClick ? 'cursor-pointer' : 'cursor-default',
       ].join(' ')}
-      style={{ width, ...(height ? { height, overflow: 'hidden' } : {}) }}
+      style={{ width, ...(height ? { minHeight: height } : {}) }}
       onMouseEnter={e => { if (onClick) e.currentTarget.style.boxShadow = '0px 6px 16px rgba(0,0,0,0.30)' }}
       onMouseLeave={e => { if (onClick) e.currentTarget.style.boxShadow = '0px 4px 4px rgba(0,0,0,0.25)' }}
     >
       <div
-        className="rounded-tl-[10px] rounded-tr-[10px]"
-        style={{ height: 6, background: accentColor }}
+        className="rounded-tl-[8px] rounded-tr-[8px]"
+        style={{ height: 8, background: accentColor }}
       />
 
       {b && (
@@ -42,39 +42,39 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
         </div>
       )}
 
-      <div style={{ paddingLeft: 12, paddingRight: 12, paddingTop: 5, paddingBottom: 8 }}>
+      <div style={{ paddingLeft: 13, paddingRight: 13, paddingTop: 8, paddingBottom: 11 }}>
         <p
           className="m-0 leading-normal"
-          style={{ fontSize: 9, fontWeight: 500, color: '#000', letterSpacing: '0.05em' }}
+          style={{ fontSize: 9, fontWeight: 600, color: '#000', letterSpacing: '0.06em' }}
         >
           INSTRUMENTO
         </p>
 
         <div
-          className="flex items-center justify-center rounded-[4px] shrink-0"
+          className="flex items-center justify-center rounded-[6px] shrink-0"
           style={{
-            width: 20, height: 20,
-            marginTop: 5,
+            width: 22, height: 22,
+            marginTop: 6,
             padding: 3,
             background: iconBg,
           }}
         >
           {typeof icon === 'string'
             ? <span style={{ fontSize: 13, lineHeight: 1 }} aria-hidden="true">{icon}</span>
-            : (() => { const I = icon; return <I style={{ width: 14, height: 14 }} aria-hidden="true" /> })()
+            : (() => { const I = icon; return <I style={{ width: 15, height: 15 }} aria-hidden="true" /> })()
           }
         </div>
 
         <p
-          className="m-0 leading-tight"
-          style={{ fontSize: 15, fontWeight: 600, color: accentColor, marginTop: 4 }}
+          className="m-0 leading-snug"
+          style={{ fontSize: 14.5, fontWeight: 700, color: accentColor, marginTop: 6 }}
         >
           {title}
         </p>
 
         <p
-          className="m-0 leading-tight"
-          style={{ fontSize: 11, fontWeight: 400, color: '#4a5568', marginTop: 2 }}
+          className="m-0 leading-snug"
+          style={{ fontSize: 11, fontWeight: 400, color: '#4a5568', marginTop: 3 }}
         >
           {description}
         </p>
