@@ -315,35 +315,113 @@ function DesktopFlowGrid({ openIds, onToggle }) {
   )
 }
 
+// Borda ondulada orgânica e irregular (vetorial, sem blur) — imita o resultado do feTurbulence do Figma
+// function WavyTopEdge() {
+//   return (
+//     <svg
+//       viewBox="0 0 1440 50"
+//       preserveAspectRatio="none"
+//       className="w-full h-[36px] md:h-[44px] block"
+//       aria-hidden="true"
+//     >
+//       <path
+//         d="M0,22
+//            C 24,14 48,28 72,20
+//            C 96,12 120,26 144,18
+//            C 168,10 192,24 216,16
+//            C 240,26 264,10 288,20
+//            C 312,28 336,12 360,22
+//            C 384,14 408,28 432,18
+//            C 456,10 480,24 504,16
+//            C 528,26 552,10 576,20
+//            C 600,28 624,12 648,22
+//            C 672,14 696,26 720,18
+//            C 744,10 768,24 792,16
+//            C 816,26 840,10 864,20
+//            C 888,28 912,12 936,22
+//            C 960,14 984,26 1008,18
+//            C 1032,10 1056,24 1080,16
+//            C 1104,26 1128,10 1152,20
+//            C 1176,28 1200,12 1224,22
+//            C 1248,14 1272,26 1296,18
+//            C 1320,10 1344,24 1368,16
+//            C 1392,26 1416,10 1440,20
+//            L1440,50 L0,50 Z"
+//         fill="#E3EFFF"
+//       />
+//     </svg>
+//   )
+// }
+
+function WavyTopEdge() {
+  return (
+    <svg
+      viewBox="0 0 1440 50"
+      preserveAspectRatio="none"
+      className="w-full h-[36px] md:h-[44px] block"
+      aria-hidden="true"
+    >
+      <path
+        d="M0,25
+           C 24,9 48,37 72,21
+           C 96,5 120,33 144,17
+           C 168,1 192,29 216,13
+           C 240,33 264,1 288,21
+           C 312,37 336,5 360,25
+           C 384,9 408,37 432,17
+           C 456,1 480,29 504,13
+           C 528,33 552,1 576,21
+           C 600,37 624,5 648,25
+           C 672,9 696,33 720,17
+           C 744,1 768,29 792,13
+           C 816,33 840,1 864,21
+           C 888,37 912,5 936,25
+           C 960,9 984,33 1008,17
+           C 1032,1 1056,29 1080,13
+           C 1104,33 1128,1 1152,21
+           C 1176,37 1200,5 1224,25
+           C 1248,9 1272,33 1296,17
+           C 1320,1 1344,29 1368,13
+           C 1392,33 1416,1 1440,21
+           L1440,50 L0,50 Z"
+        fill="#E3EFFF"
+      />
+    </svg>
+  )
+}
+
 // Seção expandível com o passo a passo de cada instrumento, responsiva para mobile e desktop
 function StepByStepSection({ isMobile, openIds, onToggle }) {
   return (
-    <section
-      id="passo-a-passo"
-      className="bg-brand-bg py-[clamp(20px,3vw,40px)] pb-[clamp(32px,4vw,48px)]"
-    >
-      <div className="max-w-[1440px] mx-auto px-[clamp(10px,1vw,66px)]">
-        <SectionBadge>Fluxos Internos dos Instrumentos</SectionBadge>
+    <>
+      <WavyTopEdge />
+      <section
+        id="passo-a-passo"
+        className="bg-brand-bg py-[clamp(20px,3vw,40px)] pb-[clamp(32px,4vw,48px)] -mt-[1px] relative"
+      >
+        <div className="max-w-[1440px] mx-auto px-[clamp(10px,1vw,66px)]">
+          <SectionBadge>Fluxos Internos dos Instrumentos</SectionBadge>
 
-        <h2 className="font-semibold text-2xl text-ink-mid m-0 mt-3 leading-snug">
-          Passo a passo de cada instrumento
-        </h2>
+          <h2 className="font-semibold text-2xl text-ink-mid m-0 mt-3 leading-snug">
+            Passo a passo de cada instrumento
+          </h2>
 
-        <p className="font-normal text-sm text-ink-mid mb-[clamp(20px,3vw,32px)] mt-1">
-          Selecione um Instrumento e explore seu fluxo
-        </p>
+          <p className="font-normal text-sm text-ink-mid mb-[clamp(20px,3vw,32px)] mt-1">
+            Selecione um Instrumento e explore seu fluxo
+          </p>
 
-        {isMobile ? (
-          <div className="flex flex-col gap-4">
-            {INSTRUMENT_FLOWS.map((flow) => (
-              <InstrumentFlowCard key={flow.id} {...flow} openIds={openIds} onToggle={onToggle} />
-            ))}
-          </div>
-        ) : (
-          <DesktopFlowGrid openIds={openIds} onToggle={onToggle} />
-        )}
-      </div>
-    </section>
+          {isMobile ? (
+            <div className="flex flex-col gap-4">
+              {INSTRUMENT_FLOWS.map((flow) => (
+                <InstrumentFlowCard key={flow.id} {...flow} openIds={openIds} onToggle={onToggle} />
+              ))}
+            </div>
+          ) : (
+            <DesktopFlowGrid openIds={openIds} onToggle={onToggle} />
+          )}
+        </div>
+      </section>
+    </>
   )
 }
 
