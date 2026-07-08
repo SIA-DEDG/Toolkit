@@ -13,7 +13,7 @@ const CARD_H = 116
 const GAP = 30          // espaço acima e abaixo de um rótulo de ramo (BranchLabel)
 const GAP_PLAIN = 36    // espaço em conexões diretas, sem rótulo de ramo
 const LABEL_H = 34      // altura de referência do rótulo de ramo, usada no cálculo do espaçamento
-const HGAP = 22         // espaço horizontal entre irmãos
+const HGAP = 40        // espaço horizontal entre irmãos
 const CANVAS_PAD = 24   // respiro nas bordas do canvas
 
 // Cor de destaque e fundo do ícone por família (mesma cor das caixas de decisão do ramo)
@@ -43,10 +43,6 @@ export const INSTRUMENTS = Object.fromEntries(
   Object.entries(INSTRUMENTS_RAW).map(([key, inst]) => [key, { ...inst, ...FAM_STYLE[inst.fam] }])
 )
 
-// --- Árvore de decisão -----------------------------------------------------
-// Cada nó "box" é uma pergunta/rótulo do fluxo; cada nó "card" é um instrumento (folha).
-// "connectMode: 'labeled'" insere um BranchLabel entre pai e cada filho, respeitando
-// sempre o mesmo respiro (GAP) acima e abaixo do rótulo. "plain" liga direto, sem rótulo.
 const card = (key) => ({ type: 'card', key })
 const box = (key, def, connect = {}) => ({ type: 'box', key, def, connectMode: 'plain', ...connect })
 
@@ -63,17 +59,13 @@ const TREE = box('root', { w: 340, h: 42, bg: '#042d63', pill: true, text: 'Nece
         }),
         box('p2b', { w: 320, h: 46, bg: FAM_B, text: 'A solução já existe no mercado?' }, {
           connectMode: 'labeled',
-          // Caminho do meio: reserva pouca largura entre os irmãos e desce para os ramos
-          // laterais (A e C) poderem se aproximar do centro sem sobreposição.
           laneWidth: 380,
-          drop: 220,
+          drop: 240,
           labels: ['Sim, solução padronizada', 'Não, a desenvolver'],
           children: [
             card('licitacao'),
             box('grau', { w: 290, h: 50, bg: FAM_B, text: 'Qual o grau de risco técnico e maturidade?' }, {
               connectMode: 'labeled',
-              // Reserva pouca largura para não empurrar Licitação para longe (a aproxima do centro)
-              // e desce a caixa "grau de risco" para o cascateamento acontecer mais abaixo.
               laneWidth: 300,
               drop: 130,
               labels: ['Alto risco - inexiste', 'Risco moderado', 'Caso especial de doação'],
@@ -95,8 +87,6 @@ const TREE = box('root', { w: 340, h: 42, bg: '#042d63', pill: true, text: 'Nece
             card('dialogo'),
             box('formato', { w: 220, h: 46, bg: FAM_C, text: 'Qual formato de evento?' }, {
               connectMode: 'labeled',
-              // Última coluna: reserva menos largura e desce para Pitches/Concurso não colidirem
-              // com o card de Diálogo nem com os rótulos vizinhos.
               laneWidth: 250,
               drop: 120,
               labels: ['Apresentação e prototipagem', 'Formal com prêmio'],
@@ -121,9 +111,6 @@ function subtreeWidth(node) {
   return Math.max(ownW, childrenW)
 }
 
-// Largura horizontal que um nó reserva entre irmãos. Por padrão é a largura real da subárvore,
-// mas um nó pode declarar `laneWidth` menor: sua subárvore larga "desce" (via `drop`) para um nível
-// abaixo dos irmãos, então não precisa reservar toda a largura na fileira de cima.
 function laneWidth(node) {
   return node.laneWidth ?? subtreeWidth(node)
 }
@@ -162,8 +149,6 @@ function computeLayout(tree) {
       childCenters.push(childCx)
       x += lane + HGAP
 
-      // `drop` desce a subárvore deste filho (e todo o seu conteúdo) alguns pixels a mais,
-      // deixando o caminho do meio mais baixo para os ramos laterais se aproximarem do centro.
       const cTop = childTop + (child.drop || 0)
 
       lines.push({ x1: childCx, y1: busY, x2: childCx, y2: cTop })
@@ -180,7 +165,6 @@ function computeLayout(tree) {
 
   layout(tree, 0, 0)
 
-  // Desloca tudo para que nada fique fora do canvas (respiro nas bordas)
   let minLeft = Infinity, maxRight = -Infinity, maxBottom = 0
   for (const b of Object.values(boxes)) {
     minLeft = Math.min(minLeft, b.cx - b.w / 2)

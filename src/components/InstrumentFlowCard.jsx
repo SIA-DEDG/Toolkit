@@ -26,8 +26,8 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
             }
           </div>
           <div className="flex-1 min-w-0 min-h-[10px]">
-            <p className="font-bold text-[13px] text-black m-0 leading-snug">{title}</p>
-            <p className="font-normal text-[10px] text-black/80 m-0 leading-snug">{subtitle}</p>
+            <p className="font-bold text-[16px] text-black m-0 leading-snug">{title}</p>
+            <p className="font-normal text-[14px] text-black/80 m-0 leading-snug">{subtitle}</p>
           </div>
           <div className="bg-white/20 rounded-md px-1.5 py-0.5 flex items-center justify-center shrink-0 mt-0.5">
             {isOpen
