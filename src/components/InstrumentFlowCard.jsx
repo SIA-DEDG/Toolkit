@@ -29,10 +29,10 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
             <p className="font-bold text-[16px] text-black m-0 leading-snug">{title}</p>
             <p className="font-normal text-[14px] text-black/80 m-0 leading-snug">{subtitle}</p>
           </div>
-          <div className="bg-white/20 rounded-md px-1.5 py-0.5 flex items-center justify-center shrink-0 mt-0.5">
+          <div className="rounded-md px-1.5 py-0.5 flex items-center justify-center shrink-0 mt-0.5" style={{ background: accentColor }}>
             {isOpen
-              ? <ChevronUp className="w-3.5 h-3.5 text-white" aria-hidden="true" />
-              : <ChevronDown className="w-3.5 h-3.5 text-white" aria-hidden="true" />
+              ? <ChevronUp className="w-4 h-4 text-white" aria-hidden="true" />
+              : <ChevronDown className="w-4 h-4 text-white" aria-hidden="true" />
             }
           </div>
         </div>
