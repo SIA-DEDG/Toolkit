@@ -13,25 +13,24 @@ const SCROLL_DELAY_MS = 50
 const PAGE_ZOOM = 0.85
 
 // Grupos de instrumentos exibidos como colunas coloridas na introdução (layout do Figma).
-// Cores seguem o design (lavanda, âmbar, teal). Ordenados do menor para o maior número
-// de instrumentos, deixando os cantos livres para os cartões de métrica flutuantes.
+// Ordem das colunas (esquerda -> direita): Contratação, Parceria, Exploração.
 const TOOLKIT_GROUPS = [
   {
     name: 'Contratação pública',
     color: '#0e9ca6',
-    tint: 'rgba(14,156,166,0.12)',
+    tint: 'rgba(14,156,166,0.16)',
     keys: ['licitacao', 'etec', 'cpsi', 'direta', 'doacao', 'transferencia'],
   },
   {
     name: 'Parceria e P&D',
     color: '#6561f7',
-    tint: 'rgba(101,97,247,0.12)',
+    tint: 'rgba(101,97,247,0.16)',
     keys: ['convenio', 'acordo'],
   },
   {
     name: 'Exploração de mercado',
     color: '#a6640e',
-    tint: 'rgba(166,100,14,0.12)',
+    tint: 'rgba(166,100,14,0.16)',
     keys: ['pmi', 'dialogo', 'pitchHackathon', 'concurso'],
   },
 ]
@@ -142,11 +141,12 @@ function GovHeader() {
   )
 }
 
-// Coluna pastel de um grupo com a lista dos seus instrumentos (layout do Figma)
-function GroupColumn({ group }) {
+// Coluna pastel de um grupo com a lista dos seus instrumentos (layout do Figma).
+// O sizing vem do chamador: fixo (w-[179px]) no desktop, fluido no mobile.
+function GroupColumn({ group, className = 'flex-1 min-w-[160px] max-w-[200px]' }) {
   return (
     <div
-      className="flex-1 min-w-[150px] self-start rounded-[10px] p-4 flex flex-col gap-3"
+      className={`self-start rounded-[8px] px-4 py-5 flex flex-col gap-4 ${className}`}
       style={{ background: group.tint }}
     >
       <div className="flex items-center gap-2">
@@ -156,14 +156,14 @@ function GroupColumn({ group }) {
         </span>
       </div>
 
-      <ul className="flex flex-col gap-2 m-0 p-0 list-none">
+      <ul className="flex flex-col gap-2.5 m-0 p-0 list-none">
         {group.keys.map((key) => {
           const inst = INSTRUMENTS[key]
           const Icon = inst.icon
           return (
-            <li key={key} className="flex items-center gap-2">
-              <Icon className="w-4 h-4 shrink-0" style={{ color: group.color }} aria-hidden="true" />
-              <span className="text-[13px] font-medium text-ink-mid leading-tight">{inst.title}</span>
+            <li key={key} className="flex items-start gap-2">
+              <Icon className="w-4 h-4 shrink-0 mt-[1px]" style={{ color: group.color }} aria-hidden="true" />
+              <span className="text-[13px] font-medium text-ink-mid leading-snug">{inst.title}</span>
             </li>
           )
         })}
@@ -182,20 +182,53 @@ function StatCard({ stat, className = '' }) {
   )
 }
 
-// Vitrine dos grupos de instrumentos: "03" flanqueia à esquerda (centralizado), as três
-// colunas no meio e "12" à direita no topo — como no Figma, sem espaço vazio nem sobreposição.
+// Vitrine dos grupos de instrumentos: colunas coloridas com os cartões "03" e "12"
+// flutuando por cima (posição absoluta), como no Figma. Por serem flutuantes, não
+// ocupam espaço na linha — as três colunas cabem sem quebrar.
 function HowToCard() {
   return (
-    <div className="flex-[1_1_620px] flex gap-4 flex-wrap items-start justify-center">
-      {/* "03 Grupos": esquerda, centralizado verticalmente */}
-      <StatCard stat={TOOLKIT_STATS[0]} className="self-center" />
+    <div className="w-full md:w-[893px] md:flex-none relative">
+      {/* Desktop: composição de geometria fixa do Figma (caixas 220px, gap 23px,
+          vão esquerdo 98px + direito 89px). Os cartões são ancorados às colunas de
+          ponta — 03 na base da 1ª, 12 no topo da última — sobrepondo só a faixa de
+          padding (17px esq / 26px dir), independente da ordem e da altura das caixas. */}
+      <div className="hidden md:block relative pl-[98px]">
+        <div className="flex gap-[23px] items-start">
+          {TOOLKIT_GROUPS.map((group, i) => (
+            <div key={group.name} className="relative">
+              <GroupColumn group={group} className="w-[220px] flex-none" />
 
-      {TOOLKIT_GROUPS.map((group) => (
-        <GroupColumn key={group.name} group={group} />
-      ))}
+              {/* "03 Grupos": saltando da quina inferior-esquerda da coluna
+                  "Contratação pública" (espelhando o "12" no topo-direito) */}
+              {group.name === 'Contratação pública' && (
+                <div className="absolute left-[-89px] bottom-[-52px] z-10">
+                  <StatCard stat={TOOLKIT_STATS[0]} />
+                </div>
+              )}
 
-      {/* "12 Instrumentos": direita, no topo */}
-      <StatCard stat={TOOLKIT_STATS[1]} />
+              {/* "12 Instrumentos": encostado no topo-direito da última coluna */}
+              {i === TOOLKIT_GROUPS.length - 1 && (
+                <div className="absolute right-[-89px] top-[-33px] z-10">
+                  <StatCard stat={TOOLKIT_STATS[1]} />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile: empilhado e fluido, sem px fixo — não estoura o overflow-x-clip */}
+      <div className="md:hidden flex flex-col gap-4">
+        <div className="flex gap-3 justify-center">
+          <StatCard stat={TOOLKIT_STATS[0]} />
+          <StatCard stat={TOOLKIT_STATS[1]} />
+        </div>
+        <div className="flex flex-wrap justify-center gap-4">
+          {TOOLKIT_GROUPS.map((group) => (
+            <GroupColumn key={group.name} group={group} />
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
@@ -211,7 +244,9 @@ function IntroSection() {
         <p className="font-normal text-[clamp(13px,1.1vw,16px)] text-black leading-[1.35] m-0 text-justify">
           O Toolkit de Compras Públicas reúne modelos de contratos, acordos e outros instrumentos jurídicos para apoiar a implementação do Marco Legal de Ciência, Tecnologia e Inovação no Piauí.
           <br />
+          <br />
           A ferramenta foi criada para fortalecer as compras públicas de inovação e orientar o uso de alternativas legais voltadas a atividades de pesquisa, desenvolvimento e inovação, contribuindo para mais segurança jurídica na aplicação desses instrumentos.
+          <br />
           <br />
           Os modelos foram elaborados pela Secretaria de Inteligência Artificial, Economia Digital, Ciência, Tecnologia e Inovação (SIA) e pela Procuradoria Geral do Estado (PGE).
         </p>
