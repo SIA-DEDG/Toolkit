@@ -5,23 +5,35 @@ import { useIsMobile } from '../hooks/useIsMobile'
 import { SectionBadge } from '../components/SectionBadge'
 import { InstrumentFlowCard } from '../components/InstrumentFlowCard'
 import { ScaledFlowchartDecision } from '../components/flowchart/ScaledFlowchartDecision'
+import { INSTRUMENTS } from '../components/flowchart/TrilhaFlowchartDecision'
 
 const SCROLL_DELAY_MS = 50
 
 // Escala geral da página (1 = tamanho original do Figma). Ajuste para encolher/aumentar tudo.
 const PAGE_ZOOM = 0.85
 
-// Passos do card "Como usar este toolkit"
-const HOW_TO_STEPS = [
-  { n: '01', lead: 'Identifique seu desafio.', rest: 'Leia os dois cards na "Identificação" e siga a trilha indicada.' },
-  { n: '02', lead: 'Siga as perguntas da "Trilha de Instrumentos"', rest: 'para identificar o instrumento mais adequado para a sua necessidade.' },
-  { n: '03', lead: 'Consulte o fluxo interno do instrumento.', rest: 'Veja cada etapa com minutas e modelos necessários para a feitura do instrumento.' },
-]
-
-// Tags dos instrumentos exibidas no card "Como usar este toolkit"
-const TOOLKIT_TAGS = [
-  'Convênio', 'Acordo', 'PMI', 'Diálogo Competitivo', 'Licitação', 'Pitches', 'Hackatons',
-  'Concurso', 'ETEC', 'CPSI', 'Contratação Direta', 'Doação', 'Transferência Tecnológica',
+// Grupos de instrumentos exibidos como colunas coloridas na introdução (layout do Figma).
+// Cores seguem o design (lavanda, âmbar, teal). Ordenados do menor para o maior número
+// de instrumentos, deixando os cantos livres para os cartões de métrica flutuantes.
+const TOOLKIT_GROUPS = [
+  {
+    name: 'Contratação pública',
+    color: '#0e9ca6',
+    tint: 'rgba(14,156,166,0.12)',
+    keys: ['licitacao', 'etec', 'cpsi', 'direta', 'doacao', 'transferencia'],
+  },
+  {
+    name: 'Parceria e P&D',
+    color: '#6561f7',
+    tint: 'rgba(101,97,247,0.12)',
+    keys: ['convenio', 'acordo'],
+  },
+  {
+    name: 'Exploração de mercado',
+    color: '#a6640e',
+    tint: 'rgba(166,100,14,0.12)',
+    keys: ['pmi', 'dialogo', 'pitchHackathon', 'concurso'],
+  },
 ]
 
 // Métricas exibidas sobre a borda esquerda do card "Como usar este toolkit"
@@ -130,55 +142,60 @@ function GovHeader() {
   )
 }
 
-// Card azul "Como usar este toolkit" com passos numerados, tags e métricas sobrepostas
+// Coluna pastel de um grupo com a lista dos seus instrumentos (layout do Figma)
+function GroupColumn({ group }) {
+  return (
+    <div
+      className="flex-1 min-w-[150px] self-start rounded-[10px] p-4 flex flex-col gap-3"
+      style={{ background: group.tint }}
+    >
+      <div className="flex items-center gap-2">
+        <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: group.color }} />
+        <span className="font-semibold text-[13px] leading-tight" style={{ color: group.color }}>
+          {group.name}
+        </span>
+      </div>
+
+      <ul className="flex flex-col gap-2 m-0 p-0 list-none">
+        {group.keys.map((key) => {
+          const inst = INSTRUMENTS[key]
+          const Icon = inst.icon
+          return (
+            <li key={key} className="flex items-center gap-2">
+              <Icon className="w-4 h-4 shrink-0" style={{ color: group.color }} aria-hidden="true" />
+              <span className="text-[13px] font-medium text-ink-mid leading-tight">{inst.title}</span>
+            </li>
+          )
+        })}
+      </ul>
+    </div>
+  )
+}
+
+// Pequeno cartão de métrica (ex.: "12 Instrumentos")
+function StatCard({ stat, className = '' }) {
+  return (
+    <div className={`w-[115px] shrink-0 rounded-[10px] bg-[#c4deff] drop-shadow-[2px_2px_2.5px_rgba(0,0,0,0.25)] pt-[11px] pb-[13px] px-2 flex flex-col items-center gap-[5px] ${className}`}>
+      <span className="font-semibold text-[30px] leading-none text-ink-mid">{stat.value}</span>
+      <span className="w-full text-center text-[14px] font-light text-black leading-tight">{stat.label}</span>
+    </div>
+  )
+}
+
+// Vitrine dos grupos de instrumentos: "03" flanqueia à esquerda (centralizado), as três
+// colunas no meio e "12" à direita no topo — como no Figma, sem espaço vazio nem sobreposição.
 function HowToCard() {
   return (
-    <div className="relative flex-[1_1_520px] ml-[clamp(24px,4vw,72px)]">
-      <div className="absolute left-0 top-1/2 -translate-y-2/3 -translate-x-2/4 z-10 flex flex-col gap-6 justify-center items-center">
-        {TOOLKIT_STATS.map((stat) => (
-          <div
-            key={stat.label}
-            className="w-[115px] rounded-[10px] bg-[#c4deff] drop-shadow-[2px_2px_2.5px_rgba(0,0,0,0.25)] pt-[11px] pb-[13px] px-2 flex flex-col items-center gap-[5px]"
-          >
-            <span className="font-semibold text-[30px] leading-none text-ink-mid">
-              {stat.value}
-            </span>
+    <div className="flex-[1_1_620px] flex gap-4 flex-wrap items-start justify-center">
+      {/* "03 Grupos": esquerda, centralizado verticalmente */}
+      <StatCard stat={TOOLKIT_STATS[0]} className="self-center" />
 
-            <span className="w-full text-center text-[14px] font-light text-black leading-tight">
-              {stat.label}
-            </span>
-          </div>
-        ))}
-      </div>
+      {TOOLKIT_GROUPS.map((group) => (
+        <GroupColumn key={group.name} group={group} />
+      ))}
 
-      <div className="rounded-lg bg-brand pl-[68px] pr-6 py-4 flex flex-col gap-5">
-        <p className="font-bold text-[18px] text-white m-0">Como usar este toolkit</p>
-
-        <div className="flex flex-col gap-4">
-          {HOW_TO_STEPS.map((step) => (
-            <div key={step.n} className="flex gap-4 items-start">
-              <div className="shrink-0 flex items-center justify-center rounded-lg bg-white/10 w-[39px] h-[31px]">
-                <span className="font-bold text-[16px] text-white">{step.n}</span>
-              </div>
-              <p className="text-[14px] text-[#e6e6e6] leading-snug m-0 text-justify">
-                <span className="font-bold text-white">{step.lead} </span>
-                <span className="font-medium">{step.rest}</span>
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div className="flex flex-wrap gap-2.5 justify-end">
-          {TOOLKIT_TAGS.map((tag) => (
-            <span
-              key={tag}
-              className="inline-flex items-center rounded-[10px] border border-white/40 px-2 py-1 font-semibold text-[12px] text-white leading-none"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
+      {/* "12 Instrumentos": direita, no topo */}
+      <StatCard stat={TOOLKIT_STATS[1]} />
     </div>
   )
 }
@@ -192,14 +209,11 @@ function IntroSection() {
           Toolkit de Inovação
         </h1>
         <p className="font-normal text-[clamp(13px,1.1vw,16px)] text-black leading-[1.35] m-0 text-justify">
-          O Toolkit de Inovação é um conjunto de minutas de contratos, acordos e outros
-          instrumentos jurídicos para a implementação do Marco Legal de Ciência, Tecnologia e
-          Inovação no Piauí. Aqui você encontra materiais de apoio relacionados tanto a compras
-          públicas de inovação quanto a outras alternativas legais, como atividades de pesquisa,
-          desenvolvimento e inovação, sempre com o objetivo de aumentar a segurança jurídica na
-          aplicação desses instrumentos. Baseados em exemplos reais e casos concretos, os modelos
-          foram elaborados pela Secretaria de Inteligência Artificial, Economia Digital, Ciência,
-          Tecnologia e Inovação (SIA) de maneira colaborativa e validados por XX.
+          O Toolkit de Compras Públicas reúne modelos de contratos, acordos e outros instrumentos jurídicos para apoiar a implementação do Marco Legal de Ciência, Tecnologia e Inovação no Piauí.
+          <br />
+          A ferramenta foi criada para fortalecer as compras públicas de inovação e orientar o uso de alternativas legais voltadas a atividades de pesquisa, desenvolvimento e inovação, contribuindo para mais segurança jurídica na aplicação desses instrumentos.
+          <br />
+          Os modelos foram elaborados pela Secretaria de Inteligência Artificial, Economia Digital, Ciência, Tecnologia e Inovação (SIA) e pela Procuradoria Geral do Estado (PGE).
         </p>
       </div>
 
@@ -314,44 +328,6 @@ function DesktopFlowGrid({ openIds, onToggle }) {
     </>
   )
 }
-
-// Borda ondulada orgânica e irregular (vetorial, sem blur) — imita o resultado do feTurbulence do Figma
-// function WavyTopEdge() {
-//   return (
-//     <svg
-//       viewBox="0 0 1440 50"
-//       preserveAspectRatio="none"
-//       className="w-full h-[36px] md:h-[44px] block"
-//       aria-hidden="true"
-//     >
-//       <path
-//         d="M0,22
-//            C 24,14 48,28 72,20
-//            C 96,12 120,26 144,18
-//            C 168,10 192,24 216,16
-//            C 240,26 264,10 288,20
-//            C 312,28 336,12 360,22
-//            C 384,14 408,28 432,18
-//            C 456,10 480,24 504,16
-//            C 528,26 552,10 576,20
-//            C 600,28 624,12 648,22
-//            C 672,14 696,26 720,18
-//            C 744,10 768,24 792,16
-//            C 816,26 840,10 864,20
-//            C 888,28 912,12 936,22
-//            C 960,14 984,26 1008,18
-//            C 1032,10 1056,24 1080,16
-//            C 1104,26 1128,10 1152,20
-//            C 1176,28 1200,12 1224,22
-//            C 1248,14 1272,26 1296,18
-//            C 1320,10 1344,24 1368,16
-//            C 1392,26 1416,10 1440,20
-//            L1440,50 L0,50 Z"
-//         fill="#E3EFFF"
-//       />
-//     </svg>
-//   )
-// }
 
 function WavyTopEdge() {
   return (

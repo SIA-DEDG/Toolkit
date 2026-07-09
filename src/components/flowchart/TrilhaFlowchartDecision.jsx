@@ -25,18 +25,18 @@ const FAM_STYLE = {
 
 // Instrumentos com nome completo (sem abreviações) e sua família (fam)
 const INSTRUMENTS_RAW = {
-  convenio: { id: 'convenio-pd&i', fam: 'A', icon: NotepadText, title: 'Convênio de PD&I', description: 'Com repasse financeiro - Art. 9º, Lei 10.973' },
-  acordo: { id: 'acordo-pd&i', fam: 'A', icon: Handshake, title: 'Acordo de Parceria PD&I', description: 'Sem repasse financeiro - Art. 9º, Lei 10.973' },
-  licitacao: { id: 'licitacao', fam: 'B', icon: FileText, title: 'Licitação', description: 'Convencional - Lei 14.133/2021' },
+  convenio: { id: 'convenio-pd&i', fam: 'A', icon: NotepadText, title: 'Convênio de PD&I', description: 'Com repasse financeiro — Art. 9º, Lei 10.973' },
+  acordo: { id: 'acordo-pd&i', fam: 'A', icon: Handshake, title: 'Acordo de Parceria PD&I', description: 'Sem repasse financeiro — Art. 9º, Lei 10.973' },
+  licitacao: { id: 'licitacao', fam: 'B', icon: FileText, title: 'Licitação', description: 'Convencional — Lei 14.133/2021' },
   etec: { id: 'encomenda-tecnologica', fam: 'B', icon: Computer, title: 'Encomenda Tecnológica', description: 'Arts. 20 a 22, Lei 10.973' },
-  cpsi: { id: 'contrato-publico', fam: 'B', icon: Wrench, title: 'Contrato Público para Solução Inovadora', description: 'Por fases competitivas - Arts. 49-51' },
-  direta: { id: 'contratacao-direta', fam: 'B', icon: ClipboardCheck, title: 'Contratação Direta', description: 'Dispensa / Inexigibilidade - Arts. 72-75, Lei 14.133' },
+  cpsi: { id: 'contrato-publico', fam: 'B', icon: Wrench, title: 'Contrato Público para Solução Inovadora', description: 'Por fases competitivas — Arts. 49-51' },
+  direta: { id: 'contratacao-direta', fam: 'B', icon: ClipboardCheck, title: 'Contratação Direta', description: 'Dispensa / Inexigibilidade — Arts. 72-75, Lei 14.133' },
   doacao: { id: 'doacao-solucao', fam: 'B', icon: Package, title: 'Doação de Solução Inovadora', description: 'Art. 14-A, Lei 10.973' },
-  transferencia: { id: 'transferencia-tecnologia', fam: 'B', icon: RefreshCw, title: 'Transferência Tecnológica', description: 'Know-how interno - Arts. 6º e 37, Lei 10.973' },
-  pmi: { id: 'pmi', fam: 'C', icon: Search, title: 'Procedimento de Manifestação de Interesse', description: 'PMI - Art. 26, Lei 14.133' },
+  transferencia: { id: 'transferencia-tecnologia', fam: 'B', icon: RefreshCw, title: 'Transferência Tecnológica', description: 'Know-how interno — Arts. 6º e 37, Lei 10.973' },
+  pmi: { id: 'pmi', fam: 'C', icon: Search, title: 'Procedimento de Manifestação de Interesse', description: 'PMI — Art. 26, Lei 14.133' },
   dialogo: { id: 'dialogo-competitivo', fam: 'C', icon: MessageCircle, title: 'Diálogo Competitivo', description: 'Art. 32, Lei 14.133/2021' },
   pitchHackathon: { id: 'pitch-hackton', fam: 'C', icon: Lightbulb, title: 'Pitches e Hackathons', description: 'Apresentação e prototipagem de ideias' },
-  concurso: { id: 'concurso-publico-inovacao', fam: 'C', icon: Trophy, title: 'Concurso Público de Inovação', description: 'Formal com premiação - Art. 29, Lei 10.973' },
+  concurso: { id: 'concurso-publico-inovacao', fam: 'C', icon: Trophy, title: 'Concurso Público de Inovação', description: 'Formal com premiação — Art. 29, Lei 10.973' },
 }
 
 export const INSTRUMENTS = Object.fromEntries(
@@ -52,27 +52,29 @@ const TREE = box('root', { w: 340, h: 42, bg: '#042d63', pill: true, text: 'Nece
       connectMode: 'labeled',
       labels: ['Desenvolver', 'Adquirir / Contratar', 'Explorar mercado'],
       children: [
-        box('p2a', { w: 400, h: 60, bg: FAM_A, text: 'Haverá transferência ou repasse de recursos financeiros públicos para o parceiro?' }, {
+        box('p2a', { w: 400, h: 60, bg: FAM_A, text: 'Haverá transferência ou repasse de recursos públicos para o parceiro?' }, {
           connectMode: 'labeled',
-          labels: ['Sim, com repasse de recursos', 'Não — colaboração mútua'],
+          labels: ['Sim — com repasse de recursos', 'Não — colaboração mútua'],
           children: [card('convenio'), card('acordo')],
         }),
         box('p2b', { w: 320, h: 46, bg: FAM_B, text: 'A solução já existe no mercado?' }, {
           connectMode: 'labeled',
           laneWidth: 380,
           drop: 240,
-          labels: ['Sim, solução padronizada', 'Não, a desenvolver'],
+          labels: ['Sim — solução padronizada', 'Não — a desenvolver'],
           children: [
             card('licitacao'),
             box('grau', { w: 290, h: 50, bg: FAM_B, text: 'Qual o grau de risco técnico e maturidade?' }, {
               connectMode: 'labeled',
               laneWidth: 300,
               drop: 130,
-              labels: ['Alto risco - inexiste', 'Risco moderado', 'Caso especial de doação'],
+              labels: ['Alto risco — solução inexiste', 'Risco moderado', 'Caso especial de doação'],
               children: [
                 card('etec'),
                 card('cpsi'),
                 box('caso', { w: 220, h: 46, bg: FAM_B, text: 'Qual o caso especial?' }, {
+                  connectMode: 'labeled',
+                  labels: ['Contratação direta', 'Parceiro formal para P&D (gera contrato)', 'Constrói especificação técnica com mercado'],
                   children: [card('direta'), card('doacao'), card('transferencia')],
                 }),
               ],
@@ -85,7 +87,7 @@ const TREE = box('root', { w: 340, h: 42, bg: '#042d63', pill: true, text: 'Nece
           children: [
             card('pmi'),
             card('dialogo'),
-            box('formato', { w: 220, h: 46, bg: FAM_C, text: 'Qual formato de evento?' }, {
+            box('formato', { w: 220, h: 46, bg: FAM_C, text: 'Qual formato?' }, {
               connectMode: 'labeled',
               laneWidth: 250,
               drop: 120,

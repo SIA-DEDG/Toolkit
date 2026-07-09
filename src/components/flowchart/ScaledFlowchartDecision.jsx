@@ -115,6 +115,11 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
     scrollRef.current?.scrollBy({ left: delta, behavior: 'smooth' })
   }
 
+  // Deriva os limites do scroll horizontal para mostrar/ocultar as bordas com fade
+  const canScrollX = thumb.width < 99.5
+  const atStartX = thumb.left <= 0.5
+  const atEndX = thumb.left + thumb.width >= 99.5
+
   // Move o scroll horizontal proporcionalmente à posição do mouse na barra
   const scrollToClientX = useCallback((clientX) => {
     const el = scrollRef.current
@@ -180,7 +185,7 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
         </div>
 
         {!expanded && (
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 z-10 bg-gradient-to-t from-white/85 to-transparent" />
         )}
       </div>
 
