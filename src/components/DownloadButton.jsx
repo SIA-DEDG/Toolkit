@@ -5,11 +5,11 @@ import { enqueueDownload } from '../hooks/useDownloadQueue'
 
 // Clareia uma cor hex misturando com branco pelo fator amount
 function lightenHex(hex, amount = 0.25) {
-  const r = parseInt(hex.slice(1, 3), 16)
-  const g = parseInt(hex.slice(3, 5), 16)
-  const b = parseInt(hex.slice(5, 7), 16)
-  const mix = (c) => Math.round(c + (255 - c) * amount)
-  return `rgb(${mix(r)}, ${mix(g)}, ${mix(b)})`
+  const red = parseInt(hex.slice(1, 3), 16)
+  const green = parseInt(hex.slice(3, 5), 16)
+  const blue = parseInt(hex.slice(5, 7), 16)
+  const lighten = (channel) => Math.round(channel + (255 - channel) * amount)
+  return `rgb(${lighten(red)}, ${lighten(green)}, ${lighten(blue)})`
 }
 
 // Botão que baixa um arquivo do Supabase Storage e exibe feedback de toast

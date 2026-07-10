@@ -5,7 +5,8 @@ const BADGE = {
 
 // Card compacto de instrumento com barra colorida, ícone e badge opcional
 export function InstrumentCard({ accentColor, iconBg, icon, title, description, width = 136, height, badge, onClick }) {
-  const b = badge ? BADGE[badge] : null
+  const badgeStyle = badge ? BADGE[badge] : null
+  const Icon = typeof icon === 'string' ? null : icon
 
   return (
     <div
@@ -27,18 +28,18 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
         style={{ height: 8, background: accentColor }}
       />
 
-      {b && (
+      {badgeStyle && (
         <div
           className="absolute flex items-center gap-[3px] rounded-[5px]"
           style={{
             top: 13, right: 6,
             height: 14, paddingLeft: 5, paddingRight: 5,
-            background: b.bg,
+            background: badgeStyle.bg,
             whiteSpace: 'nowrap',
           }}
         >
-          <div className="rounded-full shrink-0" style={{ width: 4, height: 4, background: b.dot }} />
-          <span style={{ fontSize: 9, fontWeight: 500, color: b.color, lineHeight: 1 }}>{b.label}</span>
+          <div className="rounded-full shrink-0" style={{ width: 4, height: 4, background: badgeStyle.dot }} />
+          <span style={{ fontSize: 9, fontWeight: 500, color: badgeStyle.color, lineHeight: 1 }}>{badgeStyle.label}</span>
         </div>
       )}
 
@@ -59,9 +60,9 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
             background: iconBg,
           }}
         >
-          {typeof icon === 'string'
-            ? <span style={{ fontSize: 13, lineHeight: 1 }} aria-hidden="true">{icon}</span>
-            : (() => { const I = icon; return <I style={{ width: 15, height: 15 }} aria-hidden="true" /> })()
+          {Icon
+            ? <Icon style={{ width: 15, height: 15 }} aria-hidden="true" />
+            : <span style={{ fontSize: 13, lineHeight: 1 }} aria-hidden="true">{icon}</span>
           }
         </div>
 

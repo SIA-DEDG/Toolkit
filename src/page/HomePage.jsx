@@ -194,7 +194,7 @@ function HowToCard() {
           padding (17px esq / 26px dir), independente da ordem e da altura das caixas. */}
       <div className="hidden md:block relative pl-[98px]">
         <div className="flex gap-[23px] items-start">
-          {TOOLKIT_GROUPS.map((group, i) => (
+          {TOOLKIT_GROUPS.map((group, index) => (
             <div key={group.name} className="relative">
               <GroupColumn group={group} className="w-[220px] flex-none" />
 
@@ -207,7 +207,7 @@ function HowToCard() {
               )}
 
               {/* "12 Instrumentos": encostado no topo-direito da última coluna */}
-              {i === TOOLKIT_GROUPS.length - 1 && (
+              {index === TOOLKIT_GROUPS.length - 1 && (
                 <div className="absolute right-[-89px] top-[-33px] z-10">
                   <StatCard stat={TOOLKIT_STATS[1]} />
                 </div>
@@ -459,7 +459,8 @@ export default function HomePage() {
   const handleToggle = useCallback((id) => {
     setOpenIds((prev) => {
       const next = new Set(prev)
-      next.has(id) ? next.delete(id) : next.add(id)
+      if (next.has(id)) next.delete(id)
+      else next.add(id)
       return next
     })
   }, [])

@@ -12,7 +12,7 @@ export function useToast() {
   }, [])
 
   const remove = useCallback((id) => {
-    setToasts((prev) => prev.filter((t) => t.id !== id))
+    setToasts((prev) => prev.filter((toast) => toast.id !== id))
   }, [])
 
   return { toasts, add, remove }

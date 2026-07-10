@@ -16,7 +16,7 @@ async function processQueue() {
     }
     
     if (queue.length > 0) {
-      await new Promise(r => setTimeout(r, 800))
+      await new Promise(resolve => setTimeout(resolve, 800))
     }
   }
 

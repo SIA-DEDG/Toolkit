@@ -4,8 +4,8 @@ import React, { useEffect } from 'react'
 export function Toast({ toasts, remove }) {
   return (
     <div className="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none">
-      {toasts.map((t) => (
-        <ToastItem key={t.id} toast={t} remove={remove} />
+      {toasts.map((toast) => (
+        <ToastItem key={toast.id} toast={toast} remove={remove} />
       ))}
     </div>
   )

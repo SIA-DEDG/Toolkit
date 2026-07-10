@@ -40,31 +40,31 @@ const INSTRUMENTS_RAW = {
 }
 
 export const INSTRUMENTS = Object.fromEntries(
-  Object.entries(INSTRUMENTS_RAW).map(([key, inst]) => [key, { ...inst, ...FAM_STYLE[inst.fam] }])
+  Object.entries(INSTRUMENTS_RAW).map(([key, instrument]) => [key, { ...instrument, ...FAM_STYLE[instrument.fam] }])
 )
 
 const card = (key) => ({ type: 'card', key })
 const box = (key, def, connect = {}) => ({ type: 'box', key, def, connectMode: 'plain', ...connect })
 
-const TREE = box('root', { w: 340, h: 42, bg: '#042d63', pill: true, text: 'Necessidade Institucional' }, {
+const TREE = box('root', { width: 340, height: 42, bg: '#042d63', pill: true, text: 'Necessidade Institucional' }, {
   children: [
-    box('p1', { w: 520, h: 60, bg: '#116ed0', text: 'O que a instituição precisa fazer?', subtitle: 'Ponto de partida da necessidade institucional' }, {
+    box('p1', { width: 520, height: 60, bg: '#116ed0', text: 'O que a instituição precisa fazer?', subtitle: 'Ponto de partida da necessidade institucional' }, {
       connectMode: 'labeled',
       labels: ['Desenvolver', 'Adquirir / Contratar', 'Explorar mercado'],
       children: [
-        box('p2a', { w: 400, h: 60, bg: FAM_A, text: 'Haverá transferência ou repasse de recursos públicos para o parceiro?' }, {
+        box('p2a', { width: 400, height: 60, bg: FAM_A, text: 'Haverá transferência ou repasse de recursos públicos para o parceiro?' }, {
           connectMode: 'labeled',
           labels: ['Sim — com repasse de recursos', 'Não — colaboração mútua'],
           children: [card('convenio'), card('acordo')],
         }),
-        box('p2b', { w: 320, h: 46, bg: FAM_B, text: 'A solução já existe no mercado?' }, {
+        box('p2b', { width: 320, height: 46, bg: FAM_B, text: 'A solução já existe no mercado?' }, {
           connectMode: 'labeled',
           laneWidth: 380,
           drop: 240,
           labels: ['Sim — solução padronizada', 'Não — a desenvolver'],
           children: [
             card('licitacao'),
-            box('grau', { w: 290, h: 50, bg: FAM_B, text: 'Qual o grau de risco técnico e maturidade?' }, {
+            box('grau', { width: 290, height: 50, bg: FAM_B, text: 'Qual o grau de risco técnico e maturidade?' }, {
               connectMode: 'labeled',
               laneWidth: 300,
               drop: 130,
@@ -72,7 +72,7 @@ const TREE = box('root', { w: 340, h: 42, bg: '#042d63', pill: true, text: 'Nece
               children: [
                 card('etec'),
                 card('cpsi'),
-                box('caso', { w: 220, h: 46, bg: FAM_B, text: 'Qual o caso especial?' }, {
+                box('caso', { width: 220, height: 46, bg: FAM_B, text: 'Qual o caso especial?' }, {
                   connectMode: 'labeled',
                   labels: ['Contratação direta', 'Parceiro formal para P&D (gera contrato)', 'Constrói especificação técnica com mercado'],
                   children: [card('direta'), card('doacao'), card('transferencia')],
@@ -81,13 +81,13 @@ const TREE = box('root', { w: 340, h: 42, bg: '#042d63', pill: true, text: 'Nece
             }),
           ],
         }),
-        box('p2c', { w: 320, h: 46, bg: FAM_C, text: 'O que quer descobrir / mapear?' }, {
+        box('p2c', { width: 320, height: 46, bg: FAM_C, text: 'O que quer descobrir / mapear?' }, {
           connectMode: 'labeled',
           labels: ['Interesse do mercado para P&D', 'Solução técnica para problema', 'Ideias abertas e inovações'],
           children: [
             card('pmi'),
             card('dialogo'),
-            box('formato', { w: 220, h: 46, bg: FAM_C, text: 'Qual formato?' }, {
+            box('formato', { width: 220, height: 46, bg: FAM_C, text: 'Qual formato?' }, {
               connectMode: 'labeled',
               laneWidth: 250,
               drop: 120,
@@ -102,15 +102,15 @@ const TREE = box('root', { w: 340, h: 42, bg: '#042d63', pill: true, text: 'Nece
 })
 
 // --- Cálculo do layout (posições, rótulos e conectores) --------------------
-const nodeOwnWidth = (node) => (node.type === 'card' ? CARD_W : node.def.w)
-const nodeOwnHeight = (node) => (node.type === 'card' ? CARD_H : node.def.h)
+const nodeOwnWidth = (node) => (node.type === 'card' ? CARD_W : node.def.width)
+const nodeOwnHeight = (node) => (node.type === 'card' ? CARD_H : node.def.height)
 
 function subtreeWidth(node) {
-  const ownW = nodeOwnWidth(node)
+  const ownWidth = nodeOwnWidth(node)
   const children = node.children
-  if (!children || children.length === 0) return ownW
-  const childrenW = children.reduce((sum, c) => sum + laneWidth(c), 0) + HGAP * (children.length - 1)
-  return Math.max(ownW, childrenW)
+  if (!children || children.length === 0) return ownWidth
+  const childrenWidth = children.reduce((sum, child) => sum + laneWidth(child), 0) + HGAP * (children.length - 1)
+  return Math.max(ownWidth, childrenWidth)
 }
 
 function laneWidth(node) {
@@ -120,17 +120,17 @@ function laneWidth(node) {
 function computeLayout(tree) {
   const boxes = {}
   const positions = {}
-  const labelEls = []
+  const labels = []
   const lines = []
 
-  function layout(node, cx, top) {
-    const w = nodeOwnWidth(node)
-    const h = nodeOwnHeight(node)
+  function layout(node, centerX, top) {
+    const width = nodeOwnWidth(node)
+    const height = nodeOwnHeight(node)
 
-    if (node.type === 'card') positions[node.key] = { cx, y: top }
-    else boxes[node.key] = { cx, y: top, w, h, ...node.def }
+    if (node.type === 'card') positions[node.key] = { centerX, top }
+    else boxes[node.key] = { centerX, top, width, height, ...node.def }
 
-    const bottom = top + h
+    const bottom = top + height
     const children = node.children
     if (!children || children.length === 0) return
 
@@ -141,25 +141,25 @@ function computeLayout(tree) {
     const childTop = labeled ? labelTop + LABEL_H + GAP : bottom + gap
 
     const childLanes = children.map(laneWidth)
-    const totalW = childLanes.reduce((a, b) => a + b, 0) + HGAP * (children.length - 1)
-    let x = cx - totalW / 2
+    const totalWidth = childLanes.reduce((sum, lane) => sum + lane, 0) + HGAP * (children.length - 1)
+    let left = centerX - totalWidth / 2
 
     const childCenters = []
-    children.forEach((child, i) => {
-      const lane = childLanes[i]
-      const childCx = x + lane / 2
-      childCenters.push(childCx)
-      x += lane + HGAP
+    children.forEach((child, index) => {
+      const lane = childLanes[index]
+      const childCenterX = left + lane / 2
+      childCenters.push(childCenterX)
+      left += lane + HGAP
 
-      const cTop = childTop + (child.drop || 0)
+      const childTopY = childTop + (child.drop || 0)
 
-      lines.push({ x1: childCx, y1: busY, x2: childCx, y2: cTop })
-      if (labeled) labelEls.push({ x: childCx, y: busY, text: node.labels[i] })
+      lines.push({ x1: childCenterX, y1: busY, x2: childCenterX, y2: childTopY })
+      if (labeled) labels.push({ x: childCenterX, y: busY, text: node.labels[index] })
 
-      layout(child, childCx, cTop)
+      layout(child, childCenterX, childTopY)
     })
 
-    lines.push({ x1: cx, y1: bottom, x2: cx, y2: busY })
+    lines.push({ x1: centerX, y1: bottom, x2: centerX, y2: busY })
     if (childCenters.length > 1) {
       lines.push({ x1: childCenters[0], y1: busY, x2: childCenters[childCenters.length - 1], y2: busY })
     }
@@ -168,36 +168,36 @@ function computeLayout(tree) {
   layout(tree, 0, 0)
 
   let minLeft = Infinity, maxRight = -Infinity, maxBottom = 0
-  for (const b of Object.values(boxes)) {
-    minLeft = Math.min(minLeft, b.cx - b.w / 2)
-    maxRight = Math.max(maxRight, b.cx + b.w / 2)
-    maxBottom = Math.max(maxBottom, b.y + b.h)
+  for (const box of Object.values(boxes)) {
+    minLeft = Math.min(minLeft, box.centerX - box.width / 2)
+    maxRight = Math.max(maxRight, box.centerX + box.width / 2)
+    maxBottom = Math.max(maxBottom, box.top + box.height)
   }
-  for (const p of Object.values(positions)) {
-    minLeft = Math.min(minLeft, p.cx - CARD_W / 2)
-    maxRight = Math.max(maxRight, p.cx + CARD_W / 2)
-    maxBottom = Math.max(maxBottom, p.y + CARD_H)
+  for (const position of Object.values(positions)) {
+    minLeft = Math.min(minLeft, position.centerX - CARD_W / 2)
+    maxRight = Math.max(maxRight, position.centerX + CARD_W / 2)
+    maxBottom = Math.max(maxBottom, position.top + CARD_H)
   }
 
   const offsetX = CANVAS_PAD - minLeft
   const offsetY = CANVAS_PAD
 
-  const shiftX = (v) => v + offsetX
-  const shiftY = (v) => v + offsetY
+  const shiftX = (value) => value + offsetX
+  const shiftY = (value) => value + offsetY
 
-  for (const b of Object.values(boxes)) b.cx = shiftX(b.cx), b.y = shiftY(b.y)
-  for (const p of Object.values(positions)) p.cx = shiftX(p.cx), p.y = shiftY(p.y)
-  for (const l of labelEls) l.x = shiftX(l.x), l.y = shiftY(l.y)
+  for (const box of Object.values(boxes)) { box.centerX = shiftX(box.centerX); box.top = shiftY(box.top) }
+  for (const position of Object.values(positions)) { position.centerX = shiftX(position.centerX); position.top = shiftY(position.top) }
+  for (const label of labels) { label.x = shiftX(label.x); label.y = shiftY(label.y) }
 
-  const segs = lines.map((l) => `M${shiftX(l.x1)},${shiftY(l.y1)} L${shiftX(l.x2)},${shiftY(l.y2)}`)
+  const segments = lines.map((line) => `M${shiftX(line.x1)},${shiftY(line.y1)} L${shiftX(line.x2)},${shiftY(line.y2)}`)
 
   return {
     boxes,
     positions,
-    labelEls,
-    segs,
-    canvasW: maxRight - minLeft + CANVAS_PAD * 2,
-    canvasH: maxBottom + CANVAS_PAD * 2,
+    labels,
+    segments,
+    canvasWidth: maxRight - minLeft + CANVAS_PAD * 2,
+    canvasHeight: maxBottom + CANVAS_PAD * 2,
   }
 }
 
@@ -222,39 +222,15 @@ function QBox({ text, subtitle, width = 160, height = 65, bg = BRAND, color = '#
   )
 }
 
-// Card clicável de instrumento posicionado no fluxograma
-function Card({ data, onInstrumentClick }) {
-  return (
-    <InstrumentCard
-      accentColor={data.accentColor}
-      iconBg={data.iconBg}
-      icon={data.icon}
-      title={data.title}
-      description={data.description}
-      width={CARD_W}
-      height={CARD_H}
-      onClick={() => onInstrumentClick(data.id)}
-    />
-  )
-}
-
-// Retorna estilo de posicionamento absoluto para elementos do canvas
-function abs(left, top) {
-  return { position: 'absolute', left, top }
-}
-
-function BranchLabel({ x, y, text, anchor = 'middle', maxWidth = 220 }) {
-  const translateX =
-    anchor === 'middle' ? '-50%' : anchor === 'end' ? '-100%' : '0%'
-
+function BranchLabel({ x, y, text }) {
   return (
     <div
       className="absolute z-[1] pointer-events-none flex items-center justify-center"
       style={{
         left: x,
         top: y,
-        transform: `translate(${translateX}, -50%)`,
-        maxWidth,
+        transform: 'translate(-50%, -50%)',
+        maxWidth: 220,
         minHeight: LABEL_H,
         width: 'max-content',
         background: '#e8f0fb',
@@ -275,21 +251,34 @@ function BranchLabel({ x, y, text, anchor = 'middle', maxWidth = 220 }) {
   )
 }
 
-const boxLeft = (b) => b.cx - b.w / 2
-const cardLeft = (cx) => cx - CARD_W / 2
+const boxLeft = (box) => box.centerX - box.width / 2
+const cardLeft = (centerX) => centerX - CARD_W / 2
 
 // Fluxograma de decisão em canvas absoluto com conectores SVG e cards de instrumentos
 export function TrilhaFlowchartDecision({ onInstrumentClick, headerAction }) {
-  const { boxes, positions, labelEls, segs, canvasW, canvasH } = LAYOUT
+  const { boxes, positions, labels, segments, canvasWidth, canvasHeight } = LAYOUT
 
-  const cardAt = (key) => (
-    <div key={key} style={abs(cardLeft(positions[key].cx), positions[key].y)} className="z-[1] relative">
-      <Card data={INSTRUMENTS[key]} onInstrumentClick={onInstrumentClick} />
-    </div>
-  )
+  const cardAt = (key) => {
+    const instrument = INSTRUMENTS[key]
+    const { centerX, top } = positions[key]
+    return (
+      <div key={key} style={{ position: 'absolute', left: cardLeft(centerX), top }} className="z-[1] relative">
+        <InstrumentCard
+          accentColor={instrument.accentColor}
+          iconBg={instrument.iconBg}
+          icon={instrument.icon}
+          title={instrument.title}
+          description={instrument.description}
+          width={CARD_W}
+          height={CARD_H}
+          onClick={() => onInstrumentClick(instrument.id)}
+        />
+      </div>
+    )
+  }
 
   return (
-    <div className="relative overflow-visible" style={{ width: canvasW, height: canvasH }}>
+    <div className="relative overflow-visible" style={{ width: canvasWidth, height: canvasHeight }}>
       {headerAction && (
         <div className="absolute z-[2]" style={{ right: 20, top: 20 }}>
           {headerAction}
@@ -298,23 +287,23 @@ export function TrilhaFlowchartDecision({ onInstrumentClick, headerAction }) {
 
       <svg
         className="absolute inset-0 overflow-visible pointer-events-none z-0"
-        width={canvasW} height={canvasH}
-        viewBox={`0 0 ${canvasW} ${canvasH}`}
+        width={canvasWidth} height={canvasHeight}
+        viewBox={`0 0 ${canvasWidth} ${canvasHeight}`}
         fill="none"
         aria-hidden="true"
       >
         <g stroke={BRAND} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none">
-          {segs.map((d, i) => <path key={i} d={d} />)}
+          {segments.map((pathData, index) => <path key={index} d={pathData} />)}
         </g>
       </svg>
 
-      {labelEls.map((l, i) => (
-        <BranchLabel key={i} x={l.x} y={l.y} text={l.text} />
+      {labels.map((label, index) => (
+        <BranchLabel key={index} x={label.x} y={label.y} text={label.text} />
       ))}
 
-      {Object.entries(boxes).map(([key, b]) => (
-        <div key={key} style={abs(boxLeft(b), b.y)} className="z-[1] relative">
-          <QBox text={b.text} subtitle={b.subtitle} width={b.w} height={b.h} bg={b.bg} pill={b.pill} />
+      {Object.entries(boxes).map(([key, box]) => (
+        <div key={key} style={{ position: 'absolute', left: boxLeft(box), top: box.top }} className="z-[1] relative">
+          <QBox text={box.text} subtitle={box.subtitle} width={box.width} height={box.height} bg={box.bg} pill={box.pill} />
         </div>
       ))}
 

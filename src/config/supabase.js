@@ -24,11 +24,11 @@ export async function downloadFile(fileKey, filename) {
   const check = await fetch(data.publicUrl, { method: 'HEAD' })
   if (!check.ok) throw new Error(`Arquivo não encontrado: ${fileKey}`)
 
-  const a = document.createElement('a')
-  a.href = data.publicUrl
-  a.download = filename || fileKey.split('/').pop()
-  a.target = '_blank'
-  document.body.appendChild(a)
-  a.click()
-  a.remove()
+  const link = document.createElement('a')
+  link.href = data.publicUrl
+  link.download = filename || fileKey.split('/').pop()
+  link.target = '_blank'
+  document.body.appendChild(link)
+  link.click()
+  link.remove()
 }
