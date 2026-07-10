@@ -239,7 +239,7 @@ function IntroSection() {
     <div className="max-w-[1440px] mx-auto py-[clamp(28px,4vw,56px)] px-[clamp(10px,1vw,66px)] flex gap-[clamp(24px,4vw,56px)] flex-wrap items-start">
       <div className="flex-[1_1_360px] max-w-[560px] flex flex-col gap-[35px]">
         <h1 className="font-semibold text-[clamp(22px,2.5vw,30px)] text-ink-mid m-0 leading-tight">
-          Toolkit de Inovação
+          Toolkit de Compras Públicas
         </h1>
         <p className="font-normal text-[clamp(13px,1.1vw,16px)] text-black leading-[1.35] m-0 text-justify">
           O Toolkit de Compras Públicas reúne modelos de contratos, acordos e outros instrumentos jurídicos para apoiar a implementação do Marco Legal de Ciência, Tecnologia e Inovação no Piauí.
