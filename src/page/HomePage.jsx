@@ -351,7 +351,13 @@ function DesktopFlowGrid({ openIds, onToggle }) {
     <>
       <div className="max-w-[1200px] mx-auto grid grid-cols-3 gap-[clamp(14px,2vw,20px)] mb-[clamp(14px,2vw,20px)] items-start">
         {firstRow.map((flow) => (
-          <InstrumentFlowCard key={flow.id} {...flow} openIds={openIds} onToggle={onToggle} />
+          <InstrumentFlowCard
+            key={flow.id}
+            {...flow}
+            openIds={openIds}
+            onToggle={onToggle}
+            msg={flow.id === 'acordo-pd&i' ? 'Minutas sujeitas a correção no SEI' : 'Documento sendo validado pela PGE'}
+          />
         ))}
       </div>
 

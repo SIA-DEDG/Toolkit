@@ -4,7 +4,7 @@ import { StepItem } from './StepItem'
 import DownloadButton from './DownloadButton'
 
 // Card expansível com header colorido, lista de passos e botão de download
-export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, id, openIds, onToggle, downloadKey }) {
+export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, id, openIds, onToggle, downloadKey, msg }) {
   const isOpen = openIds.has(id)
   const Icon = typeof icon === 'string' ? null : icon
 
@@ -42,17 +42,24 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
       {isOpen && (
         <div id={`flow-${id}`}>
           {cards.map((card, index) => (
-            <StepItem key={index} card={card} accentColor={accentColor} isLast={index === cards.length - 1} />
+            <StepItem 
+            key={index} 
+            card={card} 
+            accentColor={accentColor} 
+            isLast={index === cards.length - 1 } 
+            msg={id === 'acordo-pd&i' ? 'Minutas sujeitas a correção no SEI' : 'Documento sendo validado pela PGE'}/>
           ))}
         </div>
       )}
 
       <div className="px-3.5 py-2.5">
         <DownloadButton fileKey={downloadKey} label="Baixar Relatório" large color={accentColor} />
-        <span className='text-[10px] text-[#FF0000] flex justify-start items-center gap-1 mt-1'>
-          <TriangleAlert className='inline-block w-3 h-3 mr-1' />
-          Documento sendo validado pela PGE
-        </span>
+        {msg && (
+          <span className='text-[10px] text-[#FF0000] flex justify-start items-center gap-1 mt-1'>
+            <TriangleAlert className='inline-block w-3 h-3 mr-1' />
+            {msg}
+          </span>
+        )}
       </div>
     </div>
   )
