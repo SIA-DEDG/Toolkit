@@ -429,7 +429,7 @@ export const INSTRUMENT_FLOWS = [
     href: '/contrato-transferencia-tecnologia',
     accentColor: '#0e7490',
     icon: RefreshCw,
-    downloadKey: 'transferencia-tecnologia/Guia Explicativo Transferencia Tecnologica nao patendeada.pdf',
+    downloadKey: 'contrato-transferencia-tecnologia/Guia Explicativo Transferencia Tecnologica nao patendeada.pdf',
     cards: [
       {
         title: 'Início',
