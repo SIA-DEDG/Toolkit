@@ -1,4 +1,4 @@
-import { ChevronUp, ChevronDown } from 'lucide-react'
+import { ChevronUp, ChevronDown, TriangleAlert } from 'lucide-react'
 import { useCallback } from 'react'
 import { StepItem } from './StepItem'
 import DownloadButton from './DownloadButton'
@@ -49,6 +49,10 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
 
       <div className="px-3.5 py-2.5">
         <DownloadButton fileKey={downloadKey} label="Baixar Relatório" large color={accentColor} />
+        <span className='text-[10px] text-[#FF0000] flex justify-start items-center gap-1 mt-1'>
+          <TriangleAlert className='inline-block w-3 h-3 mr-1' />
+          Documento sendo validado pela PGE
+        </span>
       </div>
     </div>
   )

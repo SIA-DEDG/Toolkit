@@ -905,7 +905,7 @@ export const INSTRUMENT_FLOWS = [
     href: '/dialogo-competitivo',
     accentColor: '#b45309',
     icon: MessageCircle,
-    downloadKey: '',
+    downloadKey: 'dialogo-competitivo/Guia Explicativo Dialogo Competitivo.pdf',
     cards: [
       {
         title: 'Início',
@@ -1089,7 +1089,7 @@ export const INSTRUMENT_FLOWS = [
     href: '/concurso-publico-inovacao',
     accentColor: '#b45309',
     icon: Trophy,
-    downloadKey: '',
+    downloadKey: 'concurso-publico-de-inovacao/Guia Explicativo Concurso publico para inovacao.pdf',
     cards: [
       {
         title: 'Início',
@@ -1205,7 +1205,7 @@ export const INSTRUMENT_FLOWS = [
     href: '/doacao-solucao-inovadora',
     accentColor: '#0e7490',
     icon: Package,
-    downloadKey: '',
+    downloadKey: 'doacao-solucao-inovadora/Guia Explicativo Doacao de solucao inovadora.pdf',
     cards: [
       {
         title: 'Início',

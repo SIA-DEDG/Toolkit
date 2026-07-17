@@ -1,4 +1,5 @@
 import DownloadButton from './DownloadButton'
+import { TriangleAlert } from "lucide-react"
 
 // Item de etapa com marcador, descrição, subitens e download opcional
 export function StepItem({ card, accentColor, isLast }) {
@@ -56,6 +57,10 @@ export function StepItem({ card, accentColor, isLast }) {
         {hasDownload && (
           <div className="mt-0.5">
             <DownloadButton fileKey={card.fileKey} label={card.downloadLabel || 'Baixar Documento'} />
+            <span className='text-[10px] text-[#FF0000] flex justify-start items-center gap-1 mt-1'>
+              <TriangleAlert className='inline-block w-3 h-3 mr-1' />
+              Documento sendo validado pela PGE
+            </span>
           </div>
         )}
       </div>
