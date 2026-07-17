@@ -3,14 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fluxo de Processo – PD&I</title>
-    <link rel="icon" type="image/svg+xml" href="/assets/shared/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Sistema Indisponível</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        height: 100%;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background: #0f172a;
+        color: #e2e8f0;
+        padding: 24px;
+        text-align: center;
+      }
+      main {
+        max-width: 520px;
+      }
+      .badge {
+        display: inline-block;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #94a3b8;
+        border: 1px solid #334155;
+        border-radius: 999px;
+        padding: 6px 14px;
+        margin-bottom: 28px;
+      }
+      h1 {
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 16px;
+      }
+      p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #cbd5e1;
+      }
+      @media (max-width: 480px) {
+        h1 { font-size: 26px; }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <main>
+      <span class="badge">Sistema Indisponível</span>
+      <h1>Sistema temporariamente indisponível</h1>
+      <p>Este serviço encontra-se fora do ar no momento. Pedimos desculpas pelo transtorno e agradecemos a compreensão.</p>
+    </main>
   </body>
 </html>
