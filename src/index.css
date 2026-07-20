@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: 'Montserrat', 'Inter', system-ui, sans-serif;
+  box-sizing: border-box;
+}
+
+strong {
+  font-weight: 700;
+}
+
+html {
+  overscroll-behavior: none;
+  background-color: #90CDF4;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #90CDF4;
+  overflow-x: auto;
+  overscroll-behavior: none;
+  color: var(--color-text);
+}
+
+/* intro-text-box: responsive half-width with dashed right border */
+.intro-text-box {
+  width: 50%;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2vw, 20px);
+  padding-right: clamp(20px, 3vw, 48px);
+}
+/* 
+.select-border-bottom {
+  border-bottom: 3px solid #0e59a8;
+}
+
+.select-border-bottom-dashed {
+  border-bottom: 1px dashed #0e59a8;
+}
+
+.select-border-top {
+  border-top: 3px solid #0e59a8;
+}
+
+.select-border-top-dashed {
+  border-top: 1px dashed #0e59a8;
+} */
+
+@media (max-width: 640px) {
+  .intro-text-box {
+    width: 100%;
+    border-right: none;
+    padding-right: 0;
+  }
+}
+
+
+/* Scrollbar */
+::-webkit-scrollbar { height: 6px; width: 6px; }
+::-webkit-scrollbar-track { background: #63B3ED; }
+::-webkit-scrollbar-thumb { background: #90CDF4; border-radius: 3px; }
+
+/* Esconde a barra de scroll nativa mantendo o scroll (usado na trilha, que tem indicador azul próprio) */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
