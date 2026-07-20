@@ -17,7 +17,7 @@ export const INSTRUMENT_FLOWS = [
       {
         title: 'Formalização da Demanda',
         description: 'Registrar a demanda no SEI, com envio pelo gabinete do órgão e formalização da parceria.',
-        fileKey: 'acordo-pd&i/Documento_Formalizacao_Demanda_PDI.docx'
+        fileKey: 'acordo-pd&i/DFD_Universal_Inovacao_SIA-PI.docx'
       },
       {
         title: 'Manifestação Técnica ou do NIT',
@@ -37,7 +37,7 @@ export const INSTRUMENT_FLOWS = [
       {
         title: 'Acordo de Parceria',
         description: 'Documento do acordo de parceria firmado com a instituição envolvida.',
-        fileKey: 'acordo-pd&i/Minuta_Acordo_Parceria_PDI.docx'
+        fileKey: 'acordo-pd&i/Acordo de PD&I - Sem aporte de recurso V. GEATE.docx'
       },
       {
         title: 'Autorizações',
@@ -102,7 +102,7 @@ export const INSTRUMENT_FLOWS = [
       {
         title: 'Minuta do Convênio',
         description: 'Minuta do Convênio para Pesquisa, Desenvolvimento e Inovação',
-        fileKey: 'convenio-pd&i/Minuta_Convenio_Parceria_PDI.docx'
+        fileKey: 'convenio-pd&i/Convenio_PDI.docx'
       },
       {
         title: 'Planilha Demonstrativa de Custo',
