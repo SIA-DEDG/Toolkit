@@ -7,7 +7,7 @@ const FAM_B = '#0e7490'
 const FAM_C = '#b45309'
 
 const CARD_W = 188
-const CARD_H = 116
+const CARD_H = 160
 
 // Regras de espaçamento vertical: caixa -> rótulo de ramo -> caixa/card usa sempre o mesmo respiro
 const GAP = 30          // espaço acima e abaixo de um rótulo de ramo (BranchLabel)
@@ -60,7 +60,7 @@ const TREE = box('root', { width: 340, height: 42, bg: '#042d63', pill: true, te
         box('p2b', { width: 320, height: 46, bg: FAM_B, text: 'A solução já existe no mercado?' }, {
           connectMode: 'labeled',
           laneWidth: 380,
-          drop: 240,
+          drop: 290,
           labels: ['Sim — solução padronizada', 'Não — a desenvolver'],
           children: [
             card('licitacao'),
@@ -210,11 +210,11 @@ function QBox({ text, subtitle, width = 160, height = 65, bg = BRAND, color = '#
       className="flex flex-col items-center justify-center"
       style={{ width, minHeight: height, background: bg, padding: '8px 14px', borderRadius: pill ? 999 : 10 }}
     >
-      <p className="m-0 text-center leading-snug" style={{ fontSize: 13, fontWeight: 600, color }}>
+      <p className="m-0 text-center leading-snug" style={{ fontSize: 14, fontWeight: 600, color }}>
         {text}
       </p>
       {subtitle && (
-        <p className="m-0 text-center leading-snug mt-1" style={{ fontSize: 11, fontWeight: 400, color: 'rgba(255,255,255,0.75)' }}>
+        <p className="m-0 text-center leading-snug mt-1" style={{ fontSize: 13, fontWeight: 400, color: 'rgba(255,255,255,0.75)' }}>
           {subtitle}
         </p>
       )}
@@ -237,7 +237,7 @@ function BranchLabel({ x, y, text }) {
         border: `1px solid ${BRAND}`,
         borderRadius: 8,
         padding: '5px 13px',
-        fontSize: 12.5,
+        fontSize: 14,
         fontWeight: 500,
         lineHeight: 1.3,
         color: '#2a4365',
