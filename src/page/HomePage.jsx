@@ -105,14 +105,14 @@ function GovHeader() {
       <div className="bg-white px-[clamp(16px,4vw,64px)] py-4 flex items-center justify-between gap-[clamp(16px,3vw,40px)] flex-wrap">
         <div className="text-[10px] font-bold leading-[1.35] text-[#1a3a6b] uppercase max-w-[230px] tracking-wide">
           Secretaria de Inteligência Artificial, Economia Digital, Ciência, Tecnologia e Inovação
-          <span className="text-brand"> - SIA</span>
+          <span className="text-[#0e50a6]"> - SIA</span>
         </div>
 
         <div className="flex-1 min-w-[220px] max-w-[520px] flex items-stretch h-[46px] rounded-md border border-black/20 overflow-hidden">
           <input
             type="search"
             placeholder="Qual serviço você procura?"
-            className="flex-1 min-w-0 px-4 text-[14px] text-ink-mid outline-none bg-white"
+            className="flex-1 min-w-0 px-4 text-[14px] text-[#2a4365] outline-none bg-white"
           />
           <button className="w-[70px] shrink-0 bg-[#0e8a12] flex items-center justify-center cursor-pointer" aria-label="Buscar">
             <Search className="w-5 h-5 text-white" />
@@ -176,7 +176,7 @@ function GroupColumn({ group, className = 'flex-1 min-w-[160px] max-w-[200px]' }
 function StatCard({ stat, className = '' }) {
   return (
     <div className={`w-[115px] shrink-0 rounded-[10px] bg-[#c4deff] drop-shadow-[2px_2px_2.5px_rgba(0,0,0,0.25)] pt-[11px] pb-[13px] px-2 flex flex-col items-center gap-[5px] ${className}`}>
-      <span className="font-semibold text-[30px] leading-none text-ink-mid">{stat.value}</span>
+      <span className="font-semibold text-[30px] leading-none text-[#2a4365]">{stat.value}</span>
       <span className="w-full text-center text-[14px] font-light text-black leading-tight">{stat.label}</span>
     </div>
   )
@@ -241,7 +241,7 @@ function IntroSection() {
         <h1 className="font-semibold text-[clamp(22px,2.5vw,30px)] text-ink-mid m-0 leading-tight">
           Toolkit de Compras Públicas
         </h1>
-        <p className="font-normal text-[clamp(13px,1.1vw,16px)] text-black leading-[1.35] m-0 text-justify">
+        <p className="font-normal text-[clamp(13px,1.1vw,16px)] text-ink-dark leading-[1.35] m-0 text-justify">
           O Toolkit de Compras Públicas reúne modelos de contratos, acordos e outros instrumentos jurídicos para apoiar a implementação do Marco Legal de Ciência, Tecnologia e Inovação no Piauí.
           <br />
           <br />
@@ -407,7 +407,7 @@ function WavyTopEdge() {
            C 1320,1 1344,29 1368,13
            C 1392,33 1416,1 1440,21
            L1440,50 L0,50 Z"
-        fill="#E3EFFF"
+        fill="rgb(var(--brand-bg))"
       />
     </svg>
   )
@@ -451,7 +451,7 @@ function StepByStepSection({ isMobile, openIds, onToggle }) {
 // Rodapé com copyright da SIA
 function PageFooter() {
   return (
-    <footer className="text-center py-[clamp(20px,3vw,32px)] px-4 text-[clamp(11px,1vw,14px)] text-gray-400 bg-white">
+    <footer className="text-center py-[clamp(20px,3vw,32px)] px-4 text-[clamp(11px,1vw,14px)] text-gray-400 bg-surface">
       © {new Date().getFullYear()} Toolkit SIA - Secretaria de Inteligência Artificial,
       Economia Digital, Ciência, Tecnologia e Inovação
     </footer>
@@ -478,7 +478,7 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="bg-white w-full overflow-x-clip">
+    <div className="bg-surface w-full overflow-x-clip">
       {/* Header em tamanho original (fora do zoom da página) */}
       <GovHeader />
 
@@ -487,7 +487,7 @@ export default function HomePage() {
         <IntroSection />
         <IdentificationSection />
 
-        <section id="trilha-de-instrumentos" className="p-0 bg-white">
+        <section id="trilha-de-instrumentos" className="p-0 bg-surface">
           <div className="max-w-[1440px] mx-auto">
             <ScaledFlowchartDecision onInstrumentClick={handleInstrumentClick} />
           </div>

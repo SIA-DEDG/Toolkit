@@ -2,6 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---- Tokens de cor como triplas RGB (tema claro = valores originais) ---- */
+:root {
+  color-scheme: light;
+
+  --brand:       14 80 166;    /* #0e50a6 */
+  --brand-mid:   17 110 208;   /* #116ed0 */
+  --brand-deep:  4 45 99;      /* #042d63 */
+  --brand-bg:    227 239 255;  /* #E3EFFF */
+  --brand-light: 190 227 248;  /* #bee3f8 */
+
+  --secondary: 101 97 247;     /* #6561f7 */
+  --tertiary:  14 156 166;     /* #0e9ca6 */
+
+  --ink-dark:  26 32 44;       /* #1a202c */
+  --ink-mid:   42 67 101;      /* #2a4365 */
+  --ink-muted: 113 128 150;    /* #718096 */
+  --ink-sub:   74 85 104;      /* #4a5568 */
+
+  --surface:     255 255 255;  /* #ffffff */
+  --surface-alt: 245 248 253;  /* #f5f8fd */
+
+  --page-bg:         #90CDF4;
+  --scrollbar-track: #63B3ED;
+  --scrollbar-thumb: #90CDF4;
+}
+
+/* ---- Tema escuro: derivado da paleta, priorizando legibilidade ---- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    /* Azuis da marca clareados para contraste sobre fundo escuro */
+    --brand:       91 155 232;   /* #5b9be8 */
+    --brand-mid:   74 134 216;   /* #4a86d8 */
+    --brand-deep:  12 31 61;     /* #0c1f3d */
+    --brand-bg:    22 35 58;     /* #16233a */
+    --brand-light: 34 55 90;     /* #22375a */
+
+    --secondary: 154 151 255;    /* #9a97ff */
+    --tertiary:  62 198 209;     /* #3ec6d1 */
+
+    /* "ink" invertido: tons claros para texto sobre escuro */
+    --ink-dark:  238 242 248;    /* #eef2f8 */
+    --ink-mid:   211 222 238;    /* #d3deee */
+    --ink-muted: 154 171 192;    /* #9aabc0 */
+    --ink-sub:   182 196 214;    /* #b6c4d6 */
+
+    --surface:     20 29 46;     /* #141d2e */
+    --surface-alt: 28 39 64;     /* #1c2740 */
+
+    --page-bg:         #0a1120;
+    --scrollbar-track: #1c2740;
+    --scrollbar-thumb: #3a4a6a;
+  }
+}
+
 * {
   font-family: 'Montserrat', 'Inter', system-ui, sans-serif;
   box-sizing: border-box;
@@ -13,16 +69,16 @@ strong {
 
 html {
   overscroll-behavior: none;
-  background-color: #90CDF4;
+  background-color: var(--page-bg);
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #90CDF4;
+  background-color: var(--page-bg);
   overflow-x: auto;
   overscroll-behavior: none;
-  color: var(--color-text);
+  color: rgb(var(--ink-mid));
 }
 
 /* intro-text-box: responsive half-width with dashed right border */
@@ -62,8 +118,8 @@ body {
 
 /* Scrollbar */
 ::-webkit-scrollbar { height: 6px; width: 6px; }
-::-webkit-scrollbar-track { background: #63B3ED; }
-::-webkit-scrollbar-thumb { background: #90CDF4; border-radius: 3px; }
+::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 3px; }
 
 /* Esconde a barra de scroll nativa mantendo o scroll (usado na trilha, que tem indicador azul próprio) */
 .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }

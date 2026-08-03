@@ -11,7 +11,7 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
   const handleToggle = useCallback(() => onToggle(id), [id, onToggle])
 
   return (
-    <div className="bg-white rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.12)] overflow-hidden flex flex-col min-w-0">
+    <div className="bg-surface rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.12)] overflow-hidden flex flex-col min-w-0">
       <div className="h-[10px]" style={{ backgroundColor: accentColor }} />
       <button
         onClick={handleToggle}
@@ -27,8 +27,8 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
             }
           </div>
           <div className="flex-1 min-w-0 min-h-[10px]">
-            <p className="font-bold text-[16px] text-black m-0 leading-snug">{title}</p>
-            <p className="font-normal text-[14px] text-black/80 m-0 leading-snug">{subtitle}</p>
+            <p className="font-bold text-[16px] text-ink-dark m-0 leading-snug">{title}</p>
+            <p className="font-normal text-[14px] text-ink-sub m-0 leading-snug">{subtitle}</p>
           </div>
           <div className="rounded-md px-1.5 py-0.5 flex items-center justify-center shrink-0 mt-0.5" style={{ background: accentColor }}>
             {isOpen

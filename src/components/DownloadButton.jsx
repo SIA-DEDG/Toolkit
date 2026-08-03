@@ -40,7 +40,7 @@ export default function DownloadButton({ label = 'Baixar Documento', fileKey, fi
           'mt-2 flex items-center justify-center gap-2.5',
           color
             ? 'text-white font-semibold font-sans border-transparent'
-            : 'bg-white hover:bg-gray-100 text-ink-dark font-semibold font-sans border-ink-dark',
+            : 'bg-surface hover:bg-surface-alt text-ink-dark font-semibold font-sans border-ink-dark',
           'rounded-lg transition-colors duration-150 cursor-pointer',
           'disabled:opacity-50 disabled:cursor-not-allowed',
           large

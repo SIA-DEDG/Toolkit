@@ -15,7 +15,7 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
       tabIndex={onClick ? 0 : undefined}
       onKeyDown={onClick ? (e) => { if (e.key === 'Enter' || e.key === ' ') onClick() } : undefined}
       className={[
-        'relative bg-white rounded-[8px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]',
+        'relative bg-surface rounded-[8px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]',
         'shrink-0 transition-shadow duration-150',
         onClick ? 'cursor-pointer' : 'cursor-default',
       ].join(' ')}
@@ -46,7 +46,7 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
       <div style={{ paddingLeft: 13, paddingRight: 13, paddingTop: 8, paddingBottom: 11 }}>
         <p
           className="m-0 leading-normal"
-          style={{ fontSize: 10, fontWeight: 600, color: '#000', letterSpacing: '0.06em' }}
+          style={{ fontSize: 10, fontWeight: 600, color: 'rgb(var(--ink-dark))', letterSpacing: '0.06em' }}
         >
           INSTRUMENTO
         </p>
@@ -75,7 +75,7 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
 
         <p
           className="m-0 leading-snug"
-          style={{ fontSize: 12, fontWeight: 400, color: '#4a5568', marginTop: 3 }}
+          style={{ fontSize: 12, fontWeight: 400, color: 'rgb(var(--ink-sub))', marginTop: 3 }}
         >
           {description}
         </p>
