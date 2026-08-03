@@ -37,14 +37,14 @@ export default function DownloadButton({ label = 'Baixar Documento', fileKey, fi
         onClick={handleClick}
         disabled={loading || !fileKey}
         className={[
-          'mt-2 flex items-center justify-center gap-1.5',
+          'mt-2 flex items-center justify-center gap-2.5',
           color
             ? 'text-white font-semibold font-sans border-transparent'
             : 'bg-white hover:bg-gray-100 text-ink-dark font-semibold font-sans border-ink-dark',
           'rounded-lg transition-colors duration-150 cursor-pointer',
           'disabled:opacity-50 disabled:cursor-not-allowed',
           large
-            ? 'text-[13px] w-[172px] h-9 border-2 shadow-[0_2px_6px_rgba(0,0,0,0.18)]'
+            ? 'text-[13px] whitespace-nowrap px-4 h-9 border-2 shadow-[0_2px_6px_rgba(0,0,0,0.18)]'
             : 'text-[11px] w-[140px] h-7 border-[1.5px]',
         ].join(' ')}
         style={color ? { backgroundColor: lightenHex(color) } : undefined}

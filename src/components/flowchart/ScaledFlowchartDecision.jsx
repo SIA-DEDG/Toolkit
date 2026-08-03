@@ -1,9 +1,87 @@
-import { useRef, useState, useEffect, useCallback } from 'react'
-import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useRef, useState, useEffect, useLayoutEffect, useCallback } from 'react'
+import { createPortal } from 'react-dom'
+import { ChevronDown, ChevronLeft, ChevronRight, Maximize2, X } from 'lucide-react'
 import { SectionBadge } from '../SectionBadge'
 import { TrilhaFlowchartDecision, INSTRUMENTS } from './TrilhaFlowchartDecision'
 
 const COLLAPSED_HEIGHT = 520
+
+// Overlay em tela cheia que escala o fluxograma inteiro para caber na viewport.
+// Renderizado via portal no body para escapar do `zoom` da página.
+function FullscreenFlow({ onClose, onInstrumentClick }) {
+  const wrapRef = useRef(null)
+  const flowRef = useRef(null)
+  // scale + tamanho natural do fluxo; a caixa externa usa o tamanho JÁ escalado
+  // para o layout bater com o visual (transform não encolhe a caixa por si só).
+  const [fit, setFit] = useState({ scale: 1, w: 0, h: 0, ready: false })
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      const wrap = wrapRef.current
+      const flow = flowRef.current
+      if (!wrap || !flow) return
+      const availW = wrap.clientWidth - 24
+      const availH = wrap.clientHeight - 24
+      // scrollWidth/Height são medidas de layout, não afetadas pelo transform
+      const naturalW = flow.scrollWidth
+      const naturalH = flow.scrollHeight
+      if (!naturalW || !naturalH) return
+      const scale = Math.min(1, availW / naturalW, availH / naturalH)
+      setFit({ scale, w: naturalW, h: naturalH, ready: true })
+    }
+    measure()
+    window.addEventListener('resize', measure)
+    const onKey = (event) => { if (event.key === 'Escape') onClose() }
+    window.addEventListener('keydown', onKey)
+    // Trava o scroll do body enquanto o overlay está aberto
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('resize', measure)
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prevOverflow
+    }
+  }, [onClose])
+
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[100] bg-black/70 flex items-center justify-center p-2 sm:p-4"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Fluxo completo"
+    >
+      <div
+        className="relative bg-white rounded-xl w-full h-full max-w-[1600px] overflow-hidden shadow-2xl"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Fechar"
+          className="absolute top-3 right-3 z-10 flex items-center justify-center w-9 h-9 rounded-full bg-white/90 hover:bg-white shadow ring-1 ring-black/10 text-ink-mid cursor-pointer border-none"
+        >
+          <X className="w-5 h-5" />
+        </button>
+
+        <div ref={wrapRef} className="w-full h-full overflow-hidden flex items-center justify-center p-3">
+          {/* Caixa externa com o tamanho escalado — evita scroll/branco excedente */}
+          <div
+            style={fit.ready ? { width: fit.w * fit.scale, height: fit.h * fit.scale } : undefined}
+            className="shrink-0"
+          >
+            <div style={{ width: fit.w || undefined, height: fit.h || undefined, transform: `scale(${fit.scale})`, transformOrigin: 'top left' }}>
+              <div ref={flowRef} className="w-max">
+                <TrilhaFlowchartDecision onInstrumentClick={onInstrumentClick} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>,
+    document.body,
+  )
+}
 
 const GROUPS = [
   { id: 'A', name: 'Parceria e P&D', dot: '#6d28d9', keys: ['convenio', 'acordo'] },
@@ -78,6 +156,7 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
   const groupsRef = useRef(null)
   const [openGroup, setOpenGroup] = useState(null)
   const [expanded, setExpanded] = useState(false)
+  const [fullscreen, setFullscreen] = useState(false)
   const [thumb, setThumb] = useState({ width: 100, left: 0 })
   const [naturalHeight, setNaturalHeight] = useState(0)
 
@@ -196,15 +275,26 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
       </div>
 
       <div className="px-[clamp(20px,5vw,66px)] pt-4 pb-8 flex flex-col items-center gap-3">
-        <button
-          type="button"
-          onClick={() => setExpanded(prev => !prev)}
-          className="inline-flex items-center gap-1.5 border-none cursor-pointer rounded-full h-[31px] pl-3 pr-2.5 text-white text-[14px] font-medium"
-          style={{ background: 'linear-gradient(90deg, #042d63 0%, #0e50a6 80%)' }}
-        >
-          {expanded ? 'Ver menos do fluxo' : 'Ver mais do fluxo'}
-          <ChevronDown className={`w-4 h-4 transition-transform duration-150 ${expanded ? 'rotate-180' : ''}`} />
-        </button>
+        <div className="flex flex-wrap items-center justify-center gap-3">
+          <button
+            type="button"
+            onClick={() => setExpanded(prev => !prev)}
+            className="inline-flex items-center gap-1.5 border-none cursor-pointer rounded-full h-[31px] pl-3 pr-2.5 text-white text-[14px] font-medium"
+            style={{ background: 'linear-gradient(90deg, #042d63 0%, #0e50a6 80%)' }}
+          >
+            {expanded ? 'Ver menos do fluxo' : 'Ver mais do fluxo'}
+            <ChevronDown className={`w-4 h-4 transition-transform duration-150 ${expanded ? 'rotate-180' : ''}`} />
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setFullscreen(true)}
+            className="inline-flex items-center gap-1.5 cursor-pointer rounded-full h-[31px] pl-3 pr-3.5 text-brand text-[14px] font-medium bg-white border border-brand hover:bg-brand-light/40 transition-colors"
+          >
+            <Maximize2 className="w-4 h-4" />
+            Ver fluxo completo
+          </button>
+        </div>
 
         <div className="flex items-center gap-3 w-full max-w-[860px]">
           <button
@@ -238,6 +328,13 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
           </button>
         </div>
       </div>
+
+      {fullscreen && (
+        <FullscreenFlow
+          onClose={() => setFullscreen(false)}
+          onInstrumentClick={(id) => { setFullscreen(false); onInstrumentClick(id) }}
+        />
+      )}
     </div>
   )
 }

@@ -487,13 +487,11 @@ export default function HomePage() {
         <IntroSection />
         <IdentificationSection />
 
-        {!isMobile && (
-          <section id="trilha-de-instrumentos" className="p-0 bg-white">
-            <div className="max-w-[1440px] mx-auto">
-              <ScaledFlowchartDecision onInstrumentClick={handleInstrumentClick} />
-            </div>
-          </section>
-        )}
+        <section id="trilha-de-instrumentos" className="p-0 bg-white">
+          <div className="max-w-[1440px] mx-auto">
+            <ScaledFlowchartDecision onInstrumentClick={handleInstrumentClick} />
+          </div>
+        </section>
 
         <StepByStepSection isMobile={isMobile} openIds={openIds} onToggle={handleToggle} />
         <PageFooter />
