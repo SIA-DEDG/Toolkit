@@ -59,7 +59,7 @@ function FullscreenFlow({ onClose, onInstrumentClick }) {
           type="button"
           onClick={onClose}
           aria-label="Fechar"
-          className="absolute top-3 right-3 z-10 flex items-center justify-center w-9 h-9 rounded-full bg-surface hover:bg-surface-alt shadow ring-1 ring-black/10 dark:ring-white/15 text-ink-mid cursor-pointer border-none"
+          className="absolute top-3 right-3 z-10 flex items-center justify-center w-9 h-9 rounded-full bg-surface hover:bg-surface-alt shadow ring-1 ring-[color:var(--hairline)] text-ink-mid cursor-pointer border-none"
         >
           <X className="w-5 h-5" />
         </button>
@@ -96,7 +96,7 @@ function GroupChip({ group, open, onToggle, onInstrumentClick }) {
       <button
         type="button"
         onClick={onToggle}
-        className={`flex items-center gap-2 cursor-pointer border rounded-full pl-2.5 pr-2 py-1.5 transition-colors border-black/10 dark:border-white/10 ${open ? 'bg-black/[0.03] dark:bg-white/[0.06]' : 'bg-surface hover:bg-black/[0.03] dark:hover:bg-white/[0.06]'
+        className={`flex items-center gap-2 cursor-pointer border rounded-full pl-2.5 pr-2 py-1.5 transition-colors border-[color:var(--hairline)] ${open ? 'bg-[color:var(--overlay)]' : 'bg-surface hover:bg-[color:var(--overlay)]'
           }`}
       >
         <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: group.dot }} />
@@ -107,7 +107,7 @@ function GroupChip({ group, open, onToggle, onInstrumentClick }) {
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full mt-2 z-20 w-[340px] rounded-2xl bg-surface shadow-xl ring-1 ring-black/5 dark:ring-white/10 overflow-hidden">
+        <div className="absolute right-0 top-full mt-2 z-20 w-[340px] rounded-2xl bg-surface shadow-xl ring-1 ring-[color:var(--hairline)] overflow-hidden">
           <div className="flex items-center gap-2 px-4 py-3" style={{ background: group.dot }}>
             <span className="w-2.5 h-2.5 rounded-full bg-white/90 shrink-0" />
             <span className="font-semibold text-sm text-white">{group.name}</span>
@@ -121,7 +121,7 @@ function GroupChip({ group, open, onToggle, onInstrumentClick }) {
                 <button
                   key={key}
                   onClick={() => onInstrumentClick(instrument.id)}
-                  className="flex items-start gap-3 rounded-xl px-3 py-2 text-left bg-transparent border-none cursor-pointer transition-colors hover:bg-black/[0.04] dark:hover:bg-white/[0.06]"
+                  className="flex items-start gap-3 rounded-xl px-3 py-2 text-left bg-transparent border-none cursor-pointer transition-colors hover:bg-[color:var(--overlay)]"
                 >
                   <span
                     className="mt-0.5 flex items-center justify-center w-8 h-8 rounded-lg shrink-0"

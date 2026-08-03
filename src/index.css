@@ -15,6 +15,11 @@
   --secondary: 101 97 247;     /* #6561f7 */
   --tertiary:  14 156 166;     /* #0e9ca6 */
 
+  /* Cores de família p/ TEXTO/realce dos cards do fluxo (claro = originais) */
+  --accent-a: 109 40 217;      /* roxo   #6d28d9 */
+  --accent-b: 14 116 144;      /* teal   #0e7490 */
+  --accent-c: 180 83 9;        /* laranja #b45309 */
+
   --ink-dark:  26 32 44;       /* #1a202c */
   --ink-mid:   42 67 101;      /* #2a4365 */
   --ink-muted: 113 128 150;    /* #718096 */
@@ -23,14 +28,19 @@
   --surface:     255 255 255;  /* #ffffff */
   --surface-alt: 245 248 253;  /* #f5f8fd */
 
+  --hairline: rgba(0, 0, 0, 0.10);   /* bordas sutis */
+  --overlay:  rgba(0, 0, 0, 0.03);   /* hover/estado sutil */
+
   --page-bg:         #90CDF4;
   --scrollbar-track: #63B3ED;
   --scrollbar-thumb: #90CDF4;
 }
 
-/* ---- Tema escuro: derivado da paleta, priorizando legibilidade ---- */
+/* ---- Tema escuro: derivado da paleta, priorizando legibilidade ----
+   Vale para (a) sistema em dark quando o usuário não forçou claro, e
+   (b) escolha manual data-theme="dark" (botão de tema). ---- */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     color-scheme: dark;
 
     /* Azuis da marca clareados para contraste sobre fundo escuro */
@@ -43,7 +53,10 @@
     --secondary: 154 151 255;    /* #9a97ff */
     --tertiary:  62 198 209;     /* #3ec6d1 */
 
-    /* "ink" invertido: tons claros para texto sobre escuro */
+    --accent-a: 183 148 246;     /* roxo   #b794f6 */
+    --accent-b: 79 209 197;      /* teal   #4fd1c5 */
+    --accent-c: 246 173 85;      /* laranja #f6ad55 */
+
     --ink-dark:  238 242 248;    /* #eef2f8 */
     --ink-mid:   211 222 238;    /* #d3deee */
     --ink-muted: 154 171 192;    /* #9aabc0 */
@@ -52,10 +65,45 @@
     --surface:     20 29 46;     /* #141d2e */
     --surface-alt: 28 39 64;     /* #1c2740 */
 
+    --hairline: rgba(255, 255, 255, 0.13);
+    --overlay:  rgba(255, 255, 255, 0.06);
+
     --page-bg:         #0a1120;
     --scrollbar-track: #1c2740;
     --scrollbar-thumb: #3a4a6a;
   }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --brand:       91 155 232;
+  --brand-mid:   74 134 216;
+  --brand-deep:  12 31 61;
+  --brand-bg:    22 35 58;
+  --brand-light: 34 55 90;
+
+  --secondary: 154 151 255;
+  --tertiary:  62 198 209;
+
+  --accent-a: 183 148 246;
+  --accent-b: 79 209 197;
+  --accent-c: 246 173 85;
+
+  --ink-dark:  238 242 248;
+  --ink-mid:   211 222 238;
+  --ink-muted: 154 171 192;
+  --ink-sub:   182 196 214;
+
+  --surface:     20 29 46;
+  --surface-alt: 28 39 64;
+
+  --hairline: rgba(255, 255, 255, 0.13);
+  --overlay:  rgba(255, 255, 255, 0.06);
+
+  --page-bg:         #0a1120;
+  --scrollbar-track: #1c2740;
+  --scrollbar-thumb: #3a4a6a;
 }
 
 * {

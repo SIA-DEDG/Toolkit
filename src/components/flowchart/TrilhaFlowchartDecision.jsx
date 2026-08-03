@@ -2,9 +2,15 @@ import { InstrumentCard } from './InstrumentCard'
 import { Handshake, NotepadText, Lightbulb, MessageCircle, Computer, Wrench, Package, ClipboardCheck, RefreshCw, FileText, Search, Trophy } from 'lucide-react'
 
 const BRAND = '#0e59a8'
+// Cores de família como FUNDO das caixas de decisão (texto branco por cima) —
+// mantidas em tom médio nos dois temas para preservar contraste com o branco.
 const FAM_A = '#6d28d9'
 const FAM_B = '#0e7490'
 const FAM_C = '#b45309'
+// Cores de família adaptativas p/ TEXTO/realce dos cards (clareiam no dark).
+const ACCENT_A = 'rgb(var(--accent-a))'
+const ACCENT_B = 'rgb(var(--accent-b))'
+const ACCENT_C = 'rgb(var(--accent-c))'
 
 const CARD_W = 188
 const CARD_H = 160
@@ -16,11 +22,13 @@ const LABEL_H = 34      // altura de referência do rótulo de ramo, usada no c�
 const HGAP = 40        // espaço horizontal entre irmãos
 const CANVAS_PAD = 24   // respiro nas bordas do canvas
 
-// Cor de destaque e fundo do ícone por família (mesma cor das caixas de decisão do ramo)
+// Cor de destaque (texto/barra do card) e fundo do ícone por família.
+// accentColor usa a variável adaptativa: título e barra do card ficam na cor da
+// família em ambos os temas, clareando no dark para contraste legível.
 const FAM_STYLE = {
-  A: { accentColor: FAM_A, iconBg: 'rgba(109,40,217,0.15)' },
-  B: { accentColor: FAM_B, iconBg: 'rgba(14,116,144,0.15)' },
-  C: { accentColor: FAM_C, iconBg: 'rgba(180,83,9,0.15)' },
+  A: { accentColor: ACCENT_A, iconBg: 'rgba(109,40,217,0.15)' },
+  B: { accentColor: ACCENT_B, iconBg: 'rgba(14,116,144,0.15)' },
+  C: { accentColor: ACCENT_C, iconBg: 'rgba(180,83,9,0.15)' },
 }
 
 // Instrumentos com nome completo (sem abreviações) e sua família (fam)

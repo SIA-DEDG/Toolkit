@@ -1,7 +1,8 @@
 import { useState, useCallback } from 'react'
-import { ExternalLink, ArrowRight, Workflow, Search, ChevronDown, Contrast } from 'lucide-react'
+import { ExternalLink, ArrowRight, Workflow, Search, ChevronDown, Sun, Moon } from 'lucide-react'
 import { INSTRUMENT_FLOWS } from '../data/instruments'
 import { useIsMobile } from '../hooks/useIsMobile'
+import { useTheme } from '../hooks/useTheme'
 import { SectionBadge } from '../components/SectionBadge'
 import { InstrumentFlowCard } from '../components/InstrumentFlowCard'
 import { ScaledFlowchartDecision } from '../components/flowchart/ScaledFlowchartDecision'
@@ -80,13 +81,22 @@ const FlagES = () => (
 
 // Cabeçalho institucional replicando o Figma, porém sem a logo do governo (período eleitoral)
 function GovHeader() {
+  const { isDark, toggle } = useTheme()
   return (
     <header className="w-full select-none">
       {/* Faixa de acessibilidade e idiomas */}
       <div className="bg-[#ececec] px-[clamp(16px,4vw,64px)] py-1.5 flex items-center justify-between gap-3 flex-wrap">
         <div className="flex items-center gap-2">
-          <button className="w-8 h-8 rounded-md bg-white border border-black/15 flex items-center justify-center cursor-pointer" aria-label="Alternar contraste">
-            <Contrast className="w-4 h-4 text-black" />
+          <button
+            onClick={toggle}
+            className="w-8 h-8 rounded-md bg-white border border-black/15 flex items-center justify-center cursor-pointer"
+            aria-label={isDark ? 'Mudar para tema claro' : 'Mudar para tema escuro'}
+            aria-pressed={isDark}
+            title={isDark ? 'Tema claro' : 'Tema escuro'}
+          >
+            {isDark
+              ? <Sun className="w-4 h-4 text-black" />
+              : <Moon className="w-4 h-4 text-black" />}
           </button>
           <button className="h-8 px-2.5 rounded-md bg-white border border-black/15 text-[13px] font-semibold text-black cursor-pointer" aria-label="Diminuir fonte">A-</button>
           <button className="h-8 px-2.5 rounded-md bg-white border border-black/15 text-[13px] font-semibold text-black cursor-pointer" aria-label="Aumentar fonte">A+</button>
