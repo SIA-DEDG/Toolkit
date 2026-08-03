@@ -199,10 +199,10 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
         <button
           type="button"
           onClick={() => setExpanded(prev => !prev)}
-          className="inline-flex items-center gap-1.5 border-none cursor-pointer rounded-full h-[31px] pl-3 pr-2.5 text-white text-xs font-medium"
+          className="inline-flex items-center gap-1.5 border-none cursor-pointer rounded-full h-[31px] pl-3 pr-2.5 text-white text-[14px] font-medium"
           style={{ background: 'linear-gradient(90deg, #042d63 0%, #0e50a6 80%)' }}
         >
-          {expanded ? 'Ver menos' : 'Ver mais'}
+          {expanded ? 'Ver menos do fluxo' : 'Ver mais do fluxo'}
           <ChevronDown className={`w-4 h-4 transition-transform duration-150 ${expanded ? 'rotate-180' : ''}`} />
         </button>
 

@@ -266,7 +266,7 @@ function IdentificationCard({ title, description, action }) {
         dangerouslySetInnerHTML={{ __html: title }}
       />
       <p
-        className="font-medium text-[13px] text-[#e6e6e6] text-justify m-0 leading-snug"
+        className="font-medium text-[14px] text-[#e6e6e6] text-justify m-0 leading-snug"
         dangerouslySetInnerHTML={{ __html: description }}
       />
       <div className="flex justify-end mt-auto pt-1">
@@ -277,7 +277,7 @@ function IdentificationCard({ title, description, action }) {
 }
 
 const GRADIENT_BTN_CLASS =
-  'inline-flex items-center justify-center gap-1.5 rounded-full h-[31px] px-4 text-white font-medium text-[12px] no-underline border-none cursor-pointer'
+  'inline-flex items-center justify-center gap-1.5 rounded-full h-[31px] px-4 text-white font-medium text-[14px] no-underline border-none cursor-pointer'
 const GRADIENT_BTN_STYLE = { background: 'linear-gradient(90deg, #042d63 0%, #0e50a6 80%)' }
 
 // Seção de triagem: faixa azul com dois caminhos (quiz externo da CPIN ou trilha interna)
@@ -297,7 +297,7 @@ function IdentificationSection() {
       <div className="relative max-w-[1440px] mx-auto py-[clamp(28px,4vw,56px)] px-[clamp(10px,1vw,66px)]">
         <div className="inline-flex items-center gap-1.5 bg-brand-light rounded-full h-[28px] pl-2 pr-2.5">
           <Workflow className="w-5 h-5 text-ink-mid shrink-0" />
-          <span className="font-medium text-[12px] text-ink-mid">Triagem de Identificação</span>
+          <span className="font-medium text-[14px] text-ink-mid">Triagem de Identificação</span>
         </div>
 
         <h2 className="font-semibold text-[clamp(20px,2vw,24px)] text-white mt-4 mb-6">

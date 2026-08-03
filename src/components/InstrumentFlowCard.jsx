@@ -53,7 +53,7 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
       )}
 
       <div className="px-3.5 py-2.5">
-        <DownloadButton fileKey={downloadKey} label="Baixar Relatório" large color={accentColor} />
+        <DownloadButton fileKey={downloadKey} label="Baixar Guia Explicativo" large color={accentColor} />
         {msg && (
           <span className='text-[10px] text-[#FF0000] flex justify-start items-center gap-1 mt-1'>
             <TriangleAlert className='inline-block w-3 h-3 mr-1' />
