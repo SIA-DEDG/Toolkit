@@ -126,24 +126,47 @@ export const INSTRUMENT_INFO = {
     ],
   },
 
-  // ---- Pendentes de conteúdo ----------------------------------------------
-
   'licitacao': {
     title: 'Licitação',
-    legalBasis: '',
-    paragraphs: [],
+    legalBasis: 'Lei nº 14.133/2021.',
+    paragraphs: [
+      'A abertura de pregão é o ato formal que dá início à fase externa da licitação na modalidade pregão, destinada à aquisição de bens e serviços comuns, quando a contratação se destina a atender necessidade específica e imediata da Administração — e não à formação de banco de preços para contratações futuras e eventuais, hipótese própria do Sistema de Registro de Preços – SRP.',
+      'O pregão é a modalidade de licitação obrigatória para aquisição de bens e serviços comuns, cujo critério de julgamento poderá ser o de menor preço ou o de maior desconto. Bens e serviços comuns são aqueles cujos padrões de desempenho e qualidade podem ser objetivamente definidos pelo edital, por meio de especificações usuais de mercado.',
+      'A Lei nº 14.133/2021 ampliou a aplicação do pregão em relação à legislação anterior, passando a incluir também os serviços comuns de engenharia, sempre que o objeto possuir padrões de desempenho e qualidade que possam ser definidos objetivamente em edital. Por outro lado, é vedada a utilização do pregão para a contratação de serviços técnicos especializados de natureza predominantemente intelectual e de obras e serviços especiais de engenharia.',
+      'A realização do pregão sem Registro de Preços implica as seguintes consequências:',
+      { term: 'Demanda concreta', text: 'A licitação destina-se a suprir necessidade já definida, com quantitativos certos, que serão contratados de imediato após a homologação.' },
+      { term: 'Ausência de ata', text: 'Não haverá formação de Ata de Registro de Preços – ARP, instrumento que permitiria à Administração, e a outros órgãos mediante adesão, contratar futuramente dentro da validade da ata, sem nova licitação.' },
+      { term: 'Contratação integral', text: 'O contrato ou empenho decorrente é firmado diretamente com o vencedor para atender integralmente ao objeto licitado, sem a flexibilidade de aquisição por demanda futura característica do SRP.' },
+    ],
   },
 
   'contratacao-direta': {
     title: 'Contratação Direta',
-    legalBasis: '',
-    paragraphs: [],
+    legalBasis: 'arts. 74 e 75 da Lei nº 14.133/2021; art. 37, XXI, da Constituição Federal.',
+    paragraphs: [
+      'A contratação direta é o procedimento administrativo pelo qual a Administração Pública contrata diretamente um particular, sem realizar licitação, nas hipóteses expressamente previstas em lei. A regra geral, prevista no art. 37, XXI, da Constituição Federal, é a obrigatoriedade de licitar; a contratação direta é exceção, cabível apenas nos casos legalmente autorizados.',
+      'A Lei nº 14.133/2021 trata do tema no Capítulo VIII, dividindo a contratação direta em duas modalidades:',
+      { term: 'Inexigibilidade de licitação (art. 74)', text: 'Ocorre quando há inviabilidade de competição, ou seja, quando não existe possibilidade real de disputa entre fornecedores. As hipóteses constam de rol exemplificativo e abrangem casos como fornecedor exclusivo; contratação de profissional de notória especialização para serviços técnicos singulares; e contratação de serviços artísticos com profissional consagrado.' },
+      { term: 'Dispensa de licitação (art. 75)', text: 'Diferentemente da inexigibilidade, aqui a competição é viável, mas a lei autoriza que a Administração contrate diretamente em razão de circunstâncias objetivas, como pequeno valor, emergência ou alienação específica. É a lei quem dispensa a exigência do certame, e não a impossibilidade de competir.' },
+      'Na dispensa em razão do valor, o art. 75, II, autoriza a contratação direta de outros serviços e compras cujo valor seja inferior a R$ 59.906,02, conforme atualização vigente — os limites do art. 75 são corrigidos anualmente por decreto. Para obras e serviços de engenharia, bem como para manutenção de veículos automotores, aplica-se o inciso I, com limite próprio.',
+      'Outras hipóteses de dispensa previstas no art. 75 incluem situações de emergência ou calamidade pública, guerra ou grave perturbação da ordem e contratações entre entes públicos, sempre com objeto estritamente necessário e prazo limitado à situação que a justifica.',
+      'Independentemente de ser dispensa ou inexigibilidade, a contratação direta exige, em regra:',
+      { term: 'Justificativa formal', text: 'Motivação expressa do enquadramento legal da hipótese invocada.' },
+      { term: 'Pesquisa de preços', text: 'Orçamento estimado que demonstre a vantajosidade da contratação.' },
+      { term: 'Habilitação', text: 'Verificação da regularidade fiscal e das demais condições de habilitação do contratado.' },
+      { term: 'Publicidade e transparência', text: 'Divulgação do ato, inclusive no PNCP – Portal Nacional de Contratações Públicas.' },
+      { term: 'Vedação ao fracionamento', text: 'É vedado fracionar a despesa para enquadrá-la artificialmente nos limites de dispensa.' },
+    ],
   },
 
   'pitch-hackton': {
     title: 'Pitches e Hackatons',
     legalBasis: '',
-    paragraphs: [],
+    paragraphs: [
+      { term: 'Pitch', text: 'É a etapa em que as equipes selecionadas apresentam sua proposta de solução para o problema público definido — por exemplo, violência, pobreza ou saúde — de forma objetiva e persuasiva, para uma banca avaliadora do órgão. É o momento de comunicar a ideia antes de ela ser efetivamente desenvolvida, funcionando como filtro entre a seleção e o hackathon e ajudando o órgão a identificar quais propostas têm mais potencial para avançar à fase de desenvolvimento prático.' },
+      { term: 'Hackathon', text: 'É a etapa seguinte ao pitch: evento intensivo em que as equipes desenvolvem, na prática, a solução para o desafio proposto pelo órgão público, com base no problema formalizado na demanda e no escopo definido no plano de trabalho. Ao final, os resultados são apresentados no Demo Day, quando são avaliados os critérios definidos previamente e definidos os incentivos e premiações, financeiros ou não, que podem incluir a possibilidade de contratação futura ou o acesso a dados e à infraestrutura do órgão.' },
+      'No fluxo do processo, o pitch é a etapa de proposta e seleção de ideias, e o hackathon é a etapa de construção prática da solução — ambos integram o mesmo processo de contratação de inovação utilizado por órgãos públicos.',
+    ],
   },
 }
 
