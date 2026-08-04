@@ -4,11 +4,11 @@ import { SiteUnavailable } from './components/SiteUnavailable'
 import { useSiteEnabled } from './hooks/useSiteEnabled'
 import HomePage from './page/HomePage'
 
+// Raiz da aplicação: segura a renderização até o kill switch responder e, se o
+// site estiver liberado, monta a HomePage dentro do ErrorBoundary e do ToastProvider.
 export default function App() {
   const status = useSiteEnabled()
 
-  // Enquanto carrega não renderiza nada do sistema, para não piscar conteúdo
-  // antes da flag ser resolvida.
   if (status === 'loading') return null
   if (status !== 'enabled') return <SiteUnavailable />
 

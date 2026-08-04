@@ -8,13 +8,17 @@ import { InstrumentFlowCard } from '../components/InstrumentFlowCard'
 import { ScaledFlowchartDecision } from '../components/flowchart/ScaledFlowchartDecision'
 import { INSTRUMENTS } from '../components/flowchart/TrilhaFlowchartDecision'
 
+// Espera um tick antes de rolar, para o card já ter expandido e o destino estar
+// na posição final.
 const SCROLL_DELAY_MS = 50
 
-// Escala geral da página (1 = tamanho original do Figma). Ajuste para encolher/aumentar tudo.
+// Escala geral da página (1 = tamanho original do Figma). Mexa aqui para
+// encolher/aumentar tudo de uma vez, menos o cabeçalho institucional.
 const PAGE_ZOOM = 0.85
 
-// Grupos de instrumentos exibidos como colunas coloridas na introdução (layout do Figma).
-// Ordem das colunas (esquerda -> direita): Contratação, Parceria, Exploração.
+// Grupos de instrumentos exibidos como colunas coloridas na introdução.
+// A ordem do array é a ordem das colunas na tela (esquerda -> direita) e
+// `keys` referencia o catálogo INSTRUMENTS.
 const TOOLKIT_GROUPS = [
   {
     name: 'Contratação pública',
@@ -36,20 +40,28 @@ const TOOLKIT_GROUPS = [
   },
 ]
 
-// Métricas exibidas sobre a borda esquerda do card "Como usar este toolkit"
+// Contadores flutuantes desenhados por cima das colunas de grupos.
+// Se um instrumento novo entrar no toolkit, atualize os números aqui.
 const TOOLKIT_STATS = [
   { value: '03', label: 'Grupos' },
   { value: '12', label: 'Instrumentos' },
 ]
 
-// Rola suavemente até a seção indicada pelo id, com atraso opcional para aguardar re-renders
+/**
+ * Rola suavemente até o elemento com esse id. Não faz nada se o id não existir.
+ *
+ * @param {string} id - Id do elemento de destino, ex.: 'passo-a-passo'.
+ * @param {number} [delay=0] - Espera em ms antes de rolar, para o React
+ *   re-renderizar e o destino já estar na posição final.
+ */
 function scrollToSection(id, delay = 0) {
   setTimeout(() => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
   }, delay)
 }
 
-// Itens do menu institucional (barra azul do header)
+// Itens do menu institucional (barra azul do header). São decorativos: ainda
+// não apontam para lugar nenhum.
 const NAV_ITEMS = [
   { label: 'Início' },
   { label: 'Institucional', caret: true },
@@ -60,7 +72,8 @@ const NAV_ITEMS = [
   { label: 'Fale Conosco' },
 ]
 
-// Bandeiras (SVG simplificado — evita emoji, que no Windows não renderiza bandeira)
+// Bandeiras do seletor de idioma, desenhadas em SVG simplificado. São SVG e não
+// emoji porque o Windows não renderiza emoji de bandeira.
 const FlagBR = () => (
   <svg width="22" height="15" viewBox="0 0 28 20" className="rounded-[2px]" aria-hidden="true">
     <rect width="28" height="20" fill="#009c3b" /><path d="M14 2l11 8-11 8L3 10z" fill="#ffdf00" /><circle cx="14" cy="10" r="4" fill="#002776" />
@@ -79,7 +92,10 @@ const FlagES = () => (
   </svg>
 )
 
-// Cabeçalho institucional replicando o Figma, porém sem a logo do governo (período eleitoral)
+// Cabeçalho institucional do portal: faixa de acessibilidade/idiomas, faixa com
+// nome da secretaria + busca + login, e a barra azul de navegação.
+// Só o botão de tema funciona de verdade — A-/A+, busca, login e menu ainda são
+// estáticos. A logo do governo foi retirada por causa do período eleitoral.
 function GovHeader() {
   const { isDark, toggle } = useTheme()
   return (
@@ -151,8 +167,16 @@ function GovHeader() {
   )
 }
 
-// Coluna pastel de um grupo com a lista dos seus instrumentos (layout do Figma).
-// O sizing vem do chamador: fixo (w-[179px]) no desktop, fluido no mobile.
+/**
+ * Coluna pastel de um grupo, listando os instrumentos que pertencem a ele.
+ *
+ * @param {object} props
+ * @param {{name: string, color: string, tint: string, keys: string[]}} props.group -
+ *   Um item de TOOLKIT_GROUPS. `keys` referencia o catálogo INSTRUMENTS.
+ * @param {string} [props.className] - Classes de dimensionamento. O componente
+ *   não define o próprio tamanho de propósito: o desktop passa largura fixa e o
+ *   mobile, fluida.
+ */
 function GroupColumn({ group, className = 'flex-1 min-w-[160px] max-w-[200px]' }) {
   return (
     <div
@@ -168,12 +192,12 @@ function GroupColumn({ group, className = 'flex-1 min-w-[160px] max-w-[200px]' }
 
       <ul className="flex flex-col gap-2.5 m-0 p-0 list-none">
         {group.keys.map((key) => {
-          const inst = INSTRUMENTS[key]
-          const Icon = inst.icon
+          const instrument = INSTRUMENTS[key]
+          const Icon = instrument.icon
           return (
             <li key={key} className="flex items-start gap-2">
               <Icon className="w-4 h-4 shrink-0 mt-[1px]" style={{ color: group.color }} aria-hidden="true" />
-              <span className="text-[13px] font-medium text-ink-mid leading-snug">{inst.title}</span>
+              <span className="text-[13px] font-medium text-ink-mid leading-snug">{instrument.title}</span>
             </li>
           )
         })}
@@ -182,7 +206,13 @@ function GroupColumn({ group, className = 'flex-1 min-w-[160px] max-w-[200px]' }
   )
 }
 
-// Pequeno cartão de métrica (ex.: "12 Instrumentos")
+/**
+ * Cartãozinho azul de número mais rótulo, ex.: "12 / Instrumentos".
+ *
+ * @param {object} props
+ * @param {{value: string, label: string}} props.stat - Um item de TOOLKIT_STATS.
+ * @param {string} [props.className=''] - Classes extras de posicionamento.
+ */
 function StatCard({ stat, className = '' }) {
   return (
     <div className={`w-[115px] shrink-0 rounded-[10px] bg-[#c4deff] drop-shadow-[2px_2px_2.5px_rgba(0,0,0,0.25)] pt-[11px] pb-[13px] px-2 flex flex-col items-center gap-[5px] ${className}`}>
@@ -192,31 +222,26 @@ function StatCard({ stat, className = '' }) {
   )
 }
 
-// Vitrine dos grupos de instrumentos: colunas coloridas com os cartões "03" e "12"
-// flutuando por cima (posição absoluta), como no Figma. Por serem flutuantes, não
-// ocupam espaço na linha — as três colunas cabem sem quebrar.
+// Vitrine dos três grupos, com dois layouts distintos.
+// No desktop, geometria fixa vinda do Figma: as colunas ficam lado a lado e os
+// cartões "03" e "12" são posicionados em absoluto, saltando das quinas das
+// colunas das pontas. Como flutuam, não consomem espaço na linha e as três
+// colunas cabem sem quebrar. No mobile, tudo empilha em unidades fluidas.
 function HowToCard() {
   return (
     <div className="w-full md:w-[893px] md:flex-none relative">
-      {/* Desktop: composição de geometria fixa do Figma (caixas 220px, gap 23px,
-          vão esquerdo 98px + direito 89px). Os cartões são ancorados às colunas de
-          ponta — 03 na base da 1ª, 12 no topo da última — sobrepondo só a faixa de
-          padding (17px esq / 26px dir), independente da ordem e da altura das caixas. */}
       <div className="hidden md:block relative pl-[98px]">
         <div className="flex gap-[23px] items-start">
           {TOOLKIT_GROUPS.map((group, index) => (
             <div key={group.name} className="relative">
               <GroupColumn group={group} className="w-[220px] flex-none" />
 
-              {/* "03 Grupos": saltando da quina inferior-esquerda da coluna
-                  "Contratação pública" (espelhando o "12" no topo-direito) */}
               {group.name === 'Contratação pública' && (
                 <div className="absolute left-[-89px] bottom-[-52px] z-10">
                   <StatCard stat={TOOLKIT_STATS[0]} />
                 </div>
               )}
 
-              {/* "12 Instrumentos": encostado no topo-direito da última coluna */}
               {index === TOOLKIT_GROUPS.length - 1 && (
                 <div className="absolute right-[-89px] top-[-33px] z-10">
                   <StatCard stat={TOOLKIT_STATS[1]} />
@@ -227,7 +252,6 @@ function HowToCard() {
         </div>
       </div>
 
-      {/* Mobile: empilhado e fluido, sem px fixo — não estoura o overflow-x-clip */}
       <div className="md:hidden flex flex-col gap-4">
         <div className="flex gap-3 justify-center">
           <StatCard stat={TOOLKIT_STATS[0]} />
@@ -243,7 +267,8 @@ function HowToCard() {
   )
 }
 
-// Texto institucional do toolkit à esquerda e card "Como usar" à direita
+// Primeira dobra da página: texto de apresentação do toolkit à esquerda e a
+// vitrine dos grupos à direita.
 function IntroSection() {
   return (
     <div className="max-w-[1440px] mx-auto py-[clamp(28px,4vw,56px)] px-[clamp(10px,1vw,66px)] flex gap-[clamp(24px,4vw,56px)] flex-wrap items-start">
@@ -267,7 +292,18 @@ function IntroSection() {
   )
 }
 
-// Card de triagem translúcido sobre a faixa azul da seção de identificação
+/**
+ * Card translúcido de um caminho de triagem, sobre a faixa azul.
+ *
+ * Atenção: `title` e `description` passam por dangerouslySetInnerHTML para
+ * aceitar marcação simples. Use apenas texto definido aqui no código — nunca
+ * passe conteúdo vindo do usuário ou de uma API, sob risco de XSS.
+ *
+ * @param {object} props
+ * @param {string} props.title - Pergunta em destaque. Renderizada como HTML.
+ * @param {string} props.description - Texto de apoio. Renderizado como HTML.
+ * @param {React.ReactNode} props.action - Botão ou link do rodapé do card.
+ */
 function IdentificationCard({ title, description, action }) {
   return (
     <div className="flex-1 min-w-[300px] bg-white/20 rounded-lg p-3 flex flex-col gap-3">
@@ -290,7 +326,8 @@ const GRADIENT_BTN_CLASS =
   'inline-flex items-center justify-center gap-1.5 rounded-full h-[31px] px-4 text-white font-medium text-[14px] no-underline border-none cursor-pointer'
 const GRADIENT_BTN_STYLE = { background: 'linear-gradient(90deg, #042d63 0%, #0e50a6 80%)' }
 
-// Seção de triagem: faixa azul com dois caminhos (quiz externo da CPIN ou trilha interna)
+// Faixa azul de triagem com os dois caminhos de entrada: rolar para a trilha
+// interna (quem já sabe o que quer) ou abrir o quiz externo da inovacpin.
 function IdentificationSection() {
   return (
     <section
@@ -352,7 +389,15 @@ function IdentificationSection() {
   )
 }
 
-// Grid desktop de cards de instrumentos em duas linhas para evitar espaço vazio no final
+/**
+ * Grade de cards de instrumento no desktop, quebrada em duas grades de 3 colunas
+ * (os 3 primeiros e o resto) para os cards expandidos não deixarem buraco no
+ * final da linha.
+ *
+ * @param {object} props
+ * @param {Set<string>} props.openIds - Ids com o passo a passo aberto.
+ * @param {(id: string) => void} props.onToggle - Alterna um card pelo id.
+ */
 function DesktopFlowGrid({ openIds, onToggle }) {
   const firstRow = INSTRUMENT_FLOWS.slice(0, 3)
   const remaining = INSTRUMENT_FLOWS.slice(3)
@@ -366,26 +411,28 @@ function DesktopFlowGrid({ openIds, onToggle }) {
             {...flow}
             openIds={openIds}
             onToggle={onToggle}
-            msg={flow.id === 'acordo-pd&i' ? 'Minutas sujeitas a correção no SEI' : 'Documento sendo validado pela PGE'}
+            warningMessage={flow.id === 'acordo-pd&i' ? 'Minutas sujeitas a correção no SEI' : 'Documento sendo validado pela PGE'}
           />
         ))}
       </div>
 
       <div className="max-w-[1200px] mx-auto grid grid-cols-3 gap-[clamp(14px,2vw,20px)] items-start">
         {remaining.map((flow) => (
-          <InstrumentFlowCard 
-          key={flow.id} 
-          {...flow} 
-          openIds={openIds} 
-          onToggle={onToggle} 
-          msg={flow.id === 'acordo-pd&i' ? 'Minutas sujeitas a correção no SEI' : 'Documento sendo validado pela PGE'}  
-        />
+          <InstrumentFlowCard
+            key={flow.id}
+            {...flow}
+            openIds={openIds}
+            onToggle={onToggle}
+            warningMessage={flow.id === 'acordo-pd&i' ? 'Minutas sujeitas a correção no SEI' : 'Documento sendo validado pela PGE'}
+          />
         ))}
       </div>
     </>
   )
 }
 
+// Borda ondulada que faz a transição para o fundo azul da seção de passo a
+// passo. O path é decorativo e preenchido com a cor de fundo da própria seção.
 function WavyTopEdge() {
   return (
     <svg
@@ -423,7 +470,18 @@ function WavyTopEdge() {
   )
 }
 
-// Seção expandível com o passo a passo de cada instrumento, responsiva para mobile e desktop
+/**
+ * Seção "Passo a passo": lista empilhada no mobile, grade de 3 colunas no
+ * desktop. É o alvo do scroll quando alguém clica num instrumento da trilha.
+ *
+ * O aviso vermelho só é passado no desktop — no mobile os cards não recebem
+ * `warningMessage`, então o aviso do rodapé não aparece lá.
+ *
+ * @param {object} props
+ * @param {boolean} props.isMobile - Escolhe entre lista empilhada e grade.
+ * @param {Set<string>} props.openIds - Ids com o passo a passo aberto.
+ * @param {(id: string) => void} props.onToggle - Alterna um card pelo id.
+ */
 function StepByStepSection({ isMobile, openIds, onToggle }) {
   return (
     <>
@@ -458,7 +516,7 @@ function StepByStepSection({ isMobile, openIds, onToggle }) {
   )
 }
 
-// Rodapé com copyright da SIA
+// Rodapé com o copyright da SIA (o ano é calculado na renderização).
 function PageFooter() {
   return (
     <footer className="text-center py-[clamp(20px,3vw,32px)] px-4 text-[clamp(11px,1vw,14px)] text-gray-400 bg-surface">
@@ -468,16 +526,23 @@ function PageFooter() {
   )
 }
 
-// Página principal: compõe todas as seções e gerencia qual card de instrumento está aberto
+// Página principal. Monta as seções na ordem e é o dono do estado `openIds` —
+// o conjunto de ids de instrumento com o passo a passo aberto.
+// Existem duas formas de abrir um card, com comportamentos diferentes de
+// propósito: clicar num instrumento na trilha fecha todos os outros e rola até
+// a seção; clicar no cabeçalho de um card só alterna aquele, então dá para
+// deixar vários abertos e comparar.
 export default function HomePage() {
   const isMobile = useIsMobile()
   const [openIds, setOpenIds] = useState(new Set())
 
+  // Vindo da trilha ou do menu de grupos: deixa só este aberto e rola até ele.
   const handleInstrumentClick = useCallback((id) => {
     setOpenIds(new Set([id]))
     scrollToSection('passo-a-passo', SCROLL_DELAY_MS)
   }, [])
 
+  // Vindo do cabeçalho do próprio card: abre/fecha sem mexer nos demais.
   const handleToggle = useCallback((id) => {
     setOpenIds((prev) => {
       const next = new Set(prev)
@@ -489,10 +554,9 @@ export default function HomePage() {
 
   return (
     <div className="bg-surface w-full overflow-x-clip">
-      {/* Header em tamanho original (fora do zoom da página) */}
+      {/* O header fica fora do wrapper de zoom, em tamanho original */}
       <GovHeader />
 
-      {/* Restante da página com a escala reduzida */}
       <div style={{ zoom: PAGE_ZOOM }}>
         <IntroSection />
         <IdentificationSection />

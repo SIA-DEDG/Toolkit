@@ -2,25 +2,38 @@ import { useEffect, useState } from 'react'
 
 const STORAGE_KEY = 'sia-theme'
 
-// Lê a preferência salva: 'dark' | 'light' | null (segue o sistema)
-function getStored() {
+/**
+ * Lê a escolha manual de tema salva no localStorage.
+ *
+ * @returns {'dark'|'light'|null} A escolha salva, ou null quando não há
+ *   nenhuma — nesse caso o tema segue o sistema.
+ */
+function getStoredTheme() {
   if (typeof window === 'undefined') return null
   const value = localStorage.getItem(STORAGE_KEY)
   return value === 'dark' || value === 'light' ? value : null
 }
 
+/**
+ * @returns {boolean} true se o sistema operacional está em modo escuro agora.
+ */
 function systemPrefersDark() {
   return typeof window !== 'undefined'
     && window.matchMedia('(prefers-color-scheme: dark)').matches
 }
 
-// Gerencia o tema via atributo data-theme no <html>. Default = segue o sistema;
-// ao clicar no botão, fixa dark/light e persiste no localStorage.
+/**
+ * Controla o tema da página. Sem escolha manual, segue o sistema; ao chamar
+ * `toggle`, fixa dark/light no atributo data-theme do <html> e persiste no
+ * localStorage. As cores em si vivem no index.css.
+ *
+ * @returns {{isDark: boolean, toggle: () => void}} Estado atual do tema e a
+ *   função que alterna entre claro e escuro.
+ */
 export function useTheme() {
-  const [choice, setChoice] = useState(getStored) // null = sistema
+  const [choice, setChoice] = useState(getStoredTheme)
   const [systemDark, setSystemDark] = useState(systemPrefersDark)
 
-  // Aplica/limpa o atributo e persiste
   useEffect(() => {
     const root = document.documentElement
     if (choice) {
@@ -32,12 +45,11 @@ export function useTheme() {
     }
   }, [choice])
 
-  // Acompanha mudanças do sistema (relevante quando choice === null)
   useEffect(() => {
-    const mq = window.matchMedia('(prefers-color-scheme: dark)')
-    const handler = (event) => setSystemDark(event.matches)
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    const handleChange = (event) => setSystemDark(event.matches)
+    mediaQuery.addEventListener('change', handleChange)
+    return () => mediaQuery.removeEventListener('change', handleChange)
   }, [])
 
   const isDark = choice ? choice === 'dark' : systemDark

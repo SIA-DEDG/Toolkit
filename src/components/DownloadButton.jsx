@@ -3,7 +3,14 @@ import { downloadFile } from '../config/supabase'
 import { useToastContext } from '../hooks/ToastContext'
 import { enqueueDownload } from '../hooks/useDownloadQueue'
 
-// Clareia uma cor hex misturando com branco pelo fator amount
+/**
+ * Clareia uma cor misturando cada canal com branco. Usada para o fundo do botão
+ * não ficar tão saturado quanto a cor de destaque do instrumento.
+ *
+ * @param {string} hex - Cor no formato '#rrggbb'.
+ * @param {number} [amount=0.25] - Quanto clarear: 0 não muda nada, 1 vira branco.
+ * @returns {string} Cor no formato 'rgb(r, g, b)'.
+ */
 function lightenHex(hex, amount = 0.25) {
   const red = parseInt(hex.slice(1, 3), 16)
   const green = parseInt(hex.slice(3, 5), 16)
@@ -12,7 +19,21 @@ function lightenHex(hex, amount = 0.25) {
   return `rgb(${lighten(red)}, ${lighten(green)}, ${lighten(blue)})`
 }
 
-// Botão que baixa um arquivo do Supabase Storage e exibe feedback de toast
+/**
+ * Botão de download de um arquivo do Supabase Storage. Passa pela fila global
+ * (enqueueDownload) para não disparar vários de uma vez, mostra 'Baixando...'
+ * enquanto espera e avisa o resultado por toast.
+ *
+ * @param {object} props
+ * @param {string} [props.label='Baixar Documento'] - Texto do botão em repouso.
+ * @param {string} [props.fileKey] - Caminho do arquivo no bucket. Sem ele o
+ *   botão fica desabilitado, porque não há o que baixar.
+ * @param {string} [props.filename] - Nome sugerido no salvamento.
+ * @param {boolean} [props.large=false] - true usa o tamanho do rodapé do card;
+ *   false, o tamanho menor das etapas.
+ * @param {string} [props.color] - Cor '#rrggbb' da família. Quando presente,
+ *   pinta o fundo na versão clareada dela; senão, usa o estilo neutro.
+ */
 export default function DownloadButton({ label = 'Baixar Documento', fileKey, filename, large = false, color }) {
   const [loading, setLoading] = useState(false)
   const addToast = useToastContext()
@@ -23,9 +44,9 @@ export default function DownloadButton({ label = 'Baixar Documento', fileKey, fi
     try {
       await enqueueDownload(() => downloadFile(fileKey, filename))
       addToast('Download realizado com sucesso!', 'success')
-    } catch (err) {
+    } catch (error) {
       addToast('Arquivo indisponível. Tente novamente.', 'error')
-      console.error(err)
+      console.error(error)
     } finally {
       setLoading(false)
     }

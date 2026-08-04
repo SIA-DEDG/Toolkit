@@ -1,9 +1,23 @@
 import { Component } from 'react'
 
-// Captura erros de renderização e exibe tela de fallback com opção de reload
+/**
+ * Intercepta qualquer erro de renderização abaixo dele e troca a árvore quebrada
+ * por uma tela de fallback com botão de recarregar, em vez de deixar a página em
+ * branco. Precisa ser classe: React não tem equivalente em componente de função.
+ *
+ * Só pega erros de renderização — não captura erros de handlers de evento nem de
+ * código assíncrono, que continuam precisando do próprio try/catch.
+ *
+ * @param {object} props
+ * @param {React.ReactNode} props.children - Árvore protegida pelo boundary.
+ */
 export class ErrorBoundary extends Component {
   state = { error: null }
 
+  /**
+   * @param {Error} error - Erro lançado por algum descendente.
+   * @returns {{error: Error}} Novo state, que faz o boundary exibir o fallback.
+   */
   static getDerivedStateFromError(error) {
     return { error }
   }

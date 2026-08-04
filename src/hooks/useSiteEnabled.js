@@ -1,7 +1,15 @@
 import { useEffect, useState } from 'react'
 import { fetchSiteEnabled } from '../config/supabase'
 
-// Retorna 'loading' | 'enabled' | 'disabled'. Fail-closed: erro vira 'disabled'.
+/**
+ * Consulta o kill switch do site uma vez, na montagem.
+ *
+ * Qualquer falha vira 'disabled' (fail-closed): na dúvida, o site não aparece.
+ * O flag `active` evita setState depois do unmount.
+ *
+ * @returns {'loading'|'enabled'|'disabled'} Estado da consulta. 'loading'
+ *   enquanto a resposta não chega.
+ */
 export function useSiteEnabled() {
   const [status, setStatus] = useState('loading')
 

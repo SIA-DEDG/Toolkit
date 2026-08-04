@@ -1,15 +1,22 @@
 import { useEffect, useState } from 'react'
 
-// Retorna true se a viewport estiver abaixo do breakpoint informado
+/**
+ * Acompanha a largura da viewport, reavaliando quando a janela é redimensionada.
+ *
+ * @param {number} [breakpoint=767] - Largura máxima, em px, considerada mobile.
+ * @returns {boolean} true enquanto a viewport estiver abaixo do breakpoint.
+ */
 export function useIsMobile(breakpoint = 767) {
   const [isMobile, setIsMobile] = useState(
     () => window.matchMedia(`(max-width: ${breakpoint}px)`).matches
   )
+
   useEffect(() => {
-    const mq = window.matchMedia(`(max-width: ${breakpoint}px)`)
-    const handler = (e) => setIsMobile(e.matches)
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
+    const mediaQuery = window.matchMedia(`(max-width: ${breakpoint}px)`)
+    const handleChange = (event) => setIsMobile(event.matches)
+    mediaQuery.addEventListener('change', handleChange)
+    return () => mediaQuery.removeEventListener('change', handleChange)
   }, [breakpoint])
+
   return isMobile
 }

@@ -1,13 +1,22 @@
 import { useState, useCallback } from 'react'
 
-let _nextId = 1
+let nextToastId = 1
 
-// Gerencia a lista de toasts ativos com funções de add e remove
+/**
+ * Estado da fila de notificações. Normalmente você não chama este hook direto —
+ * o ToastProvider já o usa e expõe o `add` via contexto (useToastContext).
+ *
+ * @returns {{
+ *   toasts: Array<{id: number, message: string, type: string}>,
+ *   add: (message: string, type?: 'success'|'error') => void,
+ *   remove: (id: number) => void
+ * }} Lista atual, mais as funções de empilhar e descartar.
+ */
 export function useToast() {
   const [toasts, setToasts] = useState([])
 
   const add = useCallback((message, type = 'success') => {
-    const id = _nextId++
+    const id = nextToastId++
     setToasts((prev) => [...prev, { id, message, type }])
   }, [])
 

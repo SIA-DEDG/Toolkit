@@ -1,4 +1,5 @@
-// Tela exibida quando o kill switch (site_config.enabled) está desligado.
+// Tela de bloqueio mostrada no lugar do site quando o kill switch
+// (site_config.enabled no Supabase) está desligado ou não pôde ser lido.
 export function SiteUnavailable() {
   return (
     <div className="min-h-screen flex items-center justify-center px-6 text-center">

@@ -1,6 +1,15 @@
 import React, { useEffect } from 'react'
 
-// Container que empilha as notificações ativas no canto superior direito
+const AUTO_DISMISS_MS = 4000
+
+/**
+ * Container fixo no canto superior direito que empilha as notificações ativas.
+ *
+ * @param {object} props
+ * @param {Array<{id: number, message: string, type: string}>} props.toasts -
+ *   Notificações a exibir, na ordem de chegada.
+ * @param {(id: number) => void} props.remove - Descarta uma notificação pelo id.
+ */
 export function Toast({ toasts, remove }) {
   return (
     <div className="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none">
@@ -11,10 +20,17 @@ export function Toast({ toasts, remove }) {
   )
 }
 
-// Item individual de toast com auto-remoção após 4s
+/**
+ * Um card de notificação. Verde para 'success', vermelho para o resto, e some
+ * sozinho depois de AUTO_DISMISS_MS — o X apenas antecipa a remoção.
+ *
+ * @param {object} props
+ * @param {{id: number, message: string, type: string}} props.toast - Notificação exibida.
+ * @param {(id: number) => void} props.remove - Chamado no timeout e no clique do X.
+ */
 function ToastItem({ toast, remove }) {
   useEffect(() => {
-    const timer = setTimeout(() => remove(toast.id), 4000)
+    const timer = setTimeout(() => remove(toast.id), AUTO_DISMISS_MS)
     return () => clearTimeout(timer)
   }, [toast.id, remove])
 

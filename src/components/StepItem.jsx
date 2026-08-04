@@ -1,8 +1,27 @@
 import DownloadButton from './DownloadButton'
 import { TriangleAlert } from "lucide-react"
 
-// Item de etapa com marcador, descrição, subitens e download opcional
-export function StepItem({ card, accentColor, isLast, msg }) {
+/**
+ * Uma etapa do fluxo de um instrumento: bolinha na trilha vertical à esquerda,
+ * título, descrição, subitens, nota em itálico e, quando a etapa tem arquivo, o
+ * botão de download com o aviso embaixo.
+ *
+ * @param {object} props
+ * @param {{
+ *   title: string,
+ *   description?: string,
+ *   note?: string,
+ *   fileKey?: string,
+ *   downloadLabel?: string,
+ *   subitems?: Array<{dote?: boolean, number?: string, title: string, description?: string}>
+ * }} props.card - A etapa, vinda de INSTRUMENT_FLOWS. Em `subitems`, `dote`
+ *   marca o item como bullet; sem ele, usa `number` como numeração.
+ * @param {string} props.accentColor - Cor da família, usada na trilha e nos marcadores.
+ * @param {boolean} props.isLast - true na última etapa, para remover o traço que
+ *   liga à etapa seguinte.
+ * @param {string} [props.warningMessage] - Aviso vermelho abaixo do download.
+ */
+export function StepItem({ card, accentColor, isLast, warningMessage }) {
   const hasDownload = !!(card.fileKey || card.downloadLabel)
 
   return (
@@ -59,7 +78,7 @@ export function StepItem({ card, accentColor, isLast, msg }) {
             <DownloadButton fileKey={card.fileKey} label={card.downloadLabel || 'Baixar Documento'} />
             <span className='text-[10px] text-[#FF0000] flex justify-start items-center gap-1 mt-1'>
               <TriangleAlert className='inline-block w-3 h-3 mr-1' />
-              {msg}
+              {warningMessage}
             </span>
           </div>
         )}

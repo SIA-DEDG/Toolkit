@@ -5,41 +5,56 @@ import { SectionBadge } from '../SectionBadge'
 import { TrilhaFlowchartDecision, INSTRUMENTS } from './TrilhaFlowchartDecision'
 
 const COLLAPSED_HEIGHT = 520
+const SCROLL_STEP = 600
 
-// Overlay em tela cheia que escala o fluxograma inteiro para caber na viewport.
-// Renderizado via portal no body para escapar do `zoom` da página.
+/**
+ * Overlay de tela cheia que mostra o fluxograma inteiro, encolhido o quanto for
+ * preciso para caber na viewport.
+ *
+ * Dois detalhes que não dá para adivinhar lendo o JSX:
+ * 1. Vai para o <body> via portal para escapar do `zoom` aplicado na HomePage.
+ * 2. `transform: scale` não muda o tamanho que o elemento ocupa no layout, então
+ *    a caixa de fora recebe explicitamente o tamanho JÁ escalado — sem isso
+ *    sobra espaço em branco e o overlay ganha scroll.
+ *
+ * Renderize condicionalmente: o componente não controla a própria visibilidade.
+ *
+ * @param {object} props
+ * @param {() => void} props.onClose - Chamado no Esc, no clique fora e no X.
+ * @param {(id: string) => void} props.onInstrumentClick - Clique num card do fluxo.
+ */
 function FullscreenFlow({ onClose, onInstrumentClick }) {
-  const wrapRef = useRef(null)
+  const viewportRef = useRef(null)
   const flowRef = useRef(null)
-  // scale + tamanho natural do fluxo; a caixa externa usa o tamanho JÁ escalado
-  // para o layout bater com o visual (transform não encolhe a caixa por si só).
-  const [fit, setFit] = useState({ scale: 1, w: 0, h: 0, ready: false })
+  const [fit, setFit] = useState({ scale: 1, width: 0, height: 0, ready: false })
 
   useLayoutEffect(() => {
     const measure = () => {
-      const wrap = wrapRef.current
+      const viewport = viewportRef.current
       const flow = flowRef.current
-      if (!wrap || !flow) return
-      const availW = wrap.clientWidth - 24
-      const availH = wrap.clientHeight - 24
-      // scrollWidth/Height são medidas de layout, não afetadas pelo transform
-      const naturalW = flow.scrollWidth
-      const naturalH = flow.scrollHeight
-      if (!naturalW || !naturalH) return
-      const scale = Math.min(1, availW / naturalW, availH / naturalH)
-      setFit({ scale, w: naturalW, h: naturalH, ready: true })
+      if (!viewport || !flow) return
+      const availableWidth = viewport.clientWidth - 24
+      const availableHeight = viewport.clientHeight - 24
+      // scrollWidth/Height são medidas de layout, não afetadas pelo transform.
+      const naturalWidth = flow.scrollWidth
+      const naturalHeight = flow.scrollHeight
+      if (!naturalWidth || !naturalHeight) return
+      const scale = Math.min(1, availableWidth / naturalWidth, availableHeight / naturalHeight)
+      setFit({ scale, width: naturalWidth, height: naturalHeight, ready: true })
     }
     measure()
     window.addEventListener('resize', measure)
-    const onKey = (event) => { if (event.key === 'Escape') onClose() }
-    window.addEventListener('keydown', onKey)
-    // Trava o scroll do body enquanto o overlay está aberto
-    const prevOverflow = document.body.style.overflow
+
+    const handleKeyDown = (event) => { if (event.key === 'Escape') onClose() }
+    window.addEventListener('keydown', handleKeyDown)
+
+    const previousBodyOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+
     return () => {
       window.removeEventListener('resize', measure)
-      window.removeEventListener('keydown', onKey)
-      document.body.style.overflow = prevOverflow
+      window.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = previousBodyOverflow
     }
   }, [onClose])
 
@@ -64,13 +79,12 @@ function FullscreenFlow({ onClose, onInstrumentClick }) {
           <X className="w-5 h-5" />
         </button>
 
-        <div ref={wrapRef} className="w-full h-full overflow-hidden flex items-center justify-center p-3">
-          {/* Caixa externa com o tamanho escalado — evita scroll/branco excedente */}
+        <div ref={viewportRef} className="w-full h-full overflow-hidden flex items-center justify-center p-3">
           <div
-            style={fit.ready ? { width: fit.w * fit.scale, height: fit.h * fit.scale } : undefined}
+            style={fit.ready ? { width: fit.width * fit.scale, height: fit.height * fit.scale } : undefined}
             className="shrink-0"
           >
-            <div style={{ width: fit.w || undefined, height: fit.h || undefined, transform: `scale(${fit.scale})`, transformOrigin: 'top left' }}>
+            <div style={{ width: fit.width || undefined, height: fit.height || undefined, transform: `scale(${fit.scale})`, transformOrigin: 'top left' }}>
               <div ref={flowRef} className="w-max">
                 <TrilhaFlowchartDecision onInstrumentClick={onInstrumentClick} />
               </div>
@@ -83,13 +97,27 @@ function FullscreenFlow({ onClose, onInstrumentClick }) {
   )
 }
 
-const GROUPS = [
-  { id: 'A', name: 'Parceria e P&D', dot: '#6d28d9', keys: ['convenio', 'acordo'] },
-  { id: 'B', name: 'Contratação pública', dot: '#0e7490', keys: ['licitacao', 'etec', 'cpsi', 'direta', 'doacao', 'transferencia'] },
-  { id: 'C', name: 'Exploração de mercado', dot: '#b45309', keys: ['pmi', 'dialogo', 'pitchHackathon', 'concurso'] },
+// Grupos do menu de atalho no cabeçalho da trilha. `keys` referencia o catálogo
+// INSTRUMENTS; `dotColor` é a cor da bolinha e do cabeçalho do menu.
+const INSTRUMENT_GROUPS = [
+  { id: 'parceria', name: 'Parceria e P&D', dotColor: '#6d28d9', keys: ['convenio', 'acordo'] },
+  { id: 'contratacao', name: 'Contratação pública', dotColor: '#0e7490', keys: ['licitacao', 'etec', 'cpsi', 'direta', 'doacao', 'transferencia'] },
+  { id: 'mercado', name: 'Exploração de mercado', dotColor: '#b45309', keys: ['pmi', 'dialogo', 'pitchHackathon', 'concurso'] },
 ]
 
-// Chip de grupo com bolinha colorida e menu recolhível dos instrumentos daquele grupo
+/**
+ * Chip clicável de um grupo que abre um menu flutuante com os instrumentos dele.
+ *
+ * Não guarda estado próprio de propósito: quem abre e fecha é o pai, via `open`
+ * e `onToggle`, para só um menu ficar aberto por vez.
+ *
+ * @param {object} props
+ * @param {{id: string, name: string, dotColor: string, keys: string[]}} props.group -
+ *   Um item de INSTRUMENT_GROUPS. `keys` referencia o catálogo INSTRUMENTS.
+ * @param {boolean} props.open - Se o menu deste chip está aberto.
+ * @param {() => void} props.onToggle - Clique no chip.
+ * @param {(id: string) => void} props.onInstrumentClick - Clique num instrumento do menu.
+ */
 function GroupChip({ group, open, onToggle, onInstrumentClick }) {
   return (
     <div className="relative">
@@ -99,7 +127,7 @@ function GroupChip({ group, open, onToggle, onInstrumentClick }) {
         className={`flex items-center gap-2 cursor-pointer border rounded-full pl-2.5 pr-2 py-1.5 transition-colors border-[color:var(--hairline)] ${open ? 'bg-[color:var(--overlay)]' : 'bg-surface hover:bg-[color:var(--overlay)]'
           }`}
       >
-        <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: group.dot }} />
+        <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: group.dotColor }} />
         <span className="font-medium text-sm text-ink-mid whitespace-nowrap">{group.name}</span>
         <ChevronDown
           className={`w-4 h-4 text-ink-muted shrink-0 transition-transform duration-150 ${open ? 'rotate-180' : ''}`}
@@ -108,7 +136,7 @@ function GroupChip({ group, open, onToggle, onInstrumentClick }) {
 
       {open && (
         <div className="absolute right-0 top-full mt-2 z-20 w-[340px] rounded-2xl bg-surface shadow-xl ring-1 ring-[color:var(--hairline)] overflow-hidden">
-          <div className="flex items-center gap-2 px-4 py-3" style={{ background: group.dot }}>
+          <div className="flex items-center gap-2 px-4 py-3" style={{ background: group.dotColor }}>
             <span className="w-2.5 h-2.5 rounded-full bg-white/90 shrink-0" />
             <span className="font-semibold text-sm text-white">{group.name}</span>
             <span className="ml-auto text-xs font-medium text-white/75">{group.keys.length} instrumentos</span>
@@ -147,8 +175,20 @@ function GroupChip({ group, open, onToggle, onInstrumentClick }) {
   )
 }
 
-// Wrapper da trilha: cabeçalho com grupos, árvore em tamanho nativo com scroll horizontal
-// e controle para recolher/expandir a altura visível.
+/**
+ * Moldura da seção "Trilha de Instrumentos".
+ *
+ * Apesar do nome, não reescala nada: o fluxograma é renderizado em tamanho
+ * nativo e esta camada só monta os controles em volta — cabeçalho com os chips
+ * de grupo, a janela de altura limitada com o botão de ver mais/ver menos, a
+ * barra de rolagem horizontal customizada (setas e thumb arrastável, já que a
+ * nativa fica escondida) e a entrada do modo tela cheia, esse sim escalado.
+ *
+ * @param {object} props
+ * @param {(id: string) => void} props.onInstrumentClick - Disparado ao clicar num
+ *   instrumento, seja no fluxo, no menu de grupo ou na tela cheia. A HomePage usa
+ *   para abrir o passo a passo correspondente.
+ */
 export function ScaledFlowchartDecision({ onInstrumentClick }) {
   const scrollRef = useRef(null)
   const canvasRef = useRef(null)
@@ -160,7 +200,7 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
   const [thumb, setThumb] = useState({ width: 100, left: 0 })
   const [naturalHeight, setNaturalHeight] = useState(0)
 
-  // Mede a altura nativa do fluxograma (em tamanho real) para o recolher/expandir
+  // Mede a altura real do fluxograma para o modo expandido saber até onde abrir.
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -171,7 +211,7 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
     return () => resizeObserver.disconnect()
   }, [])
 
-  // Fecha o menu de grupo aberto ao clicar fora dos chips
+  // Fecha o menu de grupo aberto quando o clique cai fora da área dos chips.
   useEffect(() => {
     if (!openGroup) return
     const handleClickOutside = (event) => {
@@ -181,7 +221,8 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [openGroup])
 
-  // Atualiza posição/tamanho do indicador de scroll horizontal
+  // Recalcula largura e posição do thumb (ambos em %) a partir do estado do
+  // scroller. Quando não há o que rolar, o thumb ocupa a barra inteira.
   const updateThumb = useCallback(() => {
     const scroller = scrollRef.current
     if (!scroller) return
@@ -201,11 +242,13 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
     return () => window.removeEventListener('resize', updateThumb)
   }, [updateThumb, expanded, naturalHeight])
 
+  // Rola o fluxograma na horizontal (usado pelas setas laterais).
   const scrollBy = (delta) => {
     scrollRef.current?.scrollBy({ left: delta, behavior: 'smooth' })
   }
 
-  // Move o scroll horizontal proporcionalmente à posição do mouse na barra
+  // Converte uma coordenada X da tela em posição de scroll: onde o ponteiro
+  // caiu dentro da barra vira a fração equivalente do conteúdo rolável.
   const scrollToClientX = useCallback((clientX) => {
     const scroller = scrollRef.current
     const track = trackRef.current
@@ -215,7 +258,8 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
     scroller.scrollLeft = ratio * (scroller.scrollWidth - scroller.clientWidth)
   }, [])
 
-  // Arrasto da barra de rolagem (thumb) com o mouse
+  // Arrasto do thumb: salta já no clique e segue o ponteiro. Os listeners ficam
+  // na window (não no thumb) para o arrasto continuar mesmo saindo da barra.
   const handleThumbPointerDown = useCallback((event) => {
     event.preventDefault()
     scrollToClientX(event.clientX)
@@ -245,7 +289,7 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
         </div>
 
         <div ref={groupsRef} className="flex items-center gap-6 pt-1">
-          {GROUPS.map(group => (
+          {INSTRUMENT_GROUPS.map(group => (
             <GroupChip
               key={group.id}
               group={group}
@@ -269,6 +313,7 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
           </div>
         </div>
 
+        {/* Degradê que esfuma o corte inferior quando o fluxo está recolhido */}
         {!expanded && (
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 z-10 bg-gradient-to-t from-surface to-transparent" />
         )}
@@ -299,7 +344,7 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
         <div className="flex items-center gap-3 w-full max-w-[860px]">
           <button
             type="button"
-            onClick={() => scrollBy(-600)}
+            onClick={() => scrollBy(-SCROLL_STEP)}
             aria-label="Rolar para a esquerda"
             className="shrink-0 flex items-center justify-center w-6 h-6 bg-transparent border-none cursor-pointer text-brand hover:opacity-70 transition-opacity"
           >
@@ -320,7 +365,7 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
 
           <button
             type="button"
-            onClick={() => scrollBy(600)}
+            onClick={() => scrollBy(SCROLL_STEP)}
             aria-label="Rolar para a direita"
             className="shrink-0 flex items-center justify-center w-6 h-6 bg-transparent border-none cursor-pointer text-brand hover:opacity-70 transition-opacity"
           >
