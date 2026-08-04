@@ -257,10 +257,17 @@ function HowToCard() {
           <StatCard stat={TOOLKIT_STATS[0]} />
           <StatCard stat={TOOLKIT_STATS[1]} />
         </div>
-        <div className="flex flex-wrap justify-center gap-4">
-          {TOOLKIT_GROUPS.map((group) => (
-            <GroupColumn key={group.name} group={group} />
-          ))}
+
+        {/* Duas colunas: o primeiro grupo (o mais alto) fica sozinho à esquerda e
+            os demais empilham à direita, encaixando no espaço que sobra em vez
+            de ficar um card solto embaixo. */}
+        <div className="grid grid-cols-2 gap-3 items-start">
+          <GroupColumn group={TOOLKIT_GROUPS[0]} className="w-full" />
+          <div className="flex flex-col gap-3">
+            {TOOLKIT_GROUPS.slice(1).map((group) => (
+              <GroupColumn key={group.name} group={group} className="w-full" />
+            ))}
+          </div>
         </div>
       </div>
     </div>
