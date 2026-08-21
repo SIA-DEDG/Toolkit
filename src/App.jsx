@@ -1,6 +1,7 @@
 import { ToastProvider } from './hooks/ToastContext'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { SiteUnavailable } from './components/SiteUnavailable'
+import { AgentWidget } from './components/AgentWidget'
 import { useSiteEnabled } from './hooks/useSiteEnabled'
 import HomePage from './page/HomePage'
 
@@ -16,6 +17,7 @@ export default function App() {
     <ErrorBoundary>
       <ToastProvider>
         <HomePage />
+        <AgentWidget />
       </ToastProvider>
     </ErrorBoundary>
   )
