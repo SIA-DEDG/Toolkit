@@ -274,7 +274,7 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
 
   return (
     <div className="w-full">
-      <div className="py-[clamp(20px,3vw,40px)] px-[clamp(10px,1vw,66px)] pb-0 flex items-center justify-between gap-6 flex-wrap">
+      <div className="py-[clamp(20px,3vw,40px)] px-[var(--page-gutter)] pb-0 flex items-center justify-between gap-6 flex-wrap">
         <div>
           <SectionBadge>Trilha de Instrumentos</SectionBadge>
           <h2 className="font-semibold text-[clamp(18px,2vw,24px)] text-ink-mid mt-3 mb-1">
@@ -308,7 +308,7 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
           className="no-scrollbar w-full overflow-x-auto overflow-y-hidden transition-[max-height] duration-300 ease-in-out"
           style={{ maxHeight: expanded ? (naturalHeight || 4000) + 10 : COLLAPSED_HEIGHT }}
         >
-          <div ref={canvasRef} style={{ paddingBottom: 10 }}>
+          <div ref={canvasRef} className="px-[var(--page-gutter)]" style={{ paddingBottom: 10 }}>
             <TrilhaFlowchartDecision onInstrumentClick={onInstrumentClick} />
           </div>
         </div>
@@ -319,7 +319,7 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
         )}
       </div>
 
-      <div className="px-[clamp(20px,5vw,66px)] pt-4 pb-8 flex flex-col items-center gap-3">
+      <div className="px-[var(--page-gutter)] pt-4 pb-8 flex flex-col items-center gap-3">
         <div className="flex flex-wrap items-center justify-center gap-3">
           <button
             type="button"

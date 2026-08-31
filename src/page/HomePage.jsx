@@ -1,8 +1,7 @@
-import { useState, useCallback } from 'react'
-import { ExternalLink, ArrowRight, Workflow, Search, ChevronDown, Sun, Moon } from 'lucide-react'
+import { useState, useCallback, useEffect, useRef } from 'react'
+import { ExternalLink, ArrowRight, ArrowUp, Check, Workflow, ChevronDown } from 'lucide-react'
 import { INSTRUMENT_FLOWS } from '../data/instruments'
 import { useIsMobile } from '../hooks/useIsMobile'
-import { useTheme } from '../hooks/useTheme'
 import { SectionBadge } from '../components/SectionBadge'
 import { InstrumentFlowCard } from '../components/InstrumentFlowCard'
 import { ScaledFlowchartDecision } from '../components/flowchart/ScaledFlowchartDecision'
@@ -15,6 +14,7 @@ const SCROLL_DELAY_MS = 50
 // Escala geral da página (1 = tamanho original do Figma). Mexa aqui para
 // encolher/aumentar tudo de uma vez, menos o cabeçalho institucional.
 const PAGE_ZOOM = 0.85
+const ZOOMED_PAGE_GUTTER = 'clamp(18.82px, 3.27vw, 47.06px)'
 
 // Grupos de instrumentos exibidos como colunas coloridas na introdução.
 // A ordem do array é a ordem das colunas na tela (esquerda -> direita) e
@@ -60,110 +60,184 @@ function scrollToSection(id, delay = 0) {
   }, delay)
 }
 
-// Itens do menu institucional (barra azul do header). São decorativos: ainda
-// não apontam para lugar nenhum.
-const NAV_ITEMS = [
-  { label: 'Início' },
-  { label: 'Institucional', caret: true },
-  { label: 'Notícias' },
-  { label: 'Transparência', caret: true },
-  { label: 'Relatórios', caret: true },
-  { label: 'Links e Downloads', caret: true },
-  { label: 'Fale Conosco' },
+const HEADER_NAV_ITEMS = [
+  { label: 'Sobre o Toolkit de inovação', target: 'sobre-o-toolkit' },
+  { label: 'Identificação', target: 'identificacao' },
+  { label: 'Trilha de Instrumentos', target: 'trilha-de-instrumentos' },
+  { label: 'Fluxo Internos dos Instrumentos', target: 'passo-a-passo' },
 ]
 
-// Bandeiras do seletor de idioma, desenhadas em SVG simplificado. São SVG e não
-// emoji porque o Windows não renderiza emoji de bandeira.
-const FlagBR = () => (
-  <svg width="22" height="15" viewBox="0 0 28 20" className="rounded-[2px]" aria-hidden="true">
-    <rect width="28" height="20" fill="#009c3b" /><path d="M14 2l11 8-11 8L3 10z" fill="#ffdf00" /><circle cx="14" cy="10" r="4" fill="#002776" />
-  </svg>
-)
-const FlagUS = () => (
-  <svg width="22" height="15" viewBox="0 0 28 20" className="rounded-[2px]" aria-hidden="true">
-    <rect width="28" height="20" fill="#fff" />
-    <g fill="#b22234"><rect width="28" height="2.86" /><rect y="5.71" width="28" height="2.86" /><rect y="11.43" width="28" height="2.86" /><rect y="17.14" width="28" height="2.86" /></g>
-    <rect width="12" height="11.43" fill="#3c3b6e" />
-  </svg>
-)
-const FlagES = () => (
-  <svg width="22" height="15" viewBox="0 0 28 20" className="rounded-[2px]" aria-hidden="true">
-    <rect width="28" height="20" fill="#c60b1e" /><rect y="5" width="28" height="10" fill="#ffc400" />
-  </svg>
-)
-
-// Cabeçalho institucional do portal: faixa de acessibilidade/idiomas, faixa com
-// nome da secretaria + busca + login, e a barra azul de navegação.
-// Só o botão de tema funciona de verdade — A-/A+, busca, login e menu ainda são
-// estáticos. A logo do governo foi retirada por causa do período eleitoral.
+// Cabeçalho do Toolkit conforme o componente do Figma: seletor de portal,
+// controles de acessibilidade, logo e navegação por âncoras da própria página.
 function GovHeader() {
-  const { isDark, toggle } = useTheme()
+  const [activeSection, setActiveSection] = useState(HEADER_NAV_ITEMS[0].target)
+  const [showBackToTop, setShowBackToTop] = useState(false)
+  const [toolkitMenuOpen, setToolkitMenuOpen] = useState(false)
+  const toolkitMenuRef = useRef(null)
+
+  const handleNavigation = useCallback((target) => {
+    scrollToSection(target)
+  }, [])
+
+  const handleBackToTop = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
+
+  useEffect(() => {
+    let frameId = null
+
+    const updateCurrentSection = () => {
+      frameId = null
+      const readingLine = Math.min(220, window.innerHeight * 0.35)
+      let currentSection = HEADER_NAV_ITEMS[0].target
+
+      HEADER_NAV_ITEMS.forEach((item) => {
+        const section = document.getElementById(item.target)
+        if (section?.getBoundingClientRect().top <= readingLine) {
+          currentSection = item.target
+        }
+      })
+
+      setActiveSection(currentSection)
+      setShowBackToTop(window.scrollY > 320)
+    }
+
+    const handleScroll = () => {
+      if (frameId === null) frameId = window.requestAnimationFrame(updateCurrentSection)
+    }
+
+    updateCurrentSection()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+      if (frameId !== null) window.cancelAnimationFrame(frameId)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!toolkitMenuOpen) return undefined
+
+    const handlePointerDown = (event) => {
+      if (!toolkitMenuRef.current?.contains(event.target)) setToolkitMenuOpen(false)
+    }
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setToolkitMenuOpen(false)
+    }
+
+    document.addEventListener('mousedown', handlePointerDown)
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('mousedown', handlePointerDown)
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [toolkitMenuOpen])
+
   return (
-    <header className="w-full select-none">
-      {/* Faixa de acessibilidade e idiomas */}
-      <div className="bg-[#ececec] px-[clamp(16px,4vw,64px)] py-1.5 flex items-center justify-between gap-3 flex-wrap">
-        <div className="flex items-center gap-2">
-          <button
-            onClick={toggle}
-            className="w-8 h-8 rounded-md bg-white border border-black/15 flex items-center justify-center cursor-pointer"
-            aria-label={isDark ? 'Mudar para tema claro' : 'Mudar para tema escuro'}
-            aria-pressed={isDark}
-            title={isDark ? 'Tema claro' : 'Tema escuro'}
-          >
-            {isDark
-              ? <Sun className="w-4 h-4 text-black" />
-              : <Moon className="w-4 h-4 text-black" />}
-          </button>
-          <button className="h-8 px-2.5 rounded-md bg-white border border-black/15 text-[13px] font-semibold text-black cursor-pointer" aria-label="Diminuir fonte">A-</button>
-          <button className="h-8 px-2.5 rounded-md bg-white border border-black/15 text-[13px] font-semibold text-black cursor-pointer" aria-label="Aumentar fonte">A+</button>
-        </div>
-        <div className="flex items-center gap-3">
-          <span className="text-[13px] text-[#4a5568] whitespace-nowrap">
-            Portal da transparência <span className="text-[#a0aec0]">|</span> Governo
+    <>
+      <header className="w-full select-none">
+        <div className="min-h-[72px] bg-[#eef6ff] px-[var(--page-gutter)] py-4 flex items-center justify-between gap-4 flex-wrap">
+        <div className="flex items-center min-w-0 max-w-full">
+          <span className="h-5 border-l border-[#cbd5e1] shrink-0" aria-hidden="true" />
+          <span className="h-10 px-4 inline-flex items-center text-[14px] font-semibold text-[#404040] whitespace-nowrap">
+            Site SIA
           </span>
-          <div className="flex items-center gap-1.5">
-            <FlagUS /><FlagBR /><FlagES />
+          <span className="h-5 border-l border-[#cbd5e1] shrink-0" aria-hidden="true" />
+          <div ref={toolkitMenuRef} className="relative min-w-0 mx-2">
+            <button
+              type="button"
+              onClick={() => setToolkitMenuOpen((open) => !open)}
+              aria-expanded={toolkitMenuOpen}
+              aria-haspopup="menu"
+              className="h-10 max-w-[calc(100vw-150px)] px-4 inline-flex items-center gap-2 rounded-[10px] border-none bg-[#034ea2] text-[#dee6ff] text-[14px] font-semibold cursor-pointer"
+            >
+              <span className="truncate">Toolkit de Compras Públicas de Inovação</span>
+              <ChevronDown className={`w-4 h-4 shrink-0 transition-transform ${toolkitMenuOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
+            </button>
+
+            {toolkitMenuOpen && (
+              <div
+                role="menu"
+                className="absolute left-0 top-full mt-2 z-[90] w-[min(360px,calc(100vw-32px))] rounded-[10px] border border-[#dbe5f0] bg-[#fdfeff] p-1.5 shadow-xl"
+              >
+                <button
+                  type="button"
+                  role="menuitemradio"
+                  aria-checked="true"
+                  onClick={() => setToolkitMenuOpen(false)}
+                  className="w-full px-3 py-2.5 rounded-[8px] border-none bg-[#eef6ff] flex items-center gap-3 text-left text-[13px] font-semibold text-[#034ea2] cursor-pointer"
+                >
+                  <span className="flex-1">Toolkit de Compras Públicas de Inovação</span>
+                  <Check className="w-4 h-4 shrink-0" aria-hidden="true" />
+                </button>
+              </div>
+            )}
           </div>
-        </div>
-      </div>
-
-      {/* Faixa branca: nome da secretaria, busca e login */}
-      <div className="bg-white px-[clamp(16px,4vw,64px)] py-4 flex items-center justify-between gap-[clamp(16px,3vw,40px)] flex-wrap">
-        <div className="text-[10px] font-bold leading-[1.35] text-[#1a3a6b] uppercase max-w-[230px] tracking-wide">
-          Secretaria de Inteligência Artificial, Economia Digital, Ciência, Tecnologia e Inovação
-          <span className="text-[#0e50a6]"> - SIA</span>
+          <span className="h-5 border-l border-[#cbd5e1] shrink-0" aria-hidden="true" />
         </div>
 
-        <div className="flex-1 min-w-[220px] max-w-[520px] flex items-stretch h-[46px] rounded-md border border-black/20 overflow-hidden">
-          <input
-            type="search"
-            placeholder="Qual serviço você procura?"
-            className="flex-1 min-w-0 px-4 text-[14px] text-[#2a4365] outline-none bg-white"
-          />
-          <button className="w-[70px] shrink-0 bg-[#0e8a12] flex items-center justify-center cursor-pointer" aria-label="Buscar">
-            <Search className="w-5 h-5 text-white" />
-          </button>
-        </div>
-
-        <button className="h-[46px] px-5 rounded-md bg-brand text-white font-semibold text-[15px] whitespace-nowrap cursor-pointer">
-          Login Gov.Pi Cidadão
-        </button>
-      </div>
-
-      {/* Barra de navegação */}
-      <nav className="bg-brand">
-        <ul className="flex items-center justify-center gap-[clamp(12px,2.5vw,44px)] flex-wrap px-4 min-h-[50px] py-2 m-0 list-none">
-          {NAV_ITEMS.map((item) => (
-            <li key={item.label}>
-              <span className="flex items-center gap-1 text-white text-[15px] font-medium cursor-pointer whitespace-nowrap hover:text-white/80 transition-colors">
-                {item.label}
-                {item.caret && <ChevronDown className="w-4 h-4" aria-hidden="true" />}
-              </span>
-            </li>
+        <div className="flex items-center gap-2 shrink-0">
+          {['A-', 'A+'].map((label) => (
+            <button
+              key={label}
+              type="button"
+              className="w-8 h-8 rounded-[4px] bg-[#fdfeff] border-none shadow-[0_4px_2px_rgba(0,0,0,0.1)] flex items-center justify-center text-[14px] font-normal tracking-[0.4px] text-[#262626] cursor-pointer"
+              aria-label={label === 'A-' ? 'Diminuir fonte' : 'Aumentar fonte'}
+            >
+              {label}
+            </button>
           ))}
+        </div>
+        </div>
+
+        <div className="h-[87px] bg-[#fdfeff] px-[var(--page-gutter)] py-3 flex items-center">
+          <img
+            src="/assets/shared/logo.svg"
+            alt="Toolkit de Compras Públicas de Inovação"
+            className="w-[146px] h-[61px] object-fill"
+          />
+        </div>
+      </header>
+
+      <nav className="sticky top-0 z-[70] bg-[#034ea2] overflow-x-auto no-scrollbar select-none shadow-sm" aria-label="Navegação pelas seções da página">
+        <ul className="min-w-max min-h-[56px] px-[var(--page-gutter)] flex items-stretch justify-center gap-2 m-0 list-none">
+          {HEADER_NAV_ITEMS.map((item) => {
+            const isActive = activeSection === item.target
+            return (
+              <li key={item.target} className="flex">
+                <button
+                  type="button"
+                  onClick={() => handleNavigation(item.target)}
+                  aria-current={isActive ? 'page' : undefined}
+                  className={`h-14 px-4 border-x-0 border-t-0 cursor-pointer whitespace-nowrap text-[14px] font-semibold transition-colors ${
+                    isActive
+                      ? 'bg-[#023d83] border-b-[3px] border-[#e1edfa] text-[#e1edfa]'
+                      : 'bg-transparent border-b-[3px] border-transparent text-[#d1d1d1] hover:text-[#a5bdff] hover:bg-[#023d83]/40'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              </li>
+            )
+          })}
         </ul>
       </nav>
-    </header>
+
+      {showBackToTop && (
+        <button
+          type="button"
+          onClick={handleBackToTop}
+          aria-label="Voltar ao topo"
+          title="Voltar ao topo"
+          className="fixed right-5 bottom-24 z-[80] w-11 h-11 rounded-full border border-[#e1edfa] bg-[#034ea2] text-[#f5f5f5] shadow-lg flex items-center justify-center cursor-pointer transition-transform hover:-translate-y-0.5"
+        >
+          <ArrowUp className="w-5 h-5" aria-hidden="true" />
+        </button>
+      )}
+    </>
   )
 }
 
@@ -278,7 +352,7 @@ function HowToCard() {
 // vitrine dos grupos à direita.
 function IntroSection() {
   return (
-    <div className="max-w-[1440px] mx-auto py-[clamp(28px,4vw,56px)] px-[clamp(10px,1vw,66px)] flex gap-[clamp(24px,4vw,56px)] flex-wrap items-start">
+    <section id="sobre-o-toolkit" className="w-full py-[clamp(28px,4vw,56px)] px-[var(--page-gutter)] flex gap-[clamp(24px,4vw,56px)] flex-wrap items-start">
       <div className="flex-[1_1_360px] max-w-[560px] flex flex-col gap-[35px]">
         <h1 className="font-semibold text-[clamp(22px,2.5vw,30px)] text-ink-mid m-0 leading-tight">
           Toolkit de Compras Públicas
@@ -295,7 +369,7 @@ function IntroSection() {
       </div>
 
       <HowToCard />
-    </div>
+    </section>
   )
 }
 
@@ -315,7 +389,7 @@ function IdentificationCard({ title, description, action }) {
   return (
     <div className="flex-1 min-w-[300px] bg-white/20 rounded-lg p-3 flex flex-col gap-3">
       <p
-        className="font-semibold text-[16px] text-white text-justify m-0 leading-snug min-h-[2.75em]"
+        className="font-semibold text-[16px] text-[#F5F5F5] text-justify m-0 leading-snug min-h-[2.75em]"
         dangerouslySetInnerHTML={{ __html: title }}
       />
       <p
@@ -330,7 +404,7 @@ function IdentificationCard({ title, description, action }) {
 }
 
 const GRADIENT_BTN_CLASS =
-  'inline-flex items-center justify-center gap-1.5 rounded-full h-[31px] px-4 text-white font-medium text-[14px] no-underline border-none cursor-pointer'
+  'inline-flex items-center justify-center gap-1.5 rounded-full h-[31px] px-4 text-[#F5F5F5] font-medium text-[14px] no-underline border-none cursor-pointer'
 const GRADIENT_BTN_STYLE = { background: 'linear-gradient(90deg, #042d63 0%, #0e50a6 80%)' }
 
 // Faixa azul de triagem com os dois caminhos de entrada: rolar para a trilha
@@ -338,6 +412,7 @@ const GRADIENT_BTN_STYLE = { background: 'linear-gradient(90deg, #042d63 0%, #0e
 function IdentificationSection() {
   return (
     <section
+      id="identificacao"
       className="relative overflow-hidden"
       style={{ background: 'linear-gradient(99deg, #0e50a6 39%, #042d63 96%)' }}
     >
@@ -348,7 +423,7 @@ function IdentificationSection() {
         aria-hidden="true"
       />
 
-      <div className="relative max-w-[1440px] mx-auto py-[clamp(28px,4vw,56px)] px-[clamp(10px,1vw,66px)]">
+      <div className="relative w-full py-[clamp(28px,4vw,56px)] px-[var(--page-gutter)]">
         <div className="inline-flex items-center gap-1.5 bg-brand-light rounded-full h-[28px] pl-2 pr-2.5">
           <Workflow className="w-5 h-5 text-ink-mid shrink-0" />
           <span className="font-medium text-[14px] text-ink-mid">Triagem de Identificação</span>
@@ -497,7 +572,7 @@ function StepByStepSection({ isMobile, openIds, onToggle }) {
         id="passo-a-passo"
         className="bg-brand-bg py-[clamp(20px,3vw,40px)] pb-[clamp(32px,4vw,48px)] -mt-[1px] relative"
       >
-        <div className="max-w-[1440px] mx-auto px-[clamp(10px,1vw,66px)]">
+        <div className="w-full px-[var(--page-gutter)]">
           <SectionBadge>Fluxos Internos dos Instrumentos</SectionBadge>
 
           <h2 className="font-semibold text-2xl text-ink-mid m-0 mt-3 leading-snug">
@@ -526,7 +601,7 @@ function StepByStepSection({ isMobile, openIds, onToggle }) {
 // Rodapé com o copyright da SIA (o ano é calculado na renderização).
 function PageFooter() {
   return (
-    <footer className="text-center py-[clamp(20px,3vw,32px)] px-4 text-[clamp(11px,1vw,14px)] text-gray-400 bg-surface">
+    <footer className="text-center py-[clamp(20px,3vw,32px)] px-[var(--page-gutter)] text-[clamp(11px,1vw,14px)] text-gray-400 bg-[var(--page-bg)]">
       © {new Date().getFullYear()} Toolkit SIA - Secretaria de Inteligência Artificial,
       Economia Digital, Ciência, Tecnologia e Inovação
     </footer>
@@ -560,16 +635,16 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="bg-surface w-full overflow-x-clip">
+    <div className="bg-[var(--page-bg)] w-full overflow-x-clip">
       {/* O header fica fora do wrapper de zoom, em tamanho original */}
       <GovHeader />
 
-      <div style={{ zoom: PAGE_ZOOM }}>
+      <div style={{ zoom: PAGE_ZOOM, '--page-gutter': ZOOMED_PAGE_GUTTER }}>
         <IntroSection />
         <IdentificationSection />
 
-        <section id="trilha-de-instrumentos" className="p-0 bg-surface">
-          <div className="max-w-[1440px] mx-auto">
+        <section id="trilha-de-instrumentos" className="p-0 bg-[var(--page-bg)]">
+          <div className="w-full">
             <ScaledFlowchartDecision onInstrumentClick={handleInstrumentClick} />
           </div>
         </section>
