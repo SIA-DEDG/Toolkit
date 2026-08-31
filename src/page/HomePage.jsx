@@ -357,7 +357,7 @@ function HowToCard() {
 // vitrine dos grupos à direita.
 function IntroSection() {
   return (
-    <section id="sobre-o-toolkit" className="w-full py-[clamp(28px,4vw,56px)] px-[var(--page-gutter)] flex gap-[clamp(24px,4vw,56px)] xl:gap-x-6 flex-wrap items-start justify-between [&>*:only-child]:mx-auto">
+    <section id="sobre-o-toolkit" className="w-full py-[clamp(28px,4vw,56px)] md:pb-[clamp(88px,7vw,160px)] px-[var(--page-gutter)] flex gap-[clamp(24px,4vw,56px)] xl:gap-x-[clamp(40px,4vw,120px)] flex-wrap items-start justify-between [&>*:only-child]:mx-auto">
       <div className="flex-[1_1_360px] xl:flex-[999_1_360px] max-w-[620px] xl:max-w-[1050px] flex flex-col gap-[35px]">
         <h1 className="font-semibold text-[clamp(22px,2.5vw,30px)] text-ink-mid m-0 leading-tight">
           Toolkit de Compras Públicas
