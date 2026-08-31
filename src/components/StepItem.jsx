@@ -75,7 +75,7 @@ export function StepItem({ card, accentColor, isLast, warningMessage }) {
 
         {hasDownload && (
           <div className="mt-0.5">
-            <DownloadButton fileKey={card.fileKey} label={card.downloadLabel || 'Baixar Documento'} />
+            <DownloadButton fileKey={card.fileKey} label={card.downloadLabel || 'Baixar Documento'} color={accentColor} />
             <span className='text-[10px] text-[#FF0000] flex justify-start items-center gap-1 mt-1'>
               <TriangleAlert className='inline-block w-3 h-3 mr-1' />
               {warningMessage}

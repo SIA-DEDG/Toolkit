@@ -3,6 +3,8 @@ const BADGE_STYLES = {
   nao: { bg: 'rgba(251,135,135,0.5)', dot: '#cc3030', color: '#ab0000', label: 'Não' },
 }
 
+const CARD_BACKGROUND_IMAGE = '/assets/shared/background-card.svg'
+
 /**
  * Card compacto que representa um instrumento nas folhas do fluxograma.
  *
@@ -40,14 +42,21 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
       onMouseEnter={event => { if (onClick) event.currentTarget.style.boxShadow = '0px 6px 16px rgba(0,0,0,0.30)' }}
       onMouseLeave={event => { if (onClick) event.currentTarget.style.boxShadow = '0px 4px 4px rgba(0,0,0,0.25)' }}
     >
+      <img
+        src={CARD_BACKGROUND_IMAGE}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute z-0 right-0 bottom-0 w-[48px] h-[84px] max-w-none select-none"
+      />
+
       <div
-        className="rounded-tl-[8px] rounded-tr-[8px]"
+        className="relative z-[1] rounded-tl-[8px] rounded-tr-[8px]"
         style={{ height: 8, background: accentColor }}
       />
 
       {badgeStyle && (
         <div
-          className="absolute flex items-center gap-[3px] rounded-[5px]"
+          className="absolute z-[2] flex items-center gap-[3px] rounded-[5px]"
           style={{
             top: 13, right: 6,
             height: 14, paddingLeft: 5, paddingRight: 5,
@@ -60,7 +69,7 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
         </div>
       )}
 
-      <div style={{ paddingLeft: 13, paddingRight: 13, paddingTop: 8, paddingBottom: 11 }}>
+      <div className="relative z-[1]" style={{ paddingLeft: 13, paddingRight: 13, paddingTop: 8, paddingBottom: 11 }}>
         <p
           className="m-0 leading-normal"
           style={{ fontSize: 10, fontWeight: 600, color: 'rgb(var(--ink-dark))', letterSpacing: '0.06em' }}

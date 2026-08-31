@@ -5,9 +5,11 @@ import DownloadButton from './DownloadButton'
 import { InstrumentInfoModal } from './InstrumentInfoModal'
 import { getInstrumentInfo } from '../data/instrumentInfo'
 
+const CARD_BACKGROUND_IMAGE = '/assets/shared/background-card.svg'
+
 /**
- * Card de um instrumento na seção "Passo a passo": faixa e ícone na cor do
- * instrumento, cabeçalho clicável que expande a lista de etapas (StepItem) e, no
+ * Card de um instrumento na seção "Passo a passo": base temática na cor do
+ * grupo, cabeçalho clicável que expande a lista de etapas (StepItem) e, no
  * rodapé, o download do guia explicativo à esquerda e o botão de informação à
  * direita, que abre o modal com o texto explicativo.
  *
@@ -41,13 +43,31 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
   const closeInfo = useCallback(() => setInfoOpen(false), [])
 
   return (
-    <div className="bg-surface rounded-xl shadow-[0px_4px_12px_rgba(0,0,0,0.12)] overflow-hidden flex flex-col min-w-0">
-      <div className="h-[10px]" style={{ backgroundColor: accentColor }} />
+    <div
+      className="relative min-h-[190px] bg-surface rounded-lg border overflow-hidden flex flex-col min-w-0"
+      style={{
+        borderColor: accentColor,
+      }}
+    >
+      <div
+        className="relative z-[1] h-[10px] shrink-0"
+        style={{ backgroundColor: accentColor }}
+      />
+
+      <img
+        src={CARD_BACKGROUND_IMAGE}
+        alt=""
+        aria-hidden="true"
+        className={`pointer-events-none absolute right-0 w-[96px] h-[167px] max-w-none select-none ${
+          isOpen ? 'bottom-0' : 'top-[22px]'
+        }`}
+      />
+
       <button
         onClick={handleToggle}
         aria-expanded={isOpen}
         aria-controls={`flow-${id}`}
-        className="w-full text-left border-none cursor-pointer px-3.5 py-3 min-h-[80px]"
+        className="relative z-[1] flex-1 w-full text-left border-none cursor-pointer px-3.5 py-3 min-h-[96px] bg-transparent"
       >
         <div className="flex items-start gap-2.5">
           <div className="p-1.5 rounded-lg flex items-center justify-center shrink-0" style={{ background: accentColor }}>
@@ -70,7 +90,7 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
       </button>
 
       {isOpen && (
-        <div id={`flow-${id}`}>
+        <div id={`flow-${id}`} className="relative z-[1]">
           {cards.map((card, index) => (
             <StepItem
               key={index}
@@ -83,7 +103,7 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
         </div>
       )}
 
-      <div className="px-3.5 py-2.5">
+      <div className="relative z-[1] px-3.5 py-2.5">
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0">
             <DownloadButton fileKey={downloadKey} label="Baixar Guia Explicativo" large color={accentColor} />

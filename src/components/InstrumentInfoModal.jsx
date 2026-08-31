@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { X, Scale } from 'lucide-react'
 
+const CARD_BACKGROUND_IMAGE = '/assets/shared/background-card.svg'
+
 /**
  * Modal com o texto explicativo longo de um instrumento.
  *
@@ -46,7 +48,14 @@ export function InstrumentInfoModal({ info, accentColor, onClose, titleId }) {
         className="relative bg-surface rounded-xl w-full max-w-[720px] max-h-full flex flex-col overflow-hidden shadow-2xl"
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="shrink-0 flex items-start gap-3 px-5 py-4 pr-14" style={{ background: accentColor }}>
+        <img
+          src={CARD_BACKGROUND_IMAGE}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute right-0 bottom-0 w-[192px] h-[334px] max-w-none select-none"
+        />
+
+        <div className="relative z-[1] shrink-0 flex items-start gap-3 px-5 py-4 pr-14" style={{ background: accentColor }}>
           <h2 id={titleId} className="m-0 font-bold text-[17px] text-white leading-snug">
             {info.title}
           </h2>
@@ -56,13 +65,13 @@ export function InstrumentInfoModal({ info, accentColor, onClose, titleId }) {
           type="button"
           onClick={onClose}
           aria-label="Fechar"
-          className="absolute top-3 right-3 flex items-center justify-center w-9 h-9 rounded-full bg-white/20 hover:bg-white/30 text-white cursor-pointer border-none transition-colors"
+          className="absolute z-[2] top-3 right-3 flex items-center justify-center w-9 h-9 rounded-full bg-white/20 hover:bg-white/30 text-white cursor-pointer border-none transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Único bloco rolável: o cabeçalho fica fixo enquanto o texto corre */}
-        <div className="overflow-y-auto px-5 py-4 flex flex-col gap-3">
+        <div className="relative z-[1] overflow-y-auto px-5 py-4 flex flex-col gap-3">
           {info.legalBasis && (
             <div className="flex gap-2 rounded-lg bg-surface-alt p-3 border-l-[3px]" style={{ borderColor: accentColor }}>
               <Scale className="w-4 h-4 shrink-0 mt-0.5" style={{ color: accentColor }} aria-hidden="true" />
