@@ -308,7 +308,7 @@ function StatCard({ stat, className = '' }) {
 // fluidas.
 function HowToCard() {
   return (
-    <div className="w-full min-w-0 xl:flex-[1_1_700px] relative">
+    <div className="w-full min-w-0 xl:flex-[1_1_893px] xl:max-w-[1250px] relative">
       <div className="hidden md:block relative px-[98px]">
         <div className="grid grid-cols-3 gap-[clamp(16px,1.6vw,28px)] items-start">
           {TOOLKIT_GROUPS.map((group, index) => (
@@ -357,8 +357,8 @@ function HowToCard() {
 // vitrine dos grupos à direita.
 function IntroSection() {
   return (
-    <section id="sobre-o-toolkit" className="w-full py-[clamp(28px,4vw,56px)] px-[var(--page-gutter)] flex gap-[clamp(24px,4vw,56px)] flex-wrap items-start justify-between [&>*:only-child]:mx-auto">
-      <div className="flex-[1_1_360px] max-w-[560px] flex flex-col gap-[35px]">
+    <section id="sobre-o-toolkit" className="w-full py-[clamp(28px,4vw,56px)] px-[var(--page-gutter)] flex gap-[clamp(24px,4vw,56px)] xl:gap-x-6 flex-wrap items-start justify-between [&>*:only-child]:mx-auto">
+      <div className="flex-[1_1_360px] xl:flex-[999_1_360px] max-w-[620px] xl:max-w-[1050px] flex flex-col gap-[35px]">
         <h1 className="font-semibold text-[clamp(22px,2.5vw,30px)] text-ink-mid m-0 leading-tight">
           Toolkit de Compras Públicas
         </h1>
