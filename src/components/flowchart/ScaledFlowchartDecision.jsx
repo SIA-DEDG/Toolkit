@@ -308,7 +308,11 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
           className="no-scrollbar w-full overflow-x-auto overflow-y-hidden transition-[max-height] duration-300 ease-in-out"
           style={{ maxHeight: expanded ? (naturalHeight || 4000) + 10 : COLLAPSED_HEIGHT }}
         >
-          <div ref={canvasRef} className="px-[var(--page-gutter)]" style={{ paddingBottom: 10 }}>
+          <div
+            ref={canvasRef}
+            className="w-max min-w-full px-[var(--page-gutter)] flex justify-center"
+            style={{ paddingBottom: 10 }}
+          >
             <TrilhaFlowchartDecision onInstrumentClick={onInstrumentClick} />
           </div>
         </div>

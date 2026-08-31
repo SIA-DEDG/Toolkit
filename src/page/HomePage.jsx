@@ -139,8 +139,9 @@ function GovHeader() {
   return (
     <>
       <header className="w-full select-none">
-        <div className="min-h-[72px] bg-[#eef6ff] px-[var(--page-gutter)] py-4 flex items-center justify-between gap-4 flex-wrap">
-        <div className="flex items-center min-w-0 max-w-full">
+        <div className="min-h-[72px] bg-[#eef6ff] py-4">
+          <div className="w-full px-[var(--page-gutter)] flex items-center justify-between gap-4 flex-wrap">
+            <div className="flex items-center min-w-0 max-w-full">
           <span className="h-5 border-l border-[#cbd5e1] shrink-0" aria-hidden="true" />
           <span className="h-10 px-4 inline-flex items-center text-[14px] font-semibold text-[#404040] whitespace-nowrap">
             Site SIA
@@ -177,28 +178,31 @@ function GovHeader() {
             )}
           </div>
           <span className="h-5 border-l border-[#cbd5e1] shrink-0" aria-hidden="true" />
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0">
+              {['A-', 'A+'].map((label) => (
+                <button
+                  key={label}
+                  type="button"
+                  className="w-8 h-8 rounded-[4px] bg-[#fdfeff] border-none shadow-[0_4px_2px_rgba(0,0,0,0.1)] flex items-center justify-center text-[14px] font-normal tracking-[0.4px] text-[#262626] cursor-pointer"
+                  aria-label={label === 'A-' ? 'Diminuir fonte' : 'Aumentar fonte'}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div className="flex items-center gap-2 shrink-0">
-          {['A-', 'A+'].map((label) => (
-            <button
-              key={label}
-              type="button"
-              className="w-8 h-8 rounded-[4px] bg-[#fdfeff] border-none shadow-[0_4px_2px_rgba(0,0,0,0.1)] flex items-center justify-center text-[14px] font-normal tracking-[0.4px] text-[#262626] cursor-pointer"
-              aria-label={label === 'A-' ? 'Diminuir fonte' : 'Aumentar fonte'}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-        </div>
-
-        <div className="h-[87px] bg-[#fdfeff] px-[var(--page-gutter)] py-3 flex items-center">
-          <img
-            src="/assets/shared/logo.svg"
-            alt="Toolkit de Compras Públicas de Inovação"
-            className="w-[146px] h-[61px] object-fill"
-          />
+        <div className="h-[87px] bg-[#fdfeff] py-3">
+          <div className="w-full px-[var(--page-gutter)] flex items-center">
+            <img
+              src="/assets/shared/logo.svg"
+              alt="Toolkit de Compras Públicas de Inovação"
+              className="w-[146px] h-[61px] object-fill"
+            />
+          </div>
         </div>
       </header>
 
@@ -251,7 +255,7 @@ function GovHeader() {
  *   não define o próprio tamanho de propósito: o desktop passa largura fixa e o
  *   mobile, fluida.
  */
-function GroupColumn({ group, className = 'flex-1 min-w-[160px] max-w-[200px]' }) {
+function GroupColumn({ group, className = 'w-full min-w-0' }) {
   return (
     <div
       className={`self-start rounded-[8px] px-4 py-5 flex flex-col gap-4 ${className}`}
@@ -297,18 +301,19 @@ function StatCard({ stat, className = '' }) {
 }
 
 // Vitrine dos três grupos, com dois layouts distintos.
-// No desktop, geometria fixa vinda do Figma: as colunas ficam lado a lado e os
+// No desktop, as colunas fluidas ficam lado a lado e os
 // cartões "03" e "12" são posicionados em absoluto, saltando das quinas das
 // colunas das pontas. Como flutuam, não consomem espaço na linha e as três
-// colunas cabem sem quebrar. No mobile, tudo empilha em unidades fluidas.
+// colunas dividem toda a largura disponível. No mobile, tudo empilha em unidades
+// fluidas.
 function HowToCard() {
   return (
-    <div className="w-full md:w-[893px] md:flex-none relative">
-      <div className="hidden md:block relative pl-[98px]">
-        <div className="flex gap-[23px] items-start">
+    <div className="w-full min-w-0 xl:flex-[1_1_700px] relative">
+      <div className="hidden md:block relative px-[98px]">
+        <div className="grid grid-cols-3 gap-[clamp(16px,1.6vw,28px)] items-start">
           {TOOLKIT_GROUPS.map((group, index) => (
-            <div key={group.name} className="relative">
-              <GroupColumn group={group} className="w-[220px] flex-none" />
+            <div key={group.name} className="relative min-w-0">
+              <GroupColumn group={group} />
 
               {group.name === 'Contratação pública' && (
                 <div className="absolute left-[-89px] bottom-[-52px] z-10">
@@ -352,7 +357,7 @@ function HowToCard() {
 // vitrine dos grupos à direita.
 function IntroSection() {
   return (
-    <section id="sobre-o-toolkit" className="w-full py-[clamp(28px,4vw,56px)] px-[var(--page-gutter)] flex gap-[clamp(24px,4vw,56px)] flex-wrap items-start">
+    <section id="sobre-o-toolkit" className="w-full py-[clamp(28px,4vw,56px)] px-[var(--page-gutter)] flex gap-[clamp(24px,4vw,56px)] flex-wrap items-start justify-between [&>*:only-child]:mx-auto">
       <div className="flex-[1_1_360px] max-w-[560px] flex flex-col gap-[35px]">
         <h1 className="font-semibold text-[clamp(22px,2.5vw,30px)] text-ink-mid m-0 leading-tight">
           Toolkit de Compras Públicas
@@ -387,7 +392,7 @@ function IntroSection() {
  */
 function IdentificationCard({ title, description, action }) {
   return (
-    <div className="flex-1 min-w-[300px] bg-white/20 rounded-lg p-3 flex flex-col gap-3">
+    <div className="w-full min-w-0 bg-white/20 rounded-lg p-3 flex flex-col gap-3">
       <p
         className="font-semibold text-[16px] text-[#F5F5F5] text-justify m-0 leading-snug min-h-[2.75em]"
         dangerouslySetInnerHTML={{ __html: title }}
@@ -433,7 +438,7 @@ function IdentificationSection() {
           Identificação
         </h2>
 
-        <div className="flex gap-[clamp(20px,4vw,70px)] flex-wrap">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(20px,2.2vw,40px)] lg:[&>*:only-child]:col-span-2 lg:[&>*:only-child]:w-full lg:[&>*:only-child]:max-w-[600px] lg:[&>*:only-child]:justify-self-center">
           <IdentificationCard
             title="Sabe qual procedimento e instrumento quer utilizar para inovação?"
             description="Esta trilha contém os instrumentos do Toolkit para inovação. O uso dos instrumentos é independente, permitindo a escolha da solução mais adequada para o problema identificado."
@@ -486,7 +491,7 @@ function DesktopFlowGrid({ openIds, onToggle }) {
 
   return (
     <>
-      <div className="max-w-[1200px] mx-auto grid grid-cols-3 gap-[clamp(14px,2vw,20px)] mb-[clamp(14px,2vw,20px)] items-start">
+      <div className="w-full grid grid-cols-3 gap-[clamp(14px,2vw,28px)] mb-[clamp(14px,2vw,28px)] items-start">
         {firstRow.map((flow) => (
           <InstrumentFlowCard
             key={flow.id}
@@ -498,7 +503,7 @@ function DesktopFlowGrid({ openIds, onToggle }) {
         ))}
       </div>
 
-      <div className="max-w-[1200px] mx-auto grid grid-cols-3 gap-[clamp(14px,2vw,20px)] items-start">
+      <div className="w-full grid grid-cols-3 gap-[clamp(14px,2vw,28px)] items-start">
         {remaining.map((flow) => (
           <InstrumentFlowCard
             key={flow.id}
