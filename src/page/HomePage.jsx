@@ -4,6 +4,7 @@ import { INSTRUMENT_FLOWS } from '../data/instruments'
 import { useIsMobile } from '../hooks/useIsMobile'
 import { SectionBadge } from '../components/SectionBadge'
 import { InstrumentFlowCard } from '../components/InstrumentFlowCard'
+import { SiteSearch } from '../components/SiteSearch'
 import { ScaledFlowchartDecision } from '../components/flowchart/ScaledFlowchartDecision'
 import { INSTRUMENTS } from '../components/flowchart/TrilhaFlowchartDecision'
 
@@ -69,7 +70,7 @@ const HEADER_NAV_ITEMS = [
 
 // Cabeçalho do Toolkit conforme o componente do Figma: seletor de portal,
 // controles de acessibilidade, logo e navegação por âncoras da própria página.
-function GovHeader() {
+function GovHeader({ onInstrumentClick }) {
   const [activeSection, setActiveSection] = useState(HEADER_NAV_ITEMS[0].target)
   const [showBackToTop, setShowBackToTop] = useState(false)
   const [toolkitMenuOpen, setToolkitMenuOpen] = useState(false)
@@ -195,13 +196,19 @@ function GovHeader() {
           </div>
         </div>
 
-        <div className="h-[87px] bg-[#fdfeff] py-3">
-          <div className="w-full px-[var(--page-gutter)] flex items-center">
+        <div className="min-h-[87px] bg-[#fdfeff] py-3">
+          <div className="w-full px-[var(--page-gutter)] grid grid-cols-1 sm:grid-cols-[146px_minmax(0,1fr)] items-center gap-3 sm:gap-4">
             <img
               src="/assets/shared/logo.svg"
               alt="Toolkit de Compras Públicas de Inovação"
               className="w-[146px] h-[61px] object-fill"
             />
+            <div className="w-full flex justify-center sm:pr-[146px]">
+              <SiteSearch
+                onNavigateSection={handleNavigation}
+                onInstrumentSelect={onInstrumentClick}
+              />
+            </div>
           </div>
         </div>
       </header>
@@ -644,7 +651,7 @@ export default function HomePage() {
   return (
     <div className="bg-[var(--page-bg)] w-full overflow-x-clip">
       {/* O header fica fora do wrapper de zoom, em tamanho original */}
-      <GovHeader />
+      <GovHeader onInstrumentClick={handleInstrumentClick} />
 
       <div style={{ zoom: PAGE_ZOOM, '--page-gutter': ZOOMED_PAGE_GUTTER }}>
         <IntroSection />
