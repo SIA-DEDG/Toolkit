@@ -209,7 +209,7 @@ function GovHeader({
                 type="button"
                 onClick={onDecreaseScale}
                 disabled={accessibilityScale <= ACCESSIBILITY_SCALE_MIN}
-                aria-label={`Diminuir fonte e interface. Tamanho atual: ${Math.round(accessibilityScale * 100)}%`}
+                aria-label={`Diminuir fonte e conteúdo. Tamanho atual: ${Math.round(accessibilityScale * 100)}%`}
                 title="Diminuir fonte (Alt -)"
                 className="w-8 h-8 rounded-[4px] bg-[#fdfeff] border-none shadow-[0_4px_2px_rgba(0,0,0,0.1)] flex items-center justify-center text-[14px] font-normal tracking-[0.4px] text-[#262626] cursor-pointer transition-[background-color,box-shadow,transform] hover:bg-white hover:shadow-md active:translate-y-px disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none"
               >
@@ -219,7 +219,7 @@ function GovHeader({
                 type="button"
                 onClick={onIncreaseScale}
                 disabled={accessibilityScale >= ACCESSIBILITY_SCALE_MAX}
-                aria-label={`Aumentar fonte e interface. Tamanho atual: ${Math.round(accessibilityScale * 100)}%`}
+                aria-label={`Aumentar fonte e conteúdo. Tamanho atual: ${Math.round(accessibilityScale * 100)}%`}
                 title="Aumentar fonte (Alt +)"
                 className="w-8 h-8 rounded-[4px] bg-[#fdfeff] border-none shadow-[0_4px_2px_rgba(0,0,0,0.1)] flex items-center justify-center text-[14px] font-normal tracking-[0.4px] text-[#262626] cursor-pointer transition-[background-color,box-shadow,transform] hover:bg-white hover:shadow-md active:translate-y-px disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none"
               >
@@ -680,29 +680,6 @@ export default function HomePage() {
   const increaseAccessibilityScale = useCallback(() => changeAccessibilityScale(1), [changeAccessibilityScale])
 
   useEffect(() => {
-    const root = document.getElementById('root')
-    if (!root) return undefined
-    const previousStyles = {
-      zoom: root.style.zoom,
-      width: root.style.width,
-      minHeight: root.style.minHeight,
-    }
-
-    return () => {
-      root.style.zoom = previousStyles.zoom
-      root.style.width = previousStyles.width
-      root.style.minHeight = previousStyles.minHeight
-    }
-  }, [])
-
-  useEffect(() => {
-    const root = document.getElementById('root')
-    if (!root) return
-
-    root.style.zoom = String(accessibilityScale)
-    root.style.width = `${100 / accessibilityScale}%`
-    root.style.minHeight = `${100 / accessibilityScale}vh`
-
     try {
       window.localStorage.setItem(ACCESSIBILITY_SCALE_STORAGE_KEY, String(accessibilityScale))
     } catch {
@@ -746,6 +723,8 @@ export default function HomePage() {
     })
   }, [])
 
+  const accessiblePageZoom = Math.round(PAGE_ZOOM * accessibilityScale * 1000) / 1000
+
   return (
     <div className="bg-[var(--page-bg)] w-full overflow-x-clip">
       {/* O header fica fora do wrapper de zoom, em tamanho original */}
@@ -756,7 +735,7 @@ export default function HomePage() {
         onIncreaseScale={increaseAccessibilityScale}
       />
 
-      <div style={{ zoom: PAGE_ZOOM, '--page-gutter': ZOOMED_PAGE_GUTTER }}>
+      <div style={{ zoom: accessiblePageZoom, '--page-gutter': ZOOMED_PAGE_GUTTER }}>
         <IntroSection />
         <IdentificationSection />
 
