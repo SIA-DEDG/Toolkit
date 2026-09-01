@@ -226,7 +226,7 @@ function GovHeader({ onInstrumentClick }) {
                   className={`h-14 px-4 border-x-0 border-t-0 cursor-pointer whitespace-nowrap text-[14px] font-semibold transition-colors ${
                     isActive
                       ? 'bg-[#023d83] border-b-[3px] border-[#e1edfa] text-[#e1edfa]'
-                      : 'bg-transparent border-b-[3px] border-transparent text-[#d1d1d1] hover:text-[#a5bdff] hover:bg-[#023d83]/40'
+                      : 'bg-transparent border-b-[3px] border-transparent text-[#d1d1d1] hover:text-[#BEE3F8] hover:bg-[#023d83]/40 no-underline hover:underline'
                   }`}
                 >
                   {item.label}
