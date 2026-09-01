@@ -308,7 +308,7 @@ function StatCard({ stat, className = '' }) {
 // fluidas.
 function HowToCard() {
   return (
-    <div className="w-full min-w-0 xl:flex-[1_1_893px] xl:max-w-[1250px] relative">
+    <div className="w-full min-w-0 md:pb-[52px] xl:flex-[1_1_893px] xl:max-w-[1250px] relative">
       <div className="hidden md:block relative px-[98px]">
         <div className="grid grid-cols-3 gap-[clamp(16px,1.6vw,28px)] items-start">
           {TOOLKIT_GROUPS.map((group, index) => (
@@ -357,20 +357,22 @@ function HowToCard() {
 // vitrine dos grupos à direita.
 function IntroSection() {
   return (
-    <section id="sobre-o-toolkit" className="w-full py-[clamp(28px,4vw,56px)] md:pb-[clamp(88px,7vw,160px)] px-[var(--page-gutter)] flex gap-[clamp(24px,4vw,56px)] xl:gap-x-[clamp(40px,4vw,120px)] flex-wrap items-start justify-between [&>*:only-child]:mx-auto">
-      <div className="flex-[1_1_360px] xl:flex-[999_1_360px] max-w-[620px] xl:max-w-[1050px] flex flex-col gap-[35px]">
+    <section id="sobre-o-toolkit" className="w-full py-[var(--section-spacing)] px-[var(--page-gutter)] flex gap-[clamp(24px,4vw,56px)] xl:gap-x-[clamp(40px,4vw,120px)] flex-wrap items-start justify-between [&>*:only-child]:mx-auto">
+      <div className="flex-[1_1_360px] xl:flex-[999_1_360px] max-w-[620px] xl:max-w-[1050px] xl:self-stretch flex flex-col gap-[35px]">
         <h1 className="font-semibold text-[clamp(22px,2.5vw,30px)] text-ink-mid m-0 leading-tight">
           Toolkit de Compras Públicas
         </h1>
-        <p className="font-normal text-[clamp(13px,1.1vw,16px)] text-ink-dark leading-[1.35] m-0 text-justify">
-          O Toolkit de Compras Públicas reúne modelos de contratos, acordos e outros instrumentos jurídicos para apoiar a implementação do Marco Legal de Ciência, Tecnologia e Inovação no Piauí.
-          <br />
-          <br />
-          A ferramenta foi criada para fortalecer as compras públicas de inovação e orientar o uso de alternativas legais voltadas a atividades de pesquisa, desenvolvimento e inovação, contribuindo para mais segurança jurídica na aplicação desses instrumentos.
-          <br />
-          <br />
-          Os modelos foram elaborados pela Secretaria de Inteligência Artificial, Economia Digital, Ciência, Tecnologia e Inovação (SIA) e pela Procuradoria Geral do Estado (PGE).
-        </p>
+        <div className="flex flex-col gap-4 xl:flex-1 xl:justify-between">
+          <p className="font-normal text-[clamp(13px,1.1vw,16px)] text-ink-dark leading-[1.35] m-0 text-justify">
+            O Toolkit de Compras Públicas reúne modelos de contratos, acordos e outros instrumentos jurídicos para apoiar a implementação do Marco Legal de Ciência, Tecnologia e Inovação no Piauí.
+          </p>
+          <p className="font-normal text-[clamp(13px,1.1vw,16px)] text-ink-dark leading-[1.35] m-0 text-justify">
+            A ferramenta foi criada para fortalecer as compras públicas de inovação e orientar o uso de alternativas legais voltadas a atividades de pesquisa, desenvolvimento e inovação, contribuindo para mais segurança jurídica na aplicação desses instrumentos.
+          </p>
+          <p className="font-normal text-[clamp(13px,1.1vw,16px)] text-ink-dark leading-[1.35] m-0 text-justify">
+            Os modelos foram elaborados pela Secretaria de Inteligência Artificial, Economia Digital, Ciência, Tecnologia e Inovação (SIA) e pela Procuradoria Geral do Estado (PGE).
+          </p>
+        </div>
       </div>
 
       <HowToCard />
@@ -428,7 +430,7 @@ function IdentificationSection() {
         aria-hidden="true"
       />
 
-      <div className="relative w-full py-[clamp(28px,4vw,56px)] px-[var(--page-gutter)]">
+      <div className="relative w-full py-[var(--section-spacing)] px-[var(--page-gutter)]">
         <div className="inline-flex items-center gap-1.5 bg-brand-light rounded-full h-[28px] pl-2 pr-2.5">
           <Workflow className="w-5 h-5 text-ink-mid shrink-0" />
           <span className="font-medium text-[14px] text-ink-mid">Triagem de Identificação</span>

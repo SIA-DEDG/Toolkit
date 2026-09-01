@@ -274,7 +274,7 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
 
   return (
     <div className="w-full">
-      <div className="py-[clamp(20px,3vw,40px)] px-[var(--page-gutter)] pb-0 flex items-center justify-between gap-6 flex-wrap">
+      <div className="pt-[var(--section-spacing)] px-[var(--page-gutter)] pb-0 flex items-center justify-between gap-6 flex-wrap">
         <div>
           <SectionBadge>Trilha de Instrumentos</SectionBadge>
           <h2 className="font-semibold text-[clamp(18px,2vw,24px)] text-ink-mid mt-3 mb-1">

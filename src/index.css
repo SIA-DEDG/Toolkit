@@ -33,6 +33,7 @@
 
   --page-bg:         #F7FAFE;
   --page-gutter:     clamp(16px, 2.78vw, 40px);
+  --section-spacing: clamp(20px, 3vw, 40px);
   --scrollbar-track: #63B3ED;
   --scrollbar-thumb: #90CDF4;
 }
