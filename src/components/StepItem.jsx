@@ -34,12 +34,12 @@ export function StepItem({ card, accentColor, isLast, warningMessage }) {
       </div>
 
       <div className={`flex-1 flex flex-col gap-1 pt-2.5 ${isLast ? 'pb-2.5' : 'pb-4'}`}>
-        <span className="font-semibold text-xs text-ink-dark leading-snug text-left">
+        <span className="font-semibold text-[14px] text-ink-dark leading-snug text-left">
           {card.title}
         </span>
 
         {card.description && (
-          <span className="font-normal text-[11px] text-ink-muted leading-relaxed text-left">
+          <span className="font-normal text-[12px] text-ink-muted leading-relaxed text-left">
             {card.description}
           </span>
         )}
@@ -50,14 +50,14 @@ export function StepItem({ card, accentColor, isLast, warningMessage }) {
               <div key={index} className="flex gap-1.5 items-start">
                 {item.dote
                   ? <span className="w-1.5 h-1.5 rounded-full shrink-0 mt-1" style={{ background: accentColor }} />
-                  : <span className="font-bold text-[10px] shrink-0 leading-relaxed" style={{ color: accentColor }}>
+                  : <span className="font-bold text-[14px] shrink-0 leading-relaxed" style={{ color: accentColor }}>
                     {item.number}.
                   </span>
                 }
                 <div className="flex flex-col">
-                  <span className="font-semibold text-[10px] text-ink-sub leading-snug">{item.title}</span>
+                  <span className="font-semibold text-[14px] text-ink-sub leading-snug">{item.title}</span>
                   {item.description && (
-                    <span className="font-normal text-[10px] text-ink-muted leading-snug">{item.description}</span>
+                    <span className="font-normal text-[12px] text-ink-muted leading-snug">{item.description}</span>
                   )}
                 </div>
               </div>
@@ -67,7 +67,7 @@ export function StepItem({ card, accentColor, isLast, warningMessage }) {
 
         {card.note && (
           <div className="mt-0.5 pl-1.5 border-l-2" style={{ borderColor: accentColor }}>
-            <span className="font-normal text-[10px] text-ink-muted leading-snug italic">
+            <span className="font-normal text-[12px] text-ink-muted leading-snug italic">
               {card.note}
             </span>
           </div>

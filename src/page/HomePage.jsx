@@ -196,12 +196,12 @@ function GovHeader({ onInstrumentClick }) {
           </div>
         </div>
 
-        <div className="min-h-[87px] bg-[#fdfeff] py-3">
+        <div className="min-h-[100  px] bg-[#fdfeff] py-3">
           <div className="w-full px-[var(--page-gutter)] grid grid-cols-1 sm:grid-cols-[146px_minmax(0,1fr)] items-center gap-3 sm:gap-4">
             <img
               src="/assets/shared/logo.svg"
               alt="Toolkit de Compras Públicas de Inovação"
-              className="w-[146px] h-[61px] object-fill"
+              className="w-[146px] h-[76px] object-fill"
             />
             <div className="w-full flex justify-center sm:pr-[146px]">
               <SiteSearch
