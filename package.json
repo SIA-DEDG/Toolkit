@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@sia-dedg/shared-ui": "0.1.12",
+    "@sia-dedg/shared-ui": "0.1.13",
     "@supabase/supabase-js": "^2.99.0",
     "lucide-react": "^0.577.0",
     "react": "^18.2.0",
