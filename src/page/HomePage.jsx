@@ -1,10 +1,11 @@
-import { useState, useCallback, useEffect, useRef } from 'react'
-import { ExternalLink, ArrowRight, ArrowUp, Check, Workflow, ChevronDown } from 'lucide-react'
+import { useState, useCallback, useEffect } from 'react'
+import { ExternalLink, ArrowRight, Workflow } from 'lucide-react'
+import { SiaHeader } from '@sia-dedg/shared-ui'
 import { INSTRUMENT_FLOWS } from '../data/instruments'
 import { useIsMobile } from '../hooks/useIsMobile'
 import { SectionBadge } from '../components/SectionBadge'
 import { InstrumentFlowCard } from '../components/InstrumentFlowCard'
-import { SiteSearch } from '../components/SiteSearch'
+import { useSiteSearchAdapter } from '../components/SiteSearch'
 import { ScaledFlowchartDecision } from '../components/flowchart/ScaledFlowchartDecision'
 import { INSTRUMENTS } from '../components/flowchart/TrilhaFlowchartDecision'
 
@@ -18,7 +19,6 @@ const PAGE_ZOOM = 0.85
 const ZOOMED_PAGE_GUTTER = 'clamp(18.82px, 3.27vw, 47.06px)'
 const ACCESSIBILITY_SCALE_MIN = 0.9
 const ACCESSIBILITY_SCALE_MAX = 1.2
-const ACCESSIBILITY_SCALE_STEP = 0.1
 const ACCESSIBILITY_SCALE_STORAGE_KEY = 'toolkit-accessibility-scale'
 
 function getInitialAccessibilityScale() {
@@ -84,28 +84,19 @@ const HEADER_NAV_ITEMS = [
   { label: 'Fluxo Internos dos Instrumentos', target: 'passo-a-passo' },
 ]
 
-const PROJECTS_MENU_LABEL = 'Projetos'
-
 // Cabeçalho do Toolkit conforme o componente do Figma: seletor de portal,
 // controles de acessibilidade, logo e navegação por âncoras da própria página.
-function GovHeader({
-  onInstrumentClick,
-  accessibilityScale,
-  onDecreaseScale,
-  onIncreaseScale,
-}) {
+function GovHeader({ onInstrumentClick, accessibilityScale, onScaleChange }) {
   const [activeSection, setActiveSection] = useState(HEADER_NAV_ITEMS[0].target)
-  const [showBackToTop, setShowBackToTop] = useState(false)
-  const [projectsMenuOpen, setProjectsMenuOpen] = useState(false)
-  const projectsMenuRef = useRef(null)
 
   const handleNavigation = useCallback((target) => {
     scrollToSection(target)
   }, [])
 
-  const handleBackToTop = useCallback(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [])
+  const searchAdapter = useSiteSearchAdapter({
+    onNavigateSection: handleNavigation,
+    onInstrumentSelect: onInstrumentClick,
+  })
 
   useEffect(() => {
     let frameId = null
@@ -123,7 +114,6 @@ function GovHeader({
       })
 
       setActiveSection(currentSection)
-      setShowBackToTop(window.scrollY > 320)
     }
 
     const handleScroll = () => {
@@ -141,150 +131,23 @@ function GovHeader({
     }
   }, [])
 
-  useEffect(() => {
-    if (!projectsMenuOpen) return undefined
-
-    const handlePointerDown = (event) => {
-      if (!projectsMenuRef.current?.contains(event.target)) setProjectsMenuOpen(false)
-    }
-    const handleKeyDown = (event) => {
-      if (event.key === 'Escape') setProjectsMenuOpen(false)
-    }
-
-    document.addEventListener('mousedown', handlePointerDown)
-    window.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      document.removeEventListener('mousedown', handlePointerDown)
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [projectsMenuOpen])
-
   return (
-    <>
-      <header className="w-full select-none">
-        <div className="min-h-[72px] bg-[#eef6ff] py-4">
-          <div className="w-full px-[var(--page-gutter)] flex items-center justify-between gap-4 flex-wrap">
-            <div className="flex items-center min-w-0 max-w-full gap-2">
-              <span className="h-5 border-l border-[#cbd5e1] shrink-0" aria-hidden="true" />
-              <span className="h-8 px-3.5 inline-flex items-center justify-center rounded-[8px] bg-white shadow-[0_0_2px_rgba(135,135,135,0.25)] text-[14px] font-semibold text-[#404040] whitespace-nowrap">
-                Site SIA
-              </span>
-              <span className="h-5 border-l border-[#cbd5e1] shrink-0" aria-hidden="true" />
-
-              <div ref={projectsMenuRef} className="relative min-w-0">
-                <button
-                  type="button"
-                  onClick={() => setProjectsMenuOpen((open) => !open)}
-                  aria-expanded={projectsMenuOpen}
-                  aria-haspopup="menu"
-                  className="h-10 max-w-[calc(100vw-150px)] px-4 inline-flex items-center gap-2 rounded-[8px] border-none bg-transparent text-[#404040] text-[14px] font-semibold cursor-pointer hover:bg-white/60 transition-colors"
-                >
-                  <span className="truncate">{PROJECTS_MENU_LABEL}</span>
-                  <ChevronDown className={`w-4 h-4 shrink-0 transition-transform ${projectsMenuOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
-                </button>
-
-                {projectsMenuOpen && (
-                  <div
-                    role="menu"
-                    className="absolute left-0 top-full mt-2 z-[90] w-[min(360px,calc(100vw-32px))] rounded-[10px] border border-[#dbe5f0] bg-[#fdfeff] p-1.5 shadow-xl"
-                  >
-                    <button
-                      type="button"
-                      role="menuitemradio"
-                      aria-checked="true"
-                      onClick={() => setProjectsMenuOpen(false)}
-                      className="w-full px-3 py-2.5 rounded-[8px] border-none bg-[#eef6ff] flex items-center gap-3 text-left text-[13px] font-semibold text-[#034ea2] cursor-pointer"
-                    >
-                      <span className="flex-1">Toolkit de Compras Públicas de Inovação</span>
-                      <Check className="w-4 h-4 shrink-0" aria-hidden="true" />
-                    </button>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 shrink-0" role="group" aria-label="Controles de tamanho da fonte">
-              <button
-                type="button"
-                onClick={onDecreaseScale}
-                disabled={accessibilityScale <= ACCESSIBILITY_SCALE_MIN}
-                aria-label={`Diminuir fonte e conteúdo. Tamanho atual: ${Math.round(accessibilityScale * 100)}%`}
-                title="Diminuir fonte (Alt -)"
-                className="w-8 h-8 rounded-[4px] bg-[#fdfeff] border-none shadow-[0_4px_2px_rgba(0,0,0,0.1)] flex items-center justify-center text-[14px] font-normal tracking-[0.4px] text-[#262626] cursor-pointer transition-[background-color,box-shadow,transform] hover:bg-white hover:shadow-md active:translate-y-px disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none"
-              >
-                A-
-              </button>
-              <button
-                type="button"
-                onClick={onIncreaseScale}
-                disabled={accessibilityScale >= ACCESSIBILITY_SCALE_MAX}
-                aria-label={`Aumentar fonte e conteúdo. Tamanho atual: ${Math.round(accessibilityScale * 100)}%`}
-                title="Aumentar fonte (Alt +)"
-                className="w-8 h-8 rounded-[4px] bg-[#fdfeff] border-none shadow-[0_4px_2px_rgba(0,0,0,0.1)] flex items-center justify-center text-[14px] font-normal tracking-[0.4px] text-[#262626] cursor-pointer transition-[background-color,box-shadow,transform] hover:bg-white hover:shadow-md active:translate-y-px disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none"
-              >
-                A+
-              </button>
-              <span className="sr-only" aria-live="polite">
-                Tamanho da interface: {Math.round(accessibilityScale * 100)}%
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div className="min-h-[100  px] bg-[#fdfeff] py-3">
-          <div className="w-full px-[var(--page-gutter)] grid grid-cols-1 sm:grid-cols-[146px_minmax(0,1fr)] items-center gap-3 sm:gap-4">
-            <img
-              src="/assets/shared/logo.svg"
-              alt="Toolkit de Compras Públicas de Inovação"
-              className="w-[146px] h-[76px] object-fill"
-            />
-            <div className="w-full flex justify-center sm:pr-[146px]">
-              <SiteSearch
-                onNavigateSection={handleNavigation}
-                onInstrumentSelect={onInstrumentClick}
-              />
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <nav className="sticky top-0 z-[70] bg-[#034ea2] overflow-x-auto no-scrollbar select-none shadow-sm" aria-label="Navegação pelas seções da página">
-        <ul className="min-w-max min-h-[56px] px-[var(--page-gutter)] flex items-stretch justify-center gap-2 m-0 list-none">
-          {HEADER_NAV_ITEMS.map((item) => {
-            const isActive = activeSection === item.target
-            return (
-              <li key={item.target} className="flex">
-                <button
-                  type="button"
-                  onClick={() => handleNavigation(item.target)}
-                  aria-current={isActive ? 'page' : undefined}
-                  className={`h-14 px-4 border-x-0 border-t-0 cursor-pointer whitespace-nowrap text-[14px] font-semibold transition-colors ${
-                    isActive
-                      ? 'bg-[#023d83] border-b-[3px] border-[#e1edfa] text-[#e1edfa]'
-                      : 'bg-transparent border-b-[3px] border-transparent text-[#d1d1d1] hover:text-[#BEE3F8] hover:bg-[#023d83]/40 no-underline hover:underline'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              </li>
-            )
-          })}
-        </ul>
-      </nav>
-
-      {showBackToTop && (
-        <button
-          type="button"
-          onClick={handleBackToTop}
-          aria-label="Voltar ao topo"
-          title="Voltar ao topo"
-          className="fixed right-5 bottom-24 z-[80] w-11 h-11 rounded-full border border-[#e1edfa] bg-[#034ea2] text-[#f5f5f5] shadow-lg flex items-center justify-center cursor-pointer transition-transform hover:-translate-y-0.5"
-        >
-          <ArrowUp className="w-5 h-5" aria-hidden="true" />
-        </button>
-      )}
-    </>
+    <SiaHeader
+      activeNavigationId={activeSection}
+      currentProject="toolkit"
+      desktopLogoHeight={76}
+      desktopLogoWidth={146}
+      fontScale={accessibilityScale}
+      homeHref="/"
+      logoAlt="Toolkit de Compras Públicas de Inovação"
+      logoSrc="/assets/shared/logo.svg"
+      navigationItems={HEADER_NAV_ITEMS.map(({ label, target }) => ({ id: target, label }))}
+      onFontScaleChange={onScaleChange}
+      onNavigation={handleNavigation}
+      search={searchAdapter}
+      searchLabel="Buscar seções, instrumentos e arquivos"
+      searchPlaceholder="Buscar no Toolkit"
+    />
   )
 }
 
@@ -669,16 +532,6 @@ export default function HomePage() {
   const [openIds, setOpenIds] = useState(new Set())
   const [accessibilityScale, setAccessibilityScale] = useState(getInitialAccessibilityScale)
 
-  const changeAccessibilityScale = useCallback((direction) => {
-    setAccessibilityScale((currentScale) => {
-      const nextScale = Math.round((currentScale + direction * ACCESSIBILITY_SCALE_STEP) * 10) / 10
-      return Math.min(ACCESSIBILITY_SCALE_MAX, Math.max(ACCESSIBILITY_SCALE_MIN, nextScale))
-    })
-  }, [])
-
-  const decreaseAccessibilityScale = useCallback(() => changeAccessibilityScale(-1), [changeAccessibilityScale])
-  const increaseAccessibilityScale = useCallback(() => changeAccessibilityScale(1), [changeAccessibilityScale])
-
   useEffect(() => {
     try {
       window.localStorage.setItem(ACCESSIBILITY_SCALE_STORAGE_KEY, String(accessibilityScale))
@@ -686,26 +539,6 @@ export default function HomePage() {
       // A escala permanece ativa na sessão mesmo sem acesso ao armazenamento.
     }
   }, [accessibilityScale])
-
-  useEffect(() => {
-    const handleAccessibilityShortcut = (event) => {
-      if (!event.altKey || event.ctrlKey || event.metaKey) return
-
-      if (event.key === '+' || event.key === '=') {
-        event.preventDefault()
-        increaseAccessibilityScale()
-      } else if (event.key === '-') {
-        event.preventDefault()
-        decreaseAccessibilityScale()
-      } else if (event.key === '0') {
-        event.preventDefault()
-        setAccessibilityScale(1)
-      }
-    }
-
-    window.addEventListener('keydown', handleAccessibilityShortcut)
-    return () => window.removeEventListener('keydown', handleAccessibilityShortcut)
-  }, [decreaseAccessibilityScale, increaseAccessibilityScale])
 
   // Vindo da trilha ou do menu de grupos: deixa só este aberto e rola até ele.
   const handleInstrumentClick = useCallback((id) => {
@@ -731,8 +564,7 @@ export default function HomePage() {
       <GovHeader
         onInstrumentClick={handleInstrumentClick}
         accessibilityScale={accessibilityScale}
-        onDecreaseScale={decreaseAccessibilityScale}
-        onIncreaseScale={increaseAccessibilityScale}
+        onScaleChange={setAccessibilityScale}
       />
 
       <div style={{ zoom: accessiblePageZoom, '--page-gutter': ZOOMED_PAGE_GUTTER }}>

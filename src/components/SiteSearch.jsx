@@ -189,6 +189,44 @@ function ResultIcon({ type }) {
   return <FileText className="w-4 h-4" aria-hidden="true" />
 }
 
+export function useSiteSearchAdapter({ onNavigateSection, onInstrumentSelect }) {
+  const addToast = useToastContext()
+
+  return useMemo(() => ({
+    resolve(query) {
+      if (normalizeText(query).length < 2) return []
+      return SEARCH_INDEX
+        .map((result) => ({ result, score: scoreResult(query, result) }))
+        .filter(({ score }) => score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 8)
+        .map(({ result }) => result)
+    },
+    getId: (result) => result.id,
+    getLabel: (result) => result.title,
+    getDescription: (result) => `${TYPE_LABEL[result.type]} · ${result.subtitle}`,
+    async apply(result) {
+      if (result.type === 'section') {
+        onNavigateSection(result.target)
+        return
+      }
+
+      if (result.type === 'instrument' || result.type === 'step') {
+        onInstrumentSelect(result.instrumentId)
+        return
+      }
+
+      try {
+        await enqueueDownload(() => downloadFile(result.fileKey))
+        addToast('Download realizado com sucesso!', 'success')
+      } catch (error) {
+        addToast('Arquivo indisponível. Tente novamente.', 'error')
+        console.error(error)
+      }
+    },
+  }), [addToast, onInstrumentSelect, onNavigateSection])
+}
+
 export function SiteSearch({ onNavigateSection, onInstrumentSelect }) {
   const [query, setQuery] = useState('')
   const [open, setOpen] = useState(false)
