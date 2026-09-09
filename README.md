@@ -10,6 +10,8 @@ Sistema de fluxo de processo para Acordos de Parceria em Pesquisa, Desenvolvimen
 
 ## Como rodar
 
+Para instalar o header privado, configurar tokens locais/Vercel e replicar a integração em outros projetos, consulte [`docs/PRIVATE_SHARED_HEADER_GUIDE.md`](docs/PRIVATE_SHARED_HEADER_GUIDE.md).
+
 ```bash
 # 1. Instalar dependências
 npm install
