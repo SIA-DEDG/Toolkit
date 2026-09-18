@@ -227,7 +227,7 @@ function StatCard({ stat, className = '' }) {
 function HowToCard() {
   return (
     <div className="w-full min-w-0 md:pb-[52px] xl:flex-[1_1_893px] xl:max-w-[1250px] relative">
-      <div className="hidden md:block relative px-[98px]">
+      <div className="hidden md:block relative px-[98px] pt-12">
         <div className="grid grid-cols-3 gap-[clamp(16px,1.6vw,28px)] items-start">
           {TOOLKIT_GROUPS.map((group, index) => (
             <div key={group.name} className="relative min-w-0">
