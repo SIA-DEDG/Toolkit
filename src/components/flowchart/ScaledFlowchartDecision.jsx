@@ -120,22 +120,22 @@ const INSTRUMENT_GROUPS = [
  */
 function GroupChip({ group, open, onToggle, onInstrumentClick }) {
   return (
-    <div className="relative">
+    <div className="w-full sm:w-auto sm:relative">
       <button
         type="button"
         onClick={onToggle}
-        className={`flex items-center gap-2 cursor-pointer border rounded-full pl-2.5 pr-2 py-1.5 transition-colors border-[color:var(--hairline)] ${open ? 'bg-[color:var(--overlay)]' : 'bg-surface hover:bg-[color:var(--overlay)]'
+        className={`w-full sm:w-auto flex items-center gap-2 cursor-pointer border rounded-full pl-2.5 pr-2 py-1.5 transition-colors border-[color:var(--hairline)] ${open ? 'bg-[color:var(--overlay)]' : 'bg-surface hover:bg-[color:var(--overlay)]'
           }`}
       >
         <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: group.dotColor }} />
         <span className="font-medium text-sm text-ink-mid whitespace-nowrap">{group.name}</span>
         <ChevronDown
-          className={`w-4 h-4 text-ink-muted shrink-0 transition-transform duration-150 ${open ? 'rotate-180' : ''}`}
+          className={`ml-auto sm:ml-0 w-4 h-4 text-ink-muted shrink-0 transition-transform duration-150 ${open ? 'rotate-180' : ''}`}
         />
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full mt-2 z-20 w-[340px] rounded-2xl bg-surface shadow-xl ring-1 ring-[color:var(--hairline)] overflow-hidden">
+        <div className="mt-2 sm:absolute sm:right-0 sm:top-full z-20 sm:w-[340px] rounded-2xl bg-surface shadow-xl ring-1 ring-[color:var(--hairline)] overflow-hidden">
           <div className="flex items-center gap-2 px-4 py-3" style={{ background: group.dotColor }}>
             <span className="w-2.5 h-2.5 rounded-full bg-white/90 shrink-0" />
             <span className="font-semibold text-sm text-white">{group.name}</span>
@@ -288,7 +288,7 @@ export function ScaledFlowchartDecision({ onInstrumentClick }) {
           </span>
         </div>
 
-        <div ref={groupsRef} className="flex items-center gap-6 pt-1">
+        <div ref={groupsRef} className="w-full sm:w-auto flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 pt-1">
           {INSTRUMENT_GROUPS.map(group => (
             <GroupChip
               key={group.id}
