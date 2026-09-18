@@ -3,7 +3,7 @@ const BADGE_STYLES = {
   nao: { bg: 'rgba(251,135,135,0.5)', dot: '#cc3030', color: '#ab0000', label: 'Não' },
 }
 
-const CARD_BACKGROUND_IMAGE = '/assets/shared/background-card.svg'
+const CARD_BACKGROUND_IMAGE = '/assets/shared/toolkit-isotipo.png'
 
 /**
  * Card compacto que representa um instrumento nas folhas do fluxograma.
@@ -46,7 +46,7 @@ export function InstrumentCard({ accentColor, iconBg, icon, title, description, 
         src={CARD_BACKGROUND_IMAGE}
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute z-0 right-0 bottom-0 w-[48px] h-[84px] max-w-none select-none"
+        className="pointer-events-none absolute z-0 right-0 bottom-0 w-[48px] h-[84px] max-w-none select-none object-contain object-right opacity-20"
       />
 
       <div

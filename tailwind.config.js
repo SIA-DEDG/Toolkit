@@ -1,6 +1,5 @@
 export default {
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
-  darkMode: 'media',
   theme: {
     extend: {
       colors: {
@@ -24,7 +23,7 @@ export default {
           muted: 'rgb(var(--ink-muted) / <alpha-value>)',
           sub:   'rgb(var(--ink-sub) / <alpha-value>)',
         },
-        // Superfície de cards/painéis (branco no claro, escuro no dark)
+        // Superfície de cards e painéis
         surface: {
           DEFAULT: 'rgb(var(--surface) / <alpha-value>)',
           alt:     'rgb(var(--surface-alt) / <alpha-value>)',

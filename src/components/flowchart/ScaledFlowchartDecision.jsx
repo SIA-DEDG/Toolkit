@@ -100,9 +100,9 @@ function FullscreenFlow({ onClose, onInstrumentClick }) {
 // Grupos do menu de atalho no cabeçalho da trilha. `keys` referencia o catálogo
 // INSTRUMENTS; `dotColor` é a cor da bolinha e do cabeçalho do menu.
 const INSTRUMENT_GROUPS = [
-  { id: 'parceria', name: 'Parceria e P&D', dotColor: '#6d28d9', keys: ['convenio', 'acordo'] },
-  { id: 'contratacao', name: 'Contratação pública', dotColor: '#0e7490', keys: ['licitacao', 'etec', 'cpsi', 'direta', 'doacao', 'transferencia'] },
-  { id: 'mercado', name: 'Exploração de mercado', dotColor: '#b45309', keys: ['pmi', 'dialogo', 'pitchHackathon', 'concurso'] },
+  { id: 'parceria', name: 'Parceria e P&D', dotColor: '#007932', keys: ['convenio', 'acordo'] },
+  { id: 'contratacao', name: 'Contratação pública', dotColor: '#D93B20', keys: ['licitacao', 'etec', 'cpsi', 'direta', 'doacao', 'transferencia'] },
+  { id: 'mercado', name: 'Exploração de mercado', dotColor: '#FDB913', keys: ['pmi', 'dialogo', 'pitchHackathon', 'concurso'] },
 ]
 
 /**

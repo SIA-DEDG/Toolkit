@@ -2,23 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---- Tokens de cor como triplas RGB (tema claro = valores originais) ---- */
+/* ---- Tokens de cor como triplas RGB ---- */
 :root {
   color-scheme: light;
 
-  --brand:       14 80 166;    /* #0e50a6 */
-  --brand-mid:   17 110 208;   /* #116ed0 */
+  --brand:       3 78 162;     /* #034ea2 */
+  --brand-mid:   14 80 166;    /* #0e50a6 */
   --brand-deep:  4 45 99;      /* #042d63 */
   --brand-bg:    227 239 255;  /* #E3EFFF */
   --brand-light: 190 227 248;  /* #bee3f8 */
 
-  --secondary: 101 97 247;     /* #6561f7 */
-  --tertiary:  14 156 166;     /* #0e9ca6 */
+  --secondary: 217 59 32;      /* #d93b20 */
+  --tertiary:  0 121 50;       /* #007932 */
 
-  /* Cores de família p/ TEXTO/realce dos cards do fluxo (claro = originais) */
-  --accent-a: 109 40 217;      /* roxo   #6d28d9 */
-  --accent-b: 14 116 144;      /* teal   #0e7490 */
-  --accent-c: 180 83 9;        /* laranja #b45309 */
+  /* Cores das três famílias do Toolkit: parceria, contratação e mercado. */
+  --accent-a: 0 121 50;        /* verde    #007932 */
+  --accent-b: 217 59 32;       /* vermelho #d93b20 */
+  --accent-c: 221 166 70;      /* amarelo  #dda646 */
 
   --ink-dark:  26 32 44;       /* #1a202c */
   --ink-mid:   42 67 101;      /* #2a4365 */
@@ -36,76 +36,6 @@
   --section-spacing: clamp(20px, 3vw, 40px);
   --scrollbar-track: #63B3ED;
   --scrollbar-thumb: #90CDF4;
-}
-
-/* ---- Tema escuro: derivado da paleta, priorizando legibilidade ----
-   Vale para (a) sistema em dark quando o usuário não forçou claro, e
-   (b) escolha manual data-theme="dark" (botão de tema). ---- */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-
-    /* Azuis da marca clareados para contraste sobre fundo escuro */
-    --brand:       91 155 232;   /* #5b9be8 */
-    --brand-mid:   74 134 216;   /* #4a86d8 */
-    --brand-deep:  12 31 61;     /* #0c1f3d */
-    --brand-bg:    22 35 58;     /* #16233a */
-    --brand-light: 34 55 90;     /* #22375a */
-
-    --secondary: 154 151 255;    /* #9a97ff */
-    --tertiary:  62 198 209;     /* #3ec6d1 */
-
-    --accent-a: 183 148 246;     /* roxo   #b794f6 */
-    --accent-b: 79 209 197;      /* teal   #4fd1c5 */
-    --accent-c: 246 173 85;      /* laranja #f6ad55 */
-
-    --ink-dark:  238 242 248;    /* #eef2f8 */
-    --ink-mid:   211 222 238;    /* #d3deee */
-    --ink-muted: 154 171 192;    /* #9aabc0 */
-    --ink-sub:   182 196 214;    /* #b6c4d6 */
-
-    --surface:     20 29 46;     /* #141d2e */
-    --surface-alt: 28 39 64;     /* #1c2740 */
-
-    --hairline: rgba(255, 255, 255, 0.13);
-    --overlay:  rgba(255, 255, 255, 0.06);
-
-    --page-bg:         #0a1120;
-    --scrollbar-track: #1c2740;
-    --scrollbar-thumb: #3a4a6a;
-  }
-}
-
-:root[data-theme="dark"] {
-  color-scheme: dark;
-
-  --brand:       91 155 232;
-  --brand-mid:   74 134 216;
-  --brand-deep:  12 31 61;
-  --brand-bg:    22 35 58;
-  --brand-light: 34 55 90;
-
-  --secondary: 154 151 255;
-  --tertiary:  62 198 209;
-
-  --accent-a: 183 148 246;
-  --accent-b: 79 209 197;
-  --accent-c: 246 173 85;
-
-  --ink-dark:  238 242 248;
-  --ink-mid:   211 222 238;
-  --ink-muted: 154 171 192;
-  --ink-sub:   182 196 214;
-
-  --surface:     20 29 46;
-  --surface-alt: 28 39 64;
-
-  --hairline: rgba(255, 255, 255, 0.13);
-  --overlay:  rgba(255, 255, 255, 0.06);
-
-  --page-bg:         #0a1120;
-  --scrollbar-track: #1c2740;
-  --scrollbar-thumb: #3a4a6a;
 }
 
 * {
@@ -184,7 +114,7 @@ body {
 }
 
 .download-button--colored:not(:disabled):hover {
-  color: #f5f5f5;
+  color: var(--download-foreground, #f5f5f5);
   background-color: var(--download-color);
   border-color: var(--download-color);
   box-shadow: 0 5px 14px rgba(0, 0, 0, 0.24);

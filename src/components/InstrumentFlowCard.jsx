@@ -5,7 +5,7 @@ import DownloadButton from './DownloadButton'
 import { InstrumentInfoModal } from './InstrumentInfoModal'
 import { getInstrumentInfo } from '../data/instrumentInfo'
 
-const CARD_BACKGROUND_IMAGE = '/assets/shared/background-card.svg'
+const CARD_BACKGROUND_IMAGE = '/assets/shared/toolkit-isotipo.png'
 
 /**
  * Card de um instrumento na seção "Passo a passo": base temática na cor do
@@ -20,6 +20,7 @@ const CARD_BACKGROUND_IMAGE = '/assets/shared/background-card.svg'
  * @param {string} props.id - Id do instrumento. Serve de chave em `openIds` e de
  *   busca do texto em getInstrumentInfo().
  * @param {string} props.accentColor - Cor da família, na faixa, no ícone e no modal.
+ * @param {string} [props.accentTextColor='#fff'] - Cor do conteúdo sobre o realce.
  * @param {React.ComponentType|string} props.icon - Componente de ícone lucide, ou
  *   uma string (emoji), renderizada como texto.
  * @param {string} props.title - Nome do instrumento.
@@ -31,7 +32,7 @@ const CARD_BACKGROUND_IMAGE = '/assets/shared/background-card.svg'
  * @param {string} [props.warningMessage] - Aviso vermelho abaixo do download.
  *   Sem ele, nenhum aviso aparece.
  */
-export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, id, openIds, onToggle, downloadKey, warningMessage }) {
+export function InstrumentFlowCard({ accentColor, accentTextColor = '#fff', icon, title, subtitle, cards, id, openIds, onToggle, downloadKey, warningMessage }) {
   const isOpen = openIds.has(id)
   const Icon = typeof icon === 'string' ? null : icon
 
@@ -58,7 +59,7 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
         src={CARD_BACKGROUND_IMAGE}
         alt=""
         aria-hidden="true"
-        className={`pointer-events-none absolute right-0 w-[96px] h-[167px] max-w-none select-none ${
+        className={`pointer-events-none absolute right-0 w-[96px] h-[167px] max-w-none select-none object-contain object-right opacity-20 ${
           isOpen ? 'bottom-0' : 'top-[22px]'
         }`}
       />
@@ -70,9 +71,9 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
         className="relative z-[1] flex-1 w-full text-left border-none cursor-pointer px-3.5 py-3 min-h-[96px] bg-transparent"
       >
         <div className="flex items-start gap-2.5">
-          <div className="p-1.5 rounded-lg flex items-center justify-center shrink-0" style={{ background: accentColor }}>
+          <div className="p-1.5 rounded-lg flex items-center justify-center shrink-0" style={{ background: accentColor, color: accentTextColor }}>
             {Icon
-              ? <Icon className="w-[18px] h-[18px] text-white" aria-hidden="true" />
+              ? <Icon className="w-[18px] h-[18px]" aria-hidden="true" />
               : <span className="text-[18px] leading-none" aria-hidden="true">{icon}</span>
             }
           </div>
@@ -80,10 +81,10 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
             <p className="font-bold text-[16px] text-ink-dark m-0 leading-snug">{title}</p>
             <p className="font-normal text-[14px] text-ink-sub m-0 leading-snug">{subtitle}</p>
           </div>
-          <div className="rounded-md px-1.5 py-0.5 flex items-center justify-center shrink-0 mt-0.5" style={{ background: accentColor }}>
+          <div className="rounded-md px-1.5 py-0.5 flex items-center justify-center shrink-0 mt-0.5" style={{ background: accentColor, color: accentTextColor }}>
             {isOpen
-              ? <ChevronUp className="w-4 h-4 text-white" aria-hidden="true" />
-              : <ChevronDown className="w-4 h-4 text-white" aria-hidden="true" />
+              ? <ChevronUp className="w-4 h-4" aria-hidden="true" />
+              : <ChevronDown className="w-4 h-4" aria-hidden="true" />
             }
           </div>
         </div>
@@ -96,6 +97,7 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
               key={index}
               card={card}
               accentColor={accentColor}
+              accentTextColor={accentTextColor}
               isLast={index === cards.length - 1}
               warningMessage={id === 'acordo-pd&i' ? 'Minutas sujeitas a correção no SEI' : 'Documento sendo validado pela PGE'}
             />
@@ -106,7 +108,13 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
       <div className="relative z-[1] px-3.5 py-2.5">
         <div className="flex items-start justify-between gap-2">
           <div className="min-w-0">
-            <DownloadButton fileKey={downloadKey} label="Baixar Guia Explicativo" large color={accentColor} />
+            <DownloadButton
+              fileKey={downloadKey}
+              label="Baixar Guia Explicativo"
+              large
+              color={accentColor}
+              foregroundColor={accentTextColor}
+            />
             {warningMessage && (
               <span className='text-[10px] text-[#FF0000] flex justify-start items-center gap-1 mt-1'>
                 <TriangleAlert className='inline-block w-3 h-3 mr-1' />
@@ -134,6 +142,7 @@ export function InstrumentFlowCard({ accentColor, icon, title, subtitle, cards, 
         <InstrumentInfoModal
           info={info}
           accentColor={accentColor}
+          accentTextColor={accentTextColor}
           onClose={closeInfo}
           titleId={`info-title-${id}`}
         />

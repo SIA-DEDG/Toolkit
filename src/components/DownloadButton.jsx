@@ -17,8 +17,9 @@ import { enqueueDownload } from '../hooks/useDownloadQueue'
  *   false, o tamanho menor das etapas.
  * @param {string} [props.color] - Cor '#rrggbb' da família, aplicada como
  *   realce somente no hover; em repouso, o botão permanece neutro.
+ * @param {string} [props.foregroundColor='#f5f5f5'] - Cor do conteúdo no hover.
  */
-export default function DownloadButton({ label = 'Baixar Documento', fileKey, filename, large = false, color }) {
+export default function DownloadButton({ label = 'Baixar Documento', fileKey, filename, large = false, color, foregroundColor = '#f5f5f5' }) {
   const [loading, setLoading] = useState(false)
   const addToast = useToastContext()
 
@@ -52,7 +53,7 @@ export default function DownloadButton({ label = 'Baixar Documento', fileKey, fi
             ? 'text-[13px] whitespace-nowrap px-4 h-9 border-2'
             : 'text-[11px] w-[140px] h-7 border-[1.5px]',
         ].join(' ')}
-        style={color ? { '--download-color': color } : undefined}
+        style={color ? { '--download-color': color, '--download-foreground': foregroundColor } : undefined}
       >
         <svg
           className={`${large ? 'w-4 h-4' : 'w-3.5 h-3.5'} shrink-0`}

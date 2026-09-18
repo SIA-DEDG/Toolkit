@@ -1,22 +1,21 @@
 import { InstrumentCard } from './InstrumentCard'
 import { Handshake, NotepadText, Lightbulb, MessageCircle, Computer, Wrench, Package, ClipboardCheck, RefreshCw, FileText, Search, Trophy } from 'lucide-react'
 
-const BRAND_BLUE = '#0e59a8'
+const BRAND_BLUE = '#034EA2'
 
-// Cor de FUNDO das caixas de decisão de cada família (o texto por cima é branco).
-// São hex fixos, em tom médio nos dois temas, para o branco continuar legível.
+// Cor de fundo das caixas de decisão de cada família, conforme o Figma.
 const FAMILY_BOX_BG = {
-  parceria: '#6d28d9',
-  contratacao: '#0e7490',
-  mercado: '#b45309',
+  parceria: '#007932',
+  contratacao: '#D93B20',
+  mercado: '#FDB913',
 }
 
 // Cor de TEXTO/realce e fundo do ícone dos cards de instrumento por família.
 // accentColor vem de CSS variable porque clareia no tema escuro (ver index.css).
 const FAMILY_CARD_STYLE = {
-  parceria: { accentColor: 'rgb(var(--accent-a))', iconBg: 'rgba(109,40,217,0.15)' },
-  contratacao: { accentColor: 'rgb(var(--accent-b))', iconBg: 'rgba(14,116,144,0.15)' },
-  mercado: { accentColor: 'rgb(var(--accent-c))', iconBg: 'rgba(180,83,9,0.15)' },
+  parceria: { accentColor: 'rgb(var(--accent-a))', iconBg: 'rgba(0,121,50,0.15)' },
+  contratacao: { accentColor: 'rgb(var(--accent-b))', iconBg: 'rgba(217,59,32,0.15)' },
+  mercado: { accentColor: 'rgb(var(--accent-c))', iconBg: 'rgba(253,185,19,0.20)' },
 }
 
 const CARD_WIDTH = 188
@@ -97,7 +96,7 @@ const decisionNode = (key, boxProps, connection = {}) => ({ type: 'box', key, bo
 // `labels` corresponde ao filho de mesmo índice.
 const TREE = decisionNode('root', { width: 340, height: 42, bg: '#042d63', pill: true, text: 'Necessidade Institucional' }, {
   children: [
-    decisionNode('objetivo', { width: 520, height: 60, bg: '#116ed0', text: 'O que a instituição precisa fazer?', subtitle: 'Ponto de partida da necessidade institucional' }, {
+    decisionNode('objetivo', { width: 520, height: 60, bg: BRAND_BLUE, text: 'O que a instituição precisa fazer?', subtitle: 'Ponto de partida da necessidade institucional' }, {
       connectMode: 'labeled',
       labels: ['Desenvolver', 'Adquirir / Contratar', 'Explorar mercado'],
       children: [
@@ -130,13 +129,13 @@ const TREE = decisionNode('root', { width: 340, height: 42, bg: '#042d63', pill:
             }),
           ],
         }),
-        decisionNode('objetoDescoberta', { width: 320, height: 46, bg: FAMILY_BOX_BG.mercado, text: 'O que quer descobrir / mapear?' }, {
+        decisionNode('objetoDescoberta', { width: 320, height: 46, bg: FAMILY_BOX_BG.mercado, color: '#1a202c', text: 'O que quer descobrir / mapear?' }, {
           connectMode: 'labeled',
           labels: ['Interesse do mercado para P&D', 'Solução técnica para problema', 'Ideias abertas e inovações'],
           children: [
             instrumentNode('pmi'),
             instrumentNode('dialogo'),
-            decisionNode('formatoEvento', { width: 220, height: 46, bg: FAMILY_BOX_BG.mercado, text: 'Qual formato?' }, {
+            decisionNode('formatoEvento', { width: 220, height: 46, bg: FAMILY_BOX_BG.mercado, color: '#1a202c', text: 'Qual formato?' }, {
               connectMode: 'labeled',
               laneWidth: 250,
               drop: 120,

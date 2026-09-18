@@ -38,21 +38,22 @@ function getInitialAccessibilityScale() {
 // `keys` referencia o catálogo INSTRUMENTS.
 const TOOLKIT_GROUPS = [
   {
-    name: 'Contratação pública',
-    color: '#0e9ca6',
-    tint: 'rgba(14,156,166,0.16)',
-    keys: ['licitacao', 'etec', 'cpsi', 'direta', 'doacao', 'transferencia'],
-  },
-  {
     name: 'Parceria e P&D',
-    color: '#6561f7',
-    tint: 'rgba(101,97,247,0.16)',
+    color: '#007932',
+    tint: 'rgba(0,121,50,0.30)',
     keys: ['convenio', 'acordo'],
   },
   {
+    name: 'Contratação pública',
+    color: '#D93B20',
+    tint: 'rgba(217,59,32,0.20)',
+    keys: ['licitacao', 'etec', 'cpsi', 'direta', 'doacao', 'transferencia'],
+  },
+  {
     name: 'Exploração de mercado',
-    color: '#a6640e',
-    tint: 'rgba(166,100,14,0.16)',
+    color: '#FDB913',
+    textColor: '#DDA646',
+    tint: 'rgba(253,185,19,0.20)',
     keys: ['pmi', 'dialogo', 'pitchHackathon', 'concurso'],
   },
 ]
@@ -82,6 +83,15 @@ const HEADER_NAV_ITEMS = [
   { label: 'Identificação', target: 'identificacao' },
   { label: 'Trilha de Instrumentos', target: 'trilha-de-instrumentos' },
   { label: 'Fluxo Internos dos Instrumentos', target: 'passo-a-passo' },
+]
+
+const HEADER_INSTITUTIONAL_LOGOS = [
+  {
+    src: '/assets/shared/institutional-logos.png',
+    alt: 'Procuradoria-Geral do Estado do Piauí e Secretaria de Inteligência Artificial, Economia Digital, Ciência, Tecnologia e Inovação',
+    width: 398,
+    height: 66,
+  },
 ]
 
 // Cabeçalho do Toolkit conforme o componente do Figma: seletor de portal,
@@ -135,12 +145,13 @@ function GovHeader({ onInstrumentClick, accessibilityScale, onScaleChange }) {
     <SiaHeader
       activeNavigationId={activeSection}
       currentProject="toolkit"
-      desktopLogoHeight={76}
-      desktopLogoWidth={146}
+      desktopLogoHeight={79}
+      desktopLogoWidth={172}
       fontScale={accessibilityScale}
       homeHref="/"
       logoAlt="Toolkit de Compras Públicas de Inovação"
-      logoSrc="/assets/shared/logo.svg"
+      logoSrc="/assets/shared/toolkit-logo.png"
+      logos={HEADER_INSTITUTIONAL_LOGOS}
       navigationItems={HEADER_NAV_ITEMS.map(({ label, target }) => ({ id: target, label }))}
       onFontScaleChange={onScaleChange}
       onNavigation={handleNavigation}
@@ -155,13 +166,15 @@ function GovHeader({ onInstrumentClick, accessibilityScale, onScaleChange }) {
  * Coluna pastel de um grupo, listando os instrumentos que pertencem a ele.
  *
  * @param {object} props
- * @param {{name: string, color: string, tint: string, keys: string[]}} props.group -
+ * @param {{name: string, color: string, textColor?: string, tint: string, keys: string[]}} props.group -
  *   Um item de TOOLKIT_GROUPS. `keys` referencia o catálogo INSTRUMENTS.
  * @param {string} [props.className] - Classes de dimensionamento. O componente
  *   não define o próprio tamanho de propósito: o desktop passa largura fixa e o
  *   mobile, fluida.
  */
 function GroupColumn({ group, className = 'w-full min-w-0' }) {
+  const contentColor = group.textColor || group.color
+
   return (
     <div
       className={`self-start rounded-[8px] px-4 py-5 flex flex-col gap-4 ${className}`}
@@ -169,7 +182,7 @@ function GroupColumn({ group, className = 'w-full min-w-0' }) {
     >
       <div className="flex items-center gap-2">
         <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: group.color }} />
-        <span className="font-semibold text-[13px] leading-tight" style={{ color: group.color }}>
+        <span className="font-semibold text-[13px] leading-tight" style={{ color: contentColor }}>
           {group.name}
         </span>
       </div>
@@ -180,7 +193,7 @@ function GroupColumn({ group, className = 'w-full min-w-0' }) {
           const Icon = instrument.icon
           return (
             <li key={key} className="flex items-start gap-2">
-              <Icon className="w-4 h-4 shrink-0 mt-[1px]" style={{ color: group.color }} aria-hidden="true" />
+              <Icon className="w-4 h-4 shrink-0 mt-[1px]" style={{ color: contentColor }} aria-hidden="true" />
               <span className="text-[13px] font-medium text-ink-mid leading-snug">{instrument.title}</span>
             </li>
           )
@@ -221,7 +234,7 @@ function HowToCard() {
             <div key={group.name} className="relative min-w-0">
               <GroupColumn group={group} />
 
-              {group.name === 'Contratação pública' && (
+              {index === 0 && (
                 <div className="absolute left-[-89px] bottom-[-52px] z-10">
                   <StatCard stat={TOOLKIT_STATS[0]} />
                 </div>
@@ -243,13 +256,12 @@ function HowToCard() {
           <StatCard stat={TOOLKIT_STATS[1]} />
         </div>
 
-        {/* Duas colunas: o primeiro grupo (o mais alto) fica sozinho à esquerda e
-            os demais empilham à direita, encaixando no espaço que sobra em vez
-            de ficar um card solto embaixo. */}
+        {/* Duas colunas: contratação (o grupo mais alto) fica sozinho à esquerda;
+            parceria e exploração empilham à direita para equilibrar a altura. */}
         <div className="grid grid-cols-2 gap-3 items-start">
-          <GroupColumn group={TOOLKIT_GROUPS[0]} className="w-full" />
+          <GroupColumn group={TOOLKIT_GROUPS[1]} className="w-full" />
           <div className="flex flex-col gap-3">
-            {TOOLKIT_GROUPS.slice(1).map((group) => (
+            {[TOOLKIT_GROUPS[0], TOOLKIT_GROUPS[2]].map((group) => (
               <GroupColumn key={group.name} group={group} className="w-full" />
             ))}
           </div>
@@ -332,7 +344,7 @@ function IdentificationSection() {
       {/* Brilho decorativo */}
       <div
         className="pointer-events-none absolute -left-40 top-0 w-[543px] h-[435px] opacity-60"
-        style={{ background: 'radial-gradient(circle, rgba(101,97,247,0.45) 0%, rgba(101,97,247,0) 70%)' }}
+        style={{ background: 'radial-gradient(circle, rgba(0,121,50,0.24) 0%, rgba(0,121,50,0) 70%)' }}
         aria-hidden="true"
       />
 

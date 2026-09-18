@@ -17,11 +17,12 @@ import { TriangleAlert } from "lucide-react"
  * }} props.card - A etapa, vinda de INSTRUMENT_FLOWS. Em `subitems`, `dote`
  *   marca o item como bullet; sem ele, usa `number` como numeração.
  * @param {string} props.accentColor - Cor da família, usada na trilha e nos marcadores.
+ * @param {string} [props.accentTextColor='#fff'] - Cor aplicada sobre o realce.
  * @param {boolean} props.isLast - true na última etapa, para remover o traço que
  *   liga à etapa seguinte.
  * @param {string} [props.warningMessage] - Aviso vermelho abaixo do download.
  */
-export function StepItem({ card, accentColor, isLast, warningMessage }) {
+export function StepItem({ card, accentColor, accentTextColor = '#fff', isLast, warningMessage }) {
   const hasDownload = !!(card.fileKey || card.downloadLabel)
 
   return (
@@ -75,7 +76,12 @@ export function StepItem({ card, accentColor, isLast, warningMessage }) {
 
         {hasDownload && (
           <div className="mt-0.5">
-            <DownloadButton fileKey={card.fileKey} label={card.downloadLabel || 'Baixar Documento'} color={accentColor} />
+            <DownloadButton
+              fileKey={card.fileKey}
+              label={card.downloadLabel || 'Baixar Documento'}
+              color={accentColor}
+              foregroundColor={accentTextColor}
+            />
             <span className='text-[10px] text-[#FF0000] flex justify-start items-center gap-1 mt-1'>
               <TriangleAlert className='inline-block w-3 h-3 mr-1' />
               {warningMessage}

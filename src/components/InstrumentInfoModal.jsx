@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { X, Scale } from 'lucide-react'
 
-const CARD_BACKGROUND_IMAGE = '/assets/shared/background-card.svg'
+const CARD_BACKGROUND_IMAGE = '/assets/shared/toolkit-isotipo.png'
 
 /**
  * Modal com o texto explicativo longo de um instrumento.
@@ -19,10 +19,11 @@ const CARD_BACKGROUND_IMAGE = '/assets/shared/background-card.svg'
  * @param {{title: string, legalBasis: string, paragraphs: Array<string|{term: string, text: string}>}} props.info
  *   Conteúdo vindo de getInstrumentInfo().
  * @param {string} props.accentColor - Cor da família do instrumento, usada no cabeçalho.
+ * @param {string} [props.accentTextColor='#fff'] - Cor do conteúdo do cabeçalho.
  * @param {() => void} props.onClose - Chamado ao pedir o fechamento.
  * @param {string} props.titleId - Id do <h2>, referenciado por aria-labelledby.
  */
-export function InstrumentInfoModal({ info, accentColor, onClose, titleId }) {
+export function InstrumentInfoModal({ info, accentColor, accentTextColor = '#fff', onClose, titleId }) {
   useEffect(() => {
     const handleKeyDown = (event) => { if (event.key === 'Escape') onClose() }
     window.addEventListener('keydown', handleKeyDown)
@@ -52,11 +53,11 @@ export function InstrumentInfoModal({ info, accentColor, onClose, titleId }) {
           src={CARD_BACKGROUND_IMAGE}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute right-0 bottom-0 w-[192px] h-[334px] max-w-none select-none"
+          className="pointer-events-none absolute right-0 bottom-0 w-[192px] h-[334px] max-w-none select-none object-contain object-right opacity-20"
         />
 
         <div className="relative z-[1] shrink-0 flex items-start gap-3 px-5 py-4 pr-14" style={{ background: accentColor }}>
-          <h2 id={titleId} className="m-0 font-bold text-[17px] text-white leading-snug">
+          <h2 id={titleId} className="m-0 font-bold text-[17px] leading-snug" style={{ color: accentTextColor }}>
             {info.title}
           </h2>
         </div>
@@ -65,7 +66,8 @@ export function InstrumentInfoModal({ info, accentColor, onClose, titleId }) {
           type="button"
           onClick={onClose}
           aria-label="Fechar"
-          className="absolute z-[2] top-3 right-3 flex items-center justify-center w-9 h-9 rounded-full bg-white/20 hover:bg-white/30 text-white cursor-pointer border-none transition-colors"
+          className="absolute z-[2] top-3 right-3 flex items-center justify-center w-9 h-9 rounded-full bg-white/20 hover:bg-white/30 cursor-pointer border-none transition-colors"
+          style={{ color: accentTextColor }}
         >
           <X className="w-5 h-5" />
         </button>
