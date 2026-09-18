@@ -51,9 +51,8 @@ const TOOLKIT_GROUPS = [
   },
   {
     name: 'Exploração de mercado',
-    color: '#FDB913',
-    textColor: '#DDA646',
-    tint: 'rgba(253,185,19,0.20)',
+    color: '#DDA646',
+    tint: 'rgba(221,166,70,0.20)',
     keys: ['pmi', 'dialogo', 'pitchHackathon', 'concurso'],
   },
 ]

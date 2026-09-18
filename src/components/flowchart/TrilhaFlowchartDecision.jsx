@@ -7,7 +7,7 @@ const BRAND_BLUE = '#034EA2'
 const FAMILY_BOX_BG = {
   parceria: '#007932',
   contratacao: '#D93B20',
-  mercado: '#FDB913',
+  mercado: '#DDA646',
 }
 
 // Cor de TEXTO/realce e fundo do ícone dos cards de instrumento por família.
@@ -15,7 +15,7 @@ const FAMILY_BOX_BG = {
 const FAMILY_CARD_STYLE = {
   parceria: { accentColor: 'rgb(var(--accent-a))', iconBg: 'rgba(0,121,50,0.15)' },
   contratacao: { accentColor: 'rgb(var(--accent-b))', iconBg: 'rgba(217,59,32,0.15)' },
-  mercado: { accentColor: 'rgb(var(--accent-c))', iconBg: 'rgba(253,185,19,0.20)' },
+  mercado: { accentColor: 'rgb(var(--accent-c))', iconBg: 'rgba(221,166,70,0.20)' },
 }
 
 const CARD_WIDTH = 188

@@ -102,7 +102,7 @@ function FullscreenFlow({ onClose, onInstrumentClick }) {
 const INSTRUMENT_GROUPS = [
   { id: 'parceria', name: 'Parceria e P&D', dotColor: '#007932', keys: ['convenio', 'acordo'] },
   { id: 'contratacao', name: 'Contratação pública', dotColor: '#D93B20', keys: ['licitacao', 'etec', 'cpsi', 'direta', 'doacao', 'transferencia'] },
-  { id: 'mercado', name: 'Exploração de mercado', dotColor: '#FDB913', keys: ['pmi', 'dialogo', 'pitchHackathon', 'concurso'] },
+  { id: 'mercado', name: 'Exploração de mercado', dotColor: '#DDA646', keys: ['pmi', 'dialogo', 'pitchHackathon', 'concurso'] },
 ]
 
 /**
