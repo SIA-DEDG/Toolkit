@@ -227,7 +227,7 @@ function StatCard({ stat, className = '' }) {
 function HowToCard() {
   return (
     <div className="w-full min-w-0 md:pb-[52px] xl:flex-[1_1_893px] xl:max-w-[1250px] relative">
-      <div className="hidden md:block relative px-[98px] pt-12">
+      <div className="hidden md:block relative px-[98px] translate-y-10">
         <div className="grid grid-cols-3 gap-[clamp(16px,1.6vw,28px)] items-start">
           {TOOLKIT_GROUPS.map((group, index) => (
             <div key={group.name} className="relative min-w-0">
@@ -275,11 +275,11 @@ function HowToCard() {
 function IntroSection() {
   return (
     <section id="sobre-o-toolkit" className="w-full py-[var(--section-spacing)] px-[var(--page-gutter)] flex gap-[clamp(24px,4vw,56px)] xl:gap-x-[clamp(40px,4vw,120px)] flex-wrap items-start justify-between [&>*:only-child]:mx-auto">
-      <div className="flex-[1_1_360px] xl:flex-[999_1_360px] max-w-[620px] xl:max-w-[1050px] xl:self-stretch flex flex-col gap-[35px]">
+      <div className="flex-[1_1_360px] xl:flex-[999_1_360px] max-w-[620px] xl:max-w-[1050px] xl:self-stretch flex flex-col gap-5">
         <h1 className="font-semibold text-[clamp(22px,2.5vw,30px)] text-ink-mid m-0 leading-tight">
           Toolkit de Compras Públicas
         </h1>
-        <div className="flex flex-col gap-4 xl:flex-1 xl:justify-between">
+        <div className="flex flex-col gap-4">
           <p className="font-normal text-[clamp(13px,1.1vw,16px)] text-ink-dark leading-[1.35] m-0 text-justify">
             O Toolkit de Compras Públicas reúne modelos de contratos, acordos e outros instrumentos jurídicos para apoiar a implementação do Marco Legal de Ciência, Tecnologia e Inovação no Piauí.
           </p>
