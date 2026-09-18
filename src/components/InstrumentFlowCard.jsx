@@ -71,7 +71,7 @@ export function InstrumentFlowCard({ accentColor, accentTextColor = '#fff', icon
         className="relative z-[1] flex-1 w-full text-left border-none cursor-pointer px-3.5 py-3 min-h-[96px] bg-transparent"
       >
         <div className="flex items-start gap-2.5">
-          <div className="p-1.5 rounded-lg flex items-center justify-center shrink-0" style={{ background: accentColor, color: accentTextColor }}>
+          <div className="p-1.5 rounded-lg flex items-center justify-center shrink-0" style={{ background: accentColor, color: '#fff' }}>
             {Icon
               ? <Icon className="w-[18px] h-[18px]" aria-hidden="true" />
               : <span className="text-[18px] leading-none" aria-hidden="true">{icon}</span>
@@ -81,7 +81,7 @@ export function InstrumentFlowCard({ accentColor, accentTextColor = '#fff', icon
             <p className="font-bold text-[16px] text-ink-dark m-0 leading-snug">{title}</p>
             <p className="font-normal text-[14px] text-ink-sub m-0 leading-snug">{subtitle}</p>
           </div>
-          <div className="rounded-md px-1.5 py-0.5 flex items-center justify-center shrink-0 mt-0.5" style={{ background: accentColor, color: accentTextColor }}>
+          <div className="rounded-md px-1.5 py-0.5 flex items-center justify-center shrink-0 mt-0.5" style={{ background: accentColor, color: '#fff' }}>
             {isOpen
               ? <ChevronUp className="w-4 h-4" aria-hidden="true" />
               : <ChevronDown className="w-4 h-4" aria-hidden="true" />
